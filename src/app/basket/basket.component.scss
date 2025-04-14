@@ -1,0 +1,1234 @@
+.language-switcher
+{
+  position: relative;
+  left: 22px;
+}
+
+.logo2
+{
+  vertical-align: middle;
+  text-align: center;
+  margin: auto;
+  width: 50px;
+  height: 50px;
+}
+
+.header 
+{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+  padding: 15px 0;
+  background: #fff;
+ 
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .logo {
+      width: 30px;
+      height: 30px;
+    }
+
+    .brand-name {
+      font-size: 25px;
+      font-weight: 500;
+      color: #2e7d32;
+      font-family: "Montserrat Alternates";
+    }
+  }
+
+  .header-center {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+
+    .search-input {
+      width: 550px;
+      padding: 8px 12px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      outline: none;
+      transition: 0.3s;
+
+      &:focus {
+        border-color: #2e7d32;
+      }
+    }
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    .submit-project-btn 
+    {
+      width: 160px;
+      height: 33px;
+      background: transparent;
+      border: 1px solid #247a60;
+      color: #247a60;
+      padding: 6px 12px;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-family: 'Montserrat';
+
+      &:hover {
+        background: #247a60;
+        color: #fff;
+      }
+    }
+
+    .profile-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  }
+}
+
+.footer 
+{
+  padding: 40px 0;
+  font-family: 'Montserrat', sans-serif;
+
+  .footer-container {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .footer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      img {
+        width: 40px;
+        height: 40px;
+      }
+
+      span {
+        font-size: 24px;
+        font-weight: 600;
+        color: #2e7d32;
+      }
+    }
+
+    .footer-line {
+      flex-grow: 1;
+      height: 2px;
+      background: #ffcf33;
+      border: none;
+      margin-left: 20px; /* Отступ от логотипа */
+    }
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    text-align: left;
+    margin-top: 20px;
+
+    .footer-column {
+      width: 18%;
+
+      h4 {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #1b5e20;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+          margin-bottom: 5px;
+
+          a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            transition: color 0.3s ease;
+
+            &:hover {
+              color: #2e7d32;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.footer-social 
+{
+position: relative;
+text-align: center;
+top: 20px;
+left: -40px;
+color: #247A60;
+}
+
+.underline-center 
+{
+display: inline-block;
+position: relative;
+}
+
+.underline-center::after 
+{
+content: "";
+position: absolute;
+left: 50%;
+bottom: -10px;
+width: 50%;
+height: 1px;
+background-color: #247A60;
+transform: translateX(-50%);
+}
+
+.social-icons a 
+{
+margin: 0 10px;
+font-size: 28px;
+color: #333;
+padding: 4px;
+}
+
+.footer-bottom 
+{
+position: relative;
+text-align: center;
+margin-top: 70px;
+margin-bottom: 40px;
+font-size: 15px;
+color: #666;
+left:-40px;
+font-family: 'Montserrat';
+}
+
+.search-container 
+{
+  position: relative;
+  width: 1200px;
+  font-family: 'Montserrat';
+}
+
+.search-input 
+{
+  width: 50%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  position: relative;
+  left: 25%;
+}
+
+.search-input:focus {
+  border-color: #bde7d6;  /* Зеленый цвет рамки */
+  background-color: #bde7d6;  /* Светлый голубой фон */
+}
+
+.search-dropdown 
+{
+  position: absolute;
+  top: 155%;
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid #ccc;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  height: 800px;
+  overflow-y: auto;
+  border-radius: 5px;
+  padding: 10px;
+  z-index: 1000;
+}
+
+.search-item-content 
+{
+  border: 2px solid #ddd; 
+  border-radius: 10px; 
+  padding: 4px; 
+  background-color: #fff; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 99%; 
+}
+
+.search-items 
+{
+  display: flex;
+  gap: 15px;
+  justify-content: flex-start;
+}
+
+.search-item 
+{
+  text-align: left;
+  width: 390px; 
+  display: flex;
+  flex-direction: column; 
+  gap: 10px;  
+  align-items: flex-start;  
+}
+
+.search-item-img 
+{
+  width: 100%; 
+  height: 250px; 
+}
+
+.search-item-title 
+{
+  font-weight: bold;
+  margin-top: 10px;
+  font-size: 20px;
+  font-family: 'Montserrat';
+}
+
+.search-item-body 
+{
+  position: relative;
+  padding: 15px;
+  background-color: white;
+  color: black;
+  transition: transform 0.3s ease;
+}
+
+.search-item:hover .search-item-body,
+.search-item:hover .icon-container,
+.search-item:hover .icons-container 
+{
+  transform: translateY(-70px);
+}
+
+.search-item:hover 
+{
+  background-color: white;
+}
+
+.search-item-text 
+{
+  position: absolute;
+  bottom: 0px; 
+  left: 15px;
+  right: 15px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: black;
+  padding: 10px;
+  border-radius: 5px;
+  transform: translateY(10px);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.search-item:hover .search-item-text 
+{
+  bottom: 10px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.progress-bar 
+{
+  position: absolute;
+  width: 56%;
+  height: 8px; 
+  border-radius: 5px; 
+  appearance: none; 
+  background-color: #e0e0e0; 
+  margin-top: 8px;
+}
+
+.progress-bar::-webkit-progress-bar 
+{
+  background-color: #e0e0e0; 
+}
+
+.progress-bar::-webkit-progress-value 
+{
+  background-color: #247A60; 
+}
+
+.progress-bar::-moz-progress-bar 
+{
+  background-color: #247A60; 
+}
+
+.search-item-info h4 
+{
+  margin: 0;
+  font-size: 14px;
+}
+
+.search-item-info p {
+  margin: 5px 0 0;
+  font-size: 12px;
+  color: #777;
+}
+
+.search-item-info 
+{
+  flex-grow: 1;
+}
+
+.support-btn 
+{
+  background-color: #247a60;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.support-btn:hover 
+{
+  background-color: #247a60;
+}
+
+.no-results 
+{
+  padding: 10px;
+  text-align: center;
+  color: #999;
+}
+
+.button-row 
+{
+  display: flex;
+  justify-content: center; 
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.wide-buttons 
+{
+  gap: 80px; 
+  margin-bottom: 50px;
+  margin-top: 20px;
+}
+
+.button-row button 
+{
+  max-width: 350px;
+  padding: 8px 43px;
+  background-color: #bde7d6;
+  color: #333027;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.wide-button 
+{
+  width: 300px;
+  height: 45px;
+  padding: 12px 20px;
+  background-color: #bde7d6;
+  color: #333027;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  font-family: 'Montserrat';
+}
+
+.rounded-button 
+{
+  padding: 8px 16px;
+  width: 195px;
+  font-size: 18px !important;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50px !important;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  font-family: 'Montserrat';
+}
+
+button.wide-button.active, button.rounded-button.active 
+{
+  background-color: #ffcf33;
+  color: #247a60;
+  font-weight: 550;
+}
+
+button.rounded-button:hover 
+{
+  background-color: #ffcf33;
+  color: #247a60;
+  font-weight: 550;
+}
+
+.hot-projects 
+{
+  display: flex;
+  align-items: center;
+  margin-top: 40px;
+  margin-bottom: 30px;
+  margin-left: 10px;
+}
+
+.hot-projects-text 
+{
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 10px;
+  font-family: 'Montserrat';
+  color: #333;
+}
+
+.hot-projects-line {
+  flex-grow: 1;
+  border: none;
+  border-top: 3px solid #ffcf33;
+  margin-left: 20px;
+}
+
+.progress-info 
+{
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+  min-width: 200px;
+  font-size: 14px;
+  color: #333;
+  margin-top: -10px;
+}
+
+.progress-from 
+{
+  font-weight: normal;
+  font-family: 'Montserrat';
+}
+
+.progress-to 
+{
+  font-weight: 600;
+  font-family: 'Montserrat';
+}
+
+.icons-container 
+{
+  display: flex;
+  justify-content: space-between;
+  gap: 60px;
+  margin-top: 25px;
+  background: rgba(255, 255, 255, 0.7);
+  margin-left: 30px;
+  font-family: 'Montserrat';
+}
+
+.icon-item 
+{
+  text-align: center;
+  flex-basis: 30%;
+}
+
+.icon-img 
+{
+  width: 20px;
+  height: 20px;
+  margin-bottom: 5px;
+}
+
+.icon-number 
+{
+  margin-top: 5px;
+  font-size: 17px;
+  color: #333;
+  font-weight: 600;
+}
+
+.search-item 
+{
+  position: relative;
+}
+
+.icon-container 
+{
+  position: absolute;
+  top: 280px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.search-item-icon 
+{
+  width: 20px;
+  height: 20px;
+  margin-top: 10px;
+}
+
+.support-button2 
+{
+  padding: 8px 16px;
+  background-color: #247A60;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 130px;
+  height: 40px;
+  margin-left: 10px;
+  margin-top: 10px;
+  position: relative;
+  left: -45px;
+  font-family: 'Montserrat';
+}
+
+.support-button2:hover 
+{
+  background-color: #247A60;
+}
+
+.icon-top-left 
+{
+  position: absolute;
+  top: 30px;
+  left: 5px;
+  z-index: 10;
+}
+
+.top-left-icon
+{
+  width: 80px;
+  height: 40px;
+}
+
+.top-right-icon
+{
+  width:30px;
+  height: 30px;
+}
+
+.icon-top-right 
+{
+  position: absolute;
+  top: 35px;
+  left: 30px;
+  z-index: 10;
+}
+
+// BASKET
+
+.title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-family: 'Montserrat';
+    position: relative;
+    top: 20px;
+}
+
+
+.container {
+    width: 1000px;
+    height: 320px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ebebeb;
+    padding: 20px;
+    background-color: #ebebeb;
+    margin-left: 10%;
+    margin-top: 3%;
+    margin-bottom: -1%;
+}
+
+.checkbox {
+    margin-right: 40px;
+    width: 32px;
+    height: 32px;
+    margin-left: 20px;
+    appearance: none; /* Убираем стандартное оформление */
+    border-radius: 5px; /* Скругление углов */
+    background-color: white; /* Фон чекбокса */
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.checkbox:checked {
+    background-color: #ffcf33; /* Цвет фона при выборе */
+    border-color: #ffcf33;
+}
+
+.checkbox:checked::after {
+    content: '✔'; /* Галочка */
+    font-size: 20px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.checkbox2 {
+    margin-right: 40px;
+    width: 22px;
+    height: 22px;
+    margin-left: 20px;
+}
+
+.photo {
+    width: 280px;
+    height: 250px;
+    background-color: #f0f0f0;
+    margin-right: 20px;
+    background-image: url("/assets/images/ShopTovar4.png");
+
+}
+
+.photo2 
+{
+    width: 280px;
+    height: 250px;
+    background-color: #f0f0f0;
+    margin-right: 20px;
+    background-image: url("/assets/images/ShopTovar5.png");
+    background-size: cover;
+    background-position: center;
+
+}
+
+.details 
+{
+    display: flex;
+    flex-direction: column;
+    font-family: 'Montserrat';
+}
+.title-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 25%;
+    width: 400px;
+    white-space: nowrap;
+}
+.price {
+    font-size: 32px;
+    font-weight: bold;
+    margin-left: 20%;
+    width: 200px;
+}
+
+.color-box {
+    width: 30px;
+    height: 30px;
+    background-color: #EC0F10;
+    margin-top: 5px;
+    border-radius: 6px;
+    cursor:pointer;
+}
+
+/* Контейнер для изображения в правом верхнем углу */
+.top-right-image {
+    position: absolute;
+    top: 8.5%; /* Отступ от верхней грани */
+    right: 9%; /* Отступ от правой грани */
+    z-index: 10; /* Чтобы изображение было поверх других элементов */
+  }
+  
+  .top-right-image img {
+    width: 150px; /* Размер изображения */
+    height: 187px; /* Размер изображения */
+  }
+
+  .quantity-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 20px;
+    border: 3px solid #ccc;
+    width: 130px;
+    height: 50px;
+    border-radius: 5px;
+    margin-left: 109%;
+    margin-bottom: 10%;
+    position: relative;
+    top: -120px;
+    font-family: 'Montserrat';
+  }
+  
+  .quantity-container button {
+    width: 60px;
+    height: 50px;
+    font-size: 30px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: 'Montserrat';
+    background: #ebebeb;
+  }
+
+.trash-icon {
+    width: 30px;
+    height: 30px;
+    margin-top: 10px;
+    cursor: pointer;
+    margin-left: 122.5%;
+    position: relative;
+    top: -140px;
+}
+
+  /* Текст поверх изображения */
+.overlay-text {
+    position: absolute;
+    top: 28%; /* Позиционируем текст по вертикали */
+    left: 50%; /* Позиционируем текст по горизонтали */
+    transform: translate(-50%, -50%); /* Центрируем текст */
+    color: #333; /* Белый цвет текста */
+    font-size: 18px; /* Размер текста */
+    font-family: 'Montserrat', sans-serif; /* Шрифт */
+    text-align: center; /* Выравнивание текста по центру */
+    font-weight: 500; /* Жирное начертание */
+    width: 200px;
+    font-size: 17px;
+  }
+
+  /* Контейнер для информации о балансе */
+.balance-info {
+    margin-left: 75.5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 9%; /* Отступ от текста "Ваш рахунок" */
+    position: relative;
+}
+
+/* Маленькое изображение */
+.small-image {
+    width: 20px; /* Размер маленького изображения */
+    height: 20px;
+    object-fit: cover; /* Сохраняем пропорции изображения */
+    margin-right: 5px; /* Отступ между изображением и текстом */
+    z-index: 10;
+}
+
+/* Текст для цифры */
+.balance-text {
+    font-size: 25px; /* Размер числа */
+    font-weight: bold; /* Толщина шрифта */
+    color: #333; /* Цвет числа */
+    font-family: 'Montserrat';
+    z-index: 10;
+    margin-left: 2%;
+}
+
+.container2 {
+    width: 420px;
+    height: 680px;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-top: -36.2%;
+    margin-left: 61%;
+    background-color: #ebebeb;
+    margin-bottom: 10%;
+}
+.header2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    font-family: 'Montserrat';
+}
+.divider {
+    width: 96%;
+    height: 2px;
+    background-color: #ccc;
+    margin: 0 auto 10px auto;
+}
+.text2 {
+    font-size: 18px;
+    margin-left: 10px;
+    margin-top: 5%;
+    font-family: 'Montserrat';
+    font-weight: 600;
+}
+
+.row2 {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    margin: 5px 10px;
+    margin-top: 20px;
+    font-family: 'Montserrat';
+}
+.input-container {
+    margin: 5px 10px;
+    width: 100%;
+}
+
+.amount-box {
+    font-size: 20px;
+    font-weight: 500;
+    background-color: white;
+    width: 90px;
+    height: 40px;
+    border-radius: 5px;
+    text-align: center;
+    border: 3px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    font-family: 'Montserrat';
+}
+
+.amount-box2 {
+    font-size: 15px;
+    background-color: white;
+    font-weight: 500;
+    width: 235px;
+    height: 40px;
+    border-radius: 5px;
+    text-align: center;
+    border: 3px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    font-family: 'Montserrat';
+}
+
+.right2
+{
+    margin-left: 30%;
+    position: relative;
+    top: -99px;
+    height: 2px;
+}
+
+.button2
+{
+    width: 140px;
+    height: 40px;
+    border-radius: 50px;
+    border: 3px solid #ffcf33;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 16px;
+    margin-top: 5%;
+    margin-left: 32%;
+    cursor: pointer;
+}
+
+.button3
+{
+    width: 380px;
+    height: 80px;
+    background-color: #ffcf33;
+    font-size: 20px;
+    border-radius: 50px;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    border: none;
+    margin-top: 5%;
+    cursor: pointer;
+}
+
+.button4
+{
+    width: 380px;
+    height: 80px;
+    background-color: #ebebeb;
+    font-size: 20px;
+    border-radius: 50px;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    border: none;
+    border: 3px solid #ffcf33;
+    margin-top: 5%;
+    cursor: pointer;
+}
+
+.recommendations-container {
+    padding: 20px;
+    position: relative;
+    margin-top: -3%;
+    margin-bottom: 3%;
+}
+
+.recommendations-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+    font-family: 'Montserrat';
+    position: relative;
+    margin-left: 9.8%;
+    text-align: left;
+    width: 500px;
+}
+
+.custom-container3 
+{
+  position: relative;
+  width: 410px;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  left: 200px;
+  top: -1250px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.custom-image2 
+{
+  width: 240px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+  position: relative;
+  top: 50px;
+  left: 20px;
+}
+
+.custom-image-wrapper3 
+{
+  position: relative;
+  text-align: center;
+}
+
+.custom-top-left-image2 
+{
+  width: 160px; /* Ширина изображения */
+  height: 30px; /* Высота изображения */
+  object-fit: cover;
+}
+
+.custom-top-left-image-wrapper2 
+{
+  position: absolute;
+  top: 25px;
+  left: 0px;
+  overflow: hidden;
+}
+  
+.custom-arrow3 
+{
+  position: absolute;
+  top: 50%;
+  left: 50%; /* Центрируем по горизонтали */
+  transform: translate(-50%, -50%); /* Центрируем по вертикали */
+  font-size: 30px;
+  color: #247a60;
+  cursor: pointer;
+  background: #ffcf33;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center; /* Вертикальное центрирование */
+  justify-content: center; /* Горизонтальное центрирование */
+}
+
+.custom-left-arrow3
+{
+  left: 40px;
+  top: 250px;
+  z-index: 10;
+}
+
+.custom-right-arrow3 
+{
+  left: 360px;
+  top: 250px;
+}
+
+.custom-amount3 
+{
+  font-size: 36px;
+  font-weight: bold;
+  color: #333;
+  font-family: 'Montserrat';
+  position: relative;
+  top: 80px;
+}
+
+.custom-description3 
+{
+  font-size: 18px;
+  color: #333;
+  margin: 10px 0;
+  font-family: 'Montserrat';
+  position: relative;
+  top: 100px;
+}
+
+.custom-title3 
+{
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  font-family: 'Montserrat Alternates';
+  position: relative;
+  top: 100px;
+}
+
+.category
+{
+  font-family: 'Montserrat';
+  font-size: 18px;
+  top: -10px;
+  position: relative;
+  font-weight: 600;
+  left: -100px;
+}
+
+.custom-top-right-text 
+{
+  position: absolute;
+  top: -20px;
+  right: -30px;
+  font-size: 18px;
+  font-weight: 400;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  font-family: 'Montserrat';
+  color: #333;
+}
+
+.search-item-icon2 
+{
+  width: 40px;
+  height: 40px;
+  margin-top: 10px;
+  position: relative;
+  top: 70px;
+  left: -40px;
+  cursor: pointer;
+}
+
+.image-dots {
+  position: absolute;
+  bottom: 180px;  /* Отступ от нижней части контейнера */
+  left: 50%;
+  transform: translateX(-50%); /* Выравнивание по центру */
+  display: flex;
+  gap: 10px;  /* Отступы между точками */
+  z-index: 10; /* Обеспечим, чтобы точки были поверх других элементов */
+}
+
+.dot 
+{
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #bbb; /* Цвет для неактивных точек */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.dot.active {
+  background-color: #EC0F10; /* Цвет для активной точки */
+  transform: scale(1.2); /* Увеличиваем точку, если она активна */
+}
+
+.dot:hover {
+  background-color: #007c46; /* Цвет точки при наведении */
+}
+
+
+.custom-container6 {
+  display: flex;
+  flex-wrap: wrap; /* Чтобы карточки переходили на новую строку */
+  gap: 20px; /* Расстояние между карточками */
+  justify-content: space-between; /* Разделение карточек по ширине */
+  margin-top: 0px;
+  width: 90%;
+  margin-left: 160px;
+  position: relative;
+  z-index: 1; /* Делаем карточки ниже текста */
+}
+
+
+
+.custom-card3 {
+  position: relative;
+  width: 400px; /* Задаем ширину каждой карточки */
+  height: 500px; /* Высота карточки */
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Увеличили размытие и затемнение */
+  overflow: hidden; /* Прячем элементы, выходящие за пределы карточки */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.custom-info3 {
+  margin-top: -30px;
+}
+
+.custom-card3:nth-child(1) {
+  left: 40px;
+}
+
+.custom-card3:nth-child(2) {
+  left: -40px;
+}
+
+.custom-card3:nth-child(3) {
+  left: -120px;
+}
+
+.custom-card3:nth-child(4) {
+  left: -200px;
+}
+
+/* Фото в правом нижнем углу */
+.custom-bottom-right-image-wrapper {
+    position: absolute;
+    bottom: -4px; /* Отступ от нижнего края */
+    right: 0px;  /* Отступ от правого края */
+    overflow: hidden;
+  }
+  
+  .custom-bottom-right-image {
+    width: 100px; /* Ширина изображения */
+    height: 100px; /* Высота изображения */
+    object-fit: cover;
+    border-radius: 5px;
+    cursor: pointer;
+  }

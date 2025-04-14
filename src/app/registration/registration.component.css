@@ -1,0 +1,608 @@
+.separator 
+  {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 20px 0;
+    position: relative;
+    top: -20px;
+    font-family: 'Montserrat';
+  }
+  
+  .separator::before,
+  .separator::after 
+  {
+    content: "";
+    flex: 1;
+    border-bottom: 2px solid #ccc;
+    margin: 0 10px;
+  }
+
+
+  .language-switcher
+  {
+    position: relative;
+    right: 50px;
+  }
+
+.gsi-material-button {
+  background-color: WHITE;
+  background-image: none;
+  -webkit-border-radius: 20px;
+  border-radius: 10px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #1f1f1f;
+  cursor: pointer;
+  font-family: 'Montserrat';
+  font-size: 13px;
+  height: 40px;
+  letter-spacing: 0.25px;
+  outline: none;
+  overflow: hidden;
+  padding: 0 12px;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: auto;
+  max-width: 400px;
+  min-width: min-content;
+  border: 2px solid #247A60;
+  left: 110px;
+  top: -15px;
+}
+
+.gsi-material-button .gsi-material-button-icon {
+  height: 20px;
+  margin-right: 12px;
+  min-width: 20px;
+  width: 20px;
+}
+
+.gsi-material-button .gsi-material-button-content-wrapper {
+  -webkit-align-items: center;
+  align-items: center;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  height: 100%;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+}
+
+.gsi-material-button .gsi-material-button-contents {
+  color: #247A60;
+  font-weight: 600;
+}
+
+.gsi-material-button:hover {
+  background-color: WHITE !important;
+  border-color: #247A60 !important;
+  color: #1f1f1f !important;
+}
+  
+  .seedFlowNazva
+  {
+    font-size: 30px;
+    color: #66D6AA;
+    position: absolute;
+    margin-top: 7px;
+    margin-left: 5px;
+    font-family: 'Montserrat Alternates';
+  }
+
+  .container 
+  {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+  }
+  
+  header 
+  {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+    margin-top: -20px;
+  }
+
+
+
+  ::ng-deep .mat-mdc-checkbox.mat-accent .mdc-checkbox .mdc-checkbox__native-control:enabled:checked ~ .mdc-checkbox__background,
+  .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled:indeterminate ~ .mdc-checkbox__background,
+  .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control[data-indeterminate=true]:enabled ~ .mdc-checkbox__background {
+    border-color: transparent !important;
+    background-color: #247A60;
+    outline: none;
+  }
+
+  ::ng-deep .mat-mdc-checkbox.mat-accent .mdc-checkbox--selected ~ .mdc-checkbox__ripple
+  {
+    background: #66d6aa !important;
+  }
+
+  .error 
+  {
+    color: red;
+    font-size: 14px;
+  }
+  
+  input.ng-invalid.ng-touched 
+  {
+    border: 1px solid red;
+  }
+
+
+  @media(max-width: 620px)
+  {
+     .language-switcher
+     {
+        margin-left: 50%;
+     }
+
+
+  }
+
+  @media(max-width: 600px)
+  {
+     .logo2
+     {
+        bottom: 130px;
+     }
+  }
+
+  span.ymovaNeed
+  {
+    
+    left: 5px;
+  }
+
+  @media(max-width: 550px)
+  {
+
+    .separator
+    {
+      left: -10px;
+    }
+
+    span.ymovaNeed
+    {
+      
+      left: -20px;
+    }
+
+    span.passNotSame
+    {
+      left: -27px;
+    }
+
+    span.emailNeed
+    {
+      left: -27px;
+    }
+
+    span.emailCorrectNeed
+    {
+      left: -27px;
+    }
+
+    span.passNeed
+    {
+      left: -27px;
+    }
+
+    span.passMinLength
+    {
+      left: -27px;
+    }
+
+    label
+    {
+      margin-left: 3px;
+    }
+
+    div.form-group
+    {
+      margin-left: -30px;
+    }
+
+    #checkbox
+    {
+      transform: scale(1.3);
+      opacity: 0,9;
+      cursor: pointer;
+      margin-left: -28px;
+    }
+
+    a 
+    {
+      color: #2C7D59;
+      text-decoration: none;
+      margin-left: -20px;
+    }
+
+    a.politikaSaita
+    {
+      margin-left: 1px;
+    }
+    
+    button 
+    {
+      background-color: #2C7D59;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: -10px;
+      right: 13px;
+    }
+
+    h2
+    {
+      left: -35px;
+    }
+
+    header 
+    {
+      justify-content: left;
+      padding: 20px;
+      margin-top: -30px;
+      margin-left: 90px;
+    }
+  }
+
+  .haveAcc
+  {
+    text-decoration: underline; 
+    color:#898268; 
+    font-family: 'Montserrat';
+    font-size: 15px; 
+    position: relative; 
+    width: 200px; 
+    left: 20px;
+  }
+
+  @media(max-width:510px)
+  {
+    .dali
+    {
+      left: -100px;
+    }
+
+    .haveAcc
+    {
+      left: 5px;
+    }
+
+    .separator
+    {
+      left: -25px;
+    }
+
+    span.ymovaNeed
+    {
+      
+      left: -20px;
+    }
+
+    span.passNotSame
+    {
+      left: -35px;
+    }
+
+    span.emailNeed
+    {
+      left: -35px;
+    }
+
+    span.emailCorrectNeed
+    {
+      left: -35px;
+    }
+
+    span.passNeed
+    {
+      left: -35px;
+    }
+
+    span.passMinLength
+    {
+      left: -35px;
+    }
+
+
+
+    label
+    {
+      margin-left: 2px;
+    }
+
+    div.form-group
+    {
+      margin-left: -37px;
+    }
+
+    #checkbox
+    {
+      transform: scale(1.3);
+      opacity: 0,9;
+      cursor: pointer;
+      margin-left: -28px;
+    }
+
+    a 
+    {
+      color: #2C7D59;
+      text-decoration: none;
+      margin-left: -20px;
+    }
+
+    a.politikaSaita
+    {
+      margin-left: 1px;
+    }
+    
+    button 
+    {
+      background-color: #2C7D59;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: -10px;
+      right: -102px;
+      top: -30px;
+    }
+
+    h2
+    {
+      left: -35px;
+    }
+
+    header 
+    {
+      justify-content: left;
+      padding: 20px;
+      margin-top: -30px;
+      margin-left: 90px;
+    }
+  }
+
+  
+
+  mat-form-field 
+  {
+    width: 300px;
+    margin-bottom: 20px;
+  }
+  
+  p {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .logo 
+  {
+    vertical-align: middle;
+    text-align: center;
+    margin: auto;
+    width: 50px;
+    height: 50px;
+  }
+
+  .logo2
+  {
+    vertical-align: middle;
+    text-align: center;
+    margin: auto;
+    width: 50px;
+    height: 50px;
+  }
+
+  .text
+  {
+    margin-top: 20px;
+    width: 80px;
+    height: 106px;
+  }
+
+  #checkbox
+  {
+    transform: scale(1.3);
+    opacity: 0,9;
+    cursor: pointer;
+  }
+  
+  .registration-form 
+  {
+    display: flex;
+    margin: 50px auto;
+    width: 80%;
+    max-width: 900px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    height: 780px;
+  }
+
+  .left-panel 
+  {
+    background-image: url('/assets/images/bg-pattern.png');
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+  }
+  
+  .left-panel img 
+  {
+    width: 100%;
+    height: auto;
+  }
+  
+  .right-panel 
+  {
+    flex: 1;
+    background-color: #fff;
+    padding: 40px;
+  }
+  
+  h2 
+  {
+    color: #247A60;
+    margin-bottom: 20px;
+  }
+  
+  .form-group 
+  {
+    margin-bottom: 20px;
+  }
+  
+  form input[type="email"],
+  form input[type="password"],
+  form input[type="text"]
+  {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  button:disabled
+  {
+    background-color: #247A60;
+    color: #666;
+    cursor: not-allowed;
+    opacity: 0.6;
+    color: white;
+  }
+
+  form input[type="checkbox"] 
+  {
+    margin-right: 10px;
+  }
+  
+  a 
+  {
+    color: #2C7D59;
+    text-decoration: none;
+  }
+
+  .dali
+  {
+    position: relative; 
+    margin-left: 260px; 
+    top:-30px; 
+    width: 120px;
+    background-color: #247A60; 
+    font-family: 'Montserrat';
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+  }
+
+@media(max-width: 1080px)
+{
+  .dali
+  {
+    left: -20px;
+  }
+
+  button.twitter-material-button
+  {
+    top:-40px;
+    margin-left: 190px;
+  }
+
+  button.gsi-material-button
+  {
+    margin-left: -40px;
+  }
+}
+
+@media(max-width: 1080px)
+{
+  button.gsi-material-button
+  {
+    margin-left: -15px;
+  }
+}
+
+h2#reg
+{
+  position: relative; 
+  margin-top: 0px;
+  padding-bottom: 30px; 
+  margin-left: 120px;
+  font-family: 'Montserrat'; 
+  font-size: 24px;
+}
+
+@media(max-width: 600px)
+{
+  h2#reg
+  {
+    left: -15px;
+  }
+
+  .logo
+  {
+    margin-left: -70px;
+    margin-top: 10px;
+  }
+
+  .seedFlowNazva
+  {
+    margin-top: 15px;
+  }
+
+  .language-switcher
+  {
+    display: block;
+    margin-top: 10px;
+    margin-left: 300px;
+  }
+
+  .logo2
+  {
+    display: block;
+    position: absolute;
+    margin-left: -50px;
+    top: 12px;
+  }
+
+  @media(max-width: 570px)
+  {
+      .right-panel
+      {
+        margin-left: -20px;
+      }
+  }
+
+  @media(max-width: 550px)
+  {
+    .dali
+    {
+      left: -45px;
+    }
+
+    button.gsi-material-button
+    {
+      margin-left: -35px;
+    }
+  }
+}
+  

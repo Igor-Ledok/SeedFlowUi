@@ -1,0 +1,112 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<div class="container">
+    <header>
+        
+        <p></p>
+
+        <div>
+            <p><img src="assets/images/logo.png" class="logo"><strong class="seedFlowNazva">Seed Flow</strong></p>
+        </div>
+    
+        <div class="language-switcher" style="color: #898268;"><img src="assets/images/language.png" class="logo2">
+
+          <mat-select [formControl]="selectedLanguage" style="width: 55px;" (selectionChange)="onLanguageChange($event)">
+            <mat-option style="font-family: 'Montserrat';" *ngFor="let lang of languages" [value]="lang.code">
+              {{ lang.name }}
+            </mat-option>
+          </mat-select>
+      </div>
+    
+    </header>
+
+<hr style="width: 99%; margin-top: -15px;">
+
+<hr style="border-top: 2px solid #ffcf33;width: 30%;margin-top: 20px;justify-content: left;position: relative;margin-left: 8px;">
+
+    <div class="registration-form">
+      <div class="left-panel">
+      </div>
+      <div class="right-panel">
+        <h2 style="position: relative; margin-top: 40px;margin-bottom: 60px; margin-left: 170px;font-family: 'Montserrat'; ">{{"ВХІД" | transloco}}</h2>
+
+        <span *ngIf="errorMessage" class="error-message">
+          {{errorMessage | transloco}}
+        </span>
+
+        <form [formGroup]="loginForm" #myForm="ngForm">
+          <div class="form-group">
+            <label id="email2" for="email">{{"Адрес електронної пошти" | transloco}}</label>
+            <br>
+            <input name="email" id="email" type="email" [formControlName]="FORM_KEYS.EMAIL" ngModel required placeholder='{{"Введіть адресу електронної пошти" | transloco }}' formControlName="email" class="form-control" />
+          </div>
+            <div class="error" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+              <span id="erroremail" *ngIf="email?.errors?.['required']" class="inputEmail">{{"Введіть email" | transloco }}</span>
+              <span id="erroremail2" *ngIf="email?.errors?.['email']" class="emailInvalid">{{"Неправильний email" | transloco}}</span>
+          </div>
+
+          <br>
+      
+          <div class="form-group">
+            <label id="password2" for="password">{{"Пароль" | transloco }}</label>
+            <br>
+            <input id="password" name="password3" type="password" [formControlName]="FORM_KEYS.PASSWORD" ngModel required placeholder='{{"Введіть пароль" | transloco }}' [type]="hide ? 'password' : 'text'" formControlName="password" class="form-control" />
+            <i class="material-icons" matSuffix (click) = "hide = !hide" style="position: absolute;margin-left: -30px; margin-top: 11px;cursor: pointer;">{{hide ? 'visibility': 'visibility_off'}}</i>
+          </div>
+            <div class="error" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+              <span id="errorpassword" *ngIf="password?.errors?.['required']" class="inputPass">{{"Введіть пароль" | transloco }}</span>
+              <span id="errorpassword2" *ngIf="password?.errors?.['minlength']" class="min6Symb">{{"Мінімум 6 символів" | transloco }}</span>
+            </div>
+        
+          <p id="forgotpassword" [routerLink]="'/passwordReset-page'">{{"Забули свій пароль?" | transloco }}<a style="color: rgb(34, 136, 231); cursor: pointer;"> {{"Скинути пароль" | transloco }}</a></p>
+
+          <br>
+          <br>
+          <br>
+          <br>
+
+          <a [routerLink]="'/registration-page'" class="notHaveAcc" href="#">{{"У мене немає акаунту" | transloco}}</a>
+          
+          <button id="next" (click)="LoginSubmitted()"  type="submit" [disabled]="loginForm.invalid">{{"Далі" | transloco }}</button>
+        
+          <div class="separator">
+            <span style="font-weight: 500;">{{"або" | transloco }}</span>
+          </div>
+
+        <button class="gsi-material-button" (click)="loginWithGoogle()">
+          <div class="gsi-material-button-state"></div>
+          <div class="gsi-material-button-content-wrapper">
+            <div class="gsi-material-button-icon">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: block;">
+                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path>
+                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path>
+                <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path>
+                <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path>
+                <path fill="none" d="M0 0h48v48H0z"></path>
+              </svg>
+            </div>
+            <span class="gsi-material-button-contents">Sign in with Google</span>
+          </div>
+        </button>
+        
+        </form>
+
+      </div>
+
+    </div>
+
+    <hr style="border-top: 2px solid #ffcf33;width: 30%;margin-top: 95px;justify-content: left;position: relative;margin-right: 5px;">
+
+  </div>

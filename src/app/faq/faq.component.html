@@ -1,0 +1,554 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<header class="header">
+    <div class="header-left">
+      <img src="assets/images/greenCoin.png" class="logo" alt="Seed Flow Logo" />
+      <span class="brand-name">Seed Flow</span>
+    </div>
+  
+<div class="search-container" #searchContainer>
+
+    <div class="overlay" *ngIf="showDropdown" (click)="closeDropdown()"></div>
+
+  <input 
+    style="font-family: 'Montserrat'; background-image: url('assets/images/search2.png'); background-repeat: no-repeat; background-position: 5px center; padding-left: 40px;"
+    type="text"
+    class="search-input"
+    placeholder=" "
+    (focus)="showDropdown = true"
+    (input)="filterResults()"
+    [(ngModel)]="searchText"
+  />
+
+  <img src="assets/images/search.png" 
+  alt="Search Icon" 
+  class="search-icon"
+  (click)="toggleDropdown()" />
+  
+
+  <div *ngIf="showDropdown" class="search-dropdown" [style.height]="getDropdownHeight()">
+    <div class="button-row wide-buttons">
+      <button class="button wide-button"
+        [ngClass]="{ 'active': activeCategoryIndex === 0 }"
+        (click)="onCategoryButtonPress(0)">
+       {{"СТАРТАПИ" | transloco}}</button>
+      <button class="button wide-button"
+        [ngClass]="{ 'active': activeCategoryIndex === 1 }"
+        (click)="onCategoryButtonPress(1)">
+        {{"СОЦІАЛЬНІ" | transloco}}</button>
+      <button class="button wide-button"
+        [ngClass]="{ 'active': activeCategoryIndex === 2 }"
+        (click)="onCategoryButtonPress(2)">
+        {{"ГУМАНІТАРНІ" | transloco}}</button>
+    </div>
+  
+    <div *ngIf="activeCategoryIndex === 0">
+      <div class="button-row2" *ngFor="let row of startupRows">
+        <button *ngFor="let button of row" class="button2 rounded-button"
+          [ngClass]="{ 'active': activeStartupButtonIndex === button.index }"
+          (click)="onButtonPress('startup', button.index)">
+          {{ button.label | transloco }}
+        </button>
+      </div>
+    </div>    
+  
+    <div *ngIf="activeCategoryIndex === 1">
+      <div class="button-row">
+        <button *ngFor="let button of socialButtons" class="button rounded-button"
+          [ngClass]="{ 'active': activeSocialButtonIndex === button.index }"
+          (click)="onButtonPress('social', button.index)">
+          {{ button.label | transloco }}
+        </button>
+      </div>
+    </div>
+  
+    <div *ngIf="activeCategoryIndex === 2">
+      <div class="button-row">
+        <button *ngFor="let button of humanitarianButtons" class="button rounded-button"
+          [ngClass]="{ 'active': activeHumanitarianButtonIndex === button.index }"
+          (click)="onButtonPress('humanitarian', button.index)">
+          {{ button.label | transloco }}
+        </button>
+      </div>
+    </div>
+
+    <div class="hot-projects">
+      <span class="hot-projects-text">{{"ГАРЯЧІ ПРОЄКТИ" | transloco}}</span>
+      <hr class="hot-projects-line" />
+    </div>
+
+<div *ngIf="isGridView; else carouselView">
+  <div class="search-items">
+    <div *ngFor="let item of filteredItems; let i = index" class="search-item"
+    (mouseenter)="isHoveredArray[i] = true" 
+    (mouseleave)="isHoveredArray[i] = false"  
+    [ngClass]="{'hovered': isHoveredArray[i]}"
+    >
+      <div class="search-item-content">
+        <div class="icon-top-left">
+          <img [src]="item.topLeftImage" alt="Custom Image" class="top-left-icon" />
+        </div>
+
+        <img
+        class="like-icon"
+        [src]="likedProjects[i] ? 'assets/images/likeRed.png' : 'assets/images/like.png'"
+        (click)="toggleLike(i)"
+        [ngClass]="{'hovered': isHoveredArray[i]}" 
+        style="
+        width: 28px;
+        height: 25px;
+        position: absolute;
+        top: 320px; 
+        right: 10px;
+        cursor: pointer;
+        z-index: 10;
+        transition: transform 0.3s ease;
+        "
+        />
+
+        <div class="social-media-container" 
+        (click)="toggleSocialMediaList(i)"
+        style="position: absolute; top: 285px; right: 10px; z-index: 20;">
+        <img
+          class="social-media-icon"
+          src="assets/images/socialMedia.png"
+          style="height: 25px; cursor: pointer; transition: transform 0.3s ease;"
+        />
+        </div>
+
+        <div *ngIf="isSocialMediaListVisible[i] && showDropdown" 
+        class="social-media-dropdown" 
+        style="position: absolute; top: 310px; right: 10px; z-index: 30;">
+          <ul>
+            <li>
+              <a href="https://www.facebook.com/profile.php?id=61573153085556" target="_blank">
+                <img style="width: 20px; height: 20px;" src="assets/images/facebook.png">
+              </a>
+            </li>
+            <li>                
+              <a href="https://www.instagram.com/seedflow_itstep/" target="_blank">
+                <img style="width: 20px; height: 20px;" src="assets/images/Instagram.png">
+              </a>
+            </li>
+            <li><img style="width: 25px; height: 25px;" src="assets/images/twitter.png"></li>
+            <li><img style="width: 25px; height: 25px;" src="assets/images/linkSmall.png"></li>
+          </ul>
+        </div>
+
+
+        <img [src]="item.image" alt="image" class="search-item-img" />
+        <div class="search-item-body">
+          <p class="search-item-title">{{ item.title | transloco }}</p>
+          <div class="progress-info">
+            <span class="progress-from">135 457 {{"грн" | transloco}}</span>
+            <span class="progress-to">500 000 {{"грн" | transloco}}</span>
+          </div>
+          <progress class="progress-bar" [value]="item.progress" max="100"></progress>
+        </div>
+        <div class="icons-container">
+          <div class="icon-item">
+            <img src="assets/images/people.png" alt="icon 1" class="icon-img" />
+            <p class="icon-number">{{ item.value1 }}</p>
+          </div>
+          <div class="icon-item">
+            <img src="assets/images/comments.png" alt="icon 2" class="icon-img" />
+            <p class="icon-number">{{ item.value2 }}</p>
+          </div>
+          <div class="icon-item">
+            <img src="assets/images/money.png" alt="icon 3" class="icon-img" />
+            <p class="icon-number">{{ item.value3 }}%</p>
+          </div>
+          <button class="support-button2"  [routerLink]="'/donation-page'">{{"ПІДТРИМАТИ" | transloco}}</button>
+        </div>
+        <div class="search-item-text">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia recusandae aliquam rem expedita itaque.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #carouselView>
+  <div class="carousel-container">
+    <button class="carousel-arrow left" (click)="prevSlide()">‹</button>
+    <div class="carousel-wrapper" [style.transform]="'translateX(-' + currentIndex * 100 + '%)'">
+      <div *ngFor="let item of filteredItems; let i = index" class="search-item"
+          (mouseenter)="isHoveredArray[i] = true" 
+          (mouseleave)="isHoveredArray[i] = false"
+          [ngClass]="{'hovered': isHoveredArray[i]}"
+          >
+        <div class="search-item-content">
+          <div class="icon-top-left">
+            <img [src]="item.topLeftImage" alt="Custom Image" class="top-left-icon" />
+          </div>
+
+          <img [src]="item.image" alt="image" class="search-item-img" />
+
+        <img
+        class="like-icon"
+        [src]="likedProjects[i] ? 'assets/images/likeRed.png' : 'assets/images/like.png'"
+        (click)="toggleLike(i)"
+        [ngClass]="{'hovered': isHoveredArray[i]}" 
+        style="
+        width: 28px;
+        height: 25px;
+        position: absolute;
+        top: 320px; 
+        right: 10px;
+        cursor: pointer;
+        z-index: 10;
+        transition: transform 0.3s ease;
+        "
+        />
+
+        <div class="social-media-container"
+        (click)="toggleSocialMediaList(i)"  
+        style="position: absolute; top: 285px; right: 10px; z-index: 20;">
+        <img
+          class="social-media-icon"
+          src="assets/images/socialMedia.png"
+          style="height: 25px; cursor: pointer; transition: transform 0.3s ease;"
+        />
+        </div>
+
+        <div *ngIf="isSocialMediaListVisible[i] && showDropdown" 
+          class="social-media-dropdown" 
+          style="position: absolute; top: 305px; right: 10px; z-index: 30;">
+            <ul>
+              <li>
+                <a href="https://www.facebook.com/profile.php?id=61573153085556" target="_blank">
+                  <img style="width: 20px; height: 20px;" src="assets/images/facebook.png">
+                </a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/seedflow_itstep/" target="_blank">
+                  <img style="width: 20px; height: 20px;" src="assets/images/Instagram.png">
+                </a>
+              </li>
+              <li><img style="width: 25px; height: 25px;" src="assets/images/twitter.png"></li>
+              <li><img style="width: 25px; height: 25px;" src="assets/images/linkSmall.png"></li>
+            </ul>
+        </div>
+
+
+          <div class="search-item-body">
+            <p class="search-item-title">{{ item.title | transloco }}</p>
+            <div class="progress-info">
+              <span class="progress-from">135 457 {{"грн" | transloco}}</span>
+              <span class="progress-to">500 000 {{"грн" | transloco}}</span>
+            </div>
+            <progress class="progress-bar" [value]="item.progress" max="100"></progress>
+          </div>
+
+          <div class="icons-container">
+            <div class="icon-item">
+              <img src="assets/images/people.png" alt="icon 1" class="icon-img" />
+              <p class="icon-number">{{ item.value1 }}</p>
+            </div>
+            <div class="icon-item">
+              <img src="assets/images/comments.png" alt="icon 2" class="icon-img" />
+              <p class="icon-number">{{ item.value2 }}</p>
+            </div>
+            <div class="icon-item">
+              <img src="assets/images/money.png" alt="icon 3" class="icon-img" />
+              <p class="icon-number">{{ item.value3 }}%</p>
+            </div>
+            <button class="support-button2" [routerLink]="'/donation-page'">{{"ПІДТРИМАТИ" | transloco}}</button>
+          </div>
+
+          <div class="search-item-text">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia recusandae aliquam rem expedita itaque.
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-arrow right" (click)="nextSlide()">›</button>
+  </div>
+</ng-template>
+
+
+
+
+
+
+
+      
+      
+    
+    <ng-template #noResults>
+      <div class="no-results">Нічого не знайдено</div>
+    </ng-template>
+  </div>
+</div>
+  
+    <div class="header-right">
+      <img src="assets/images/slashes.png" class="new-photo" alt="New Photo" (click)="openWindow()">
+      <button class="submit-project-btn" [routerLink]="'/general-page'">{{"Подати проєкт" | transloco}}</button>
+      <img src="assets/images/profile.png" class="profile-icon" alt="User Profile" [routerLink]="'/profile-page'">
+    </div>
+
+<div *ngIf="isWindowOpen" class="popup-window" (click)="closeWindow()">
+  <div class="popup-content" (click)="$event.stopPropagation()">
+    <div class="header-left2">
+      <img src="assets/images/profile.png" class="profile-icon" alt="User Profile" [routerLink]="'/profile-page'">
+      <img src="assets/images/bell.png" class="other-photo" alt="Other Photo">
+    </div>
+
+    <div class="header-right2">
+      <div class="language-switcher2" style="color: #898268;"><img src="assets/images/language.png" class="logo2">
+
+        <mat-select [formControl]="selectedLanguage" style="width: 55px;" (selectionChange)="onLanguageChange($event)">
+          <mat-option style="font-family: 'Montserrat';" *ngFor="let lang of languages" [value]="lang.code">
+            {{ lang.name }}
+          </mat-option>
+        </mat-select>
+    </div>
+    </div>
+
+  <div class="bottom-line"></div>
+
+  <div class="button-container">
+    <button class="popup-button" (click)="onButtonClick('Проєкти')" [routerLink]="'/projects-list-page'">
+      <img src="assets/images/projects.png" alt="Проєкти" class="button-icon">
+      <span class="button-text">{{"Проєкти" | transloco}}</span>
+    </button>
+
+    <div class="separator"></div>
+
+    <button class="popup-button" (click)="onButtonClick('Про нас')" [routerLink]="'/about-us-page'">
+      <img src="assets/images/aboutUs.png" alt="Про нас" class="button-icon">
+      <span class="button-text">{{"Про нас" | transloco}}</span>
+    </button>
+
+    <div class="separator"></div>
+
+    <button class="popup-button" (click)="onButtonClick('Акаунт')" [routerLink]="'/profile-page'">
+      <img src="assets/images/account.png" alt="Акаунт" class="button-icon">
+      <span class="button-text">{{"Акаунт" | transloco}}</span>
+    </button>
+
+    <div class="separator"></div>
+
+    <button class="popup-button" (click)="onButtonClick('Підтримка')" [routerLink]="'/support-page'">
+      <img src="assets/images/help.png" alt="Підтримка" class="button-icon">
+      <span class="button-text">{{"Підтримка" | transloco}}</span>
+    </button>
+
+    <div class="separator"></div>
+
+    <button class="popup-button" (click)="onButtonClick('Магазин')" [routerLink]="'/shop-main-page-page'">
+      <img src="assets/images/shop.png" alt="Магазин" class="button-icon">
+      <span class="button-text">{{"Магазин" | transloco}}</span>
+    </button>
+  </div>
+  </div>
+
+   <div class="logout-container">
+    <a href="#" class="logout-link">{{"Вийти" | transloco}}</a>
+  </div>
+</div>
+
+    <div class="language-switcher" style="color: #898268;"><img src="assets/images/language.png" class="logo2">
+
+      <mat-select [formControl]="selectedLanguage" style="width: 55px;" (selectionChange)="onLanguageChange($event)">
+        <mat-option style="font-family: 'Montserrat';" *ngFor="let lang of languages" [value]="lang.code">
+          {{ lang.name }}
+        </mat-option>
+      </mat-select>
+  </div>
+
+   
+  </header>
+
+  <hr>
+
+  <button class="fixed-button" (click)="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <div class="container">
+    <img 
+    *ngFor="let img of images; let i = index"
+    [src]="activeIndex === i ? img.active : img.gray"
+    alt="Image"
+    class="image"
+    [class.active]="activeIndex === i"
+    (click)="onImageClick(img.link)">
+  </div>
+
+  <div class="breadcrumbs">
+    <a [routerLink] = "'/'" style="cursor: pointer; text-decoration: none; color: inherit;">
+    <span>{{"Головна" | transloco}}</span>  
+    </a>
+    &gt;
+    <a [routerLink] = "'/support-page'" style="cursor: pointer; text-decoration: none; color: inherit;">
+    <span>{{"Підтримка" | transloco}}</span>
+    </a>
+    &gt;
+      <span>{{"Питання та відповіді" | transloco}}</span>
+  </div> 
+
+    <p class="header-text">{{"Найчастіші питання?" | transloco}}</p>
+
+    <div class="background">
+        <div class="left-background">
+          <div *ngFor="let row of rows; let i = index" 
+               class="row" 
+               [ngClass]="{'active': selectedRow === i}" 
+               (click)="selectRow(i)">
+            <div class="circle" [ngStyle]="{'background-color': selectedRow === i ? '#247A60' : '#bde7d6'}"></div>
+            <span class="text">{{ row.text | transloco }}</span>
+            <span class="arrow"></span>
+          </div>
+        </div>
+      
+        <div class="right-background">
+          <div *ngIf="selectedRow !== null">
+            <h2 class="selected-title">{{ rows[selectedRow].title | transloco }}</h2>
+            <p class="selected-text">{{ rows[selectedRow].detailText | transloco }}</p>
+          </div>
+          <p *ngIf="selectedRow === null" class="default-text">{{"Виберіть ряд для перегляду тексту" | transloco}}</p>
+        </div>
+      </div>
+      
+
+      <div class="footer-wrapper">
+        <div class="photo-group left-group">
+          <img src="assets/images/greenPig2.png" class="random-img" />
+          <img src="assets/images/greenPig2.png" class="random-img" />
+          <img src="assets/images/greenPig2.png" class="random-img" />
+        </div>
+      
+        <div class="custom-footer">
+          <h3 class="footer-title">{{ "Поставьте своє питання" | transloco }}</h3>
+          <input class="search-input2" type="text" placeholder='{{ "Чи можу я..." | transloco }}'>
+        </div>
+      
+        <div class="photo-group right-group">
+          <img src="assets/images/greenPig3.png" class="random-img" />
+          <img src="assets/images/greenPig3.png" class="random-img" />
+          <img src="assets/images/greenPig3.png" class="random-img" />
+        </div>
+      </div>
+      
+      
+      
+
+
+
+
+
+
+
+      <footer class="footer">
+        <div class="footer-container">
+          <div class="footer-header">
+            <div class="footer-logo">
+              <img src="assets/images/greenCoin.png" alt="Seed Flow" />
+              <span>Seed Flow</span>
+            </div>
+            <hr class="footer-line" />
+          </div>
+      
+          <div class="subscription">
+            <span class="podpiska">
+              {{"ПІДПИШИСЬ НА НАШІ НОВИНИ" | transloco}}
+            </span>
+            <input type="email" placeholder="{{'Введіть адресу електронної пошти' | transloco }}" class="email2" />
+            <button class="btn2">
+              {{"ВІДПРАВИТИ" | transloco }}
+            </button>
+          </div>
+      
+          <div class="footer-links">
+            <div class="footer-column">
+              <h4>{{"ПРО НАС" | transloco}}</h4>
+              <ul>
+                <li><a href="#">{{"Політика конфіденційності" | transloco}}</a></li>
+                <li><a href="#">{{"Правила користування порталом" | transloco}}</a></li>
+                <li><a href="#">{{"Правила використання файлів Cookie" | transloco}}</a></li>
+                <li><a href="#">{{"Про нас" | transloco}}</a></li>
+              </ul>
+            </div>
+            <div class="footer-column">
+              <h4>{{"ПРОЄКТИ" | transloco}}</h4>
+              <ul>
+                <li><a href="#">{{"Список проєктів" | transloco}}</a></li>
+                <li><a href="#">{{"Пошук" | transloco}}</a></li>
+                <li><a href="#">{{"Викласти проєкт" | transloco}}</a></li>
+              </ul>
+            </div>
+            <div class="footer-column">
+              <h4>{{"АКАУНТ" | transloco}}</h4>
+              <ul>
+                <li><a href="#">{{"Налаштування акаунта" | transloco}}</a></li>
+                <li><a href="#">{{"Повідомлення" | transloco}}</a></li>
+                <li><a href="#">{{"Перегляд транзакцій" | transloco}}</a></li>
+                <li><a href="#">{{"Підтримані проєкти" | transloco}}</a></li>
+                <li><a href="#">{{"Вподобані проєкти" | transloco}}</a></li>
+                <li><a href="#">{{"Вподобані товари" | transloco}}</a></li>
+                <li><a href="#">{{"Історія покупок" | transloco}}</a></li>
+              </ul>
+            </div>
+            <div class="footer-column">
+              <h4>{{"ПІДТРИМКА" | transloco}}</h4>
+              <ul>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">{{"Супровід проєкту" | transloco}}</a></li>
+                <li><a href="#">{{"Семінари/вебінари" | transloco}}</a></li>
+                <li><a href="#">{{"Блог" | transloco}}</a></li>
+              </ul>
+            </div>
+            <div class="footer-column">
+              <h4>{{"МАГАЗИН" | transloco}}</h4>
+              <ul>
+                <li><a href="#">{{"Всі товари" | transloco}}</a></li>
+                <li><a href="#">{{"Оплата і доставка" | transloco}}</a></li>
+                <li><a href="#">{{"Кошик" | transloco}}</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      
+        <hr
+        class="yellowLine"
+      />
+      <div class="footer-social">
+        <h4 style="font-family: 'Montserrat'">
+          <p class="underline-center">{{"МИ У СОЦМЕРЕЖАХ" | transloco }}</p>
+        </h4>
+      
+        <div class="social-icons">
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-telegram"></i></a>
+          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+        </div>
+      </div>
+      
+      <hr
+      class="yellowLine2"
+      
+      />
+      
+      <div class="footer-bottom">
+        <p style="font-weight: 400;">
+          Всі права збережені | All rights save © 2025
+        </p>
+      </div>
+      </footer>
+

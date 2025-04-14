@@ -1,0 +1,507 @@
+<!-- Шрифт Montserrat -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+<!-- Шрифт unbounded -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+
+<!-- Шрифт Montserrat Alternates -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<header class="header">
+  <div class="header-left">
+    <img src="assets/images/greenCoin.png" class="logo" alt="Seed Flow Logo" />
+    <span class="brand-name">Seed Flow</span>
+  </div>
+
+   <!-- Блок поиска -->
+<div class="search-container" #searchContainer>
+  <input 
+    style="font-family: 'Montserrat';"
+    type="text"
+    class="search-input"
+    placeholder="🔍"
+    (focus)="showDropdown = true"
+    (input)="filterResults()"
+    [(ngModel)]="searchText"
+  />
+  
+  <div *ngIf="showDropdown" class="search-dropdown" [style.height]="getDropdownHeight()">
+    <!-- 3 основные кнопки: СТАРТАПИ, СОЦІАЛЬНІ, ГУМАНІТАРНІ -->
+    <div class="button-row wide-buttons">
+      <button class="button wide-button"
+        [ngClass]="{ 'active': activeCategoryIndex === 0 }"
+        (click)="onCategoryButtonPress(0)">
+        СТАРТАПИ</button>
+      <button class="button wide-button"
+        [ngClass]="{ 'active': activeCategoryIndex === 1 }"
+        (click)="onCategoryButtonPress(1)">
+        СОЦІАЛЬНІ</button>
+      <button class="button wide-button"
+        [ngClass]="{ 'active': activeCategoryIndex === 2 }"
+        (click)="onCategoryButtonPress(2)">
+        ГУМАНІТАРНІ</button>
+    </div>
+  
+    <!-- Кнопки для СТАРТАПИ -->
+    <div *ngIf="activeCategoryIndex === 0">
+      <div class="button-row" *ngFor="let row of startupRows">
+        <button *ngFor="let button of row" class="button rounded-button"
+          [ngClass]="{ 'active': activeStartupButtonIndex === button.index }"
+          (click)="onButtonPress('startup', button.index)">
+          {{ button.label }}
+        </button>
+      </div>
+    </div>
+  
+    <!-- Кнопки для СОЦІАЛЬНІ -->
+    <div *ngIf="activeCategoryIndex === 1">
+      <div class="button-row">
+        <button *ngFor="let button of socialButtons" class="button rounded-button"
+          [ngClass]="{ 'active': activeSocialButtonIndex === button.index }"
+          (click)="onButtonPress('social', button.index)">
+          {{ button.label }}
+        </button>
+      </div>
+    </div>
+  
+    <!-- Кнопки для ГУМАНІТАРНІ -->
+    <div *ngIf="activeCategoryIndex === 2">
+      <div class="button-row">
+        <button *ngFor="let button of humanitarianButtons" class="button rounded-button"
+          [ngClass]="{ 'active': activeHumanitarianButtonIndex === button.index }"
+          (click)="onButtonPress('humanitarian', button.index)">
+          {{ button.label }}
+        </button>
+      </div>
+    </div>
+
+    <div class="hot-projects">
+      <span class="hot-projects-text">ГАРЯЧІ ПРОЄКТИ</span>
+      <hr class="hot-projects-line" />
+    </div>
+
+<!-- Результаты поиска (фото и описание) -->
+<div *ngIf="filteredItems.length > 0; else noResults">
+  <div class="search-items">
+    <div *ngFor="let item of filteredItems" class="search-item">
+       <!-- Контейнер для фото и описания, чтобы добавить рамку -->
+       <div class="search-item-content">
+
+        <div class="icon-top-left">
+          <img src="assets/images/LeftUpAngle.png" alt="icon" class="top-left-icon" />
+        </div>
+
+        <div class="icon-top-right">
+          <img src="assets/images/rocket.png" alt="icon 2" class="top-right-icon" />
+        </div>
+
+
+      <!-- Фото элемента -->
+      <img [src]="item.image" alt="image" class="search-item-img" />
+      
+      <!-- Название с суммой и прогресс-баром -->
+      <div class="search-item-body">
+        <p class="search-item-title">{{ item.title }}</p>
+        <!-- Сумма сверху прогресс-бара -->
+        <div class="progress-info">
+          <span class="progress-from">135 457 грн</span>
+          <span class="progress-to">500 000 грн</span>
+        </div>
+        
+        <!-- Прогресс-бар -->
+        <progress class="progress-bar" [value]="item.progress" max="100"></progress>
+      </div>
+
+      <!-- Иконка справа внизу под фото -->
+      <div class="icon-container">
+        <img src="assets/images/socialMedia.png" alt="icon" class="search-item-icon" />
+        <br>
+        <img src="assets/images/like.png" alt="new icon" class="search-item-icon" />
+      </div>
+
+      <!-- Иконки и числа под прогресс-баром -->
+      <div class="icons-container">
+        <div class="icon-item">
+          <img src="assets/images/people.png" alt="icon 1" class="icon-img" />
+          <p class="icon-number">{{ item.value1 }}</p>
+        </div>
+        <div class="icon-item">
+          <img src="assets/images/comments.png" alt="icon 2" class="icon-img" />
+          <p class="icon-number">{{ item.value2 }}</p>
+        </div>
+        <div class="icon-item">
+          <img src="assets/images/money.png" alt="icon 3" class="icon-img" />
+          <p class="icon-number">{{ item.value3 }}%</p>
+        </div>
+
+        <button class="support-button2">ПІДТРИМАТИ</button>
+      </div>
+
+      <div class="search-item-text">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia recusandae aliquam rem expedita itaque.
+      </div>
+    </div>
+  </div>
+</div>
+</div>  
+    
+    <ng-template #noResults>
+      <div class="no-results">Нічого не знайдено</div>
+    </ng-template>
+  </div>
+</div>
+  
+
+  <div class="header-right">
+    <button class="submit-project-btn">{{"Подати проєкт" | transloco}}</button>
+    <img src="assets/images/profile.png" class="profile-icon" alt="User Profile">
+  </div>
+
+  <div class="language-switcher" style="color: #898268;"><img src="assets/images/language.png" class="logo2">
+
+    <mat-select [formControl]="selectedLanguage" style="width: 55px;" (selectionChange)="onLanguageChange($event)">
+      <mat-option style="font-family: 'Montserrat';" *ngFor="let lang of languages" [value]="lang.code">
+        {{ lang.name }}
+      </mat-option>
+    </mat-select>
+</div>
+
+</header>
+
+<hr>
+
+<div class="container">
+    <div class="top">
+        <h1>{{"Майстерня" | transloco}}<span class="highlight">{{"«Гудзик»" | transloco}}</span></h1>
+        
+        <!-- Сумма сверху прогресс-бара -->
+        <div class="progress-info2">
+            <span class="progress-from2">135 457 {{"грн" | transloco}}</span>
+            <span class="progress-to2">500 000 {{"грн" | transloco}}</span>
+        </div>
+      
+      <!-- Прогресс-бар -->
+      <progress class="progress-bar2" value="35" max="100"></progress>
+    </div>
+
+    <div class="stats">
+        <div class="left">
+            <h2 style="font-size: 25px; text-decoration: underline; position: relative; left: -70px;">{{"Статистика" | transloco}}</h2>
+            <p style="margin-left: 65px;margin-top: 30px;"><span class="label">{{"Мета збору" | transloco}}:</span><strong style="position: relative; left: 50px; font-size: 20px;">500 000 {{"грн" | transloco}}</strong></p>
+            <p style="margin-left: 65px;margin-top: 30px;"><span class="label">{{"Зібрано" | transloco}}:</span> <span class="highlight" style="position: relative; left: 140px; font-size: 20px;">13 578 {{"грн" | transloco}}</span> <span style="position: relative; left: 220px;font-size: 20px;">2,7%</span></p>
+            <p style="margin-left: 65px;margin-top: 30px; width: 365px;"><span class="label">{{"Залишилось зібрати" | transloco}}:</span> <strong style="position: relative; left: 35px;font-size: 20px;">486 422 {{"грн" | transloco}}</strong> <span style="position: relative; left: 100px;font-size: 20px;">97,3%</span></p>
+        </div>
+        <div class="right">
+            <p style="margin-left: -10px;"><span class="label">{{"Дедлайн" | transloco}}:</span> <strong style="font-size: 18px; left: 30px; position: relative;">30.06.2025</strong></p>
+            <p style="margin-top: 30px; margin-left: -10px;"><span class="label">{{"Середнє надходження за день" | transloco}}:</span> <strong style="font-size: 18px; left: 45px; position: relative;">969 {{"грн/день" | transloco}}</strong></p>
+            <p style="margin-top: 30px; margin-left: -10px;"><span class="label">{{"Необхідне надходження за день" | transloco}}:</span> <strong style="font-size: 18px; left: 15px; position: relative;">5 000 {{"грн/день" | transloco}}</strong></p>
+        </div>
+    </div>
+    <div class="down">
+        <div class="icon" (click)="toggleDropdown(0)">
+          <img src="assets/images/people.png">
+          <strong>{{"Інвестори" | transloco}}</strong>
+          <span>78</span>
+          <span class="arrow" [class.open]="dropdownStates[0]">&#9660;</span>
+          <div class="dropdown" *ngIf="dropdownStates[0]">
+            <div class="grid">
+                <div class="grid-item">
+                  <img src="assets/images/investor1.png" alt="People 1">
+                  <p>120 {{"грн" | transloco}}</p>
+                </div>
+                <div class="grid-item">
+                  <img src="assets/images/investor2.png" alt="People 2">
+                  <p>120 {{"грн" | transloco}}</p>
+                </div>
+                <div class="grid-item">
+                  <img src="assets/images/investor1.png" alt="People 3">
+                  <p>120 {{"грн" | transloco}}</p>
+                </div>
+                <div class="grid-item">
+                  <img src="assets/images/investor2.png" alt="People 4">
+                  <p>120 {{"грн" | transloco}}</p>
+                </div>
+                <div class="grid-item">
+                  <img src="assets/images/investor2.png" alt="People 5">
+                  <p>120 {{"грн" | transloco}}</p>
+                </div>
+                <div class="grid-item">
+                  <img src="assets/images/investor1.png" alt="People 6">
+                  <p>120 {{"грн" | transloco}}</p>
+                </div>
+                <div class="grid-item">
+                  <img src="assets/images/investor2.png" alt="People 7">
+                  <p>120 {{"грн" | transloco}}</p>
+                </div>
+                <div class="grid-item">
+                  <img src="assets/images/investor1.png" alt="People 8">
+                  <p>120 {{"грн" | transloco}}</p>
+                </div>
+                <div class="grid-item">
+                  <img src="assets/images/investor1.png" alt="People 9">
+                  <p>120 {{"грн" | transloco}}</p>
+                </div>
+                <div class="grid-item">
+                  <img src="assets/images/investor2.png" alt="People 10">
+                  <p>120 {{"грн" | transloco}}</p>
+                </div>
+                <div class="grid-item">
+                  <img src="assets/images/investor1.png" alt="People 11">
+                  <p>120 {{"грн" | transloco}}</p>
+                </div>
+                <div class="grid-item">
+                  <img src="assets/images/investor2.png" alt="People 12">
+                  <p>120 {{"грн" | transloco}}</p>
+                </div>
+              </div>
+              <a href="#" class="see-all">{{"Дивитись усіх" | transloco}}</a>
+          </div>
+        </div>
+      
+        <div class="icon" (click)="toggleDropdown(1)">
+          <img src="assets/images/comments.png">
+          <strong>{{"Залишилось днів" | transloco}}</strong>
+          <span style="position: relative; left: 20px;">86</span>
+          <span style="position: relative; left: 50px;" class="arrow" [class.open]="dropdownStates[1]">&#9660;</span>
+          <div class="dropdown2" *ngIf="dropdownStates[1]">
+            <p><span>{{"Початок кампанії" | transloco}}:</span> <span style="font-size: 18px;">21.03.2025</span></p>
+            <p><span>{{"Кінець кампанії" | transloco}}:</span> <span style="font-size: 18px;">30.06.2025</span></p>
+            <p><span>{{"Залишилось днів" | transloco}}:</span> <span style="font-size: 18px;">86</span></p>
+            <p><span style="font-weight: 500;">{{"Щоб завершити збір" | transloco}}</span></p>
+            <p class="with-margin-bottom"><span style="font-weight: 500;">{{"Вам знадобиться ще" | transloco}}:</span> <span style="font-weight: bold; font-size: 20px;">95 {{"днів" | transloco}}</span></p>
+            <p><span>{{"Ви виходите за межі" | transloco}}</span>
+            <p class="with-margin-bottom2"><span>{{"дедлайну на" | transloco}}:</span> <span style="position: relative;font-weight: bold; font-size: 20px; color:#ff6063; left: 80px;">9 {{"днів" | transloco}}</span></p>
+            
+            <hr class="section-line">
+            <p class="center-text"><span style="font-size: 18px;color: #ffcf33;text-decoration: underline;">{{"Як я можу просувати свій проєкт" | transloco}}</span></p>
+          </div>
+        </div>
+      
+        <div class="icon" (click)="toggleDropdown(2)">
+          <img src="assets/images/money.png">
+          <strong>{{"Внески" | transloco}}</strong>
+          <span>2,7%</span>
+          <span class="arrow" [class.open]="dropdownStates[2]">&#9660;</span>
+          <div class="dropdown3" *ngIf="dropdownStates[2]">
+            <p><span class="dot"></span><span  style="font-size: 20px;">{{"За останній тиждень" | transloco}}</span></p>
+            <p class="with-margin-left"><span>{{"Найбільший" | transloco}}:</span> <span style="font-size: 18px;">2000 {{"грн" | transloco}}</span></p>
+            <p class="with-margin-left"><span>{{"Середній" | transloco}}:</span> <span style="font-size: 18px;">300 {{"грн" | transloco}}</span></p>
+            <p class="with-margin-left"><span>{{"Найменший" | transloco}}:</span> <span style="font-size: 18px;">20 {{"грн" | transloco}}</span></p>
+            <p class="with-margin-left"><span>{{"Всього внесків" | transloco}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;14 <a style="text-decoration: underline; font-size: 14px; position: relative; left: 40px;">{{"Переглянути" | transloco}}</a></span></p>
+            <p class="with-margin-top"><span>{{"З них анонімних" | transloco}}:</span> <span style="font-size: 18px;">3</span></p>
+          
+            <p><span class="dot"></span><span  style="font-size: 20px;">{{"За останній місяць" | transloco}}</span></p>
+            <p class="with-margin-left"><span>{{"Найбільший" | transloco}}:</span> <span style="font-size: 18px;">3500 {{"грн" | transloco}}</span></p>
+            <p class="with-margin-left"><span>{{"Середній" | transloco}}:</span> <span style="font-size: 18px;">400 {{"грн" | transloco}}</span></p>
+            <p class="with-margin-left"><span>{{"Найменший" | transloco}}:</span> <span style="font-size: 18px;">20 {{"грн" | transloco}}</span></p>
+            <p class="with-margin-left"><span>{{"Всього внесків" | transloco}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;28 <a style="text-decoration: underline; font-size: 14px; position: relative; left: 40px;">{{"Переглянути" | transloco}}</a></span></p>
+            <p class="with-margin-top"><span>{{"З них анонімних" | transloco}}:</span> <span style="font-size: 18px;">7</span></p>
+
+            <p><span class="dot"></span><span  style="font-size: 20px;">За весь період</span></p>
+            <p class="with-margin-left"><span>{{"Найбільший" | transloco}}:</span> <span style="font-size: 18px;">3500 {{"грн" | transloco}}</span></p>
+            <p class="with-margin-left"><span>{{"Середній" | transloco}}:</span> <span style="font-size: 18px;">400 {{"грн" | transloco}}</span></p>
+            <p class="with-margin-left"><span>{{"Найменший" | transloco}}:</span> <span style="font-size: 18px;">20 {{"грн" | transloco}}</span></p>
+            <p class="with-margin-left"><span>{{"Всього внесків" | transloco}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;41 <a style="text-decoration: underline; font-size: 14px; position: relative; left: 40px;">{{"Переглянути" | transloco}}</a></span></p>
+            <p class="with-margin-top"><span>{{"З них анонімних" | transloco}}:</span> <span style="font-size: 18px;">11</span></p>
+        </div>
+        </div>
+      </div>  
+
+      <hr class="line2">     
+
+        <p class="after-line-text">{{"НАЙЧАСТІШІ ПИТАННЯ ДО ФАХІВЦІВ" | transloco}}</p>
+        <div class="list">
+            <p class="list-item"><span class="dot2"></span>{{"Чому мій збір просувається не так швидко?" | transloco}}</p>
+            <p class="list-item"><span class="dot2"></span>{{"Як збільшити охоплення аудіторії, яка бачить мій проєкт?" | transloco}}</p>
+            <p class="list-item"><span class="dot2"></span>{{"Яка реклама є ефективнішою?" | transloco}}</p>
+            <p class="list-item"><span class="dot2"></span>{{"Як працювати з аудиторією соціальних мереж?" | transloco}}</p>
+          </div>
+        <p class="text">{{"Ці та багато інших питань задають собі автори проєктів." | transloco}}</p>
+        <p class="text2">{{"Хочеш отримати відповіді на свої питання та зробити збір більш ефективним?" | transloco}}</p>
+
+        <div class="titles">
+          <h2>{{"Завітай до розділу" | transloco}}</h2>
+          <h2>{{"Або переходь" | transloco}}</h2>
+        </div>
+
+        <div class="button3" style="font-family: 'Montserrat Alternates';">
+        {{ "Підтримка" | transloco }}
+        <img src="assets/images/help.png" class="help" id="help" />
+        </div>
+
+
+        <div class="images-container">
+          <div class="image-item" [attr.data-text]="'Питання та відповіді' | transloco">
+            <img src="assets/images/photo2.png" alt="Фото 1" />
+            <a href="#" class="image-link">{{"Переглянути усі" | transloco}}</a>
+          </div>
+          <div class="image-item" [attr.data-text]="'Супровід проєкту' | transloco">
+            <img src="assets/images/photo2.png" alt="Фото 2" />
+            <a href="#" class="image-link">{{"Переглянути усі" | transloco}}</a>
+          </div>
+          <div class="image-item" [attr.data-text]="'Статті/блог' | transloco">
+            <img src="assets/images/photo2.png" alt="Фото 3" />
+            <a href="#" class="image-link">{{"Переглянути усі" | transloco}}</a>
+          </div>
+          <div class="image-item" [attr.data-text]="'Семінари/вебінари' | transloco">
+            <img src="assets/images/photo2.png" alt="Фото 4" />
+            <a href="#" class="image-link">{{"Переглянути усі" | transloco}}</a>
+          </div>
+        </div>
+
+
+        <h2 style="position: relative; top: -20px; font-size: 26px; left: -25px; color:white; margin-bottom: 30px; font-family: 'Montserrat'; z-index: 100;">{{"ДІЗНАЙТЕСЬ, ЯК ВИ МОЖЕТЕ КРАЩЕ ПРОСУВАТИ СВІЙ ПРОЄКТ ПРЯМО ЗАРАЗ" | transloco}}</h2>
+        
+        <div class="image-container">
+          <div class="image-box" [attr.data-description]="'Вибір між кредитом і лізингом залежить від вашої фінансової ситуації, потреб...' | transloco">
+            <img src="assets/images/photo2.png" alt="Image 1" />
+            <div class="title">{{"Допомога фахівців" | transloco}}</div>
+          </div>
+
+          
+          <div class="image-box" [attr.data-description]="'Вибір між кредитом і лізингом залежить від вашої фінансової ситуації, потреб і планів на майбутнє...' | transloco">
+            <img src="assets/images/photo2.png" alt="Image 2" />
+            <div class="title">{{"Послуга «проєкт під ключ»" | transloco}}</div>
+          </div>
+        </div>
+
+        <button class="image-button">{{"ЗАМОВИТИ" | transloco}}</button>
+        <button class="image-button2">{{"ЗАМОВИТИ" | transloco}}</button>
+        
+  </div>
+
+
+
+
+
+<!-- <hr
+  style="
+    border-top: 2px solid #ffcf33;
+    width: 99.9%;
+    margin-top: 60px;
+    height: 2px;
+    background-color: #ffcf33;
+  "
+/> -->
+
+<!-- <hr
+  style="
+    border-top: 2px solid #ffcf33;
+    width: 54.2%;
+    justify-content: left;
+    position: relative;
+    margin-right: 13%;
+    top: 133px;
+  "
+/> -->
+
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-header">
+      <div class="footer-logo">
+        <img src="assets/images/greenCoin.png" alt="Seed Flow" />
+        <span>Seed Flow</span>
+      </div>
+      <hr class="footer-line" />
+    </div>
+
+    <div class="subscription">
+      <span class="podpiska">
+        {{"ПІДПИШИСЬ НА НАШІ НОВИНИ" | transloco}}
+      </span>
+      <input type="email" placeholder="{{'Введіть адресу електронної пошти' | transloco }}" class="email2" />
+      <button class="btn2">
+        {{"ВІДПРАВИТИ" | transloco }}
+      </button>
+    </div>
+
+    <div class="footer-links">
+      <div class="footer-column">
+        <h4>{{"ПРО НАС" | transloco}}</h4>
+        <ul>
+          <li><a href="#">{{"Політика конфіденційності" | transloco}}</a></li>
+          <li><a href="#">{{"Правила користування порталом" | transloco}}</a></li>
+          <li><a href="#">{{"Правила використання файлів Cookie" | transloco}}</a></li>
+          <li><a href="#">{{"Про нас" | transloco}}</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>{{"ПРОЄКТИ" | transloco}}</h4>
+        <ul>
+          <li><a href="#">{{"Список проєктів" | transloco}}</a></li>
+          <li><a href="#">{{"Пошук" | transloco}}</a></li>
+          <li><a href="#">{{"Викласти проєкт" | transloco}}</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>{{"АКАУНТ" | transloco}}</h4>
+        <ul>
+          <li><a href="#">{{"Налаштування акаунта" | transloco}}</a></li>
+          <li><a href="#">{{"Повідомлення" | transloco}}</a></li>
+          <li><a href="#">{{"Перегляд транзакцій" | transloco}}</a></li>
+          <li><a href="#">{{"Підтримані проєкти" | transloco}}</a></li>
+          <li><a href="#">{{"Вподобані проєкти" | transloco}}</a></li>
+          <li><a href="#">{{"Вподобані товари" | transloco}}</a></li>
+          <li><a href="#">{{"Історія покупок" | transloco}}</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>{{"ПІДТРИМКА" | transloco}}</h4>
+        <ul>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">{{"Супровід проєкту" | transloco}}</a></li>
+          <li><a href="#">{{"Семінари/вебінари" | transloco}}</a></li>
+          <li><a href="#">{{"Блог" | transloco}}</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>{{"МАГАЗИН" | transloco}}</h4>
+        <ul>
+          <li><a href="#">{{"Всі товари" | transloco}}</a></li>
+          <li><a href="#">{{"Оплата і доставка" | transloco}}</a></li>
+          <li><a href="#">{{"Кошик" | transloco}}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr
+  class="yellowLine"
+/>
+<div class="footer-social">
+  <h4 style="font-family: 'Montserrat'">
+    <p class="underline-center">{{"МИ У СОЦМЕРЕЖАХ" | transloco }}</p>
+  </h4>
+
+  <div class="social-icons">
+    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+    <a href="#"><i class="fa-brands fa-telegram"></i></a>
+    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+  </div>
+</div>
+
+<hr
+class="yellowLine2"
+
+/>
+
+<div class="footer-bottom">
+  <p style="font-weight: 400;">
+    Всі права збережені | All rights save © 2025
+  </p>
+</div>
+</footer>
+  
+
+
+
+

@@ -1,0 +1,286 @@
+.projects-grid 
+{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); // 3 колонки в ряд
+    gap:20px; // Отступы между карточками
+    justify-content: center; // Центрируем грид
+    margin-left: 140px;
+    margin-top: 30px;
+    
+    .project-card {
+      width: 500px;
+      height: auto;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+      position: relative;
+      cursor: pointer;
+    
+      &:hover {
+        transform: scale(1.03);
+      }
+    
+      .project-image {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        object-position: top; // Показывает верхнюю часть изображения
+        top: -90px;
+      }
+  
+      .project-imageCover
+      {
+        width: 100px;
+        height: auto;
+        left: 50px;
+        top: 70px;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        object-fit: cover;
+        z-index: 10;
+        transition: transform 0.3s ease;
+      }
+  
+      .image-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(168, 168, 168, 0.687), transparent);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        border-radius: 15px;
+      }
+    
+      &:hover .image-overlay {
+        opacity: 1;
+      }
+  
+      .content-wrapper {
+        position: relative;
+        background: #fff;
+        transition: transform 0.4s ease-in-out;
+        display: flex;
+        flex-direction: column;
+    
+        &.expanded {
+          transform: translateY(-100px); // Поднимаем ровно на высоту description
+          
+        }
+      }
+    
+      .project-content {
+        display: flex;
+        padding: 15px;
+        background: #fff;
+        transition: transform 0.3s ease;
+        position: relative;
+        z-index: 2;
+    
+        .left-column {
+          flex: 1;
+    
+          h2 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            font-family: "Unbounded";
+            color: #247a60;
+          }
+  
+          .funding-info {
+            display: flex;
+            justify-content: space-between; // Выравнивание p в ряд
+            gap: 10px;
+            
+            p {
+              margin: 10px 0;
+              color: #247a60;
+              font-family: "Montserrat";
+            }
+          }
+    
+          .progress-bar {
+            width: 100%;
+            height: 8px; // Фиксированная высота шкалы
+            background: #8c826c; // Серый фон
+            border-radius: 4px;
+            position: relative;
+            overflow: visible; // Позволяет бегунку выйти за границы
+            pointer-events: none; // Отключает события на шкале
+          
+            .progress {
+              height: 100%;
+              background: #206b58; // Зеленый прогресс
+              position: absolute;
+              top: 0;
+              left: 0;
+              border-radius: 4px;
+            }
+          
+            .slider-thumb {
+              width: 14px;
+              height: 14px;
+              background: #206b58;
+              border-radius: 50%;
+              position: absolute;
+              top: 50%;
+              transform: translate(-50%, -50%); // Центрируем
+              box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+              pointer-events: auto; // Включает взаимодействие с бегунком
+            }
+          }
+    
+          .mini-columns {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+    
+            .mini-column {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+    
+              img {
+                width: 15px;
+                height: 15px;
+              }
+    
+              p {
+                font-size: 12px;
+                margin-top: 5px;
+                font-family: "Montserrat";
+                color: #247a60;
+              }
+            }
+          }
+        }
+    
+        .right-column {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          margin-left: 60px;
+    
+          button {
+            background: none;
+            border: 1px solid white;
+            padding: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+          }
+  
+          .share
+          {
+            width: 20px;
+            height: auto;
+            border: none;
+            margin-left: 70px;
+          }
+        
+          .like
+          {
+            width: 20px;
+            height: auto;
+            border: none;
+            margin-left: 70px;
+            cursor: pointer;
+            transition: opacity 0.3s ease-in-out;
+          }
+          .like:hover 
+          {
+            opacity: 1;
+          }
+  
+          .suport
+          {
+            background-color: #247a60;
+            color: white;
+            font-family: "Montserrat";
+            width: 120px;
+            height: 40px;
+            margin-top: 20px;
+          }
+  
+          .suport:hover 
+          {
+              background-color: white;  
+              color: #247a60;             
+              border: 2px solid #247a60;
+          }
+          
+          .suport:focus 
+          {
+              outline: none;
+          }
+        }
+      }
+    
+      .description {
+        font-family: "Unbounded";
+        color: #247a60;
+        font-weight: 300;
+        font-size: 14px;
+        position: absolute;
+        top: 83%;
+        left: 0;
+        width: 93%;
+        padding: 20px;
+        transition: top 0.3s ease;
+        z-index: 1;
+        font-size: 14px;
+    
+        &.visible {
+          top: 100%;
+        }
+      }
+      
+  // ----------------------------
+  
+      /* Кнопка "Поделиться" */
+  .img_Btn {
+    cursor: pointer;
+  
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  
+    .share {
+      width: 30px;
+      height: 30px;
+    }
+  }
+  
+  
+      /* Выпадающий блок */
+  .share-popup {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 100;
+    animation: fadeIn 0.3s ease;
+  }
+  
+  /* Иконки соцсетей */
+  .share-popup a {
+    text-decoration: none;
+    color: #555;
+    font-size: 24px;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      color: #007bff;
+      transform: scale(1.2);
+    }
+  }
+  
+    }
+  }

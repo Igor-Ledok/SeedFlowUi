@@ -1,0 +1,114 @@
+<!-- Шрифт Montserrat -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+rel="stylesheet"
+/>
+
+<!-- Шрифт unbounded -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Unbounded:wght@200..900&display=swap"
+rel="stylesheet"
+/>
+
+<!-- Шрифт Montserrat Alternates -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Unbounded:wght@200..900&display=swap"
+rel="stylesheet"
+/>
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+crossorigin="anonymous"
+referrerpolicy="no-referrer"
+/>
+
+<div class="projects-grid">
+
+
+<div *ngFor="let card of cards; let i = index"  class="project-card" (mouseover)="showDescription(i)" (mouseleave)="hideDescription(i)">
+
+    <div _ngcontent-ng-c848617541=""><img src="assets/images/rocketBig.png" alt="GlobalEdu" class="project-imageCover" /></div>
+<!-- <img src="assets/images/стартап-освіта.png" alt="GlobalEdu" class="project-image" /> -->
+    <img
+        [src]="card.img"
+        alt="{{ card.title }}"
+        class="project-image"
+      />
+
+<div class="image-overlay"></div> <!-- Затемнение сверху -->
+
+
+<div class="content-wrapper" [class.expanded]="card.isHovered">
+<div class="project-content" [class.expanded]="card.isHovered">
+<div class="left-column">
+<h2>{{ card.title }}</h2>
+<div class="funding-info">
+<p style="font-weight: 300;">{{ formatNumber(card.startSum) }} {{ "грн" | transloco }}</p>
+<p style="font-weight: 500;">{{ formatNumber(card.endSum) }} {{ "грн" | transloco }}</p>
+</div>
+<div class="progress-bar">
+<div class="progress" [style.width.%]="getPercentage(card.startSum, card.endSum)"></div>
+<div class="slider-thumb" [style.left.%]="getPercentage(card.startSum, card.endSum)"></div>
+</div>
+<div class="mini-columns">
+<div class="mini-column">
+<img src="assets/images/people.png" alt="icon1">
+<p>{{ formatNumber(card.folowers) }}</p>
+</div>
+<div class="mini-column">
+<img src="assets/images/comments.png" alt="icon2">
+<p>{{ formatNumber(card.daysToEnd) }}</p>
+</div>
+<div class="mini-column">
+<img src="assets/images/money.png" alt="icon3">
+<p>{{ formatDecimal(card.moneyColected) }}%</p>
+</div>
+</div>
+</div>
+
+<div class="right-column">
+
+<button (click)="toggleShare(i, $event)" class="img_Btn"><img src="assets/images/socialMedia.png" alt="GlobalEdu" class="share" /></button>
+
+<button (click)="toggleLike(i)" class="like-button">
+<img class="like" [src]="likedProjects[i] ? 'assets/images/likeRed.png' : 'assets/images/like.png'" alt="Like" />
+</button>
+<button _ngcontent-ng-c612173718="" class="suport" (click)="supportProject()">{{ "ПІДТРИМАТИ" | transloco }}</button>
+</div>
+</div>
+
+<div class="description">
+<p>
+{{card.description | transloco}}
+</p>
+</div>
+</div>
+
+<div 
+class="share-popup" 
+*ngIf="card.isShared" 
+(click)="stopPropagation($event)">
+<a href="https://facebook.com" target="_blank">
+<i class="fab fa-facebook-f"></i>
+</a>
+<a href="https://twitter.com" target="_blank">
+<i class="fab fa-twitter"></i>
+</a>
+<a href="https://instagram.com" target="_blank">
+<i class="fab fa-instagram"></i>
+</a>
+<a href="https://youtube.com" target="_blank">
+<i class="fab fa-youtube"></i>
+</a>
+</div>
+</div>
+
+

@@ -1,0 +1,847 @@
+<!-- Шрифт Montserrat -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+<!-- Шрифт unbounded -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+
+<!-- Шрифт Montserrat Alternates -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<header class="header">
+    <div class="header-left">
+      <img src="assets/images/greenCoin.png" class="logo" alt="Seed Flow Logo" />
+      <span class="brand-name">Seed Flow</span>
+    </div>
+  
+    <!-- Блок поиска -->
+<div class="search-container" #searchContainer>
+  <input 
+    style="font-family: 'Montserrat';"
+    type="text"
+    class="search-input"
+    placeholder="🔍"
+    (focus)="showDropdown = true"
+    (input)="filterResults()"
+    [(ngModel)]="searchText"
+  />
+  
+  <div *ngIf="showDropdown" class="search-dropdown" [style.height]="getDropdownHeight()">
+    <!-- 3 основные кнопки: СТАРТАПИ, СОЦІАЛЬНІ, ГУМАНІТАРНІ -->
+    <div class="button-row wide-buttons">
+      <button class="button wide-button"
+        [ngClass]="{ 'active': activeCategoryIndex === 0 }"
+        (click)="onCategoryButtonPress(0)">
+       {{" СТАРТАПИ" | transloco}}</button>
+      <button class="button wide-button"
+        [ngClass]="{ 'active': activeCategoryIndex === 1 }"
+        (click)="onCategoryButtonPress(1)">
+        СОЦІАЛЬНІ</button>
+      <button class="button wide-button"
+        [ngClass]="{ 'active': activeCategoryIndex === 2 }"
+        (click)="onCategoryButtonPress(2)">
+        ГУМАНІТАРНІ</button>
+    </div>
+  
+    <!-- Кнопки для СТАРТАПИ -->
+    <div *ngIf="activeCategoryIndex === 0">
+      <div class="button-row" *ngFor="let row of startupRows">
+        <button *ngFor="let button of row" class="button rounded-button"
+          [ngClass]="{ 'active': activeStartupButtonIndex === button.index }"
+          (click)="onButtonPress('startup', button.index)">
+          {{ button.label }}
+        </button>
+      </div>
+    </div>
+  
+    <!-- Кнопки для СОЦІАЛЬНІ -->
+    <div *ngIf="activeCategoryIndex === 1">
+      <div class="button-row">
+        <button *ngFor="let button of socialButtons" class="button rounded-button"
+          [ngClass]="{ 'active': activeSocialButtonIndex === button.index }"
+          (click)="onButtonPress('social', button.index)">
+          {{ button.label }}
+        </button>
+      </div>
+    </div>
+  
+    <!-- Кнопки для ГУМАНІТАРНІ -->
+    <div *ngIf="activeCategoryIndex === 2">
+      <div class="button-row">
+        <button *ngFor="let button of humanitarianButtons" class="button rounded-button"
+          [ngClass]="{ 'active': activeHumanitarianButtonIndex === button.index }"
+          (click)="onButtonPress('humanitarian', button.index)">
+          {{ button.label }}
+        </button>
+      </div>
+    </div>
+
+    <div class="hot-projects">
+      <span class="hot-projects-text">ГАРЯЧІ ПРОЄКТИ</span>
+      <hr class="hot-projects-line" />
+    </div>
+
+<!-- Результаты поиска (фото и описание) -->
+<div *ngIf="filteredItems.length > 0; else noResults">
+  <div class="search-items">
+    <div *ngFor="let item of filteredItems" class="search-item">
+       <!-- Контейнер для фото и описания, чтобы добавить рамку -->
+       <div class="search-item-content">
+
+        <div class="icon-top-left">
+          <img src="assets/images/LeftUpAngle.png" alt="icon" class="top-left-icon" />
+        </div>
+
+        <div class="icon-top-right">
+          <img src="assets/images/rocket.png" alt="icon 2" class="top-right-icon" />
+        </div>
+
+
+      <!-- Фото элемента -->
+      <img [src]="item.image" alt="image" class="search-item-img" />
+      
+      <!-- Название с суммой и прогресс-баром -->
+      <div class="search-item-body">
+        <p class="search-item-title">{{ item.title }}</p>
+        <!-- Сумма сверху прогресс-бара -->
+        <div class="progress-info">
+          <span class="progress-from">135 457 {{"грн" | transloco}}</span>
+          <span class="progress-to">500 000 {{"грн" | transloco}}</span>
+        </div>
+        
+        <!-- Прогресс-бар -->
+        <progress class="progress-bar" [value]="item.progress" max="100"></progress>
+      </div>
+
+      <!-- Иконка справа внизу под фото -->
+      <div class="icon-container">
+        <img src="assets/images/socialMedia.png" alt="icon" class="search-item-icon" />
+        <br>
+        <img src="assets/images/like.png" alt="new icon" class="search-item-icon" />
+      </div>
+
+      <!-- Иконки и числа под прогресс-баром -->
+      <div class="icons-container">
+        <div class="icon-item">
+          <img src="assets/images/people.png" alt="icon 1" class="icon-img" />
+          <p class="icon-number">{{ item.value1 }}</p>
+        </div>
+        <div class="icon-item">
+          <img src="assets/images/comments.png" alt="icon 2" class="icon-img" />
+          <p class="icon-number">{{ item.value2 }}</p>
+        </div>
+        <div class="icon-item">
+          <img src="assets/images/money.png" alt="icon 3" class="icon-img" />
+          <p class="icon-number">{{ item.value3 }}%</p>
+        </div>
+
+        <button class="support-button2">{{"ПІДТРИМАТИ" | transloco}}</button>
+      </div>
+
+      <div class="search-item-text">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia recusandae aliquam rem expedita itaque.
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+      
+      
+    
+    <ng-template #noResults>
+      <div class="no-results">Нічого не знайдено</div>
+    </ng-template>
+  </div>
+</div>
+  
+    <div class="header-right">
+      <button class="submit-project-btn">{{"Подати проєкт" | transloco}}</button>
+      <img src="assets/images/profile.png" class="profile-icon" alt="User Profile">
+    </div>
+
+    <div class="language-switcher" style="color: #898268;"><img src="assets/images/language.png" class="logo2">
+
+      <mat-select [formControl]="selectedLanguage" style="width: 55px;" (selectionChange)="onLanguageChange($event)">
+        <mat-option style="font-family: 'Montserrat';" *ngFor="let lang of languages" [value]="lang.code">
+          {{ lang.name }}
+        </mat-option>
+      </mat-select>
+  </div>
+   
+  </header>
+
+  <hr>
+
+
+
+
+  <div class="filter-container">
+    <h2 class="filter-title">{{"Фільтрувати" | transloco}}</h2>
+
+    <div class="filter-image-container">
+    <img src="assets/images/ShopYellowBackground1.png" alt="Фільтр" class="filter-image">
+    <span class="overlay-text">{{"ТЕМАТИКА" | transloco}}</span>
+  </div>
+
+  <div class="image-container">
+    <img src="assets/images/ShopGreenLeftUp.png" alt="Description of Image" class="top-right-image">
+    <div class="overlay-text3">{{"Ваш рахунок" | transloco}}<span style="color:#247a60; font-weight: 600; font-size: 22px;"><br>Seeds</span></div>
+  
+    <div class="number-container">
+      <img src="assets/images/Seeds.png" alt="Small Icon" class="small-icon">
+      <span class="number">250</span>
+    </div>
+  </div>
+  
+
+      <!-- Чекбоксы под изображением -->
+    <div class="checkbox-container">
+        <section id="checkbox" *ngFor="let category of categories">
+            <mat-checkbox>
+                <label>
+                    <span style="font-family: 'Montserrat'; font-size: 14px;">{{ category | transloco }}</span>
+                </label>
+            </mat-checkbox>
+        </section>
+    </div>
+
+    <div class="filter-image-container">
+      <img src="assets/images/ShopYellowBackground2.png" alt="Фільтр" class="filter-image2">
+      <span class="overlay-text2">{{"ОСОБЛИВОСТІ" | transloco}}</span>
+    </div>
+
+          <!-- Чекбоксы под изображением -->
+          <div class="checkbox-container">
+            <section id="checkbox" *ngFor="let category of categories2">
+                <mat-checkbox>
+                    <label>
+                        <span style="font-family: 'Montserrat'; font-size: 14px;">{{ category | transloco }}</span>
+                    </label>
+                </mat-checkbox>
+            </section>
+        </div>
+
+        <div class="filter-image-container">
+          <img src="assets/images/ShopYellowBackground1.png" alt="Фільтр" class="filter-image">
+          <span class="overlay-text">{{"ЦІНА" | transloco}}</span>
+        </div>
+
+        <div class="number-container2">
+          <div class="number-box">{{ progressValue }}</div>
+          <div class="number-box">{{ maxValue }}</div>
+      </div>
+
+      <div class="progress-bar-container">
+        <input 
+          type="range" 
+          class="slider" 
+          [(ngModel)]="progressValue" 
+          [min]="minValue" 
+          [max]="maxValue" 
+          (input)="updateProgress()"
+        />
+      </div>
+
+      <div class="text-box">
+        {{"СКИНУТИ ВСЕ" | transloco}}
+      </div>     
+</div>
+
+
+  <div class="container">
+    <h1 class="title">Seed Goods</h1>
+    <p class="subtitle">{{"Вчора ідея - сьогодні продукт" | transloco}}</p>
+    <p class="welcome">{{"Ласкаво просимо до крамнички" | transloco}} <span class="green">Seed Flow</span></p>
+    <p class="description">
+     {{"Кожен проєкт має на меті створення кінцевого продукту." | transloco}}<br>
+      {{"Багато успішно закритих проєктів не тільки почали втілювати свої ідеї, а й налагодили виробництво своїх товарів." | transloco}}
+    </p>
+    <p class="highlight">
+      {{"Вже зараз ви можете замовити круті та корисні товари, які ще вчора були тільки ідеєю!" | transloco}}
+    </p>
+  </div>
+
+
+  <div class="custom-container">
+    <div class="custom-arrow custom-left-arrow" (click)="changeImage('left')">&#10094;</div>
+  
+    <div class="custom-image-wrapper">
+      <img [src]="currentImage.src" alt="Image" class="custom-image" />
+      <div class="custom-info">
+        <h2 class="custom-title">{{ currentImage.title | transloco}}</h2>
+        <p class="custom-description">{{ currentImage.description | transloco }}</p>
+        <p class="custom-amount">{{ currentImage.amount | transloco }}</p>
+      </div>
+    </div>
+  
+    <div class="custom-arrow custom-right-arrow" (click)="changeImage('right')">&#10095;</div>
+  
+    <div class="custom-top-left-image-wrapper">
+      <img src="assets/images/ShopTopOfTheWeek.png" alt="Top Left Image" class="custom-top-left-image" />
+    </div>
+  
+      <!-- Фото в правом нижнем углу -->
+  <div class="custom-bottom-right-image-wrapper">
+    <img src="assets/images/ShopKorzina.png" alt="Bottom Right Image" class="custom-bottom-right-image" />
+  </div>
+  </div>
+
+  <div class="custom-container2">
+    <div class="custom-arrow2 custom-left-arrow2" (click)="changeImage2('left')">&#10094;</div>
+  
+    <div class="custom-image-wrapper2">
+      <img [src]="currentImage2.src" alt="Image" class="custom-image" />
+      <div class="custom-info">
+        <h2 class="custom-title">{{ currentImage2.title | transloco}}</h2>
+        <p class="custom-description">{{ currentImage2.description | transloco}}</p>
+        <p class="custom-amount">{{ currentImage2.amount | transloco }}</p>
+      </div>
+    </div>
+  
+    <div class="custom-arrow2 custom-right-arrow2" (click)="changeImage2('right')">&#10095;</div>
+  
+    <div class="custom-top-left-image-wrapper">
+      <img src="assets/images/ShopNew.png" alt="Top Left Image" class="custom-top-left-image" />
+    </div>
+  
+      <!-- Фото в правом нижнем углу -->
+  <div class="custom-bottom-right-image-wrapper" [routerLink]="'/tovar-page-page'">
+    <img src="assets/images/ShopKorzina.png" alt="Bottom Right Image" class="custom-bottom-right-image" />
+  </div>
+  </div>
+
+  
+
+
+
+
+
+  <div class="custom-container4">
+    <!-- Карточка 1 -->
+    <div class="custom-card3">
+      <div class="custom-arrow3 custom-left-arrow3" (click)="changeImage3('left')">&#10094;</div>
+    
+      <div class="custom-image-wrapper3">
+        <img [src]="currentImage3.src" alt="Image" class="custom-image2" />
+        <div class="custom-info3">
+          <h2 class="custom-title3">{{ currentImage3.title | transloco }}</h2>
+          <p class="custom-description3">{{ currentImage3.description | transloco }}</p>
+          <p class="custom-amount3">{{ currentImage3.amount | transloco }}</p>
+        </div>
+      </div>
+    
+      <div class="custom-arrow3 custom-right-arrow3" (click)="changeImage3('right')">&#10095;</div>
+    
+      <div class="custom-top-left-image-wrapper2">
+        <img src="assets/images/ShopGreenLeftUp2.png" alt="Top Left Image" class="custom-top-left-image2" />
+        <span class="category">{{"Дім" | transloco}}</span>
+      </div>
+  
+      <!-- Текст в правом верхнем углу -->
+      <div class="custom-top-right-text">
+        <span>{{"Артикул" | transloco}}: 425789</span> <!-- Текст справа -->
+        <img src="assets/images/like.png" (click)="toggleLikeFirst()" [src]="isLiked ? 'assets/images/likeRed.png' : 'assets/images/like.png'" alt="new icon" class="search-item-icon2" />
+      </div>
+    
+      <!-- Фото в правом нижнем углу -->
+      <div class="custom-bottom-right-image-wrapper" [routerLink]="'/tovar-page-page'">
+        <img src="assets/images/ShopKorzina.png" alt="Bottom Right Image" class="custom-bottom-right-image" />
+      </div>
+  
+      <!-- Точки для переключения изображений -->
+      <div class="image-dots">
+        <span
+          *ngFor="let dot of images3; let i = index"
+          class="dot"
+          [ngClass]="{'active': currentIndex3 === i}"
+          (click)="setImage3(i)"
+        ></span>
+      </div>
+    </div>
+  
+    <!-- Повторяем карточку 2, 3, 4 -->
+    <div class="custom-card3" *ngFor="let item of items; let i = index">
+      <div class="custom-arrow3 custom-left-arrow3" (click)="changeImage3('left')">&#10094;</div>
+  
+      <div class="custom-image-wrapper3">
+        <img [src]="currentImage3.src" alt="Image" class="custom-image2" />
+        <div class="custom-info3">
+          <h2 class="custom-title3">{{ currentImage3.title | transloco }}</h2>
+          <p class="custom-description3">{{ currentImage3.description | transloco }}</p>
+          <p class="custom-amount3">{{ currentImage3.amount | transloco }}</p>
+        </div>
+      </div>
+  
+      <div class="custom-arrow3 custom-right-arrow3" (click)="changeImage3('right')">&#10095;</div>
+  
+      <div class="custom-top-left-image-wrapper2">
+        <img src="assets/images/ShopGreenLeftUp2.png" alt="Top Left Image" class="custom-top-left-image2" />
+        <span class="category">{{"Дім" | transloco}}</span>
+      </div>
+  
+      <!-- Текст в правом верхнем углу -->
+      <div class="custom-top-right-text">
+        <span>{{"Артикул" | transloco}}: 425789</span> <!-- Текст справа -->
+        <img src="assets/images/like.png" (click)="toggleLikeFirst()" [src]="isLiked ? 'assets/images/likeRed.png' : 'assets/images/like.png'" alt="new icon" class="search-item-icon2" />
+      </div>
+  
+      <!-- Фото в правом нижнем углу -->
+      <div class="custom-bottom-right-image-wrapper" [routerLink]="'/tovar-page-page'">
+        <img src="assets/images/ShopKorzina.png" alt="Bottom Right Image" class="custom-bottom-right-image" />
+      </div>
+  
+      <!-- Точки для переключения изображений -->
+      <div class="image-dots">
+        <span
+          *ngFor="let dot of images3; let i = index"
+          class="dot"
+          [ngClass]="{'active': currentIndex3 === i}"
+          (click)="setImage3(i)"
+        ></span>
+      </div>
+    </div>
+  </div>
+  
+  <br>
+
+  <div class="custom-container5">
+    <!-- Карточка 1 -->
+    <div class="custom-card3">
+      <div class="custom-arrow3 custom-left-arrow3" (click)="changeImage3('left')">&#10094;</div>
+    
+      <div class="custom-image-wrapper3">
+        <img [src]="currentImage3.src" alt="Image" class="custom-image2" />
+        <div class="custom-info3">
+          <h2 class="custom-title3">{{ currentImage3.title | transloco}}</h2>
+          <p class="custom-description3">{{ currentImage3.description | transloco }}</p>
+          <p class="custom-amount3">{{ currentImage3.amount | transloco }}</p>
+        </div>
+      </div>
+    
+      <div class="custom-arrow3 custom-right-arrow3" (click)="changeImage3('right')">&#10095;</div>
+    
+      <div class="custom-top-left-image-wrapper2">
+        <img src="assets/images/ShopGreenLeftUp2.png" alt="Top Left Image" class="custom-top-left-image2" />
+        <span class="category">{{"Дім" | transloco}}</span>
+      </div>
+  
+      <!-- Текст в правом верхнем углу -->
+      <div class="custom-top-right-text">
+        <span>{{"Артикул" | transloco}}: 425789</span> <!-- Текст справа -->
+        <img src="assets/images/like.png" (click)="toggleLikeFirst()" [src]="isLiked ? 'assets/images/likeRed.png' : 'assets/images/like.png'" alt="new icon" class="search-item-icon2" />
+      </div>
+    
+      <!-- Фото в правом нижнем углу -->
+      <div class="custom-bottom-right-image-wrapper" [routerLink]="'/tovar-page-page'">
+        <img src="assets/images/ShopKorzina.png" alt="Bottom Right Image" class="custom-bottom-right-image" />
+      </div>
+  
+      <!-- Точки для переключения изображений -->
+      <div class="image-dots">
+        <span
+          *ngFor="let dot of images3; let i = index"
+          class="dot"
+          [ngClass]="{'active': currentIndex3 === i}"
+          (click)="setImage3(i)"
+        ></span>
+      </div>
+    </div>
+  
+    <!-- Повторяем карточку 2, 3, 4 -->
+    <div class="custom-card3" *ngFor="let item of items; let i = index">
+      <div class="custom-arrow3 custom-left-arrow3" (click)="changeImage3('left')">&#10094;</div>
+  
+      <div class="custom-image-wrapper3">
+        <img [src]="currentImage3.src" alt="Image" class="custom-image2" />
+        <div class="custom-info3">
+          <h2 class="custom-title3">{{ currentImage3.title | transloco }}</h2>
+          <p class="custom-description3">{{ currentImage3.description | transloco }}</p>
+          <p class="custom-amount3">{{ currentImage3.amount | transloco }}</p>
+        </div>
+      </div>
+  
+      <div class="custom-arrow3 custom-right-arrow3" (click)="changeImage3('right')">&#10095;</div>
+  
+      <div class="custom-top-left-image-wrapper2">
+        <img src="assets/images/ShopGreenLeftUp2.png" alt="Top Left Image" class="custom-top-left-image2" />
+        <span class="category">{{"Дім" | transloco}}</span>
+      </div>
+  
+      <!-- Текст в правом верхнем углу -->
+      <div class="custom-top-right-text">
+        <span>{{"Артикул" | transloco}}: 425789</span> <!-- Текст справа -->
+        <img src="assets/images/like.png" (click)="toggleLikeFirst()" [src]="isLiked ? 'assets/images/likeRed.png' : 'assets/images/like.png'" alt="new icon" class="search-item-icon2" />
+      </div>
+  
+      <!-- Фото в правом нижнем углу -->
+      <div class="custom-bottom-right-image-wrapper" [routerLink]="'/tovar-page-page'">
+        <img src="assets/images/ShopKorzina.png" alt="Bottom Right Image" class="custom-bottom-right-image" />
+      </div>
+  
+      <!-- Точки для переключения изображений -->
+      <div class="image-dots">
+        <span
+          *ngFor="let dot of images3; let i = index"
+          class="dot"
+          [ngClass]="{'active': currentIndex3 === i}"
+          (click)="setImage3(i)"
+        ></span>
+      </div>
+    </div>
+  </div>
+
+
+
+<!-- Креатівний простір "LOFT" -->
+
+<hr
+  style="
+    width: 78.8%;
+    margin-bottom: 30px;
+    margin-top: 100px;
+    left: -23px;
+    position: relative;
+    top: -30px;
+  "
+/>
+
+<div class="container4">
+  <div class="image-section">
+    <img
+      src="assets/images/loftImg.png"
+      alt="Креативний простір"
+      style="position: relative; width: 1130px"
+    />
+  </div>
+
+  <div class="text-section">
+    <h2 class="title2"> {{ "КРЕАТИВНИЙ ПРОСТІР «LOFT»" | transloco }}</h2>
+    <p class="subtitle2">
+      {{ "Довгострокова" | transloco}} <br />
+      {{"короткострокова аренда" | transloco}}
+    </p>
+    <p class="description2">
+      Lorem ipsum dolor sit amet consectetur. Mattis laoreet dolor facilisis ac
+      magnis ullamcorper sed quis. Lectus vel nunc tellus fringilla.
+      Pellentesque eu dapibus purus leo orci dignissim id.
+    </p>
+    <p class="description3">
+      Pellentesque eu dapibus purus leo orci dignissim id. Felis malesuada
+      habitant tempor odio dolor.
+    </p>
+    <p class="contact">{{"Тел." | transloco }} +38 (073) 123-45-67</p>
+    <a href="#" class="more">{{"Більше" | transloco }}</a>
+    <div id="targetSection" style="position: relative; top: 69px"></div>
+  </div>
+</div>
+
+<hr
+  style="
+    width: 78.8%;
+    margin-bottom: 30px;
+    left: -22px;
+    position: relative;
+    top: -99px;
+  "
+/>
+
+<div class="custom-container6">
+  <!-- Карточка 1 -->
+  <div class="custom-card3">
+    <div class="custom-arrow3 custom-left-arrow3" (click)="changeImage3('left')">&#10094;</div>
+  
+    <div class="custom-image-wrapper3">
+      <img [src]="currentImage3.src" alt="Image" class="custom-image2" />
+      <div class="custom-info3">
+        <h2 class="custom-title3">{{ currentImage3.title | transloco }}</h2>
+        <p class="custom-description3">{{ currentImage3.description | transloco }}</p>
+        <p class="custom-amount3">{{ currentImage3.amount | transloco }}</p>
+      </div>
+    </div>
+  
+    <div class="custom-arrow3 custom-right-arrow3" (click)="changeImage3('right')">&#10095;</div>
+  
+    <div class="custom-top-left-image-wrapper2">
+      <img src="assets/images/ShopGreenLeftUp2.png" alt="Top Left Image" class="custom-top-left-image2" />
+      <span class="category">{{"Дім" | transloco}}</span>
+    </div>
+
+    <!-- Текст в правом верхнем углу -->
+    <div class="custom-top-right-text">
+      <span>{{"Артикул" | transloco}}: 425789</span> <!-- Текст справа -->
+      <img src="assets/images/like.png" (click)="toggleLikeFirst()" [src]="isLiked ? 'assets/images/likeRed.png' : 'assets/images/like.png'" alt="new icon" class="search-item-icon2" />
+    </div>
+  
+    <!-- Фото в правом нижнем углу -->
+    <div class="custom-bottom-right-image-wrapper" [routerLink]="'/tovar-page-page'">
+      <img src="assets/images/ShopKorzina.png" alt="Bottom Right Image" class="custom-bottom-right-image" />
+    </div>
+
+    <!-- Точки для переключения изображений -->
+    <div class="image-dots">
+      <span
+        *ngFor="let dot of images3; let i = index"
+        class="dot"
+        [ngClass]="{'active': currentIndex3 === i}"
+        (click)="setImage3(i)"
+      ></span>
+    </div>
+  </div>
+
+  <!-- Повторяем карточку 2, 3, 4 -->
+  <div class="custom-card3" *ngFor="let item of items; let i = index">
+    <div class="custom-arrow3 custom-left-arrow3" (click)="changeImage3('left')">&#10094;</div>
+
+    <div class="custom-image-wrapper3">
+      <img [src]="currentImage3.src" alt="Image" class="custom-image2" />
+      <div class="custom-info3">
+        <h2 class="custom-title3">{{ currentImage3.title | transloco}}</h2>
+        <p class="custom-description3">{{ currentImage3.description | transloco}}</p>
+        <p class="custom-amount3">{{ currentImage3.amount | transloco }}</p>
+      </div>
+    </div>
+
+    <div class="custom-arrow3 custom-right-arrow3" (click)="changeImage3('right')">&#10095;</div>
+
+    <div class="custom-top-left-image-wrapper2">
+      <img src="assets/images/ShopGreenLeftUp2.png" alt="Top Left Image" class="custom-top-left-image2" />
+      <span class="category">{{"Дім" | transloco}}</span>
+    </div>
+
+    <!-- Текст в правом верхнем углу -->
+    <div class="custom-top-right-text">
+      <span>{{"Артикул" | transloco}}: 425789</span> <!-- Текст справа -->
+      <img src="assets/images/like.png" (click)="toggleLikeFirst()" [src]="isLiked ? 'assets/images/likeRed.png' : 'assets/images/like.png'" alt="new icon" class="search-item-icon2" />
+    </div>
+
+    <!-- Фото в правом нижнем углу -->
+    <div class="custom-bottom-right-image-wrapper" [routerLink]="'/tovar-page-page'">
+      <img src="assets/images/ShopKorzina.png" alt="Bottom Right Image" class="custom-bottom-right-image" />
+    </div>
+
+    <!-- Точки для переключения изображений -->
+    <div class="image-dots">
+      <span
+        *ngFor="let dot of images3; let i = index"
+        class="dot"
+        [ngClass]="{'active': currentIndex3 === i}"
+        (click)="setImage3(i)"
+      ></span>
+    </div>
+  </div>
+</div>
+
+
+<div class="custom-container7">
+  <!-- Карточка 1 -->
+  <div class="custom-card3">
+    <div class="custom-arrow3 custom-left-arrow3" (click)="changeImage3('left')">&#10094;</div>
+  
+    <div class="custom-image-wrapper3">
+      <img [src]="currentImage3.src" alt="Image" class="custom-image2" />
+      <div class="custom-info3">
+        <h2 class="custom-title3">{{ currentImage3.title | transloco }}</h2>
+        <p class="custom-description3">{{ currentImage3.description | transloco }}</p>
+        <p class="custom-amount3">{{ currentImage3.amount | transloco }}</p>
+      </div>
+    </div>
+  
+    <div class="custom-arrow3 custom-right-arrow3" (click)="changeImage3('right')">&#10095;</div>
+  
+    <div class="custom-top-left-image-wrapper2">
+      <img src="assets/images/ShopGreenLeftUp2.png" alt="Top Left Image" class="custom-top-left-image2" />
+      <span class="category">{{"Дім" | transloco}}</span>
+    </div>
+
+    <!-- Текст в правом верхнем углу -->
+    <div class="custom-top-right-text">
+      <span>{{"Артикул" | transloco}}: 425789</span> <!-- Текст справа -->
+      <img src="assets/images/like.png" (click)="toggleLikeFirst()" [src]="isLiked ? 'assets/images/likeRed.png' : 'assets/images/like.png'" alt="new icon" class="search-item-icon2" />
+    </div>
+  
+    <!-- Фото в правом нижнем углу -->
+    <div class="custom-bottom-right-image-wrapper" [routerLink]="'/tovar-page-page'">
+      <img src="assets/images/ShopKorzina.png" alt="Bottom Right Image" class="custom-bottom-right-image" />
+    </div>
+
+    <!-- Точки для переключения изображений -->
+    <div class="image-dots">
+      <span
+        *ngFor="let dot of images3; let i = index"
+        class="dot"
+        [ngClass]="{'active': currentIndex3 === i}"
+        (click)="setImage3(i)"
+      ></span>
+    </div>
+  </div>
+
+  <!-- Повторяем карточку 2, 3, 4 -->
+  <div class="custom-card3" *ngFor="let item of items; let i = index">
+    <div class="custom-arrow3 custom-left-arrow3" (click)="changeImage3('left')">&#10094;</div>
+
+    <div class="custom-image-wrapper3">
+      <img [src]="currentImage3.src" alt="Image" class="custom-image2" />
+      <div class="custom-info3">
+        <h2 class="custom-title3">{{ currentImage3.title | transloco }}</h2>
+        <p class="custom-description3">{{ currentImage3.description | transloco}}</p>
+        <p class="custom-amount3">{{ currentImage3.amount | transloco }}</p>
+      </div>
+    </div>
+
+    <div class="custom-arrow3 custom-right-arrow3" (click)="changeImage3('right')">&#10095;</div>
+
+    <div class="custom-top-left-image-wrapper2">
+      <img src="assets/images/ShopGreenLeftUp2.png" alt="Top Left Image" class="custom-top-left-image2" />
+      <span class="category">{{"Дім" | transloco}}</span>
+    </div>
+
+    <!-- Текст в правом верхнем углу -->
+    <div class="custom-top-right-text">
+      <span>{{"Артикул" | transloco}}: 425789</span> <!-- Текст справа -->
+      <img src="assets/images/like.png" (click)="toggleLikeFirst()" [src]="isLiked ? 'assets/images/likeRed.png' : 'assets/images/like.png'" alt="new icon" class="search-item-icon2" />
+    </div>
+
+    <!-- Фото в правом нижнем углу -->
+    <div class="custom-bottom-right-image-wrapper" [routerLink]="'/tovar-page-page'">
+      <img src="assets/images/ShopKorzina.png" alt="Bottom Right Image" class="custom-bottom-right-image" />
+    </div>
+
+    <!-- Точки для переключения изображений -->
+    <div class="image-dots">
+      <span
+        *ngFor="let dot of images3; let i = index"
+        class="dot"
+        [ngClass]="{'active': currentIndex3 === i}"
+        (click)="setImage3(i)"
+      ></span>
+    </div>
+  </div>
+</div>
+
+  
+
+  
+
+
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-header">
+        <div class="footer-logo">
+          <img src="assets/images/greenCoin.png" alt="Seed Flow" />
+          <span style="font-family: 'Montserrat Alternates';">Seed Flow</span>
+        </div>
+        <hr class="footer-line" />
+      </div>
+
+      <div class="subscription" style="background-color: #bde7d6; margin-left: 345px; padding: 25px; text-align: center; border-radius: 8px; margin-bottom: 20px; width: 80%; display: flex; align-items: center; justify-content: center; box-sizing: border-box;">
+        <span style="font-family: 'Montserrat'; font-size: 18px; font-weight: 500; color: #247a60;position: relative; right: 50px; white-space: nowrap;">
+          {{"ПІДПИШИСЬ НА НАШІ НОВИНИ" | transloco}}
+        </span>
+        <input type="email" placeholder="{{'Введіть адресу електронної пошти' | transloco }}" style="padding: 8px; border: none; border-radius: 5px; width: 750px; font-family: 'Montserrat';" />
+        <button style="padding: 12px 15px; border: none; background-color: #247a60; color: white; font-weight: 500; border-radius: 5px; position: relative; left: 50px; cursor: pointer; font-family: 'Montserrat';">
+          {{"ВІДПРАВИТИ" | transloco }}
+        </button>
+      </div>
+  
+      <div class="footer-links">
+        <div class="footer-column">
+          <h4>{{"ПРО НАС" | transloco}}</h4>
+          <ul>
+            <li><a href="#">{{"Політика конфіденційності" | transloco}}</a></li>
+            <li><a href="#">{{"Правила користування порталом" | transloco}}</a></li>
+            <li><a href="#">{{"Про нас" | transloco}}</a></li>
+            <li><a href="#">{{"Супровід" | transloco}}</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>{{"ПРОЄКТИ" | transloco}}</h4>
+          <ul>
+            <li><a href="#">{{"Список проєктів" | transloco}}</a></li>
+            <li><a href="#">{{"Пошук" | transloco}}</a></li>
+            <li><a href="#">{{"Викласти проєкт" | transloco}}</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>{{"АКАУНТ" | transloco}}</h4>
+          <ul>
+            <li><a href="#">{{"Налаштування акаунта" | transloco}}</a></li>
+            <li><a href="#">{{"Повідомлення" | transloco}}</a></li>
+            <li><a href="#">{{"Перегляд транзакцій" | transloco}}</a></li>
+            <li><a href="#">{{"Підтримані проєкти" | transloco}}</a></li>
+            <li><a href="#">{{"Вподобані проєкти" | transloco}}</a></li>
+            <li><a href="#">{{"Вподобані товари" | transloco}}</a></li>
+            <li><a href="#">{{"Історія покупок" | transloco}}</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>{{"ПІДТРИМКА" | transloco}}</h4>
+          <ul>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">{{"Супровід проєкту" | transloco}}</a></li>
+            <li><a href="#">{{"Семінари/вебінари" | transloco}}</a></li>
+            <li><a href="#">{{"Блог" | transloco}}</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>{{"МАГАЗИН" | transloco}}</h4>
+          <ul>
+            <li><a href="#">{{"Політика конфіденційності" | transloco}}</a></li>
+            <li><a href="#">{{"Правила користування порталом" | transloco}}</a></li>
+            <li><a href="#">{{"Про нас" | transloco}}</a></li>
+            <li><a href="#">{{"Карта сайту" | transloco}}</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+     <hr
+      style="
+        border-top: 3px solid #ffcf33;
+        width: 38%;
+        margin-top: 60px;
+        justify-content: left;
+        position: relative;
+        left: -440px;
+      "
+    />
+    <div class="footer-social">
+      <h4 style="font-family: 'Montserrat'">
+        <p class="underline-center">{{"МИ У СОЦМЕРЕЖАХ" | transloco }}</p>
+      </h4>
+
+      <div class="social-icons">
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-telegram"></i></a>
+        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+      </div>
+    </div>
+
+    <hr
+      style="
+        border-top: 3px solid #ffcf33;
+        width: 38%;
+        margin-top: 80px;
+        justify-content: left;
+        position: relative;
+        left: 365px;
+      "
+    />
+
+    <div class="footer-bottom">
+      <p style="font-weight: 400;">
+        Всі права збережені | All rights save © 2025
+      </p>
+    </div>
+  </footer>
