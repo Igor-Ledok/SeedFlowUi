@@ -42,6 +42,7 @@
       font-weight: 500;
       color: #2e7d32;
       font-family: "Montserrat Alternates";
+      z-index: 2;
     }
   }
 
@@ -1182,7 +1183,7 @@ button.rounded-button:hover
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  z-index: 10;
 }
 
 .popup-content {
@@ -1586,9 +1587,21 @@ button.rounded-button:hover
 
 
 
+.button-wrapper {
+  display: flex;
+  align-items: right;
+  gap: 10px;
+}
 
 
-
+.socialMedia2 {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  position: absolute !important;
+  top: 50px;
+  left: 15px;
+}
 
 
 .project-header {
@@ -1603,34 +1616,38 @@ button.rounded-button:hover
 
   .project-image {
     position: relative;
-    width: 50%;
-    border-radius: 10px;
-    overflow: hidden;
 
     img {
-      width: 100%;
+      width: 550px;
       border-radius: 10px;
       object-fit: cover;
       height: 380px;
       background: #fff;
 
-      object-fit: fill; // растягивание
+      object-fit: contain; // растягивание
       // object-fit: contain; // сохранение пропорций
     }
 
-    .project-category {
+    .project-category 
+    {
       position: absolute;
       top: 10px;
-      left: 10px;
-      padding: 5px 10px;
+      left: 0px;
+      width: 130px;
+      height: 50px;
       border-radius: 20px;
-      font-size: 14px;
+      border-top-right-radius: 50px;
       display: flex;
       align-items: center;
-      gap: 5px;
-      .category-icon{
-        width: 80px;
-        height: auto;
+      justify-content: center;
+      padding: 0;
+      background: none;
+      z-index: 2;
+    
+      .category-icon {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
       }
     }
 
@@ -1834,6 +1851,41 @@ button.rounded-button:hover
     }
   }
 }
+@media (max-width: 1300px) {
+  .project-header {
+    flex-direction: column;
+    align-items: center;
+    width: 95%; // уменьшаем ширину для маленьких экранов
+    padding: 10px;
+
+    .project-image img {
+      height: auto; // чтобы не было сплющено
+      max-height: 300px;
+    }
+
+    .project-info {
+      width: 100%; // растягиваем на всю ширину
+      margin-top: 20px;
+
+      .stats {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .btn.support {
+        width: 100%;
+        left: 0;
+        top: 0;
+        margin-top: 20px;
+      }
+    }
+  }
+}
+
+
+
+
 .project-description {
   width: 80%;
   margin: 0 auto;
@@ -1951,6 +2003,52 @@ button.rounded-button:hover
     }
   }
 }
+
+@media (max-width: 900px) {
+  .project-sections {
+    flex-direction: column-reverse; /* сначала текст, потом фото */
+  }
+
+  .image-section {
+    width: 100%;
+  }
+
+  .text-content {
+    width: 100%;
+  }
+}
+
+// Медиа
+.dropdown-wrapper {
+  position: relative;
+}
+
+.dropdown-list {
+  // position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+}
+
+.dropdown-image {
+  width: 20px;
+  height: 20px;
+  display: block;
+  margin: 6px 0;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.dropdown-image:hover {
+  transform: scale(1.1);
+}
+
+
 /* Ограничение ширины всего контейнера */
 .uploads-container {
   width: 80%;
@@ -2236,15 +2334,12 @@ button.btn.edit
     max-width: 250px;
   }
 
-  // ❌ УДАЛИ это полностью:
-  // .btn-primary { position, left, top }
-  // .btn-secondary { position, left, top }
 }
 
 
 /* Контейнер всей шапки */
 .tabs-container {
-width: 80%; /* Занимает 80% экрана, как и остальные блоки */
+width: 81%; /* Занимает 80% экрана, как и остальные блоки */
 margin: 0 auto; /* Центрирование */
 display: flex;
 justify-content: center; /* Выровнять контент по центру */
@@ -2264,8 +2359,8 @@ padding: 15px 0;
 flex: 1;
 max-width: 300px;
 background: #ffffff;
-border: 2px solid #2e7d60;
-color: #2e7d60;
+border: 2px solid #247a60;
+color: #247a60;
 font-size: 24px;
 font-weight: bold;
 padding: 10px 20px;
@@ -2274,6 +2369,21 @@ cursor: pointer;
 transition: all 0.3s ease-in-out;
 text-align: center;
 font-family: 'Montserrat';
+}
+
+.btn-secondary 
+{
+  background: white;
+  border: 3px solid #247A60 !important;    
+  color: #247A60;
+  width: 250px;
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+.btn-secondary:hover
+{
+  background: #247A60;
+  color: white;
 }
 
 .tabs-container .tabs button:nth-child(6) 
@@ -2304,7 +2414,101 @@ color: #ffffff;
   color: #ffffff;
 }
 
+.popup-window2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
 
+.popup-content2 {
+  background-color: #247A60;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  width: 640px;
+  height: 350px;
+}
+
+.button-container2 {
+  margin-top: 20px;
+}
+
+.popup-button2 {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.popup-button2:hover {
+  background-color: #0056b3;
+}
+
+.popup-message2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 80px;
+}
+
+.popup-image2 {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 10px;
+}
+
+.popup-text2 {
+  font-size: 20px;
+  font-family: 'Montserrat';
+  color: white;
+  margin: 0;
+  text-align: center;
+}
+
+.projects-wrapper 
+{
+  display: flex;
+  justify-content: center; 
+  width: 100%;
+  margin-top: 150px;
+}
+
+.project-line
+{
+  display: flex;
+  align-items: center;
+  width: 100%; 
+  margin-left: 5%;
+}
+
+.project-title{
+  font-size: 28px;
+  color: #000;
+  white-space: nowrap; 
+  font-family: 'Montserrat';
+  margin-right: 20px; 
+}
+
+.yellow-line2 
+{
+  flex-grow: 1; 
+  height: 5px;
+  background-color: #ffcf33; 
+}
+
+.highlighted-number {
+  font-size: 40px;
+  font-weight: bold;
+}
 
 
 .btn2
@@ -2501,6 +2705,11 @@ color: #ffffff;
 
 @media(max-width: 1650px)
 {
+  .tabs
+  {
+    white-space: nowrap;
+  }
+
   .tabs-container 
   {
     width: 72%;
@@ -2559,6 +2768,11 @@ color: #ffffff;
 
 @media(max-width: 1550px)
 {
+  .tabs-container
+  {
+    margin-left: 150px;
+  }
+
   .form-input
   {
     left: 180px;
@@ -2609,6 +2823,19 @@ color: #ffffff;
   {
     margin-left: 20px;
     gap: 60px !important;
+  }
+}
+
+@media(max-width: 1535px)
+{
+  .tabs-container
+  {
+    min-height: 52px !important;
+  }
+
+  .tabs button
+  {
+    font-size: 20px;
   }
 }
 
@@ -2800,6 +3027,14 @@ color: #ffffff;
   .form-input
   {
     left: 40px;
+  }
+}
+
+@media(max-width: 1345px)
+{
+  .tabs button
+  {
+    white-space: nowrap;
   }
 }
 
@@ -3179,6 +3414,14 @@ color: #ffffff;
   left: 365px;
 }
 
+@media(max-width: 1010px)
+{
+  .tabs-container
+  {
+    margin-left: 140px;
+  }
+}
+
 @media(max-width: 1000px)
 {
   .error
@@ -3428,12 +3671,13 @@ left: 50px;
   {
     margin-left: 50px !important;
   }
-
-
 }
+
+
 
 @media(max-width: 950px)
 {
+
 .yellowLine2
 {
   width: 32%;
@@ -3706,6 +3950,16 @@ left: 50px;
 
 @media(max-width: 740px)
 {
+  .popup-content2 {
+    background-color: #247A60;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 440px;
+    height: 350px;
+    margin-left: -15px;
+  }
+
   .yellowLine2
   {
     left: 283px;

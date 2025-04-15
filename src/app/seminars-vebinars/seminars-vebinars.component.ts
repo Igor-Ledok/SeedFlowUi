@@ -9,6 +9,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Router } from '@angular/router';
+import { UserInfo, UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-seminars-vebinars',
@@ -45,6 +47,9 @@ export class SeminarsVebinarsComponent {
     activeSocialButtonIndex: number = -1;
     activeHumanitarianButtonIndex: number = -1;
     activeCategoryIndex: number = -1;
+
+    public userInfo: UserInfo;
+    public statusjwt: boolean = false;
       
         someString:string = 'UA';
       
@@ -366,7 +371,9 @@ export class SeminarsVebinarsComponent {
           private route: ActivatedRoute,
           private eRef: ElementRef,
           private languageService: LanguageService,
-          private router: Router
+          private router: Router,
+          private authService: AuthService, 
+          private userService: UserService
          ) 
          {
 
@@ -381,6 +388,18 @@ export class SeminarsVebinarsComponent {
           const savedLanguage = localStorage.getItem('selectedLanguage') ||'ua'; 
           this.selectedLanguage.setValue(savedLanguage);
           this.onLanguageChange({ value: savedLanguage });
+
+          this.statusjwt = !this.authService.isTokenExpired();
+          console.log(this.statusjwt);
+          this.userService.getUserInfo().subscribe(
+          (response: { user: UserInfo }) => {
+            this.userInfo = response.user;
+            console.log(this.userInfo);
+            },
+          (error: any) => {
+            console.error('Ошибка загрузки информации о пользователе', error);    
+            }
+          );
 
           this.checkScreenSize();
           this.likedProjects = new Array(this.filteredItems.length).fill(false);

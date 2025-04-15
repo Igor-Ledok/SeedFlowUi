@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
@@ -8,6 +8,8 @@ import { LanguageService } from '../services/language.service';
 import { general } from '../models/project/general.interface';
 import { ProjectService } from '../services/project.service';
 import { TopicDto } from '../models/project/topic.interface';
+import { UserInfo, UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -27,8 +29,6 @@ import { TopicDto } from '../models/project/topic.interface';
 })
 export class GeneralComponent 
 {
-
-  @ViewChild('fileInput') fileInput: ElementRef<HTMLInputElement>;
   activeButtonIndex: number = -1;
   activeStartupButtonIndex: number = -1;
   activeSocialButtonIndex: number = -1;
@@ -37,6 +37,9 @@ export class GeneralComponent
   activeCategoryId: string | null = null;
   selectedCategoryName: string | null = null; // Название выбранной категории
   topics: TopicDto[] = []; // Массив с тегами
+
+  public userInfo: UserInfo;
+  public statusjwt: boolean = false;
 
   projectData: general = {} as general; // Ініціалізація даних проекту
 
@@ -258,7 +261,8 @@ export class GeneralComponent
       private eRef: ElementRef,
       private languageService: LanguageService,
       private projectService: ProjectService,
-      private cdRef: ChangeDetectorRef) {}
+      private authService: AuthService, 
+      private userService: UserService) {}
   
       @HostListener('window:resize', ['$event'])
       onResize() {
@@ -287,6 +291,19 @@ export class GeneralComponent
       this.likedProjects = new Array(this.filteredItems.length).fill(false);
       this.totalSlides = this.filteredItems.length; // Инициализация общего количества слайдов
       this.loadTopics();
+    
+      this.statusjwt = !this.authService.isTokenExpired();
+      console.log(this.statusjwt);
+      this.userService.getUserInfo().subscribe(
+        (response: { user: UserInfo }) => {
+          this.userInfo = response.user;
+          console.log(this.userInfo);
+        },
+        (error: any) => {
+          console.error('Ошибка загрузки информации о пользователе', error);    
+        }
+      );
+    
     }
   
     navigate(tabKey: string) {
@@ -391,17 +408,9 @@ export class GeneralComponent
     reader.readAsDataURL(file);
   }
   
-
-
-  
-  clearFile(fileInput: ElementRef<HTMLInputElement>): void {
+  clearFile(): void {
     this.projectData.BudgetPlanUrl = null;
     this.projectData.SelectedFileNameDocx = null;
-    
-    // Очистка значения в поле ввода
-    if (fileInput) {
-      fileInput.nativeElement.value = '';
-    }
   }
 
   
@@ -418,10 +427,16 @@ export class GeneralComponent
     console.log('кнопка Фото отправлено/сохранено работает');
   }
 
+  closePopup() {
+    this.isPopupOpen = false;  // Закрытие попапа
+  }
 
   saveGeneralData(): void {
     this.projectService.getProjectDataGenerel(this.projectData);
+
+    this.isPopupOpen = true;
   }
+
   submitProject(): void {
     console.log('кнопка отправить работает');
   }
@@ -491,7 +506,7 @@ export class GeneralComponent
   projectTitleError: string = '';
 
 handleNextClick() {
-  this.saveGeneralData(); // Сохраняем данные перед переходом
+  //this.saveGeneralData(); // Сохраняем данные перед переходом
 
   const isValid = this.validateCategories();
   let isValid2 = true;
@@ -546,17 +561,17 @@ handleNextClick() {
   }
 }
 
-onAmountChange() {
-  if (this.projectData.CollectionAmount < 10) {
-    this.collectionAmountError = 'Заповніть суму збору. Це обовязково!';
-  }
-  if (!this.projectData.CollectionAmount) {
-    this.collectionAmountError = 'Мінімальна сума збору – 10 грн';
-  }
-  else {
+onAmountChange() 
+{
+  if (!this.projectData.CollectionAmount || this.projectData.CollectionAmount < 10) {
+    // this.collectionAmountError = '';
+  } else {
     this.collectionAmountError = '';
   }
 }
+
+isPopupOpen: boolean = false;
+
   scrollToTop(): void 
   {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -593,7 +608,7 @@ onAmountChange() {
     const text = this.projectData.BudgetPlanUrl?.trim(); 
     
     if (!this.projectData.BudgetPlan) {
-      this.fileError = 'Необхідно заповнити або ввести текст.';
+      this.fileError = 'Необхідно заповнити текст.';
     } else {
       this.fileError = ''; // Очистка ошибки, если условие выполнено
     }

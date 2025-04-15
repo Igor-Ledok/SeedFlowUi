@@ -7,6 +7,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { LanguageService } from '../services/language.service';
 import { ProjectService } from '../services/project.service';
 import { Reward } from '../models/project/reward.interface';
+import { UserInfo } from 'os';
+import { UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-rewards',
@@ -35,6 +38,9 @@ export class RewardsComponent {
 
     sizeReward: number = 0;
     public projectData: Reward[] = [];
+
+    public filebase64: string = '';
+    public statusjwt: boolean = false;
 
     someString:string = 'UA';
     
@@ -120,8 +126,9 @@ export class RewardsComponent {
       private eRef: ElementRef,
       private languageService: LanguageService,
       private projectService: ProjectService,
-      private router: Router
-    )
+      private router: Router,
+      private authService: AuthService, 
+      private userService: UserService) 
     {
 
     }
@@ -244,8 +251,6 @@ export class RewardsComponent {
     this.sizeReward++;
   }
 
-
-
   uploadImage(event: any, index: number): void {
     const file = event.target.files[0];
     
@@ -274,9 +279,6 @@ export class RewardsComponent {
     }
   }
   
-  
-
-  
   @HostListener('window:resize', ['$event'])
   onResize() {
     this.checkScreenSize();
@@ -301,6 +303,24 @@ export class RewardsComponent {
     this.checkScreenSize();    
     this.likedProjects = new Array(this.filteredItems.length).fill(false);
     this.totalSlides = this.filteredItems.length; // Инициализация общего количества слайдов
+
+    this.statusjwt = !this.authService.isTokenExpired();
+    console.log(this.statusjwt);
+    this.userService.getUserInfo().subscribe(
+      (response: { user: {
+        name: string;
+        description: string;
+        email: string;
+        date: string;
+        photo: string;
+      } }) => {
+        this.filebase64 = response.user.photo;
+
+      },
+      (error: any) => {
+        console.error('Ошибка загрузки информации о пользователе', error);    
+      }
+  );
   }
 
   countCharacters() 
@@ -308,6 +328,11 @@ export class RewardsComponent {
     
   }
   
+  isPopupOpen: boolean = false;
+
+    closePopup() {
+      this.isPopupOpen = false;  // Закрытие попапа
+    }
 
   saveGeneralData(): void {
     // this.sizeReward = this.projectDataOld.length;
@@ -320,6 +345,8 @@ export class RewardsComponent {
       console.log(this.projectData[i]);
       this.projectService.getProjectDataRewards(this.projectData[i]);
     }
+
+    this.isPopupOpen = true;
   }
 
   @ViewChildren('limitInput') limitInputs!: QueryList<NgModel>;

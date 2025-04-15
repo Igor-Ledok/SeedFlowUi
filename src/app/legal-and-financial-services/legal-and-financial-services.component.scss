@@ -42,6 +42,7 @@
       font-weight: 500;
       color: #2e7d32;
       font-family: "Montserrat Alternates";
+      z-index: 2;
     }
   }
 
@@ -1211,7 +1212,7 @@ button.rounded-button:hover
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  z-index: 10;
 }
 
 .popup-content {
@@ -1327,7 +1328,7 @@ button.rounded-button:hover
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  margin-left: 10px;
+  margin-left: 5px;
   cursor: pointer;
 }
 
@@ -1350,6 +1351,14 @@ button.rounded-button:hover
 
 @media(max-width: 910px)
 {
+  .other-photo {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-left: 120px;
+    cursor: pointer;
+  }
+
   .button-row button.rounded-button:nth-of-type(2) {
     text-align: center;
     padding-left: 25px;

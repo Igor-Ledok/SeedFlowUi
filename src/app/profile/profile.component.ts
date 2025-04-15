@@ -8,7 +8,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { LanguageService } from '../services/language.service';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { UserService } from '../services/user.service';
+import { UserInfo, UserService } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
 import { ProjectData } from '../models/project/project-data.interface';
 import { ProjectList } from '../models/project/project-list-data';
@@ -93,6 +93,9 @@ onReplyClick(index: number): void {
     activeHumanitarianButtonIndex: number = -1;
     activeCategoryIndex: number = -1;
     showUserProject: boolean = false;
+
+      public userInfo: UserInfo;
+      public statusjwt: boolean = false;
       
         someString:string = 'UA';
       
@@ -371,7 +374,7 @@ onReplyClick(index: number): void {
           }
         ];
             
-        likedProjects: boolean[] = new Array(this.LikeProjectList.length).fill(false);
+        likedProjects: boolean[] = new Array(this.userProjectList.length).fill(false);
 
 
         toggleLike(index: number, projectId: string): void {
@@ -385,8 +388,6 @@ onReplyClick(index: number): void {
             }
           });
         }
-
-        
 
         getProgress(project: any) {
           return (project.amountRaised / project.goal) * 100 + '%';
@@ -416,6 +417,19 @@ onReplyClick(index: number): void {
             this.date = response.user.date;
             this.photo = response.user.photo;
           });
+
+          this.statusjwt = !this.authService.isTokenExpired();
+          console.log(this.statusjwt);
+        
+          this.userService.getUserInfo().subscribe(
+            (response: { user: UserInfo }) => {
+              this.userInfo = response.user;
+              console.log(this.userInfo);
+            },
+            (error: any) => {
+              console.error('Ошибка загрузки информации о пользователе', error);    
+            }
+          );
 
           this.rule = this.authService.getUserRole();
 
@@ -448,6 +462,8 @@ onReplyClick(index: number): void {
             }
           );
         }
+
+        
 
         geLikeProjects(): void{
           this.projectService.getLikeProjects().subscribe(
@@ -544,4 +560,11 @@ onReplyClick(index: number): void {
           toggleDropdown() {
             this.showDropdown = !this.showDropdown;
           }
+        
+          MATHPercentageOfMoney(collected: number, total: number): string {
+            if (!total || total === 0) return '0%';
+            const percent = (collected / total) * 100;
+            return `${Math.min(percent, 100)}%`; // ограничим до 100%
+          }
+         
 }

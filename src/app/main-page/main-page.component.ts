@@ -17,6 +17,7 @@ import { LanguageService } from '../services/language.service';
 import { AuthService } from '../services/auth.service';
 import { ProjectList } from '../models/project/project-list-data';
 import { ProjectService } from '../services/project.service';
+import { UserInfo, UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-main-page',
@@ -41,6 +42,9 @@ import { ProjectService } from '../services/project.service';
 export class MainPageComponent 
 {
   public projectsInactiveList: ProjectList[] = [];
+  public projectsListLastThree: ProjectList[] = [];
+  public userInfo: UserInfo;
+  public statusjwt: boolean = false;
 
   onKvadratClick(event: Event)
   {
@@ -56,6 +60,11 @@ export class MainPageComponent
 
   onAccountClick(): void {
     const role = this.authService.getUserRole();
+
+    if(!this.statusjwt) {
+      return; // Если статус jwt не валиден, ничего не делаем
+    }
+      
     if (!role) {
       this.router.navigate(['/login-page']); // Перенаправление на страницу логина
     } else {
@@ -100,10 +109,45 @@ onLanguageChange(event: any)
 
   this.getInactiveProjects();
 
+
+
+  this.statusjwt = !this.authService.isTokenExpired();
+  console.log(this.statusjwt);
+
+  this.userService.getUserInfo().subscribe(
+    (response: { user: UserInfo }) => {
+      this.userInfo = response.user;
+      console.log(this.userInfo);
+    },
+    (error: any) => {
+      console.error('Ошибка загрузки информации о пользователе', error);    
+    }
+  );
+
+  this.GetLastThreeProjectById();
+
   this.checkScreenSize();    
   this.likedProjects = new Array(this.filteredItems.length).fill(false);
   this.totalSlides = this.filteredItems.length; // Инициализация общего количества слайдов
+
   }
+
+  GetLastThreeProjectById(): void {
+    this.projectService.getLastThreeProjectById().subscribe(
+      (data: ProjectList[]) => {
+        this.projectsListLastThree = data;
+        for (let i = 0; i < this.projectsListLastThree.length; i++) {
+          this.projectsListLastThree[i].categoryPhotoUrl = 'assets/images/' + this.projectsListLastThree[i].categoryPhotoUrl;
+        }
+        console.log(this.projectsListLastThree);
+        this.likedProjects = data.map(data => data.favorite); // предполагается, что сервер отдает поле isLiked
+      },
+      (error: any) => {
+        console.error('Ошибка загрузки проектов', error);
+      }
+    );
+  }
+  
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -114,12 +158,21 @@ onLanguageChange(event: any)
     this.isGridView = window.innerWidth > 1350;
   }
 
+
+
+  MATHPercentageOfMoney(collected: number, total: number): string {
+    if (!total || total === 0) return '0%';
+    const percent = (collected / total) * 100;
+    return `${Math.min(percent, 100)}%`; // ограничим до 100%
+  }
+
   constructor(
     private languageService: LanguageService, 
     private elRef: ElementRef,
     private authService: AuthService, 
     private router: Router,
-    private projectService: ProjectService) 
+    private projectService: ProjectService,
+    private userService: UserService) 
     {
       
     }
@@ -560,11 +613,21 @@ filteredItems = this.items;
 
   
 
-  likedProjects: boolean[] = new Array(this.projects2.length).fill(false);
+  likedProjects: boolean[] = new Array(this.projectsListLastThree .length).fill(false);
 
-  toggleLike(index: number): void {
+
+  toggleLike(index: number, projectId: string): void {
     this.likedProjects[index] = !this.likedProjects[index];
+    this.projectService.LikeProject(projectId).subscribe({
+      next: () => {
+        this.likedProjects[index] = !this.likedProjects[index]; // меняем состояние
+      },
+      error: (err) => {
+        console.error('Ошибка при лайке:', err);
+      }
+    });
   }
+
 
   getProgress(project: any) {
     return (project.amountRaised / project.goal) * 100;

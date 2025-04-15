@@ -51,7 +51,7 @@ import { SeminarSecondComponent } from './seminar-second/seminar-second.componen
 import { SeminarThirdComponent } from './seminar-third/seminar-third.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ShopMainPageComponent } from './shop-main-page/shop-main-page.component';
-import { ProjectsListComponent } from './projects-list/projects-list.component';
+import { ProjectsListComponent } from './projects-list/projects-list.component' ;
 import { AboutUsComponent } from './about-us/about-us.component';
 import { TovarPageComponent } from './tovar-page/tovar-page.component';
 import { TovarPage2Component } from './tovar-page2/tovar-page2.component';

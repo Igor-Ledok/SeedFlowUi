@@ -42,6 +42,7 @@
       font-weight: 500;
       color: #2e7d32;
       font-family: "Montserrat Alternates";
+      z-index: 2;
     }
   }
 
@@ -712,17 +713,17 @@ button.rounded-button:hover
   height: 20px;
 }
 
-@media(max-width: 1920px)
+@media(max-width: 1940px)
 {
   .header-right
   {
     position: relative;
-    right: 100px;
+    right: 150px;
   }
 
   .language-switcher
   {
-    left: -80px;
+    left: -130px;
   }
 }
 
@@ -745,7 +746,7 @@ button.rounded-button:hover
   }
 }
 
-@media(max-width: 1600px)
+@media(max-width: 1610px)
 {
   .header-left
   {
@@ -770,7 +771,7 @@ button.rounded-button:hover
   }
 }
 
-@media(max-width: 1365px)
+@media(max-width: 1385px)
 {
   
   .header-right
@@ -784,7 +785,7 @@ button.rounded-button:hover
   }
 }
 
-@media (max-width: 1350px) 
+@media (max-width: 1360px) 
 {
   .social-media-dropdown
   {
@@ -1036,7 +1037,7 @@ button.rounded-button:hover
   }
 }
 
-@media(max-width: 1155px)
+@media(max-width: 1165px)
 {
   .search-container 
   {
@@ -1045,12 +1046,12 @@ button.rounded-button:hover
 
   .header-right
   {
-    right: 480px;
+    right: 500px !important;
   }
 
   .language-switcher
   {
-    left: -460px;
+    left: -490px;
   }
 
   .search-input 
@@ -1091,6 +1092,25 @@ button.rounded-button:hover
   }
 }
 
+@media(max-width: 1155px)
+{
+  .header-right
+  {
+    right: 500px;
+  }
+
+  .language-switcher
+  {
+    left: -490px;
+  }
+
+  .search-container 
+  {
+    margin-left: -250px;
+  }
+
+}
+
 @media(max-width: 1110px)
 {
   .search-container 
@@ -1100,12 +1120,12 @@ button.rounded-button:hover
 
   .header-right
   {
-    right: 420px;
+    right: 440px !important;
   }
 
   .language-switcher
   {
-    left: -400px;
+    left: -430px !important;
   }
 
   .search-input 
@@ -1129,12 +1149,12 @@ button.rounded-button:hover
 
   .header-right
   {
-    right: 550px;
+    right: 550px !important;
   }
 
   .language-switcher
   {
-    left: -540px;
+    left: -540px !important;
   }
 
   .search-dropdown {
@@ -1323,7 +1343,7 @@ button.rounded-button:hover
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  margin-left: 10px;
+  margin-left: 5px;
   cursor: pointer;
 }
 
@@ -1346,6 +1366,20 @@ button.rounded-button:hover
 
 @media(max-width: 910px)
 {
+  .EnterAccount
+  {
+    position: relative;
+    left: 130px;
+  }
+
+  .other-photo {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-left: 120px;
+    cursor: pointer;
+  }
+
   .button-row button.rounded-button:nth-of-type(2) {
     text-align: center;
     padding-left: 25px;
@@ -3735,8 +3769,66 @@ button.rounded-button:hover
   }
   }
   
+  .EnterAccount
+  {
+    cursor: pointer;
+  }
+
   @media(max-width: 930px)
   {
+    .EnterAccount
+    {
+      position: relative;
+      left: 130px;
+    }
+  
+    .language-switcher
+    {
+      display: none;
+    }
+  
+    .submit-project-btn
+    {
+      display:none;
+    }
+  
+    .other-photo {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-left: 120px;
+      cursor: pointer;
+    }
+  
+    .header-right2
+    {
+      right: 25px;  
+    }
+  
+    .search-input
+    {
+      display: none;
+    }
+  
+    .search-icon
+    {
+      display: block;
+      width: 22px;
+      height: 22px;
+      cursor: pointer;
+      margin-left: 450px;
+      top: 0px;
+      position: relative;
+    }
+  
+    .new-photo {
+      display: block; 
+      left: 100px;
+      top: 2px;
+      position: relative;
+      cursor: pointer;
+    }
+
   .yellowLine2
   {
     width: 30%;

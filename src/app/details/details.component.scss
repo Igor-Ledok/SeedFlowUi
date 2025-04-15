@@ -42,6 +42,7 @@
       font-weight: 500;
       color: #2e7d32;
       font-family: "Montserrat Alternates";
+      z-index: 2;
     }
   }
 
@@ -1179,7 +1180,7 @@ button.rounded-button:hover
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  z-index: 10;
 }
 
 .popup-content {
@@ -1295,8 +1296,22 @@ button.rounded-button:hover
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  margin-left: 10px;
+  margin-left: 5px;
   cursor: pointer;
+}
+
+
+
+
+@media(max-width: 910px)
+{
+  .other-photo {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-left: 120px;
+    cursor: pointer;
+  }
 }
 
 
@@ -2315,9 +2330,94 @@ textarea.form-input {
   color: #ffffff;
 }
 
+.file-info
+{
+  margin-left: 20px !important;
+}
+
+.remove-button
+{
+  cursor: pointer;
+  padding: 12px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  font-family: 'Montserrat' !important;
+  background: #ACE4CE;
+  color: #333;
+  min-width: 175px !important;
+  max-width: 175px !important;
+}
+
+.docx2
+{
+  white-space: nowrap !important;
+  font-family: 'Montserrat'; 
+  position: relative; 
+  top: 10px;
+}
 
 
+.popup-window2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
 
+.popup-content2 {
+  background-color: #247A60;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  width: 640px;
+  height: 350px;
+}
+
+.button-container2 {
+  margin-top: 20px;
+}
+
+.popup-button2 {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.popup-button2:hover {
+  background-color: #0056b3;
+}
+
+.popup-message2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 80px;
+}
+
+.popup-image2 {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 10px;
+}
+
+.popup-text2 {
+  font-size: 20px;
+  font-family: 'Montserrat';
+  color: white;
+  margin: 0;
+  text-align: center;
+}
 
 
 
@@ -2396,6 +2496,11 @@ textarea.form-input {
 
 @media(max-width: 2000px)
 {
+  .file-info
+{
+  margin-left: -100px !important;
+}
+
   .photo-gallery
   {
     left: -100px;
@@ -2531,6 +2636,11 @@ textarea.form-input {
 
 @media(max-width: 1800px)
 {
+  .file-info
+  {
+    margin-left: -50px !important;
+  }
+
   .photo-gallery
   {
     left: -50px;
@@ -2618,6 +2728,11 @@ textarea.form-input {
 
 @media(max-width: 1650px)
 {
+  .file-info
+  {
+    margin-left: 60px !important;
+  }
+
   .photo-gallery
   {
     left: 60px;
@@ -3440,6 +3555,12 @@ textarea.form-input {
 
 @media(max-width: 1000px)
 {
+  .file-info
+  {
+    margin-left: 170px !important;
+    margin-top: -20px !important;
+  }
+
   .photo-gallery
   {
     margin-top: 20px;
@@ -4043,6 +4164,16 @@ left: 50px;
   .yellowLine
   {
     width: 90%;
+  }
+
+  .popup-content2 {
+    background-color: #247A60;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 440px;
+    height: 350px;
+    margin-left: -15px;
   }
 }
 

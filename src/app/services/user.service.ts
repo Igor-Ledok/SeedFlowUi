@@ -34,6 +34,7 @@ export class UserService
   updateUser(user: UpdateUserDto): Observable<any> {
     return this.http.post(this.baseUrl + 'update', user, { headers: this.getHeaders() }); // путь к твоему API
   }
+
 }
 
 // Интерфейс для создания пользователя

@@ -1,5 +1,5 @@
 export const environment = {
-  baseUrl: 'https://testui-06e231620354.herokuapp.com',
+  baseUrl: 'https://testui-8c034b20e03d.herokuapp.com',
   // baseUrl разработка: http://localhost:4200
   // baseUrl продакшен: https://testui-8c034b20e03d.herokuapp.com
 

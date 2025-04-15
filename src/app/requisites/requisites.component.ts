@@ -17,6 +17,8 @@ import { contactPhoneValidator } from '../validator7';
 import { fullAddressValidator } from '../validator8';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Router } from '@angular/router';
+import { UserInfo, UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-requisites',
@@ -41,6 +43,9 @@ export class RequisitesComponent {
     activeSocialButtonIndex: number = -1;
     activeHumanitarianButtonIndex: number = -1;
     activeCategoryIndex: number = -1;
+
+      public userInfo: UserInfo;
+      public statusjwt: boolean = false;
 
     projectData: requisites = {} as requisites; // Ініціалізація даних проекту
     
@@ -128,7 +133,9 @@ export class RequisitesComponent {
       private eRef: ElementRef,
       private languageService: LanguageService,
       private projectService: ProjectService,
-      private router: Router
+      private router: Router,
+      private authService: AuthService, 
+      private userService: UserService
     )
     {}
 
@@ -248,6 +255,18 @@ export class RequisitesComponent {
       this.checkScreenSize();    
       this.likedProjects = new Array(this.filteredItems.length).fill(false);
       this.totalSlides = this.filteredItems.length; // Инициализация общего количества слайдов
+
+      this.statusjwt = !this.authService.isTokenExpired();
+      console.log(this.statusjwt);
+      this.userService.getUserInfo().subscribe(
+        (response: { user: UserInfo }) => {
+          this.userInfo = response.user;
+          console.log(this.userInfo);
+        },
+        (error: any) => {
+          console.error('Ошибка загрузки информации о пользователе', error);    
+        }
+      );
     }
   
     @HostListener('document:keydown.escape', ['$event'])
@@ -256,8 +275,16 @@ export class RequisitesComponent {
       this.showDropdown = false;
     }
 
+    isPopupOpen: boolean = false;
+
+    closePopup() {
+      this.isPopupOpen = false;  // Закрытие попапа
+    }
+
     saveGeneralData(): void {
       this.projectService.getProjectDataRequisites(this.projectData);
+
+      this.isPopupOpen = true;
     }
     submitProject(): void {
       console.log('submitProject');
@@ -320,6 +347,8 @@ export class RequisitesComponent {
         this.projectForm.markAllAsTouched();
         return;
       }
+
+      this.projectService.getProjectDataRequisites(this.projectData);
 
       this.router.navigate(['/uploads-page']);
   

@@ -49,6 +49,7 @@
       font-weight: 500;
       color: #2e7d32;
       font-family: "Montserrat Alternates";
+      z-index: 2;
     }
   }
 
@@ -963,8 +964,24 @@ button.rounded-button:hover
 }
 }
 
+.file-info
+{
+  margin-top: 30px;
+}
+
 @media(max-width: 1280px)
 {
+  .error-message3
+  {
+    left: 95px !important;
+  }
+
+  .file-info
+  {
+    position: relative;
+    left: 95px !important;
+  }
+
   .file-label
   {
     left: 90px !important;
@@ -1199,7 +1216,7 @@ button.rounded-button:hover
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  z-index: 10;
 }
 
 .popup-content {
@@ -1315,8 +1332,22 @@ button.rounded-button:hover
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  margin-left: 10px;
+  margin-left: 5px;
   cursor: pointer;
+}
+
+
+
+
+@media(max-width: 910px)
+{
+  .other-photo {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-left: 120px;
+    cursor: pointer;
+  }
 }
 
 
@@ -2145,6 +2176,29 @@ max-width: 320px;
     background-color: #C8E6C9;
   }
 
+  .remove-button
+  {
+    cursor: pointer;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    font-family: 'Montserrat' !important;
+    background: #ACE4CE;
+    color: #333;
+    min-width: 175px !important;
+    max-width: 175px !important;
+  }
+
+  .docx2
+  {
+    white-space: nowrap !important;
+    font-family: 'Montserrat'; 
+    position: relative; 
+    top: 10px;
+  }
+
 
 .photo-preview-container {
   width: 100%;
@@ -2173,6 +2227,7 @@ max-width: 320px;
       font-size: 16px;
       font-weight: bold;
       border: none;
+      font-family: 'Montserrat' !important;
     }
 
     .btn-add {
@@ -2343,8 +2398,65 @@ color: #ffffff;
 }
 
 
+.popup-window2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
 
+.popup-content2 {
+  background-color: #247A60;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  width: 640px;
+  height: 350px;
+}
 
+.button-container2 {
+  margin-top: 20px;
+}
+
+.popup-button2 {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.popup-button2:hover {
+  background-color: #0056b3;
+}
+
+.popup-message2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 80px;
+}
+
+.popup-image2 {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 10px;
+}
+
+.popup-text2 {
+  font-size: 20px;
+  font-family: 'Montserrat';
+  color: white;
+  margin: 0;
+  text-align: center;
+}
 
 
 
@@ -2390,6 +2502,17 @@ color: #ffffff;
 
 @media(max-width: 2120px)
 {
+  .error-message3
+  {
+    left: 100px;
+  }
+
+  .file-info
+  {
+    position: relative;
+    left: 100px;
+  }
+
   .file-upload 
   {
     width: 20%;
@@ -2429,6 +2552,8 @@ color: #ffffff;
 
 @media(max-width: 2050px)
 {
+
+
   .form-input
   {
     font-size: 15px !important;
@@ -3016,6 +3141,11 @@ color: #ffffff;
     font-size: 15.5px;
   }
 
+  .error-message2
+  {
+    font-size: 15.5px;
+  }
+
   .footer-logo
   {
     position: relative;
@@ -3282,6 +3412,11 @@ color: #ffffff;
     font-size: 14px;
   }
 
+  .error-message2
+  {
+    font-size: 14px;
+  }
+
   .checkbox-container
   {
     left: 60px;
@@ -3413,6 +3548,11 @@ color: #ffffff;
     font-size: 12.5px;
   }
 
+  .error-message2
+  {
+    font-size: 12.5px;
+  }
+
   .tabs button 
   {
     font-size: 15px;
@@ -3518,6 +3658,22 @@ color: #ffffff;
 
 @media(max-width: 1000px)
 { 
+  .error-message3
+  {
+    top: 45px;
+    font-size: 14px;
+    left: 90px !important;
+  }
+
+  .file-info
+  {
+    position: relative;
+    left: 95px !important;
+    top: -10px !important;
+    margin-bottom: 40px;
+  }
+
+
   .photo-preview-container {
     position: relative;
     left: 250px;
@@ -3532,11 +3688,6 @@ color: #ffffff;
   .error-message6
   {
     font-size: 12px;
-  }
-
-  .error-message3
-  {
-    font-size: 14px;
   }
 
   .form-group
@@ -3679,8 +3830,9 @@ color: #ffffff;
 
   .file-label2
   {
+    top: -30px;
     min-width: 350px !important;
-    left: 100px;
+    left: 130px !important;
     position: relative;
     margin-bottom: 20px;
     margin-top: -10px;
@@ -4073,6 +4225,17 @@ left: 50px;
 
 @media(max-width: 860px)
 {
+  .file-label2
+  {
+    top: -90px !important;
+    min-width: 350px !important;
+    left: 60px !important;
+    position: relative;
+    margin-bottom: 20px;
+    margin-top: -10px;
+    margin-bottom: -10px;
+  }
+
   .photo-preview-container {
     position: relative;
     left: 220px;
@@ -4370,10 +4533,25 @@ left: 50px;
   {
     left: 140px;
   }
+
+  .popup-content2 {
+    background-color: #247A60;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 440px;
+    height: 350px;
+    margin-left: -15px;
+  }
 }
 
 @media(max-width: 700px)
 {
+  .file-label2
+  {
+    top: -80px;
+  }
+
   .photo-preview-container {
     position: relative;
     left: 270px;

@@ -143,6 +143,43 @@ export class AuthService
     );
   }
 
+
+  isTokenExpired(): boolean {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return true; // Если токен отсутствует, считаем его просроченным
+    }
+
+    try {
+      const payload = this.decodeToken(token);
+      const exp = payload?.exp; // Время истечения токена (в секундах)
+      
+      if (!exp) {
+        return true; // Если поле exp отсутствует, считаем токен просроченным
+      }
+
+      const expirationDate = new Date(exp * 1000); // Переводим из секунд в миллисекунды
+      const currentDate = new Date();
+
+      return currentDate > expirationDate; // Если текущее время больше времени истечения, токен просрочен
+    } catch (error) {
+      console.error('Ошибка декодирования токена: ', error);
+      return true; // Если произошла ошибка, считаем токен просроченным
+    }
+  }
+
+  private decodeToken(token: string): any {
+    const parts = token.split('.');
+    if (parts.length !== 3) {
+      throw new Error('Invalid token');
+    }
+
+    const payload = parts[1]; // Берем только полезную нагрузку
+    const decodedPayload = atob(payload); // Декодируем из base64
+    return JSON.parse(decodedPayload); // Парсим JSON
+  }
+  
+
 }
 
 export interface AuthRequestDto 

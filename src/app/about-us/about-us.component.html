@@ -15,7 +15,7 @@
 <header class="header">
     <div class="header-left">
       <img src="assets/images/greenCoin.png" class="logo" alt="Seed Flow Logo" />
-      <span class="brand-name">Seed Flow</span>
+      <span class="brand-name" style="cursor: pointer;" [routerLink]="'/'">Seed Flow</span>
     </div>
   
 <div class="search-container" #searchContainer>
@@ -292,11 +292,19 @@
     </ng-template>
   </div>
 </div>
-  
+
     <div class="header-right">
       <img src="assets/images/slashes.png" class="new-photo" alt="New Photo" (click)="openWindow()">
       <button class="submit-project-btn" [routerLink]="'/general-page'">{{"Подати проєкт" | transloco}}</button>
-      <img src="assets/images/profile.png" class="profile-icon" alt="User Profile" [routerLink]="'/profile-page'">
+      <span *ngIf="statusjwt; else loginLink">
+        <!-- Показываем фото профиля, если токен актуален -->
+        <img *ngIf="userInfo?.photo" [src]="userInfo.photo" alt="User Profile Photo" class="profile-icon" [routerLink]="'/profile-page'" />
+      </span>
+
+      <!-- Если токен не актуален, показываем ссылку на страницу входа -->
+      <ng-template #loginLink>
+        <span class="EnterAccount" [routerLink]="'/login-page'">{{ "Увійти" | transloco }}</span>
+      </ng-template>
     </div>
 
 <div *ngIf="isWindowOpen" class="popup-window" (click)="closeWindow()">

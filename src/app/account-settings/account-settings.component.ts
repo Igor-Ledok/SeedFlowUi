@@ -7,8 +7,9 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { LanguageService } from '../services/language.service';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { UserService } from '../services/user.service';
+import { UserInfo, UserService } from '../services/user.service';
 import { UpdateUserDto } from '../models/user/update-user-dto';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-account-settings',
@@ -42,6 +43,8 @@ export class AccountSettingsComponent {
   activeHumanitarianButtonIndex: number = -1;
   activeCategoryIndex: number = -1;
   
+  public userInfo: UserInfo;
+  public statusjwt: boolean = false;
 
   someString:string = 'UA';
 
@@ -253,7 +256,8 @@ filteredItems = this.items;
     private eRef: ElementRef,
     private languageService: LanguageService,
     private userService: UserService,
-    private router: Router) 
+    private router: Router,
+    private authService: AuthService ) 
     {
       
     }
@@ -270,6 +274,18 @@ filteredItems = this.items;
       this.photoBase64 = response.user.photo;
       this.profileForm = response.user.description;
     });
+
+    this.statusjwt = !this.authService.isTokenExpired();
+    console.log(this.statusjwt);
+    this.userService.getUserInfo().subscribe(
+      (response: { user: UserInfo }) => {
+        this.userInfo = response.user;
+        console.log(this.userInfo);
+      },
+      (error: any) => {
+        console.error('Ошибка загрузки информации о пользователе', error);    
+      }
+    );
 
     const savedLanguage = localStorage.getItem('selectedLanguage') ||'ua'; 
     this.selectedLanguage.setValue(savedLanguage);
@@ -305,10 +321,8 @@ filteredItems = this.items;
 
     this.userService.updateUser(dto).subscribe({
       next: () => {
-        alert("Дані збережено!");
       },
       error: () => {
-        alert("Сталася помилка під час збереження.");
       }
     });
   }
@@ -378,4 +392,9 @@ filteredItems = this.items;
       this.showDropdown = !this.showDropdown;
     }
 
+    dropdownOpen: boolean = false;
+
+    toggleDropdown2() {
+      this.dropdownOpen = !this.dropdownOpen;
+    }
 }

@@ -18,7 +18,7 @@
 <header class="header">
     <div class="header-left">
       <img src="assets/images/greenCoin.png" class="logo" alt="Seed Flow Logo" />
-      <span class="brand-name">Seed Flow</span>
+      <span class="brand-name" style="cursor: pointer;" [routerLink]="'/'">Seed Flow</span>
     </div>
   
 <div class="search-container" #searchContainer>
@@ -296,16 +296,21 @@
   </div>
 </div>
   
-    <div class="header-right">
-      <img src="assets/images/slashes.png" class="new-photo" alt="New Photo" (click)="openWindow()">
-      <button class="submit-project-btn" [routerLink]="'/general-page'">{{"Подати проєкт" | transloco}}</button>
-      <img src="assets/images/profile.png" class="profile-icon" alt="User Profile" [routerLink]="'/profile-page'">
-    </div>
+<div class="header-right">
+  <img src="assets/images/slashes.png" class="new-photo" alt="New Photo" (click)="openWindow()">
+  <button class="submit-project-btn" [routerLink]="'/general-page'">{{"Подати проєкт" | transloco}}</button>
+  <span *ngIf="statusjwt; else loginLink">
+    <img *ngIf="filebase64" [src]="filebase64" alt="User Profile Photo" class="profile-icon" [routerLink]="'/profile-page'" />
+  </span>
+
+  <ng-template #loginLink>
+    <span class="EnterAccount" [routerLink]="'/login-page'">{{ "Увійти" | transloco }}</span>
+  </ng-template>
+</div>
 
 <div *ngIf="isWindowOpen" class="popup-window" (click)="closeWindow()">
   <div class="popup-content" (click)="$event.stopPropagation()">
     <div class="header-left2">
-      <img src="assets/images/profile.png" class="profile-icon" alt="User Profile" [routerLink]="'/profile-page'">
       <img src="assets/images/bell.png" class="other-photo" alt="Other Photo">
     </div>
 
@@ -536,6 +541,16 @@
     <button class="btn btn-secondary" (click)="saveGeneralData()">{{"ЗБЕРЕГТИ ЗМІНИ" | transloco}}</button>
     <button class="btn btn-primary" (click)="submitProject()">{{"ДАЛІ" | transloco}}</button>
   </div>
+
+  <div *ngIf="isPopupOpen" class="popup-window2" (click)="closePopup()">
+    <div class="popup-content2" (click)="$event.stopPropagation()">
+      
+      <div class="popup-message2">
+        <img src="assets/images/WhitePig.png" class="popup-image2" alt="Success">
+        <p class="popup-text2">{{"Зміни у проєкті успішно збережено" | transloco}}</p>
+      </div>
+    </div>
+  </div>
 </div>
 
 <footer class="footer">
@@ -562,28 +577,28 @@
       <div class="footer-column">
         <h4>{{"ПРО НАС" | transloco}}</h4>
         <ul>
-          <li><a href="#">{{"Політика конфіденційності" | transloco}}</a></li>
-          <li><a href="#">{{"Правила користування порталом" | transloco}}</a></li>
-          <li><a href="#">{{"Правила використання файлів Cookie" | transloco}}</a></li>
-          <li><a href="#">{{"Про нас" | transloco}}</a></li>
+          <li><a [routerLink]="'/policy-page'">{{"Політика конфіденційності" | transloco}}</a></li>
+          <li><a [routerLink]="'/support-page'">{{"Правила користування порталом" | transloco}}</a></li>
+          <li><a [routerLink]="'/cookie-rools-page'">{{"Правила використання файлів Cookie" | transloco}}</a></li>
+          <li><a [routerLink]="'/about-us-page'">{{"Про нас" | transloco}}</a></li>
         </ul>
       </div>
       <div class="footer-column">
         <h4>{{"ПРОЄКТИ" | transloco}}</h4>
         <ul>
-          <li><a href="#">{{"Список проєктів" | transloco}}</a></li>
-          <li><a href="#">{{"Пошук" | transloco}}</a></li>
-          <li><a href="#">{{"Викласти проєкт" | transloco}}</a></li>
+          <li><a [routerLink]="'/projects-list-page'">{{"Список проєктів" | transloco}}</a></li>
+          <li><a [routerLink]="'/send-request-page'">{{"Пошук" | transloco}}</a></li>
+          <li><a [routerLink]="'/general-page'">{{"Викласти проєкт" | transloco}}</a></li>
         </ul>
       </div>
       <div class="footer-column">
         <h4>{{"АКАУНТ" | transloco}}</h4>
         <ul>
-          <li><a href="#">{{"Налаштування акаунта" | transloco}}</a></li>
+          <li><a [routerLink]="'/account-settings-page'">{{"Налаштування акаунта" | transloco}}</a></li>
           <li><a href="#">{{"Повідомлення" | transloco}}</a></li>
           <li><a href="#">{{"Перегляд транзакцій" | transloco}}</a></li>
-          <li><a href="#">{{"Підтримані проєкти" | transloco}}</a></li>
-          <li><a href="#">{{"Вподобані проєкти" | transloco}}</a></li>
+          <li><a [routerLink]="'/profile-page'">{{"Підтримані проєкти" | transloco}}</a></li>
+          <li><a [routerLink]="'/profile-page'">{{"Вподобані проєкти" | transloco}}</a></li>
           <li><a href="#">{{"Вподобані товари" | transloco}}</a></li>
           <li><a href="#">{{"Історія покупок" | transloco}}</a></li>
         </ul>
@@ -591,18 +606,19 @@
       <div class="footer-column">
         <h4>{{"ПІДТРИМКА" | transloco}}</h4>
         <ul>
-          <li><a href="#">FAQ</a></li>
-          <li><a href="#">{{"Супровід проєкту" | transloco}}</a></li>
-          <li><a href="#">{{"Семінари/вебінари" | transloco}}</a></li>
-          <li><a href="#">{{"Блог" | transloco}}</a></li>
+          <li><a [routerLink]="'/faq-page'">FAQ</a></li>
+          <li><a [routerLink]="'/accompaniment-page'">{{"Супровід проєкту" | transloco}}</a></li>
+          <li><a [routerLink]="'/seminars-vebinars-page'">{{"Семінари/вебінари" | transloco}}</a></li>
+          <li><a [routerLink]="'/blog-page'">{{"Блог" | transloco}}</a></li>
         </ul>
       </div>
       <div class="footer-column">
         <h4>{{"МАГАЗИН" | transloco}}</h4>
         <ul>
-          <li><a href="#">{{"Всі товари" | transloco}}</a></li>
-          <li><a href="#">{{"Оплата і доставка" | transloco}}</a></li>
-          <li><a href="#">{{"Кошик" | transloco}}</a></li>
+          <li><a style="cursor: pointer;">{{"Всі товари" | transloco}}</a></li>
+          <li><a style="cursor: pointer;">{{"Оплата і доставка" | transloco}}</a></li>
+          <li><a style="cursor: pointer;">{{"Кошик" | transloco}}</a></li>
+          <!-- [routerLink]="'/basket-page'" -->
         </ul>
       </div>
     </div>

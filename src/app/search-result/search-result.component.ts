@@ -8,6 +8,8 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { LanguageService } from '../services/language.service';
+import { UserInfo, UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-search-result',
@@ -27,6 +29,9 @@ import { LanguageService } from '../services/language.service';
   styleUrl: './search-result.component.scss'
 })
 export class SearchResultComponent {
+
+  public userInfo: UserInfo;
+  public statusjwt: boolean = false;
 
   view: [number, number] = [1190, 600]; // Размер графика
   
@@ -329,7 +334,9 @@ export class SearchResultComponent {
           constructor(
             private route: ActivatedRoute,
             private eRef: ElementRef,
-            private languageService: LanguageService
+            private languageService: LanguageService,
+            private authService: AuthService, 
+            private userService: UserService
            ) 
            {
   
@@ -353,6 +360,18 @@ export class SearchResultComponent {
             const savedLanguage = localStorage.getItem('selectedLanguage') ||'ua'; 
             this.selectedLanguage.setValue(savedLanguage);
             this.onLanguageChange({ value: savedLanguage });
+
+            this.statusjwt = !this.authService.isTokenExpired();
+          console.log(this.statusjwt);
+          this.userService.getUserInfo().subscribe(
+            (response: { user: UserInfo }) => {
+              this.userInfo = response.user;
+              console.log(this.userInfo);
+            },
+            (error: any) => {
+              console.error('Ошибка загрузки информации о пользователе', error);    
+            }
+          );
 
             this.checkScreenSize();    
             this.likedProjects = new Array(this.filteredItems.length).fill(false);

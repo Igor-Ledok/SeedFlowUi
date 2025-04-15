@@ -9,6 +9,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { details } from '../models/project/datails.interface';
 import { ProjectService } from '../services/project.service';
 import { detailsdescription } from '../models/project/datailsDescription.interface';
+import { UserInfo, UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-details',
@@ -40,6 +42,9 @@ export class DetailsComponent
   projectDescription: detailsdescription[] = [];
 
   projectData: details = {} as details;
+  
+  public userInfo: UserInfo;
+  public statusjwt: boolean = false;
 
 
   someString:string = 'UA';
@@ -233,7 +238,9 @@ filteredItems = this.items;
     private eRef: ElementRef,
     private languageService: LanguageService,
     private projectService: ProjectService,
-    private cdr: ChangeDetectorRef ) 
+    private cdr: ChangeDetectorRef,
+    private authService: AuthService, 
+    private userService: UserService ) 
     {
       
     }
@@ -268,6 +275,18 @@ filteredItems = this.items;
       this.projectPhotos.push(this.projectService.returnProjectDataDetailsProjectPhotos(i));
     }
 
+    this.statusjwt = !this.authService.isTokenExpired();
+    console.log(this.statusjwt);
+    this.userService.getUserInfo().subscribe(
+      (response: { user: UserInfo }) => {
+        this.userInfo = response.user;
+        console.log(this.userInfo);
+      },
+      (error: any) => {
+        console.error('Ошибка загрузки информации о пользователе', error);    
+      }
+    );
+
     this.projectDescriptionSize = this.projectService.getProjectDataDetailsProjectDescriptionSize();
     for (let i = 0; i < this.projectDescriptionSize; i++){
       const description = this.projectService.returnProjectDataDetailsProjectDescription(i);
@@ -290,9 +309,9 @@ filteredItems = this.items;
       }
     }
 
-    const savedLanguage = localStorage.getItem('selectedLanguage') ||'ua'; 
-    this.selectedLanguage.setValue(savedLanguage);
-    this.onLanguageChange({ value: savedLanguage });
+    // const savedLanguage = localStorage.getItem('selectedLanguage') ||'ua'; 
+    // this.selectedLanguage.setValue(savedLanguage);
+    // this.onLanguageChange({ value: savedLanguage });
 
     this.checkScreenSize();    
     this.likedProjects = new Array(this.filteredItems.length).fill(false);
@@ -356,21 +375,26 @@ filteredItems = this.items;
       reader.readAsDataURL(file);
     }
   }
-  
+
   removePhoto(index: number): void {
     this.projectPhotos.splice(index, 1);
   }
-  
 
   changePhoto(index: number): void {
     document.getElementById('additionalPhotos')?.click();
   }
 
+  isPopupOpen: boolean = false;
+
+  closePopup() {
+    this.isPopupOpen = false;  // Закрытие попапа
+  }
+
   saveDetailData(): void {
-    console.log('кнопка сохранить работает');
 
     this.projectData.Phone = this.phone;
 
+    console.log('кнопка сохранить работает');
     this.projectService.getProjectDataDetails(this.projectData);
     //this.projectService.getProjectDataDetailsProjectPhotos();
 
@@ -384,14 +408,16 @@ filteredItems = this.items;
       this.projectService.getProjectDataDetailsProjectDescription({TitleDetailedDescription: this.dynamicFields[i].titleDetailedDescription, DetailedDescription: this.dynamicFields[i].detailedDescription});
     }
 
+    this.isPopupOpen = true;
   }
 
   budgetDescription: string = '';
   budgetCharCount: number = 0;
 
-updateBudgetCharCount() {
+  updateBudgetCharCount() 
+  {
     this.budgetCharCount = this.projectData.BudgetArticles.length;
-}
+  }
 
   charCount: number = 0;
   charCount2: number = 0;
@@ -489,43 +515,38 @@ updateBudgetCharCount() {
   {
     if (fieldName === 'titleDetailedDescription') 
     {
-      const value = this.dynamicFields[i].titleDetailedDescription;
-      this.dynamicFields[i].subtitleError = !value || !value.trim();
+      this.dynamicFields[i].subtitleError = !this.dynamicFields[i].titleDetailedDescription.trim();
     }
   
     if (fieldName === 'detailedDescription') 
     {
-      const value = this.dynamicFields[i].detailedDescription;
-      this.dynamicFields[i].descriptionError = !value || !value.trim();
+      this.dynamicFields[i].descriptionError = !this.dynamicFields[i].detailedDescription.trim();
     }
-
-    console.log('VALIDATE', i, fieldName, this.dynamicFields[i].titleDetailedDescription);
-
   }
 
   validatePhone() 
-{
-  const phonePatterns: { [key: string]: RegExp } = {
-    'UA': /^\+380\d{9}$/,
-    'US': /^\+1\d{10}$/,
-    'IT': /^\+39\d{10}$/,
-    'DE': /^\+49\d{10,11}$/,
-    'FR': /^\+33\d{9}$/,
-    'ES': /^\+34\d{9}$/
-  };
-
-  const phone = this.phone?.trim() || '';  // <--- изменено
-  let isValid = false;
-
-  for (let country in phonePatterns) {
-    if (phonePatterns[country].test(phone)) {
-      isValid = true;
-      break;
+  {
+    const phonePatterns: { [key: string]: RegExp } = {
+      'UA': /^\+380\d{9}$/,
+      'US': /^\+1\d{10}$/,
+      'IT': /^\+39\d{10}$/,
+      'DE': /^\+49\d{10,11}$/,
+      'FR': /^\+33\d{9}$/,
+      'ES': /^\+34\d{9}$/
+    };
+  
+    const phone = this.phone?.trim() || '';  // <--- изменено
+    let isValid = false;
+  
+    for (let country in phonePatterns) {
+      if (phonePatterns[country].test(phone)) {
+        isValid = true;
+        break;
+      }
     }
-  }
-
-  this.phoneError = !isValid;
-  }
+  
+    this.phoneError = !isValid;
+    }
   
   
   
@@ -577,7 +598,6 @@ updateBudgetCharCount() {
 
     console.log(this.projectData.BudgetArticlesFileName);
     console.log(this.projectData.BudgetArticlesUrl);
-
   }
 
   clearFile(): void {
@@ -622,28 +642,23 @@ updateBudgetCharCount() {
   
     if (hasError) 
     {
-      console.log("Ошибка: Детальний опис содержит ошибки");
       return;
     }
 
     if (this.budgetError) 
     {
-      console.log("Ошибка: Бюджет не может быть пустым");
       return;
     }
     if (this.cityError)
     {
-      console.log("Ошибка: Город не может быть пустым");
       return;
     }
     if (this.emailError)
     {
-      console.log("Ошибка: Email не может быть пустым");
       return;
     }
     if (this.phoneError)
     {
-      console.log("Ошибка: Телефон не может быть пустым");
       return;
     }
 

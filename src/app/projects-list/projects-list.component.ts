@@ -18,6 +18,8 @@ import { ProjectList } from '../models/project/project-list-data';
 import { ProjectService } from '../services/project.service';
 import { CategoryDto, TopicDto } from '../models/project/topic.interface';
 import { FilterRequestDto } from '../models/request/filter-request-dto';
+import { UserInfo, UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-projects-list',
@@ -57,6 +59,9 @@ export class ProjectsListComponent
     endSum: 0,
     categories: []
   };
+
+  public userInfo: UserInfo;
+  public statusjwt: boolean = false;
 
   someString:string = 'UA';
 
@@ -256,7 +261,9 @@ export class ProjectsListComponent
   private route: ActivatedRoute,
   private eRef: ElementRef,
   private languageService: LanguageService,
-  private projectService: ProjectService
+  private projectService: ProjectService,
+  private authService: AuthService,
+  private userService: UserService,
   ) 
   {
 
@@ -274,6 +281,19 @@ export class ProjectsListComponent
 
     this.getActiveProjects();
     this.getInactiveProjects();
+
+    this.statusjwt = !this.authService.isTokenExpired();
+    console.log(this.statusjwt);
+  
+    this.userService.getUserInfo().subscribe(
+      (response: { user: UserInfo }) => {
+        this.userInfo = response.user;
+        console.log(this.userInfo);
+      },
+      (error: any) => {
+        console.error('Ошибка загрузки информации о пользователе', error);    
+      }
+    );
     
     const savedLanguage = localStorage.getItem('selectedLanguage') ||'ua'; 
     this.selectedLanguage.setValue(savedLanguage);
@@ -286,12 +306,7 @@ export class ProjectsListComponent
     this.loadTopics();
   }
 
-  // loadTopics(): void {
-  //   this.projectService.getTopics().subscribe((data: TopicDto[]) => {
-  //     this.topics = data;
-  //     console.log('Полученные темы:', this.topics);
-  //   });
-  // }
+
   loadTopics(): void {
     this.projectService.getTopics().subscribe((data: TopicDto[]) => {
       this.topics = data.map(topic => ({
@@ -397,8 +412,21 @@ export class ProjectsListComponent
   }
 
   
+  dropdownOpen: boolean = false;
+
+  toggleDropdown2() {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+
+
   PercentageOfMoney(num1: number,num2: number): number {
     return Math.round((num1 / num2) * 100);
+  }
+
+  MATHPercentageOfMoney(collected: number, total: number): string {
+    if (!total || total === 0) return '0%';
+    const percent = (collected / total) * 100;
+    return `${Math.min(percent, 100)}%`; // ограничим до 100%
   }
 
 
@@ -792,7 +820,24 @@ export class ProjectsListComponent
   }
 
 
+  visibleItems3 = 4;
+  currentIndex3 = 0;
 
+  get maxIndex(): number {
+    return this.projectsInactiveList.length - this.visibleItems;
+  }
+
+  nextSlide3() {
+    if (this.currentIndex < this.maxIndex) {
+      this.currentIndex++;
+    }
+  }
+  
+  prevSlide3() {
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+    }
+  }
 
 
    // Массив с текстами ссылок

@@ -15,7 +15,7 @@
 <header class="header">
     <div class="header-left">
       <img src="assets/images/greenCoin.png" class="logo" alt="Seed Flow Logo" />
-      <span class="brand-name">Seed Flow</span>
+      <span class="brand-name" style="cursor: pointer;" [routerLink]="'/'">Seed Flow</span>
     </div>
   
 <div class="search-container" #searchContainer>
@@ -293,16 +293,21 @@
   </div>
 </div>
   
-    <div class="header-right">
-      <img src="assets/images/slashes.png" class="new-photo" alt="New Photo" (click)="openWindow()">
-      <button class="submit-project-btn" [routerLink]="'/general-page'">{{"Подати проєкт" | transloco}}</button>
-      <img src="assets/images/profile.png" class="profile-icon" alt="User Profile" [routerLink]="'/profile-page'">
-    </div>
+<div class="header-right">
+  <img src="assets/images/slashes.png" class="new-photo" alt="New Photo" (click)="openWindow()">
+  <button class="submit-project-btn" [routerLink]="'/general-page'">{{"Подати проєкт" | transloco}}</button>
+  <span *ngIf="statusjwt; else loginLink">
+    <img *ngIf="userInfo?.photo" [src]="userInfo.photo" alt="User Profile Photo" class="profile-icon" [routerLink]="'/profile-page'" />
+  </span>
+
+  <ng-template #loginLink>
+    <span class="EnterAccount" [routerLink]="'/login-page'">{{ "Увійти" | transloco }}</span>
+  </ng-template>
+</div>
 
 <div *ngIf="isWindowOpen" class="popup-window" (click)="closeWindow()">
   <div class="popup-content" (click)="$event.stopPropagation()">
     <div class="header-left2">
-      <img src="assets/images/profile.png" class="profile-icon" alt="User Profile" [routerLink]="'/profile-page'">
       <img src="assets/images/bell.png" class="other-photo" alt="Other Photo">
     </div>
 
@@ -492,11 +497,11 @@
       <div class="icon-container"></div>
 
       <div class="project-overlay">
-        <div class="project-title">{{ project.title | transloco }}</div>
-
         <div class="project-extra">
+          <div class="project-title">{{ project.title | transloco }}</div>
+
           <div class="progress-bar2">
-            <div class="progress2" [style.width]="PercentageOfMoney(project.collectedAmount,project.collectionAmount)"></div>
+            <div class="progress2" [style.width]="MATHPercentageOfMoney(project.collectedAmount, project.collectionAmount)"></div>
           </div>
           <p class="amount-raised">{{ project.collectedAmount }} {{ "грн" | transloco }}</p>
           <p class="goal-amount">{{ project.collectionAmount }} {{ "грн" | transloco }}</p>
@@ -516,10 +521,21 @@
             <span style="position: relative; top: 30px; left: -16px; font-size: 18px; font-weight: 400; font-family: 'Montserrat';">   {{PercentageOfMoney(project.collectedAmount,project.collectionAmount)}}</span>
           </div>
 
-          <div>
+          <!-- <div>
             <img src="assets/images/socialMedia.png" class="social-icon" />
-          </div>
+          </div> -->
 
+          <div class="dropdown-wrapper">
+            <img src="assets/images/socialMedia.png" alt="icon" class="support-icon social-icon" (click)="toggleDropdown2()" /> 
+            <div class="dropdown-list" *ngIf="dropdownOpen">
+              <a href="https://www.facebook.com/profile.php?id=61573153085556"> 
+              <img src="assets/images/facebook.png" alt="social 1" class="dropdown-image" />
+              </a>
+              <a href="https://www.instagram.com/seedflow_itstep/"> 
+              <img src="assets/images/Instagram.png" alt="social 2" class="dropdown-image" />
+              </a>
+            </div>
+          </div> 
           <div>
             <img
               class="like-icon"
@@ -563,7 +579,6 @@
   
       <div class="project-overlay2">
         <div class="project-title2">{{ project.title | transloco }}</div>
-  
         <div class="project-extra2">
           <p class="completed-text">{{ "Збір закрито" | transloco }}: 
             <span class="closing-date">{{ project.collectionAmount }}</span>
@@ -603,209 +618,150 @@
 
 <div class="yellow-line"></div>
   
-<!-- Карусель "'translateX(' + -currentIndex * (100 / visibleItems) + '%)'" -->
-<div class="carousel-wrapper2">
-
-  <div class="carousel-title-wrapper">
-    <h2 class="carousel-title-text">{{ "УСПІШНО ЗАВЕРШЕНІ ПРОЄКТИ" | transloco }}</h2>
-    <div class="carousel-title-line"></div>
-  </div>
-
-    <div class="carousel-container2">
-      <button class="nav-btn left" (click)="prevSlide()">
-        <span class="arrow arrow-left"></span>
-      </button>
+ <div class="carousel-wrapper2">
   
-      <div class="carousel">
-        <div
-          class="carousel-track"
-
-          [style.transform]="'translateX(' + -currentIndex * (100 / visibleItems) + '%)'"
-          
-        >
-          <div
-            *ngFor="let project of projectsInactiveList; let i = index"
-            class="carousel-item"
-          >
-            <img [src]="project.mainPhotoUrl" alt="Project Image" />
+      <div class="carousel-title-wrapper">
+        <h2 class="carousel-title-text">{{ "УСПІШНО ЗАВЕРШЕНІ ПРОЄКТИ" | transloco }}</h2>
+        <div class="carousel-title-line"></div>
+      </div>
   
-            <div class="carousel-info-block">
-              <div
-                style="
-                  font-size: 25px;
-                  position: relative;
-                  margin-top: 10px;
-                  margin-left: -18px;
-                "
-              >
-                {{ project.title | transloco }}
-              </div>
-              <div class="carousel-info-content">
-                <p
-                  style="
-                    color: black;
-                    font-weight: 400;
-                    position: relative;
-                    left: -100px;
-                    font-size: 14px;
-                    margin-top: 10px;
-                  "
-                >
-                   {{ "Збір закрито" | transloco }}
-                  <span
-                    style="font-weight: 600; position: relative; left: 14px"
-                    >{{ project.collectionAmount }}</span
-                  >
-                </p>
-                <p
-                  style="
-                    color: black;
-                    font-weight: 400;
-                    position: relative;
-                    left: -135px;
-                    font-size: 14px;
-                    margin-top: 10px;
-                  "
-                >
-                  {{ "Учасників" | transloco }}<span
-                    style="font-weight: 600; position: relative; left: 45px"
-                    >{{ project.teamsCount }}</span
-                  >
-                </p>
-                <p
-                  style="
-                    color: black;
-                    font-size: 20px;
-                    position: relative;
-                    top: -53px;
-                    left: 90px;
-                  "
-                >
-                  {{ project.collectedAmount }} {{"грн" | transloco}}
-                </p>
-                <p
-                  style="
-                    color: black;
-                    position: relative;
-                    top: -48px;
-                    font-size: 14px;
-                    font-weight: 400;
-                    left: 55px;
-                  "
-                >
-                  (({{PercentageOfMoney(project.collectedAmount,project.collectionAmount)}}%))
-                </p>
+      <div class="carousel-container2">
+        <button class="nav-btn left" (click)="prevSlide3()" [disabled]="currentIndex === 0">
+          <span class="arrow arrow-left"></span>
+        </button>
+  
+        <div class="carousel">
+          <div 
+          class="carousel-track" 
+          [style.transform]="'translateX(-' + currentIndex * (100 / visibleItems) + '%)'">
+            <div *ngFor="let project of projectsInactiveList" class="carousel-item">
+              <img [src]="project.mainPhotoUrl" alt="Project Image" />
+  
+              <div class="carousel-info-block">
+                <div class="carousel-project-title">{{ project.title | transloco }}</div>
+                
+                <div class="carousel-info-content">
+                  <div class="info-left">
+                    <p style="font-weight: 500;">{{ "Збір закрито" | transloco }}: <span>{{ project.rewardsCount }}</span></p>
+                    <p style="font-weight: 500;">{{ "Учасників" | transloco }}: <span>{{ project.teamsCount }}</span></p>
+                  </div>
+                  <div class="info-right">
+                    <p class="amount">{{ project.collectedAmount }} {{ "грн" | transloco }}</p>
+                    <p class="percent">({{ PercentageOfMoney(project.collectedAmount, project.collectionAmount) }}%)</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
   
-      <button class="nav-btn right" (click)="nextSlide()">
-        <span class="arrow arrow-right"></span>
-      </button>
-    </div>
-  </div>
-
-
-
-
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-header">
-        <div class="footer-logo">
-          <img src="assets/images/greenCoin.png" alt="Seed Flow" />
-          <span>Seed Flow</span>
-        </div>
-        <hr class="footer-line" />
-      </div>
-  
-      <div class="subscription">
-        <span class="podpiska">
-          {{"ПІДПИШИСЬ НА НАШІ НОВИНИ" | transloco}}
-        </span>
-        <input type="email" placeholder="{{'Введіть адресу електронної пошти' | transloco }}" class="email2" />
-        <button class="btn2">
-          {{"ВІДПРАВИТИ" | transloco }}
+        <button class="nav-btn right" (click)="nextSlide3()" [disabled]="currentIndex >= maxIndex">
+          <span class="arrow arrow-right"></span>
         </button>
       </div>
   
-      <div class="footer-links">
-        <div class="footer-column">
-          <h4>{{"ПРО НАС" | transloco}}</h4>
-          <ul>
-            <li><a href="#">{{"Політика конфіденційності" | transloco}}</a></li>
-            <li><a href="#">{{"Правила користування порталом" | transloco}}</a></li>
-            <li><a href="#">{{"Правила використання файлів Cookie" | transloco}}</a></li>
-            <li><a href="#">{{"Про нас" | transloco}}</a></li>
-          </ul>
+  
+    </div>
+
+
+
+
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-header">
+          <div class="footer-logo">
+            <img src="assets/images/greenCoin.png" alt="Seed Flow" />
+            <span>Seed Flow</span>
+          </div>
+          <hr class="footer-line" />
         </div>
-        <div class="footer-column">
-          <h4>{{"ПРОЄКТИ" | transloco}}</h4>
-          <ul>
-            <li><a href="#">{{"Список проєктів" | transloco}}</a></li>
-            <li><a href="#">{{"Пошук" | transloco}}</a></li>
-            <li><a href="#">{{"Викласти проєкт" | transloco}}</a></li>
-          </ul>
+    
+        <div class="subscription">
+          <span class="podpiska">
+            {{"ПІДПИШИСЬ НА НАШІ НОВИНИ" | transloco}}
+          </span>
+          <input type="email" placeholder="{{'Введіть адресу електронної пошти' | transloco }}" class="email2" />
+          <button class="btn2">
+            {{"ВІДПРАВИТИ" | transloco }}
+          </button>
         </div>
-        <div class="footer-column">
-          <h4>{{"АКАУНТ" | transloco}}</h4>
-          <ul>
-            <li><a href="#">{{"Налаштування акаунта" | transloco}}</a></li>
-            <li><a href="#">{{"Повідомлення" | transloco}}</a></li>
-            <li><a href="#">{{"Перегляд транзакцій" | transloco}}</a></li>
-            <li><a href="#">{{"Підтримані проєкти" | transloco}}</a></li>
-            <li><a href="#">{{"Вподобані проєкти" | transloco}}</a></li>
-            <li><a href="#">{{"Вподобані товари" | transloco}}</a></li>
-            <li><a href="#">{{"Історія покупок" | transloco}}</a></li>
-          </ul>
-        </div>
-        <div class="footer-column">
-          <h4>{{"ПІДТРИМКА" | transloco}}</h4>
-          <ul>
-            <li><a href="#">FAQ</a></li>
-            <li><a href="#">{{"Супровід проєкту" | transloco}}</a></li>
-            <li><a href="#">{{"Семінари/вебінари" | transloco}}</a></li>
-            <li><a href="#">{{"Блог" | transloco}}</a></li>
-          </ul>
-        </div>
-        <div class="footer-column">
-          <h4>{{"МАГАЗИН" | transloco}}</h4>
-          <ul>
-            <li><a href="#">{{"Всі товари" | transloco}}</a></li>
-            <li><a href="#">{{"Оплата і доставка" | transloco}}</a></li>
-            <li><a href="#">{{"Кошик" | transloco}}</a></li>
-          </ul>
+    
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4>{{"ПРО НАС" | transloco}}</h4>
+            <ul>
+              <li><a [routerLink]="'/policy-page'">{{"Політика конфіденційності" | transloco}}</a></li>
+              <li><a [routerLink]="'/support-page'">{{"Правила користування порталом" | transloco}}</a></li>
+              <li><a [routerLink]="'/cookie-rools-page'">{{"Правила використання файлів Cookie" | transloco}}</a></li>
+              <li><a [routerLink]="'/about-us-page'">{{"Про нас" | transloco}}</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>{{"ПРОЄКТИ" | transloco}}</h4>
+            <ul>
+              <li><a [routerLink]="'/projects-list-page'">{{"Список проєктів" | transloco}}</a></li>
+              <li><a [routerLink]="'/send-request-page'">{{"Пошук" | transloco}}</a></li>
+              <li><a [routerLink]="'/general-page'">{{"Викласти проєкт" | transloco}}</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>{{"АКАУНТ" | transloco}}</h4>
+            <ul>
+              <li><a [routerLink]="'/account-settings-page'">{{"Налаштування акаунта" | transloco}}</a></li>
+              <li><a href="#">{{"Повідомлення" | transloco}}</a></li>
+              <li><a href="#">{{"Перегляд транзакцій" | transloco}}</a></li>
+              <li><a [routerLink]="'/profile-page'">{{"Підтримані проєкти" | transloco}}</a></li>
+              <li><a [routerLink]="'/profile-page'">{{"Вподобані проєкти" | transloco}}</a></li>
+              <li><a href="#">{{"Вподобані товари" | transloco}}</a></li>
+              <li><a href="#">{{"Історія покупок" | transloco}}</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>{{"ПІДТРИМКА" | transloco}}</h4>
+            <ul>
+              <li><a [routerLink]="'/faq-page'">FAQ</a></li>
+              <li><a [routerLink]="'/accompaniment-page'">{{"Супровід проєкту" | transloco}}</a></li>
+              <li><a [routerLink]="'/seminars-vebinars-page'">{{"Семінари/вебінари" | transloco}}</a></li>
+              <li><a [routerLink]="'/blog-page'">{{"Блог" | transloco}}</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>{{"МАГАЗИН" | transloco}}</h4>
+            <ul>
+              <li><a style="cursor: pointer;">{{"Всі товари" | transloco}}</a></li>
+              <li><a style="cursor: pointer;">{{"Оплата і доставка" | transloco}}</a></li>
+              <li><a style="cursor: pointer;">{{"Кошик" | transloco}}</a></li>
+              <!-- [routerLink]="'/basket-page'" -->
+            </ul>
+          </div>
         </div>
       </div>
+    
+      <hr
+      class="yellowLine"
+    />
+    <div class="footer-social">
+      <h4 style="font-family: 'Montserrat'">
+        <p class="underline-center">{{"МИ У СОЦМЕРЕЖАХ" | transloco }}</p>
+      </h4>
+    
+      <div class="social-icons">
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-telegram"></i></a>
+        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+      </div>
     </div>
-  
+    
     <hr
-    class="yellowLine"
-  />
-  <div class="footer-social">
-    <h4 style="font-family: 'Montserrat'">
-      <p class="underline-center">{{"МИ У СОЦМЕРЕЖАХ" | transloco }}</p>
-    </h4>
-  
-    <div class="social-icons">
-      <a href="#"><i class="fa-brands fa-instagram"></i></a>
-      <a href="#"><i class="fa-brands fa-telegram"></i></a>
-      <a href="#"><i class="fa-brands fa-youtube"></i></a>
-      <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+    class="yellowLine2"
+    
+    />
+    
+    <div class="footer-bottom">
+      <p style="font-weight: 400;">
+        Всі права збережені | All rights save © 2025
+      </p>
     </div>
-  </div>
-  
-  <hr
-  class="yellowLine2"
-  
-  />
-  
-  <div class="footer-bottom">
-    <p style="font-weight: 400;">
-      Всі права збережені | All rights save © 2025
-    </p>
-  </div>
-  </footer>
-
-
+    </footer>

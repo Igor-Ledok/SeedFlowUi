@@ -11,7 +11,6 @@ import { Reward } from '../models/project/reward.interface';
 import { TeamMember } from '../models/project/team-member.interface';
 import { detailsdescription } from '../models/project/datailsDescription.interface';
 import { CategoryDto } from '../models/project/topic.interface';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-uploads',
@@ -103,8 +102,7 @@ export class UploadsComponent {
   constructor(
     private eRef: ElementRef,
     private languageService: LanguageService,
-    private projectService: ProjectService,
-    private router: Router)
+    private projectService: ProjectService)
   {
 
   }
@@ -123,6 +121,22 @@ export class UploadsComponent {
     }
   }
 
+  isSavePopupOpen: boolean = false;
+
+  showSavePopup() {
+    this.isSavePopupOpen = true;
+  }
+  
+  closeSavePopup() {
+    this.isSavePopupOpen = false;
+  }
+
+  isPopupOpen: boolean = false;
+
+    closePopup() {
+      this.isPopupOpen = false; 
+    }
+
   ngOnInit(): void 
   {
     this.projectService.getCategory().subscribe((data: CategoryDto) => {
@@ -134,8 +148,20 @@ export class UploadsComponent {
       }
   
       console.log(this.category?.id); // Access properties safely
-    });
+    }
     
+    );
+    
+    if (this.projectData.MainPhotoUrl === undefined) {
+      this.projectData.MainPhotoUrl = "assets/images/specialistHelp7.png";
+      }
+      if (this.projectData.MainPhotoUrl === "") {
+        this.projectData.MainPhotoUrl = "assets/images/specialistHelp7.png";
+        }
+        if (this.projectData.MainPhotoUrl === null) {
+          this.projectData.MainPhotoUrl = "assets/images/specialistHelp7.png";
+          }
+
     // Reward
     this.sizeReward = this.projectService.getProjectDataRewardsSize();
     for (let i = 0; i < this.sizeReward; i++) {
@@ -345,10 +371,10 @@ convertBase64ToImage(base64String: string): void {
 
     submitProject(): void {
       console.log('submitProject');
-      this.projectService.sendProjectData().subscribe({ 
+      this.projectService.sendProjectData().subscribe({
         next: (response) => {
           console.log(response);
-          this.router.navigate(['/uploads-access-page ']);
+         
         },
         error: (e: any) => {
           console.log(e);
@@ -415,5 +441,9 @@ convertBase64ToImage(base64String: string): void {
       toggleDropdown() {
         this.showDropdown = !this.showDropdown;
       }
+      dropdownOpen: boolean = false;
 
+      toggleDropdown2() {
+        this.dropdownOpen = !this.dropdownOpen;
+      }
 }

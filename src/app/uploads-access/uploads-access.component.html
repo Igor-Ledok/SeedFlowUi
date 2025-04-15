@@ -18,7 +18,7 @@
 <header class="header">
     <div class="header-left">
       <img src="assets/images/greenCoin.png" class="logo" alt="Seed Flow Logo" />
-      <span class="brand-name">Seed Flow</span>
+      <span class="brand-name" style="cursor: pointer;" [routerLink]="'/'">Seed Flow</span>
     </div>
   
     
@@ -403,7 +403,7 @@
       </div>
       <div class="right-panel">
         <div id="accessSupport">{{"Ваш проєкт" | transloco }}</div>
-        <h2 id="proj">{{name | transloco }}</h2>
+        <h2 id="proj">{{"«Майстерня Гудзик»" | transloco }}</h2>
 
         <div id="saveSucessfuly">{{"Успішно відправлений на модерацію. Після того, як проєкт пройде валідацію нашим менеджером, його буде викладено в загальний доступ." | transloco }}</div>
 

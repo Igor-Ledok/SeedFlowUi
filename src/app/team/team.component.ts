@@ -9,6 +9,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { TeamMember } from '../models/project/team-member.interface';
 import { ProjectService } from '../services/project.service';
 import { Router } from '@angular/router';
+import { UserInfo, UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-team',
@@ -27,6 +29,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./team.component.scss']
 })
 export class TeamComponent {
+  public userInfo: UserInfo;
+  public statusjwt: boolean = false;
+
   sizeTeam: number = 0;
   public projectData: TeamMember[] = [];
 
@@ -82,7 +87,9 @@ export class TeamComponent {
       private eRef: ElementRef,
       private languageService: LanguageService,
       private projectService: ProjectService, 
-      private router: Router)
+      private router: Router,
+      private authService: AuthService, 
+      private userService: UserService)
     {
 
     }
@@ -265,9 +272,27 @@ export class TeamComponent {
         this.projectData.push(this.projectService.returnProjectDataTeam(i));
       }
 
+      this.statusjwt = !this.authService.isTokenExpired();
+      console.log(this.statusjwt);
+      this.userService.getUserInfo().subscribe(
+        (response: { user: UserInfo }) => {
+          this.userInfo = response.user;
+          console.log(this.userInfo);
+        },
+        (error: any) => {
+          console.error('Ошибка загрузки информации о пользователе', error);    
+        }
+      );
+
       this.checkScreenSize();    
       this.likedProjects = new Array(this.filteredItems.length).fill(false);
       this.totalSlides = this.filteredItems.length;
+    }
+
+    isPopupOpen: boolean = false;
+
+    closePopup() {
+      this.isPopupOpen = false; 
     }
 
     saveGeneralData(): void {
@@ -284,6 +309,8 @@ export class TeamComponent {
         console.log(this.projectData[i]);
         this.projectService.getProjectDataTeam(this.projectData[i]);
       }
+
+      this.isPopupOpen = true;
     }
     
 
@@ -307,7 +334,6 @@ export class TeamComponent {
         reader.readAsDataURL(file); // Преобразуем файл в base64
       }
     }
-    
 
     member = { name: '', role: '', phone: '', email: '' };
 

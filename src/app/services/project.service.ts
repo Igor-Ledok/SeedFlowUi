@@ -72,7 +72,6 @@ export class ProjectService {
   getProjectname(): string {
     return this.projectData.Title;
   }
-
   
   
   returnProjectDataDetails(): details {
@@ -418,5 +417,22 @@ export class ProjectService {
     return this.http.get<ProjectList[]>(this.baseUrl + "/list/like", { headers:headers });
   }
   
+  getLastThreeProjectById(): Observable<ProjectList[]> {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.error('Token not found in localStorage.');
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+      });
+      return this.http.get<ProjectList[]>(this.baseUrl + "/list/lastthree", { headers:headers });
+    }
+    else {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      });
+      return this.http.get<ProjectList[]>(this.baseUrl + "/list/lastthree/user", { headers:headers });
+    }
+  }
 
 }

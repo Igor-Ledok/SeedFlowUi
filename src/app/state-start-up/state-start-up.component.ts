@@ -9,6 +9,8 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { LanguageService } from '../services/language.service';
 import { Router } from '@angular/router';
+import { UserInfo, UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-state-start-up',
@@ -36,6 +38,9 @@ commentText: string = '';
     activeSocialButtonIndex: number = -1;
     activeHumanitarianButtonIndex: number = -1;
     activeCategoryIndex: number = -1;
+
+        public userInfo: UserInfo;
+        public statusjwt: boolean = false;
       
         someString:string = 'UA';
       
@@ -357,7 +362,9 @@ commentText: string = '';
           private route: ActivatedRoute,
           private eRef: ElementRef,
           private languageService: LanguageService,
-          private router: Router
+          private router: Router,
+          private authService: AuthService, 
+          private userService: UserService
          ) 
          {
 
@@ -372,6 +379,18 @@ commentText: string = '';
           const savedLanguage = localStorage.getItem('selectedLanguage') ||'ua'; 
           this.selectedLanguage.setValue(savedLanguage);
           this.onLanguageChange({ value: savedLanguage });
+
+           this.statusjwt = !this.authService.isTokenExpired();
+                    console.log(this.statusjwt);
+                    this.userService.getUserInfo().subscribe(
+                    (response: { user: UserInfo }) => {
+                      this.userInfo = response.user;
+                      console.log(this.userInfo);
+                      },
+                    (error: any) => {
+                      console.error('Ошибка загрузки информации о пользователе', error);    
+                      }
+                    );
 
           this.checkScreenSize();
           this.likedProjects = new Array(this.filteredItems.length).fill(false);

@@ -18,7 +18,7 @@
 <header class="header">
     <div class="header-left">
       <img src="assets/images/greenCoin.png" class="logo" alt="Seed Flow Logo" />
-      <span class="brand-name">Seed Flow</span>
+      <span class="brand-name" style="cursor: pointer;" [routerLink]="'/'">Seed Flow</span>
     </div>
   
     <!-- Блок поиска -->
@@ -311,18 +311,23 @@
   </div>
 </div>
   
-    <div class="header-right">
-      <img src="assets/images/slashes.png" class="new-photo" alt="New Photo" (click)="openWindow()">
-      <button class="submit-project-btn" [routerLink]="'/general-page'">{{"Подати проєкт" | transloco}}</button>
-      <img src="assets/images/profile.png" class="profile-icon" alt="User Profile" [routerLink]="'/profile-page'">
-    </div>
+<div class="header-right">
+  <img src="assets/images/slashes.png" class="new-photo" alt="New Photo" (click)="openWindow()">
+  <button class="submit-project-btn" [routerLink]="'/general-page'">{{"Подати проєкт" | transloco}}</button>
+  <span *ngIf="statusjwt; else loginLink">
+    <img *ngIf="userInfo?.photo" [src]="userInfo.photo" alt="User Profile Photo" class="profile-icon" [routerLink]="'/profile-page'" />
+  </span>
+
+  <ng-template #loginLink>
+    <span class="EnterAccount" [routerLink]="'/login-page'">{{ "Увійти" | transloco }}</span>
+  </ng-template>
+</div>
 
 <!-- Окошко, которое будет открываться -->
 <div *ngIf="isWindowOpen" class="popup-window" (click)="closeWindow()">
   <div class="popup-content" (click)="$event.stopPropagation()">
     <!-- Левый верхний блок с фото профиля и дополнительным фото -->
     <div class="header-left2">
-      <img src="assets/images/profile.png" class="profile-icon" alt="User Profile" [routerLink]="'/profile-page'">
       <img src="assets/images/bell.png" class="other-photo" alt="Other Photo">
     </div>
 
@@ -579,7 +584,7 @@
         </div>
         <hr class="footer-line" />
       </div>
-
+  
       <div class="subscription">
         <span class="podpiska">
           {{"ПІДПИШИСЬ НА НАШІ НОВИНИ" | transloco}}
@@ -594,28 +599,28 @@
         <div class="footer-column">
           <h4>{{"ПРО НАС" | transloco}}</h4>
           <ul>
-            <li><a href="#">{{"Політика конфіденційності" | transloco}}</a></li>
-            <li><a href="#">{{"Правила користування порталом" | transloco}}</a></li>
-            <li><a href="#">{{"Правила використання файлів Cookie" | transloco}}</a></li>
-            <li><a href="#">{{"Про нас" | transloco}}</a></li>
+            <li><a [routerLink]="'/policy-page'">{{"Політика конфіденційності" | transloco}}</a></li>
+            <li><a [routerLink]="'/support-page'">{{"Правила користування порталом" | transloco}}</a></li>
+            <li><a [routerLink]="'/cookie-rools-page'">{{"Правила використання файлів Cookie" | transloco}}</a></li>
+            <li><a [routerLink]="'/about-us-page'">{{"Про нас" | transloco}}</a></li>
           </ul>
         </div>
         <div class="footer-column">
           <h4>{{"ПРОЄКТИ" | transloco}}</h4>
           <ul>
-            <li><a href="#">{{"Список проєктів" | transloco}}</a></li>
-            <li><a href="#">{{"Пошук" | transloco}}</a></li>
-            <li><a href="#">{{"Викласти проєкт" | transloco}}</a></li>
+            <li><a [routerLink]="'/projects-list-page'">{{"Список проєктів" | transloco}}</a></li>
+            <li><a [routerLink]="'/send-request-page'">{{"Пошук" | transloco}}</a></li>
+            <li><a [routerLink]="'/general-page'">{{"Викласти проєкт" | transloco}}</a></li>
           </ul>
         </div>
         <div class="footer-column">
           <h4>{{"АКАУНТ" | transloco}}</h4>
           <ul>
-            <li><a href="#">{{"Налаштування акаунта" | transloco}}</a></li>
+            <li><a [routerLink]="'/account-settings-page'">{{"Налаштування акаунта" | transloco}}</a></li>
             <li><a href="#">{{"Повідомлення" | transloco}}</a></li>
             <li><a href="#">{{"Перегляд транзакцій" | transloco}}</a></li>
-            <li><a href="#">{{"Підтримані проєкти" | transloco}}</a></li>
-            <li><a href="#">{{"Вподобані проєкти" | transloco}}</a></li>
+            <li><a [routerLink]="'/profile-page'">{{"Підтримані проєкти" | transloco}}</a></li>
+            <li><a [routerLink]="'/profile-page'">{{"Вподобані проєкти" | transloco}}</a></li>
             <li><a href="#">{{"Вподобані товари" | transloco}}</a></li>
             <li><a href="#">{{"Історія покупок" | transloco}}</a></li>
           </ul>
@@ -623,23 +628,24 @@
         <div class="footer-column">
           <h4>{{"ПІДТРИМКА" | transloco}}</h4>
           <ul>
-            <li><a href="#">FAQ</a></li>
-            <li><a href="#">{{"Супровід проєкту" | transloco}}</a></li>
-            <li><a href="#">{{"Семінари/вебінари" | transloco}}</a></li>
-            <li><a href="#">{{"Блог" | transloco}}</a></li>
+            <li><a [routerLink]="'/faq-page'">FAQ</a></li>
+            <li><a [routerLink]="'/accompaniment-page'">{{"Супровід проєкту" | transloco}}</a></li>
+            <li><a [routerLink]="'/seminars-vebinars-page'">{{"Семінари/вебінари" | transloco}}</a></li>
+            <li><a [routerLink]="'/blog-page'">{{"Блог" | transloco}}</a></li>
           </ul>
         </div>
         <div class="footer-column">
           <h4>{{"МАГАЗИН" | transloco}}</h4>
           <ul>
-            <li><a href="#">{{"Всі товари" | transloco}}</a></li>
-            <li><a href="#">{{"Оплата і доставка" | transloco}}</a></li>
-            <li><a href="#">{{"Кошик" | transloco}}</a></li>
+            <li><a style="cursor: pointer;">{{"Всі товари" | transloco}}</a></li>
+            <li><a style="cursor: pointer;">{{"Оплата і доставка" | transloco}}</a></li>
+            <li><a style="cursor: pointer;">{{"Кошик" | transloco}}</a></li>
+            <!-- [routerLink]="'/basket-page'" -->
           </ul>
         </div>
       </div>
     </div>
-
+  
     <hr
     class="yellowLine"
   />
@@ -647,7 +653,7 @@
     <h4 style="font-family: 'Montserrat'">
       <p class="underline-center">{{"МИ У СОЦМЕРЕЖАХ" | transloco }}</p>
     </h4>
-
+  
     <div class="social-icons">
       <a href="#"><i class="fa-brands fa-instagram"></i></a>
       <a href="#"><i class="fa-brands fa-telegram"></i></a>
@@ -655,12 +661,12 @@
       <a href="#"><i class="fa-brands fa-linkedin"></i></a>
     </div>
   </div>
-
+  
   <hr
   class="yellowLine2"
-
+  
   />
-
+  
   <div class="footer-bottom">
     <p style="font-weight: 400;">
       Всі права збережені | All rights save © 2025
