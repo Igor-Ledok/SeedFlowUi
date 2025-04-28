@@ -1,0 +1,29 @@
+<app-header></app-header>
+
+  <hr>
+
+
+  <div class="search-results-container">
+    <div class="breadcrumbs">
+      <a [routerLink] = "'/'" style="cursor: pointer; text-decoration: none; color: inherit;">
+      <span>{{"Головна" | transloco}}</span>  
+      </a>
+      &gt;
+      <a [routerLink] = "'/support-page'" style="cursor: pointer; text-decoration: none; color: inherit;">
+      <span>{{"Підтримка" | transloco}}</span>
+      </a>
+      &gt;
+      <span>{{"Надіслати запит" | transloco}}</span>
+    </div> 
+    <h2 class="title">{{"Є питання?" | transloco}}</h2>
+    <input type="text" placeholder="{{'Поставьте запитання...' | transloco}}" class="input-field"
+    [(ngModel)]="searchText2" (keydown.enter)="onEnter()">
+    <p class="description">{{"Щоб розпочати, увійдіть у свій обліковий запис Seed Flow, якщо він у вас є." | transloco}}</p>
+    <button class="btnEnter" [routerLink]="'/login-page'">{{"Увійти" | transloco}}</button>
+    <button class="btnDontHaveAcc" [routerLink]="'/registration-page'">{{"У мене немає облікового запису" | transloco}}</button>
+
+
+</div>
+
+<app-footer></app-footer>
+

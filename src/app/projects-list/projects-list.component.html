@@ -1,0 +1,305 @@
+<app-header></app-header>
+
+  <hr>
+
+<div class="main-container">
+  <div class="buttons-container">
+    <button (click)="setActiveTab(true)" 
+    [ngClass]="{
+        'active-button': showActive,
+        'inactive-button': !showActive
+      }" 
+      class="actual">{{"АКТУАЛЬНІ" | transloco}}</button>
+    <button (click)="setActiveTab(false)" [ngClass]="{
+        'active-button': !showActive,
+        'inactive-button': showActive
+      }" class="unActual">{{"ЗАВЕРШЕНІ" | transloco}}</button>
+  </div>
+
+  <div class="filter-container">
+    <div class="sort-wrapper">
+    <img 
+    [src]="sortIcon" 
+    style="position: relative; right: 10px; cursor:pointer" 
+    (click)="toggleSortModal()"
+    >
+
+    <img 
+    [src]="filterIcon" 
+    style="position: relative; left: 10px; cursor:pointer" 
+    (click)="toggleFilterModal()"
+    >
+  
+    <div *ngIf="isSortModalVisible" class="sort-modal-container" (click)="closeSortModal()">
+      <div class="sort-modal" (click)="$event.stopPropagation()">
+        <a 
+          *ngFor="let link of links; let i = index" 
+          (click)="changeColor(i)" 
+          [ngClass]="{'active-link': selectedLinkIndex === i}" 
+          style="font-family: 'Montserrat'; cursor: pointer;"
+        >
+          {{ link | transloco }}
+          <br>
+          <br>
+        </a>
+        <br><br>
+      </div>
+    </div>
+  </div>
+
+
+  </div>
+</div> 
+
+<!-- Модальное окно с фильтрами -->
+<div *ngIf="isFilterModalOpen" class="filter-modal">
+    <div class="modal-overlay" (click)="toggleFilterModal()"></div>
+    <div class="modal-content">
+      <!-- Ваши элементы фильтра здесь -->
+      <h2 class="filter-title">{{"Фільтрувати" | transloco}}</h2>
+
+    <!-- Ползунок суммы -->
+    <div class="progress-bar-container">
+      <h4 class="progress-title">{{ "СУМА ЗБОРУ" | transloco }}</h4>
+
+      <div class="slider-wrapper">
+        <div class="progress-bar-area">
+        <input 
+          type="range" 
+          class="slider" 
+          [(ngModel)]="progress2" 
+          [min]="minValue" 
+          [max]="maxValue" 
+          (input)="updateProgress()"
+        />
+        <div 
+          class="slider-fill" 
+          [style.width.%]="(progress2 - minValue) / (maxValue - minValue) * 100">
+        </div>
+        <div 
+          class="slider-thumb" 
+          [style.left.%]="(progress2 - minValue) / (maxValue - minValue) * 100">
+        </div>
+      </div>
+
+      <div class="progress-labels">
+        <span class="start-label">{{ dynamicStartLabel2 }} {{"грн" | transloco}}</span>
+        <span class="end-label">{{ endLabel2 }} {{"грн" | transloco}}</span>
+      </div>
+    </div>
+    </div>
+
+      <h4 class="filter-title">{{"КАТЕГОРІЯ" | transloco}}</h4>
+
+      <ng-container *ngFor="let topic of topics">
+        <h4 class="filter-title">{{ topic.name | transloco }} &nbsp; ▼</h4>
+        <div class="checkbox-group">
+          <br>
+          <ng-container *ngFor="let category of topic.categories">
+            <section class="example-margin" id="checkbox">
+              <mat-checkbox class="example-margin" [(ngModel)]="category.checked">
+                <label>
+                  <span style="font-size: 20px; font-family: 'Montserrat'; font-weight: 400;">{{ category.name | transloco }}</span>
+                </label>
+              </mat-checkbox>
+            </section>
+            <br />
+          </ng-container>
+        </div>
+      </ng-container>
+      
+
+      <div class="filter-buttons">
+        <button class="reset">{{"СКИНУТИ" | transloco}}</button>
+        <button class="filter2"  (click)="filter()">{{"ФІЛЬТРУВАТИ" | transloco}}</button>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+<div class="projects-wrapper">
+<div class="projects-container">
+  <div class="projects-grid" *ngIf="showActive">
+    <div
+      class="project-card"
+      *ngFor="let project of projectsList; let i = index"
+      [ngClass]="'project-card-' + i"
+    >
+      <div class="icon-container"></div>
+
+      <div class="project-overlay">
+        <div class="project-extra">
+          <div class="project-title">{{ project.title | transloco }}</div>
+
+          <div class="progress-bar2">
+            <div class="progress2" [style.width]="MATHPercentageOfMoney(project.collectedAmount, project.collectionAmount)"></div>
+          </div>
+          <p class="amount-raised">{{ project.collectedAmount }} {{ "грн" | transloco }}</p>
+          <p class="goal-amount">{{ project.collectionAmount }} {{ "грн" | transloco }}</p>
+
+          <div class="icon-container2">
+            <img src="assets/images/people.png" />
+            <span class="people2"> {{project.teamsCount}}</span>
+          </div>
+
+          <div class="icon-container3">
+            <img src="assets/images/comments.png" />
+            <span class="comments2">  {{ project.rewardsCount}}</span>
+          </div>
+
+          <div class="icon-container4">
+            <img src="assets/images/money.png" />
+            <span class="money2">   {{PercentageOfMoney(project.collectedAmount,project.collectionAmount)}}</span>
+          </div>
+
+          <div class="dropdown-wrapper">
+            <img src="assets/images/socialMedia.png" alt="icon" class="support-icon social-icon" (click)="toggleDropdown3(i)" /> 
+            <div class="dropdown-list" *ngIf="dropdownOpen2[i]">
+              <a href="https://www.facebook.com/profile.php?id=61573153085556"> 
+              <img src="assets/images/facebook.png" alt="social 1" class="dropdown-image" />
+              </a>
+              <a href="https://www.instagram.com/seedflow_itstep/"> 
+              <img src="assets/images/Instagram.png" alt="social 2" class="dropdown-image" />
+              </a>
+            </div>
+          </div> 
+          <div>
+            <img
+              class="like-icon"
+              [src]="likedProjects[i] ? 'assets/images/likeRed.png' : 'assets/images/like.png'"
+              (click)="toggleLike(i, project.id)"
+            />
+          </div>
+
+          <button [routerLink]="['/donation-page']" [queryParams]="{ projectId: project.id}" class="support-button">{{ "ПІДТРИМАТИ" | transloco }}</button>
+          
+          <div class="project-description">
+            <p>{{project.shortDescription | transloco}}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div>
+        <img src="assets/images/LeftUpAngle.png" class="angle-icon" />
+      </div> -->
+      <div>
+        <img  [src]="project.categoryPhotoUrl" class="rocket-icon" />
+      </div>
+
+      <img *ngIf="project" [routerLink]="['/see-project-page']" [queryParams]="{ projectId: project.id}" [src]="project.mainPhotoUrl" alt="{{ project.title }}" class="project-image" />
+    </div>
+  </div>
+</div>
+
+
+<div id="targetSection2"></div>
+
+
+<div class="projects-wrapper">
+<div class="projects-grid2" *ngIf="!showActive">
+    <div
+      class="project-card2 completed"
+      *ngFor="let project of projectsInactiveList; let i = index"
+      [ngClass]="'project-card-' + i"
+    >
+      <div class="icon-container"></div>
+  
+      <div class="project-overlay2">
+        <div class="project-title2">{{ project.title | transloco }}</div>
+        <div class="project-extra2">
+          <p class="completed-text">{{ "Збір закрито" | transloco }}: 
+            <span class="closing-date">{{ project.collectionAmount }}</span>
+          </p>
+  
+          <p class="participants-text">
+            {{ "Учасників" | transloco }}: 
+            <span class="participants">{{ project.teamsCount }}</span>
+          </p>
+  
+          <p class="amount-raised2">
+            {{ project.collectedAmount }} {{ "грн" | transloco }}
+          </p>
+  
+          <p class="goal-percentage">
+            ({{PercentageOfMoney(project.collectedAmount,project.collectionAmount)}}%)
+          </p>
+  
+          <div class="icon-container2">
+            <img [src]="" />
+            <span>{{22}}asdasdasd</span>
+          </div>
+        </div>
+      </div>
+  
+      <div>
+        <img [src]="project.categoryPhotoUrl" class="rocket-icon" />
+      </div>
+
+      <img style="cursor: pointer;" *ngIf="project" [routerLink]="['/see-project-page']" [queryParams]="{ projectId: project.id}" [src]="project.mainPhotoUrl" alt="{{ project.title }}" class="project-image" />
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+<div class="yellow-line"></div>
+  
+<div class="carousel-wrapper2">
+  
+      <div class="carousel-title-wrapper">
+        <h2 class="carousel-title-text">{{ "УСПІШНО ЗАВЕРШЕНІ ПРОЄКТИ" | transloco }}</h2>
+        <div class="carousel-title-line"></div>
+      </div>
+  
+      <div class="carousel-container2">
+        <!-- <button class="nav-btn left" (click)="prevSlide3()" [disabled]="currentIndex === 0">
+          <span class="arrow arrow-left"></span>
+        </button> -->
+  
+        <div class="carousel"
+        (mousedown)="onDragStart4($event)"
+        (mousemove)="onDragMove4($event)"
+        (mouseup)="onDragEnd4()"
+        (mouseleave)="onDragEnd4()"
+        (click)="onClick4($event)">
+     
+     <div class="carousel-track" #carouselTrack4>
+       
+       <div *ngFor="let project of projectsInactiveList" class="carousel-item">
+         <img  [src]="project.mainPhotoUrl" alt="Project Image" draggable="false" />
+   
+         <div class="carousel-info-block" *ngIf="project" [routerLink]="['/see-project-page']" [queryParams]="{ projectId: project.id}">
+           <div class="carousel-project-title">{{ project.title | transloco }}</div>
+   
+           <div class="carousel-info-content">
+             <div class="info-left">
+               <p style="font-weight: 500;">{{ "Збір закрито" | transloco }}: <span>{{ project.rewardsCount }}</span></p>
+               <p style="font-weight: 500;">{{ "Учасників" | transloco }}: <span>{{ project.teamsCount }}</span></p>
+             </div>
+             <div class="info-right">
+               <p class="amount">{{ project.collectedAmount }} {{ "грн" | transloco }}</p>
+               <p class="percent">({{ PercentageOfMoney(project.collectedAmount, project.collectionAmount) }}%)</p>
+             </div>
+           </div>
+         </div>
+       </div>
+       
+     </div>
+   </div>
+   
+  
+        <!-- <button class="nav-btn right" (click)="nextSlide3()" [disabled]="currentIndex >= maxIndex">
+          <span class="arrow arrow-right"></span>
+        </button> -->
+      </div>
+  
+  
+    </div>
+
+<app-footer></app-footer>

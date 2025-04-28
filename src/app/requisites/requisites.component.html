@@ -1,0 +1,299 @@
+
+<app-header></app-header>
+
+  <hr>
+
+
+
+<div class="tabs-container">
+  <div class="tabs">
+    <button [routerLink]="'/general-page'">{{"ЗАГАЛЬНЕ" | transloco}}</button>
+    <button [routerLink]="'/detail-page'">{{"ДЕТАЛІ" | transloco}}</button>
+    <button [routerLink]="'/team-page'">{{"КОМАНДА" | transloco}}</button>
+    <button [routerLink]="'/rewards-page'">{{"ВИНАГОРОДИ" | transloco}}</button>
+    <button [routerLink]="'/requisites-page'">{{"РЕКВІЗИТИ" | transloco}}</button>
+    <button [routerLink]="'/uploads-page'">{{"ВИКЛАСТИ" | transloco}}</button>
+  </div>
+</div>
+
+<button class="fixed-button" (click)="scrollToTop()">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<div class="container">
+  <img 
+  *ngFor="let img of images; let i = index"
+  [src]="activeIndex === i ? img.active : img.gray"
+  alt="Image"
+  class="image"
+  [class.active]="activeIndex === i"
+  (click)="onImageClick(img.link)">
+</div>
+
+<!-- <form [formGroup]=""> -->
+<div class="form-group">
+    <div class="form-row">
+      <div class="fields">
+        <div class="input-group">
+          <label class="form-label">{{"Назва організації" | transloco}}</label>
+          <input 
+          type="text" 
+          class="form-input" 
+          placeholder='{{"Введіть назву організації" | transloco}}' 
+          [(ngModel)]="projectData.OrganizationName"
+          (ngModelChange)="ValidOrganizationName()"/>
+
+          <!-- <div class="error" *ngIf="organizationName?.invalid && organizationName?.touched">
+            <span *ngIf="organizationName?.errors?.['required']">{{"Обов'язкове поле" | transloco}}</span>
+            <span *ngIf="organizationName?.errors?.['minlength']">{{"Мінімальна довжина 3 символи" | transloco}}</span>
+          </div> -->
+          <div *ngIf="organizationName" class="error">
+            <span>
+              {{ organizationName | transloco }}
+            </span>
+          </div>
+        </div>
+  
+        <div class="input-group">
+          <label class="form-label">{{"ЄДРПОУ/ІПН" | transloco}}</label>
+          <input 
+          type="text" 
+          class="form-input" 
+          placeholder='{{"Введіть ЄДРПОУ або ІПН" | transloco}}' 
+          [(ngModel)]="projectData.Edrpou"
+          (ngModelChange)="ValidEdrpou()"/>
+
+          <!-- <div class="error" *ngIf="edrpou?.invalid && edrpou?.touched">
+            <span *ngIf="edrpou?.errors?.['required']">{{"Обов'язкове поле" | transloco}}</span>
+            <span *ngIf="edrpou?.errors?.['invalidEdrpouOrIpn']">{{ "Невірний формат ЄДРПОУ або ІПН" | transloco }}</span>
+          </div> -->
+          <div *ngIf="edrpou" class="error">
+            <span>
+              {{ edrpou | transloco }}
+            </span>
+          </div>
+        </div>
+  
+        <div class="input-group">
+          <label class="form-label">{{"Повна адреса, індекс" | transloco}}</label>
+          <input 
+          type="text" 
+          class="form-input" 
+          placeholder='{{"Введіть адресу" | transloco}}' 
+          [(ngModel)]="projectData.FullAddress"
+          (ngModelChange)="ValidAddress()"/>
+
+          <!-- <div class="error" *ngIf="fullAddress?.invalid && fullAddress?.touched">
+            <span *ngIf="fullAddress?.errors?.['required']">{{"Обов'язкове поле" | transloco}}</span>
+            <span *ngIf="fullAddress?.errors?.['invalidAddress']">{{"Помилка (Улица з великої букви, номер будинку і поштовий індекс)" | transloco}}</span>
+          </div> -->
+          <div *ngIf="fullAddress" class="error">
+            <span>
+              {{ fullAddress | transloco }}
+            </span>
+          </div>
+        </div>
+  
+        <div class="input-group">
+          <label class="form-label">{{"Місто" | transloco}}</label>
+          <input 
+          type="text" 
+          class="form-input" 
+          placeholder='{{"Введіть місто" | transloco}}' 
+          [(ngModel)]="projectData.City"
+          (ngModelChange)="ValidCity()"/>
+
+          <!-- <div class="error" *ngIf="city?.invalid && city?.touched">
+            <span *ngIf="city?.errors?.['required']">{{"Обов'язкове поле" | transloco}}</span>
+            <span *ngIf="city?.errors?.['invalidCityName']">{{"Введіть коректну назву міста (тільки букви та пробіли)" | transloco}}</span>
+          </div> -->
+          <div *ngIf="city" class="error">
+            <span>
+              {{ city | transloco }}
+            </span>
+          </div>
+        </div>
+  
+        <div class="input-group">
+          <label class="form-label">{{"Номер рахунку в форматі IBAN" | transloco}}</label>
+          <input 
+          type="text" 
+          class="form-input" 
+          placeholder="UA123456789..." 
+          [(ngModel)]="projectData.Iban"
+          (ngModelChange)="ValidIban()"/>
+
+          <!-- <div class="error" *ngIf="iban?.invalid && iban?.touched">
+            <span *ngIf="iban?.errors?.['required']">{{"Обов'язкове поле" | transloco}}</span>
+            <span *ngIf="iban?.errors?.['invalidIban']">{{"Невірний формат IBAN" | transloco}}</span>
+          </div> -->
+          <div *ngIf="iban" class="error">
+            <span>
+              {{ iban | transloco }}
+            </span>
+          </div>
+        </div>
+  
+        <div class="input-group">
+          <label class="form-label">{{"Назва банку" | transloco}}</label>
+          <input 
+          type="text" 
+          class="form-input" 
+          placeholder='{{"Введіть назву банку" | transloco}}'
+          [(ngModel)]="projectData.BankName"
+          (ngModelChange)="ValidBankName()"/>
+
+          <!-- <div class="error" *ngIf="bankName?.invalid && bankName?.touched">
+            <span *ngIf="bankName?.errors?.['required']">{{"Обов'язкове поле" | transloco}}</span>
+            <span *ngIf="bankName?.errors?.['minLength']">{{"Назва банку повинна містити не менше 3 символів" | transloco}}</span>
+            <span *ngIf="bankName?.errors?.['invalidCharacter']">{{"Використовуються недозволені символи" | transloco}}</span>
+          </div> -->
+          <div *ngIf="bankName" class="error">
+            <span>
+              {{ bankName | transloco }}
+            </span>
+          </div>
+        </div>
+  
+        <div class="input-group">
+          <label class="form-label">{{"МФО" | transloco}}</label>
+          <input 
+          type="text" 
+          class="form-input" 
+          placeholder='{{"Введіть МФО" | transloco}}' 
+          [(ngModel)]="projectData.Mfo"
+          (ngModelChange)="ValidMfo()"/>
+
+          <!-- <div class="error" *ngIf="mfo?.invalid && mfo?.touched">
+            <span *ngIf="mfo?.errors?.['required']">{{"Обов'язкове поле" | transloco}}</span>
+            <span *ngIf="mfo?.errors?.['invalidMfo']">{{"МФО має складатися з 5 цифр" | transloco}}</span>
+          </div> -->
+          <div *ngIf="mfo" class="error">
+            <span>
+              {{ mfo | transloco }}
+            </span>
+          </div>
+        </div>
+  
+        <div class="input-group">
+          <label class="form-label">
+            {{"Підписант" | transloco}}:<br>
+            <label class="role">{{"(Роль, Прізвище Ім'я та По-батькові)" | transloco}}</label>
+          </label>
+          <input
+            type="text"
+            class="form-input"
+            placeholder='{{"Роль, Прізвище Ім&#39;я та По-батькові" | transloco}}'
+            [(ngModel)]="projectData.Signatory"
+            (ngModelChange)="ValidSignatory()"
+            />
+        
+          <!-- <div class="error" *ngIf="signatory?.invalid && signatory?.touched">
+            <span *ngIf="signatory?.errors?.['required']">{{"Обов'язкове поле" | transloco}}</span>
+            <span *ngIf="signatory?.errors?.['invalidFormat']">
+              {{"Формат: Роль з великої літери, кома, Прізвище Ім'я По-батькові" | transloco}}
+            </span>
+          </div> -->
+          <div *ngIf="signatory" class="error">
+            <span>
+              {{ signatory | transloco }}
+            </span>
+          </div>
+        </div>
+        
+  
+        <div class="input-group">
+          <label class="form-label">{{"Контактний телефон" | transloco}}</label>
+          <input 
+          type="text" 
+          class="form-input" 
+          placeholder='{{"Введіть телефон" | transloco}}' 
+          [(ngModel)]="projectData.Contactnumber"
+          (ngModelChange)="validPhone()"/>
+          
+          <!-- <div class="error" *ngIf="contactNumber?.invalid && contactNumber?.touched">
+            <span *ngIf="contactNumber?.errors?.['required']">{{"Обов'язкове поле" | transloco}}</span>
+            <span *ngIf="contactNumber?.errors?.['invalidPhoneNumber']">{{"Невірний номер телефону (потрібен формат міжнародного номера)" | transloco}}</span>
+          </div> -->
+          <div *ngIf="contactNumber" class="error">
+            <span>
+              {{ contactNumber | transloco }}
+            </span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label class="form-label">{{"Договір" | transloco}}</label>
+          <input 
+          type="email" 
+          class="form-input" 
+          placeholder='{{"Вкажіть e-mail, на який буде надіслано договір" | transloco}}'
+          [(ngModel)]="projectData.Contract"
+          (ngModelChange)="ValidContract()" />
+          
+          <!-- <div class="error" *ngIf="contract?.invalid && contract?.touched">
+            <span *ngIf="contract?.errors?.['required']">{{ 'Обов\'язкове поле' | transloco }}</span>
+            <span *ngIf="contract?.errors?.['email']">{{ 'Введіть правильний email' | transloco }}</span>
+          </div>
+        </div> -->
+        <div *ngIf="contract" class="error">
+          <span>
+            {{ contract | transloco }}
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+    
+  </div>
+
+  <br>
+  
+  <div class="form-group contract-section">
+
+    <div class="form-row">
+      <span class="form-description">
+        <strong>{{"Зверніть увагу!" | transloco}}</strong>  
+        {{"Розміщуючи Ваш проєкт на платформі Seed Flow, ви погоджуєтеся підписати угоду із ТОВ «Сід Флоу». Цією угодою регулюється звітність за використані кошти, зібрані на платформі Seed Flow. Автор успішного проєкту підписує угоду, де зобов’язується надати звіт за витрачені кошти з документами, що підтверджують витрати на реалізацію проєкту у визначені в угоді строки." | transloco}}
+      </span>
+  
+      <div class="fields">
+        <div class="checkbox-container">
+          <input type="checkbox" id="agreement" [(ngModel)]="agreement" (ngModelChange)="ValidAgreement()"/>
+          <label class="agreement" for="agreement">
+            {{"Я даю згоду на обробку моїх персональних даних" | transloco}}
+          </label>
+          <!-- <div class="error3" *ngIf="agreement?.invalid && agreement?.touched">
+            <span *ngIf="agreement?.errors?.['required']">{{ 'Необхідна згода' | transloco }}</span>
+          </div> -->
+          <div *ngIf="agreementMesege" class="error3">
+            <span>
+              {{ agreementMesege | transloco }}
+            </span>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+  </div>
+  
+  
+  <div class="form-buttons">
+    <button class="btn btn-secondary" (click)="saveGeneralData()">{{"ЗБЕРЕГТИ ЗМІНИ" | transloco}}</button>
+    <button class="btn btn-primary" (click)="nextStep()">{{"ДАЛІ" | transloco}}</button>
+  </div>
+  
+  <div *ngIf="isPopupOpen" class="popup-window2" (click)="closePopup()">
+    <div class="popup-content2" (click)="$event.stopPropagation()">
+      
+      <div class="popup-message2">
+        <img src="assets/images/WhitePig.png" class="popup-image2" alt="Success">
+        <p class="popup-text2">{{"Зміни у проєкті успішно збережено" | transloco}}</p>
+      </div>
+    </div>
+  </div>
+  </div>
+
+<app-footer></app-footer>

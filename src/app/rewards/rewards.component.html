@@ -1,0 +1,177 @@
+<app-header></app-header>
+
+  <hr>
+
+
+
+<div class="tabs-container">
+  <div class="tabs">
+    <button [routerLink]="'/general-page'">{{"ЗАГАЛЬНЕ" | transloco}}</button>
+    <button [routerLink]="'/detail-page'">{{"ДЕТАЛІ" | transloco}}</button>
+    <button [routerLink]="'/team-page'">{{"КОМАНДА" | transloco}}</button>
+    <button [routerLink]="'/rewards-page'">{{"ВИНАГОРОДИ" | transloco}}</button>
+    <button [routerLink]="'/requisites-page'">{{"РЕКВІЗИТИ" | transloco}}</button>
+    <button [routerLink]="'/uploads-page'">{{"ВИКЛАСТИ" | transloco}}</button>
+  </div>
+</div>
+
+<button class="fixed-button" (click)="scrollToTop()">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<div class="container">
+  <img 
+  *ngFor="let img of images; let i = index"
+  [src]="activeIndex === i ? img.active : img.gray"
+  alt="Image"
+  class="image"
+  [class.active]="activeIndex === i"
+  (click)="onImageClick(img.link)">
+</div>
+
+<div class="form-group">
+  <p class="rewards-title">
+    {{"Вкажіть, як Ви хочете віддячити людям, які підтримають Ваш проєкт (якщо це передбачено умовами проєкту)" | transloco}}
+  </p>
+
+  <div *ngFor="let reward of projectData; let i = index" class="reward-block">
+    <h3 class="reward-title">{{"Подяка" | transloco}} {{ i + 1 }}</h3>
+
+    <div class="reward-content">
+      <span class="reward-description">
+       {{"Опишіть винагороду, яку отримають ваші донори в якості подяки, коли проєкт здійсниться (якщо це передбачено умовами проєкту)" | transloco}}
+      </span>
+
+      <div class="fields">
+        <!-- <div class="right-side"> -->
+          <div class="input-row">
+            <div class="input-group same-width">
+              <label class="sum">{{"Сума" | transloco}}</label>
+              <input 
+              id="sum" 
+              type="number" 
+              min="1" 
+              [(ngModel)]="reward.Amount" 
+              class="form-input" 
+              #sumInput="ngModel" 
+              required
+              />
+              <span class="input-suffix">{{"грн" | transloco}}</span>
+            
+              <div class="error" *ngIf="sumInput.invalid && sumInput.touched">
+                <span *ngIf="sumInput.errors?.['min']">{{"Мінімальна сума - 1 грн." | transloco}}</span>
+                <span *ngIf="sumInput.errors?.['required']">{{"Це поле є обов'язковим!" | transloco}}</span>
+              </div>
+            </div>
+            
+
+
+            <div class="input-group same-width">
+              <label class="limit2">{{"Ліміт" | transloco}}</label>
+              <input id="limit" type="number" min="1" #limitInput="ngModel" required [(ngModel)]="reward.Limit" class="form-input" />
+              <span class="input-suffix2">{{"шт" | transloco}}</span>
+          
+              <div class="error2" *ngIf="limitInput.invalid && limitInput.touched">
+                <span *ngIf="limitInput.errors?.['required']">{{"Це поле обов'язкове!" | transloco}}</span>
+                <span *ngIf="limitInput.errors?.['min']">{{"Мінімальне значення - 1" | transloco}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="input-group same-width">
+            <label class="opis">{{"Опис" | transloco}}</label>
+            <textarea 
+              id="description" 
+              [(ngModel)]="reward.Description" 
+              class="form-input2" 
+              #opisInput="ngModel" 
+              rows="4" 
+              required
+              maxlength="150"
+              (input)="countCharacters()"
+            ></textarea>
+
+            <div class="char-counter">
+              {{ reward.Description?.length || 0 }}/150
+            </div>
+            
+            <div class="error3" *ngIf="opisInput.invalid && opisInput.touched">
+              <span *ngIf="opisInput.errors?.['required']">{{"Це поле обов'язкове!" | transloco}}</span>
+            </div>
+          </div>
+
+
+
+          <div class="input-group same-width">
+            <label class="srok">{{"Термін виконання" | transloco}}</label>
+            <div class="execution-time">
+              <div class="time-select">
+                <select>
+                  <option *ngFor="let month of months" [value]="month">{{ month  | transloco}}</option>
+                </select>
+                <select class="yearSelect">
+                  <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+          <div class="checkbox-row">
+            <label class="checkbox">
+              <input type="checkbox" [(ngModel)]="reward.Limit" /> 
+              {{"Безстроково" | transloco}}
+            </label>
+          </div>
+
+          <div class="file-upload">
+            <input 
+              type="file" 
+              id="reward-image-{{ i }}" 
+              class="file-input" 
+              (change)="uploadImage($event, i)" 
+              #photoInput="ngModel" 
+              required 
+              [(ngModel)]="reward.PhotoUrl"
+              [required]="!reward.PhotoUrl" 
+            />
+            <label for="reward-image-{{ i }}" class="file-label">
+              <a href="#" class="uploaded-file" (click)="uploadImage($event, i)"></a>
+              <span class="load">{{"Завантажити зображення" | transloco}} (jpeg, jpg, png)</span>
+            </label>
+            <div *ngIf="reward.PhotoUrl" class="image-preview">
+              <img [src]="reward.PhotoUrl" alt="Превью зображення" class="preview-img" />
+            </div>
+            <div class="error4" *ngIf="photoInput.invalid && photoInput.touched">
+              <span *ngIf="photoInput.errors?.['required']">{{"Фото є обов'язковим" | transloco}}</span>
+            </div>
+          </div>
+          
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+
+  <button class="add-reward-btn" (click)="addReward()">{{"+ додати подяку" | transloco}}</button>
+  <div class="form-buttons">
+    <button class="btn btn-secondary" (click)="saveGeneralData()">{{"ЗБЕРЕГТИ ЗМІНИ" | transloco}}</button>
+    <button class="btn btn-primary" (click)="submitProject()">{{"ДАЛІ" | transloco}}</button>
+  </div>
+
+  <div *ngIf="isPopupOpen" class="popup-window2" (click)="closePopup()">
+    <div class="popup-content2" (click)="$event.stopPropagation()">
+      
+      <div class="popup-message2">
+        <img src="assets/images/WhitePig.png" class="popup-image2" alt="Success">
+        <p class="popup-text2">{{"Зміни у проєкті успішно збережено" | transloco}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

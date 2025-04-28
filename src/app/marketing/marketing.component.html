@@ -1,0 +1,115 @@
+<app-header></app-header>
+
+  <hr>
+
+  <button class="fixed-button" (click)="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <div class="container">
+    <img 
+    *ngFor="let img of images; let i = index"
+    [src]="activeIndex === i ? img.active : img.gray"
+    alt="Image"
+    class="image"
+    [class.active]="activeIndex === i"
+    (click)="onImageClick(img.link)">
+  </div>
+
+
+  <div class="search-section">
+    <div class="breadcrumbs">
+      <a [routerLink] = "'/'" style="cursor: pointer; text-decoration: none; color: inherit;">
+      <span>{{"Головна" | transloco}}</span>  
+      </a>
+      &gt;
+      <a [routerLink] = "'/support-page'" style="cursor: pointer; text-decoration: none; color: inherit;">
+      <span>{{"Підтримка" | transloco}}</span>
+      </a>
+      &gt;
+      <a [routerLink] = "'/accompaniment-page'" style="cursor: pointer; text-decoration: none; color: inherit;">
+        <span>{{"Супровід проєкту" | transloco}}</span>
+      </a>
+      &gt;
+      <span>{{"Маркетинг" | transloco}}</span>
+    </div> 
+    <h2 class="title">{{"Маркетинг" | transloco}}</h2>
+    <p class="description">{{"Розширьте охоплення та створіть аудиторію за допомогою цих агентств, які пропонують послуги цифрового маркетингу тощо." | transloco}}</p>
+    <input class="field-input" type="text" placeholder='{{"Пошук ресурсів..." | transloco}}'
+    [(ngModel)]="searchText2" (keydown.enter)="onEnter()">
+  </div>
+
+
+   <div class="card-container">
+    <div class="card-grid">
+      <div class="card">
+        <img src="assets/images/marketing1.png" alt="Фото 1">
+        <h3 class="card-title">{{ "AB-запуск" | transloco }}</h3>
+        <p class="card-description">
+          {{ "Ми прагнемо допомогти вам масштабувати запуск продуктів, спільноти та продажі, зберігаючи при цьому ваше бачення бізнесу." | transloco }}
+        </p>
+        <button [routerLink]="'/marketing-form-page'" class="card-button">
+          {{ "Зв'язатися з експертом" | transloco }}
+        </button>
+      </div>
+  
+      <div class="card">
+        <img src="assets/images/marketing2.png" alt="Фото 2">
+        <h3 class="card-title">{{ "Агентство 2.0" | transloco }}</h3>
+        <p class="card-description">
+          {{ "Перша краудфандингова маркетингова агенція з понад 10-річним досвідом запуску гучних кампаній." | transloco }}
+        </p>
+        <button [routerLink]="'/marketing-form-page'" class="card-button">
+          {{ "Зв'язатися з експертом" | transloco }}
+        </button>
+      </div>
+  
+      <div class="card">
+        <img src="assets/images/marketing3.png" alt="Фото 3">
+        <h3 class="card-title">GadgetFlow</h3>
+        <p class="card-description">
+          {{ "Оригінальна платформа пошуку продуктів, яка охоплює понад 28 мільйонів людей на місяць. Послуги маркетингу, розпакування та огляду." | transloco }}
+        </p>
+        <button [routerLink]="'/marketing-form-page'" class="card-button">
+          {{ "Зв'язатися з експертом" | transloco }}
+        </button>
+      </div>
+  
+      <div class="card">
+        <img src="assets/images/marketing4.png" alt="Фото 4">
+        <h3 class="card-title">LaunchBoom</h3>
+        <p class="card-description">
+          {{ "Отримайте кошти менш ніж за 24 години, використовуючи перевірену стратегію, що лежить в основі найуспішніших кампаній" | transloco }}
+        </p>
+        <button [routerLink]="'/marketing-form-page'" class="card-button">
+          {{ "Зв'язатися з експертом" | transloco }}
+        </button>
+      </div>
+  
+      <div class="card">
+        <img src="assets/images/marketing5.png" alt="Фото 5">
+        <h3 class="card-title">LaunchPad</h3>
+        <p class="card-description">
+          {{ "Провідна агенція цифрового маркетингу з повним набором послуг із показником успішності краудфандингу в 92%." | transloco }}
+        </p>
+        <button [routerLink]="'/marketing-form-page'" class="card-button">
+          {{ "Зв'язатися з експертом" | transloco }}
+        </button>
+      </div>
+  
+      <div class="card">
+        <img src="assets/images/marketing6.png" alt="Фото 6">
+        <h3 class="card-title">Rainfactory</h3>
+        <p class="card-description">
+          {{ "Найкраще краудфандингове маркетингове агентство, яке надає повний спектр послуг." | transloco }}
+        </p>
+        <button [routerLink]="'/marketing-form-page'" class="card-button">
+          {{ "Зв'язатися з експертом" | transloco }}
+        </button>
+      </div>
+    </div>
+  </div>
+  
+<app-footer></app-footer>
+
+

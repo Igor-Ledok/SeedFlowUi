@@ -1,0 +1,233 @@
+.registration-form 
+{
+  display: flex;
+  margin: 50px auto;
+  width: 80%;
+  max-width: 900px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  height: 670px;
+  bottom: 20px;
+  position: relative;
+}
+
+.left-panel 
+{
+  background-image: url('/assets/images/bg-pattern.png');
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+}
+
+.left-panel img 
+{
+  width: 100%;
+  height: auto;
+}
+
+.right-panel 
+{
+  flex: 1;
+  background-color: #fff;
+  padding: 40px;
+}
+
+h2#yspix
+{
+  position: relative;
+  top:25%;
+  margin-bottom: 60px; 
+  margin-left: 115px; 
+  font-family: 'Montserrat'; 
+  width: 150px;
+  text-align: center;
+}
+
+.enterAccess
+{
+  position: relative;
+  margin-top: 40%;
+  margin-left: 50px; 
+  font-family: 'Montserrat'; 
+  font-weight: 500; 
+  width: 300px; 
+  font-size: 16px; 
+  text-align: center;
+}
+
+button#backToMainPage
+{
+  position: relative;
+  margin-left: 67px; 
+  width: 275px; 
+  font-family: 'Montserrat';
+}
+
+button#goToProfile
+{
+  position: relative; 
+  margin-left: 122px; 
+  width: 175px; 
+  font-family: 'Montserrat';
+}
+
+button 
+{
+  background-color: #2C7D59;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover 
+{
+  background-color: #246944;
+}
+
+h2 
+{
+  color: #2C7D59;
+  margin-bottom: 20px;
+}
+
+.centered-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    margin-top: -80px;
+  }
+  
+  .center-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+  }
+  
+  .main-message {
+    font-weight: 700;
+    font-size: 18px;
+    font-family: 'Montserrat';
+    margin-bottom: 16px;
+    width: 300px;
+  }
+  
+  .notice {
+    color: #247a60;
+    font-family: 'Montserrat';
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  
+  .sub-message {
+    font-family: 'Montserrat';
+    font-size: 17px;
+    color: #333;
+    font-weight: 500;
+    max-width: 420px;
+    margin-bottom: 30px;
+    line-height: 1.4;
+  }
+  
+  .go-home-button {
+    background-color: #2C7D59;
+    color: white;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Montserrat';
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 30px;
+  }
+  
+  .go-home-button:hover {
+    background-color: #246944;
+  }
+
+  @media(max-width: 560px)
+  {
+    .left-panel
+    {
+        display: none;
+    }
+  }
+
+  @media(max-width: 460px)
+  {
+    .centered-panel
+    {
+        margin-left: -20px;
+    }
+  }
+
+  @media(max-width: 420px)
+  {
+    .centered-panel
+    {
+        margin-left: -35px;
+    }
+  }
+
+  @media(max-width: 414px)
+  {
+    .centered-panel
+    {
+        margin-left: -25px;
+    }
+  }
+
+  @media(max-width: 400px)
+  {
+    .centered-panel
+    {
+        margin-left: -30px;
+    }
+  }
+
+  @media(max-width: 390px)
+  {
+    .sub-message 
+    {
+        font-size: 16px;
+    }
+
+    .main-message
+    {
+        width: 250px;
+    }
+  }
+
+  @media(max-width: 375px)
+  {
+    .centered-panel
+    {
+        margin-left: -20px;
+    }
+
+    .sub-message 
+    {
+        font-size: 15px;
+    }
+  }
+
+  @media(max-width: 344px)
+  {
+    .centered-panel
+    {
+        margin-left: -30px;
+    }
+  }
+  
+
+  

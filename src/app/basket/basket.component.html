@@ -1,0 +1,215 @@
+<app-header></app-header>
+
+  <hr>
+
+  <div class="breadcrumbs">
+    <span style="cursor: default;">{{"Магазин" | transloco}}</span>  
+    &gt;
+    <span style="cursor: default;">{{"Кошик" | transloco}}</span>
+  </div> 
+
+  <button class="fixed-button" (click)="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  
+  <div class="container2">
+    <img 
+    *ngFor="let img of images4; let i = index"
+    [src]="activeIndex === i ? img.active : img.gray"
+    alt="Image"
+    class="image"
+    [class.active]="activeIndex === i"
+    (click)="onImageClick(img.link)">
+  </div>
+
+  <div class="right-section">
+    <div class="image-container">
+      <img src="assets/images/ShopGreenLeftUp.png" alt="Description of Image" class="top-right-image" />
+      <div class="overlay-text3">
+        <span class="main-text">{{"Ваш рахунок" | transloco}}</span>
+        <span class="highlight-seeds">Seeds</span>
+        <div class="number-container">
+          <img src="assets/images/yellowCoin.png" alt="Small Icon" class="small-icon" />
+          <span class="number">{{userInfo.bonusCoin}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="basket-page">
+    <h1 class="basket-title">{{"Кошик" | transloco}}</h1>
+    <div class="container">
+      <div class="items">
+        <div class="item-container" *ngFor="let item of cartItems; let i=index">
+          <div class="block-a">
+            <div class="photo-block">
+              <img [src]="item.product.imageBase64" alt="Фото товару" />
+            </div>
+            <div class="product-name">
+              <h2>{{ item.product.name | transloco }}, {{ item.product.shortDescription | transloco}}</h2>
+              <div class="product-price">
+                <p>{{ item.product.price * item.quantity }} {{"грн" | transloco}}</p>
+              </div>
+            </div>
+
+            <div class="quantity-container">
+              <button (click)="updateQuantity(item.product.id, item.quantity - 1)">-</button>
+              <span>{{ item.quantity }}</span>
+              <button (click)="updateQuantity(item.product.id, item.quantity + 1)">+</button>
+            </div>
+
+            <div class="trash-container">
+              <img src="assets/images/Trash.png" alt="Удалить" class="trash-icon" (click)="removeItem(item.product.id)">
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="block-b">
+        <div class="total-container">
+          <span class="total-text">{{"Всього" | transloco}}</span>
+          <span class="total-amount">{{totalSum}} {{"грн" | transloco}}</span>
+        </div>
+
+        <div class="line"></div>
+
+        <div class="seed-money-text">
+          {{"Використати Seed Money" | transloco}} 
+        </div>
+
+        <div class="row2">
+          <span>{{"Доступно" | transloco}}:</span>
+          <span  class="amount-box">{{userInfo.bonusCoin}}</span>
+        
+          <div class="checkbox-container">
+            <input type="checkbox" id="useBonus" [(ngModel)]="useBonus" (change)="updatePayment()" />
+            <label for="useBonus" class="checkbox-label">
+              {{ "Використати мої бонуси" | transloco }}
+            </label>
+          </div>
+        </div>
+
+        <div class="line"></div>
+
+        <div class="payment-container">
+          <span class="payment-text">{{"До сплати" | transloco}}</span>
+          <span class="payment-amount">{{ finalAmount }} {{"грн" | transloco}}</span>
+        </div>
+
+        <div class="line"></div>
+
+        <div class="buttons-container">
+          <button class="go-to-cart-button" (click)="goToCart()">{{"ПЕРЕЙТИ ДО ОФОРМЛЕННЯ" | transloco}}</button>
+          <button class="continue-shopping-button" (click)="continueShopping()">{{"ПРОДОВЖИТИ ПОКУПКИ" | transloco}}</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="basket-wrapper">
+  <div class="basket-container">
+    <h1 class="basket-title">{{"Кошик" | transloco}}</h1>
+  
+    <div class="container" *ngFor="let item of cartItems">
+      <input type="checkbox" class="checkbox" checked>
+      <div class="photo">
+        <img [src]="item.product.imageBase64" alt="Фото товара" class="photo" />
+      </div>
+      <div class="details">
+        <div class="title-container">
+          <h2>{{ item.product.name }}, {{ item.product.shortDescription }}</h2>
+          <span class="price">{{ item.product.price * item.quantity }} {{"грн" | transloco}}</span>
+        </div>
+        
+        <br><br><br><br><br><br><br>
+        <div class="quantity-container">
+          <button (click)="updateQuantity(item.product.id, item.quantity - 1)">-</button>
+          <span>{{ item.quantity }}</span>
+          <button (click)="updateQuantity(item.product.id, item.quantity + 1)">+</button>
+        </div>
+    
+        <img src="assets/images/Trash.png" alt="Удалить" class="trash-icon" (click)="removeItem(item.product.id)">
+      </div>
+    </div>
+
+    
+  
+    <div class="container2">
+        <div class="header2">
+            <span style="position: relative; margin-left: 30%; font-size: 18px;">{{"Всього" | transloco}}</span>
+            <span style="font-size: 32px; color: #247a60;">{{totalAmount}} {{"грн" | transloco}}</span>
+        </div>
+        <div class="divider"></div>
+        <div class="text2">{{"Використати Seed Money" | transloco}}</div>
+        <div class="row2">
+            <span>{{"Доступно" | transloco}}:</span>
+            <span  class="amount-box">{{userInfo.bonusCoin}}</span>
+        </div>
+        <div class="right2">
+          <div class="row2">
+            <span>{{ "Використати бонуси" | transloco }}:</span>
+          </div>
+          <mat-checkbox [(ngModel)]="useBonus" (change)="updatePayment()">
+            {{ "Використати мої бонуси " | transloco }}
+          </mat-checkbox>
+        </div>
+        
+        <br>
+    
+        <div class="divider"></div>
+        
+        <div class="header2">
+            <span style="position: relative; margin-left: 30%; font-size: 18px;">{{"До сплати" | transloco}}</span>
+            <span style="font-size: 32px; color: #247a60;">{{ finalAmount }} {{"грн" | transloco}}</span>
+        </div>
+    
+        <div class="divider"></div>
+    
+        <button class="button3" [routerLink]="'/product-registration-page'">{{"ПЕРЕЙТИ ДО ОФОРМЛЕННЯ" | transloco}}</button>
+    
+        <button class="button4" [routerLink]="'/shop-main-page-page'">{{"ПРОДОВЖИТИ ПОКУПКИ" | transloco}}</button>
+    
+    </div>
+
+  </div>
+  
+
+
+
+</div> -->
+
+
+
+
+<app-footer></app-footer>

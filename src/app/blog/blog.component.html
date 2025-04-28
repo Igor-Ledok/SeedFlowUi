@@ -1,0 +1,153 @@
+<app-header></app-header>
+
+  <hr>
+
+  <div class="container">
+    <img 
+    *ngFor="let img of images; let i = index"
+    [src]="activeIndex === i ? img.active : img.gray"
+    alt="Image"
+    class="image"
+    [class.active]="activeIndex === i"
+    (click)="onImageClick(img.link)">
+  </div>
+
+  <button class="fixed-button" (click)="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <div class="breadcrumbs">
+    <a [routerLink] = "'/'" style="cursor: pointer; text-decoration: none; color: inherit;">
+    <span>{{"Головна" | transloco}}</span>  
+    </a>
+    &gt;
+    <a [routerLink] = "'/support-page'" style="cursor: pointer; text-decoration: none; color: inherit;">
+    <span>{{"Підтримка" | transloco}}</span>
+    </a>
+    &gt;
+    <span>{{"Статті/Блог" | transloco}}</span>
+  </div> 
+
+
+  <div class="custom-container">
+    <p class="category">{{"АКТУАЛЬНЕ" | transloco}}</p>
+    <h2 class="title">{{"Хочемо підкорювати гостей столиці комфортом новаторства" | transloco}}</h2>
+    <p class="meta">By <span style="color: #247a60;">John Doe</span> | Feb 23, 2025</p>
+    <p class="description">
+        {{"Незмінно зміцнює позиції широкий вибір відкриттів: розробка програмного забезпечення, мобільний голосовий зв'язок і телекомунікації для домашніх улюбленців і стильних особистостей." | transloco}}
+    </p>
+    <button [routerLink]="'/state2-page'" class="read-more">{{"Детальніше" | transloco}}</button>
+</div>
+
+<div class="photo">
+<img src="assets/images/blog1.png">
+</div>
+
+<div class="articles-section">
+  <p class="all-articles">{{ "Усі статті" | transloco }}</p>
+  <div class="yellow-line"></div>
+</div>
+
+
+
+
+
+<div class="articles-container">
+    <div class="article-row">
+      <img style="width: 490px; height: 320px;" src="assets/images/blog2.png" alt="Фото 1" class="article-image">
+      <div class="article-content">
+        <p class="article-category">{{"СТАРТАПИ" | transloco}}</p>
+        <h3 class="article-title">{{"Ми відкриваємо перед вами нові перспективи" | transloco}}</h3>
+        <p class="article-description">{{"Одна з ведучих міжнародних компаній здійснює діяльність за наступними напрямками: свіжі овочі та фрукти, підприємницька діяльність та кімнатні й садові рослини." | transloco}}</p>
+        <a [routerLink]="'/state-startup-page'" href="#" class="read-more2">{{"Читати далі" | transloco}}</a>
+      </div>
+    </div>
+  
+    <div class="article-row">
+      <img style="width: 490px; height: 320px;" src="assets/images/blog3.png" alt="Фото 2" class="article-image">
+      <div class="article-content">
+        <p class="article-category">{{"БІЗНЕС" | transloco}}</p>
+        <h3 class="article-title">{{"Наша мета проста: це забезпечення відкриттів та інновацій." | transloco}}</h3>
+        <p class="article-description">{{"Систематичне поліпшення, розширення технічної бази, відкритість злагодженої команди та до найменших дрібниць прораховані технології забезпечили компанії успіх і провідну роль на світовому ринку." | transloco}}</p>
+        <a [routerLink]="'/state-startup-page'" href="#" class="read-more2">{{"Читати далі" | transloco}}</a>
+      </div>
+    </div>
+  
+    <div class="article-row">
+      <img style="width: 490px; height: 320px;" src="assets/images/blog4.png" alt="Фото 3" class="article-image">
+      <div class="article-content">
+        <p class="article-category">{{"СТАРТАПИ" | transloco}}</p>
+        <h3 class="article-title">{{"Кампанія відкриває перед світом нові універсальні можливості" | transloco}}</h3>
+        <p class="article-description">{{"Завдяки технологічним та довершеним продуктам та послугам, кваліфікованим співробітникам і відповідальному ставленню до новаторства та глобального громадянства, а також співпраці з замовниками та акціонерами, компанія відкриває перед світом нові універсальні можливості." | transloco}} </p>
+        <a [routerLink]="'/state-startup-page'" href="#" class="read-more2">{{"Читати далі" | transloco}}</a>
+      </div>
+    </div>
+  
+    <div class="article-row">
+      <img style="width: 490px; height: 320px;" src="assets/images/blog5.png" alt="Фото 4" class="article-image">
+      <div class="article-content">
+        <p class="article-category">{{"ТЕХНОЛОГІЇ" | transloco}}</p>
+        <h3 class="article-title">{{"Надання інновацій, зберігання даних та новаторства" | transloco}}</h3>
+        <p class="article-description">{{"Тривале вдосконалення, підтримка топ-менеджерів, створення оптимальних торгових марок та синергетичне поєднання забезпечили підприємству успіх і провідну роль на ринку України." | transloco}}</p>
+        <a [routerLink]="'/state-startup-page'" href="#" class="read-more2">{{"Читати далі" | transloco}}</a>
+      </div>
+    </div>
+  
+    <div class="article-row">
+      <img style="width: 490px; height: 320px;" src="assets/images/blog6.png" alt="Фото 5" class="article-image">
+      <div class="article-content">
+        <p class="article-category">{{"ЕКОНОМІКА" | transloco}}</p>
+        <h3 class="article-title">{{"Широкий вибір глобального громадянства" | transloco}}</h3>
+        <p class="article-description">{{"Одна з ведучих міжнародних організацій надає широкий спектр послуг, а саме закупівлю-продаж, виготовлення ключів та пасажирські перевезення." | transloco}}</p>
+        <a [routerLink]="'/state-startup-page'" href="#" class="read-more2">{{"Читати далі" | transloco}}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-gallery">
+    <div class="image-item">
+      <h3 class="image-title" [routerLink]="'/accompaniment-page'">{{"⇦ Prev" | transloco}}</h3>
+    </div>
+    <div class="image-item">
+      <h3 class="image-title2" [routerLink]="'/seminars-vebinars-page'">{{"Next ⇨" | transloco}}</h3>
+    </div>
+  </div>
+  
+
+    <div class="container2">
+    <div class="articles-section">
+        <p class="all-articles2">{{ "Усі категорії" | transloco }}</p>
+    </div>
+
+    <div class="square">
+      <img class="icon" src="assets/images/Business.png" alt="Бізнес">
+        <h3 class="title2">{{ "Бізнес" | transloco }}</h3>
+        <p class="description2">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+    </div>
+    <div class="square">
+      <img class="icon" src="assets/images/Startap.png" alt="Бізнес">
+        <h3 class="title2">{{ "Стартапи" | transloco }}</h3>
+        <p class="description2">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+    </div>
+    <div class="square">
+      <img class="icon" src="assets/images/Economika.png" alt="Бізнес">
+        <h3 class="title2">{{ "Економіка" | transloco }}</h3>
+        <p class="description2">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+    </div>
+    <div class="square">
+      <img class="icon" src="assets/images/Technology.png" alt="Бізнес">
+        <h3 class="title2">{{ "Технології" | transloco }}</h3>
+        <p class="description2">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+    </div>
+</div>
+
+
+
+ <div class="text-container">
+    <h1 class="title-text">{{"Приєднуйтесь до нашої спільноти" | transloco}}</h1>
+    <p class="sub-text">{{"Ставайте учасником нашої спільноти" | transloco}}</p>
+    <button class="action-btn">{{"Приєднатися" | transloco}}</button>
+</div>
+
+<app-footer></app-footer>
+

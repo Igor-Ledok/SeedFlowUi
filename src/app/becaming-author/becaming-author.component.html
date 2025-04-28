@@ -1,0 +1,100 @@
+<app-header></app-header>
+
+  <hr>
+
+<div class="DM">
+
+  <!-- Форма отправки сообщения -->
+  <div *ngIf="!messageSent" class="registration-form">
+    <div class="left-panel"></div>
+    <div class="right-panel">
+      <h1 class="becomeAuthor">{{"СТАНОВЛЕННЯ АВТОРОМ" | transloco}}</h1>
+      <br>
+      <p class="sendZayavka">{{"Ви подаєте заявку на становлення автором. Будь ласка, вкажіть ваше справжнє ім'я та прізвище. Натискаючи кнопку «далі» ви погоджуєтесь з правилами платформи" | transloco}}</p>
+      
+      <br>
+      <p class="yourPIB">{{"Ваше ПІБ" | transloco}}</p>
+  
+      <div class="input-group">
+        <input 
+          type="text"
+          class="search-input"
+          [(ngModel)]="name"
+          name="fullName"
+          #fullNameInput="ngModel"
+          required
+          pattern="^[А-Яа-яЁёІіЇїЄєҐґA-Za-z'’\-]+ [А-Яа-яЁёІіЇїЄєҐґA-Za-z'’\-]+ [А-Яа-яЁёІіЇїЄєҐґA-Za-z'’\-]+$"
+          title="Введіть повне ім'я у форматі: Прізвище Ім'я По батькові"
+          placeholder='{{"Введіть ваше ПІБ" | transloco}}'
+        />
+  
+        <div class="error2" *ngIf="fullNameInput.invalid && fullNameInput.touched">
+          <span *ngIf="fullNameInput.errors?.['required']">{{"Введіть ПІБ" | transloco}}</span>
+          <span *ngIf="fullNameInput.errors?.['pattern']">{{"Формат: Прізвище Ім'я По батькові" | transloco}}</span>
+        </div>
+      </div>
+  
+      <p class="password2">{{"Пароль" | transloco}}</p>
+      <div class="password-wrapper">
+        <input 
+        [type]="hide ? 'password' : 'text'"
+        class="search-input with-eye"
+        [(ngModel)]="password"
+        name="password"
+        #passwordInput="ngModel"
+        required
+        (ngModelChange)="clearErrorMessage()"
+        placeholder='{{"Введіть пароль" | transloco}}'
+      />
+
+      <i 
+      class="material-icons eye-icon" 
+      (click)="hide = !hide"
+      title="Показати/Приховати пароль"
+    >
+      {{ hide ? 'visibility' : 'visibility_off' }}
+    </i>
+  </div>
+
+      <a class="helpBtn">{{"Виникли проблеми?" | transloco}}</a>
+  
+      <div class="error4" *ngIf="passwordInput.invalid && passwordInput.touched">
+        <span *ngIf="passwordInput.errors?.['required']">{{"Введіть пароль" | transloco}}</span>
+      </div>        
+  
+      <div class="error3" *ngIf="errorMessage">
+        {{ errorMessage | transloco }}
+      </div>
+  
+      <!-- Убираем [disabled]="ValidateInfo()" для кнопки -->
+      <button 
+        class="send-project-btn3"
+        (click)="sendMessage()">
+        {{"Далі" | transloco}}
+      </button>
+    </div>
+  </div>
+  
+
+    
+</div>  
+
+<!-- Блок с подтверждением отправки сообщения -->
+<div *ngIf="messageSent" class="registration-form">
+    <div class="left-panel"></div>
+    <div class="right-panel">
+        <h1 class="success2">{{"Вітаємо!" | transloco}}</h1>
+        <br>
+        <p class="zayavka">{{"Ваша заявка успішно підтверджена" | transloco}}.</p>
+        
+        <br><br><br>
+
+        <button [routerLink]="'/'" class="send-project-btn">{{"Повернутися на головну сторінку" | transloco}}</button>
+        <br>
+        <button [routerLink]="'/profile-page'" class="send-project-btn2">{{"Перейти у профіль" | transloco}}</button>
+    </div>
+</div>
+
+
+
+

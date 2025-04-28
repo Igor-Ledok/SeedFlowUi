@@ -1,0 +1,231 @@
+<app-header></app-header>
+
+  <hr>
+
+  <button class="fixed-button" (click)="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  
+  <div class="container">
+    <img 
+    *ngFor="let img of images; let i = index"
+    [src]="activeIndex === i ? img.active : img.gray"
+    alt="Image"
+    class="image"
+    [class.active]="activeIndex === i"
+    (click)="onImageClick(img.link)">
+  </div>
+
+  <div class="wrapper">
+    <div class="main-container">
+      <div class="left-block">
+        <img *ngIf="returnProjectData.project" [src]="returnProjectData.project?.mainPhotoUrl" class="main-photo" />
+        <img [src]="returnProjectData.project?.selectedCategoryPhoto || 'assets/images/LeftUpAngle.png'" class="top-left-photo" />
+      </div>
+      
+      <div class="right-block">
+        <h2 class="title">{{returnProjectData.project?.title | transloco}}</h2>
+
+        <div class="progress-section">
+          <div class="progress-labels">
+            <span class="start-amount">{{returnProjectData.project?.collectedAmount}} {{"грн" | transloco}}</span>
+            <span class="end-amount">{{returnProjectData.project?.collectionAmount}} {{"грн" | transloco}}</span>
+          </div>
+          <div class="progress-bar3">
+            <div class="progress-fill" [style.width]="MATHPercentageOfMoney(returnProjectData.project?.collectedAmount, returnProjectData.project?.collectionAmount)"></div>
+            
+          
+          </div>
+          <div class="images-with-numbers-below-progress">
+            <div class="image-item">
+              <img src="assets/images/people.png" alt="Image 1" class="small-image" />
+              <p class="number">{{returnProjectData.teamMembers?.length}}</p>
+            </div>
+            <div class="image-item">
+              <img src="assets/images/comments.png" alt="Image 2" class="small-image" />
+              <p class="number">{{returnProjectData.project?.collectionDuration}}</p>
+            </div>
+            <div class="image-item">
+              <img src="assets/images/money.png" alt="Image 3" class="small-image" />
+              <p class="number">{{PercentageOfMoney(returnProjectData.project?.collectedAmount, returnProjectData.project?.collectionAmount)}}%</p>
+            </div>
+          </div>
+        </div>
+
+        
+
+        <p class="collecting-text">{{"Збирає" | transloco}}:</p>
+      
+        <div class="participants">
+          <div class="participant" *ngFor="let member of returnProjectData.teamMembers">
+            <img [src]="member?.urlPhoto" alt="Participant 1" class="participant-photo" />
+            <p class="participant-name">{{member?.name | transloco}}</p>
+          </div>
+        </div>
+
+        <div class="support-button-wrapper">
+          <button  [routerLink]="['/donation-page']" [queryParams]="{ projectId: returnProjectData.project?.id }" class="support-button">{{ "ПІДТРИМАТИ" | transloco }}</button>
+          <button *ngIf="!userIsAuthor" (click)="goToChat()" class="support-button2">{{ "НАПИСАТИ АВТОРУ" | transloco }}</button>
+        </div>
+        
+      </div>
+      </div>
+    </div>
+
+
+    <div class="projects-wrapper">
+      <div class="project-line">
+        <span class="project-title">
+          {{ "ПРО ПРОЄКТ" | transloco }}
+        </span>
+        <div class="yellow-line2"></div>
+      </div>
+    </div>
+  
+
+    <div class="project-container">
+   <div class="project-section">
+      
+    <div class="project-description">
+        <p style="font-weight: 600;">
+          {{ returnProjectData.project?.shortDescription ? (returnProjectData.project?.shortDescription | transloco) : ('ㅤ' | transloco) }}
+        </p>
+
+        <div *ngFor="let item of returnProjectData.descriptions">
+          <h3>{{ item?.titleDetailedDescription }}</h3>
+          <p>{{ item?.detailedDescription }}</p>
+        </div>
+      </div>
+    
+
+      <div class="project-images">
+        <ng-container *ngIf="returnProjectData.projectPhoto?.length > 0; else defaultPhoto">
+          <div class="project-image-block" *ngFor="let photo of returnProjectData.projectPhoto">
+            <img [src]="photo" class="project-image" />
+          </div>
+        </ng-container>
+      
+        <ng-template #defaultPhoto>
+          <div class="project-image-block">
+            <img style="border: 1px solid rgb(204, 204, 204);" src="assets/images/NoPhoto.jpg" class="project-image" />
+          </div>
+        </ng-template>
+      </div>
+      
+
+      <div class="uploads-container">
+        <div class="left-section">
+          <div class="budget-plan">
+            <h3>{{"План бюджету проєкта" | transloco}}</h3>
+            <div class="file-info">
+              <textarea style="cursor: default; background: #F9F9F9;" readonly class="file-name">{{returnProjectData.project?.budgetPlan}}</textarea>
+            </div>
+          </div>
+    
+        
+          <div class="contacts">
+            <h3>{{"Контакти" | transloco}}</h3>
+            <div class="contact-item">
+              <span>{{returnProjectData.project?.phone}}</span>
+            </div>
+            <div class="contact-item">
+              <span>{{returnProjectData.project?.fullAddress | transloco}}</span>
+            </div>
+          </div>
+          <div class="email-section">
+            <h3>{{"Електронна пошта" | transloco}}</h3>
+            <div class="contact-item">
+              <span>{{returnProjectData.project?.email}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    
+ 
+
+
+
+    <div class="rewards-container">
+      <h3 class="section-title">{{"Подяка" | transloco}}</h3>
+    
+      <div class="rewards-list">
+        <div class="reward-card" *ngFor="let reward of returnProjectData.rewards">
+         
+          <div class="reward-image">
+            <img [src]="reward?.photoUrl || 'assets/images/NoPhoto.jpg'" alt="Reward Image">
+          </div>
+    
+         
+          <div class="reward-info">
+            <h4 class="reward-price">{{"Від" | transloco}} {{ reward?.amount }} {{"грн" | transloco}}</h4>
+    
+            <div class="reward-details">
+              <div class="detail">
+                <span class="label">{{"Ліміт" | transloco}}</span>
+                <span class="value">{{ reward?.limit }}</span>
+              </div>
+              <div class="detail">
+                <span class="label">{{"Інвесторів" | transloco}}</span>
+                <span class="value">0</span>
+              </div>
+            </div>
+    
+            <p class="reward-description">{{ reward?.description | transloco }}</p>
+    
+          </div>
+        </div>
+      </div>
+      </div> 
+   </div>
+    </div>
+
+     <div class="projects2-wrapper">
+        <div class="projects2-line">
+          <div class="line-highlight2"></div>
+          <span class="projects2-label">{{"КОМЕНТАРІ" | transloco}}</span>
+        </div>
+      </div>
+
+    <div class="comments-wrapper">
+        <div class="comments-list">
+          <div class="comment-card" *ngFor="let comment of returnComents; let i = index">
+            <div class="comment-header">
+              <div class="comment-image">
+                <img [src]="comment.senderPhotoBase64 || 'assets/images/userWithoutPhoto.png'"  alt="User Image" class="profile-image" />
+              </div>
+              <div class="comment-info">
+                <div class="comment-name">{{ comment.senderName | transloco }}</div>
+              </div>
+              <div class="comment-date">{{ comment.createdAt | transloco }}</div> 
+            </div>
+            <div class="comment-text">{{ comment.message | transloco }}</div>
+      
+            <div class="comment-reply-answer" *ngIf="comment.reply" >
+              <div class="reply-header">
+                <span class="reply-author">{{this.returnProjectData.project.aurhorName | transloco}}</span>
+                <span class="reply-date">{{ comment.reply.createdAt| transloco }}</span>
+              </div>
+              <div class="reply-text">{{ comment.reply.message| transloco }}</div>
+            </div>
+
+            <div class="comment-reply" *ngIf="userIsAuthor" (click)="onReplyClick(i)">{{"Відповісти" | transloco}}</div>
+      
+            <div class="reply-box" *ngIf="selectedReplyId === i" >
+              <textarea [(ngModel)]="replyMessages" class="reply-input" placeholder='{{"Напишіть відповідь..." | transloco}}'></textarea>
+              <button (click)="sendReply(comment.id)">{{"Надіслати" | transloco}}</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="add-comment">
+          <textarea [(ngModel)]="newCommentMessage" class="comment-input" placeholder='{{ "Напишіть коментар..." | transloco }}'></textarea>
+          <button class="send-button" (click)="sendComment()">
+            {{ "Надіслати" | transloco }}
+          </button>
+        </div>
+      </div>
+
+  
+<app-footer></app-footer>
+  

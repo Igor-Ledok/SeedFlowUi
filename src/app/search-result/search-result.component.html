@@ -1,0 +1,34 @@
+<app-header></app-header>
+
+  <hr>
+
+
+  <div class="search-results-container">
+    <div class="breadcrumbs">
+      <a [routerLink] = "'/'" style="cursor: pointer; text-decoration: none; color: inherit;">
+      <span>{{"Головна" | transloco}}</span>  
+      </a>
+      &gt;
+      <a [routerLink] = "'/support-page'" style="cursor: pointer; text-decoration: none; color: inherit;">
+      <span>{{"Підтримка" | transloco}}</span>
+      </a>
+      &gt;
+      <span>{{"Результати пошуку" | transloco}}</span>
+    </div> 
+    <h2 class="title">{{"Результати пошуку" | transloco}}</h2>
+    <input type="text" placeholder="{{'Пошук...' | transloco}}" class="input-field"
+    [(ngModel)]="searchText2" (keydown.enter)="onEnter()">
+    <p class="description">{{"Немає результатів для вашого запиту" | transloco}}</p>
+    <p class="description2">{{"Спробуйте уточнити свій пошук або перегляньте довідковий центр" | transloco}}</p>
+    <p class="description3">{{"Якщо ви намагаєтесь знайти певну кампанію, знайдіть її на Seed Flow" | transloco}}</p>
+  
+    <div class="centered-text">
+        {{"Все ще не можете знайти те, що вам потрібно?" | transloco}}
+    </div>
+    <button class="custom-button" [routerLink]="'/send-request-page'">{{"Зверніться до служби підтримки" | transloco}}</button>
+
+</div>
+
+<app-footer></app-footer>
+
+

@@ -1,0 +1,278 @@
+<app-header></app-header>
+
+<hr>
+
+<div class="breadcrumbs">
+  <span style="cursor: default;">{{"Магазин" | transloco}}</span>  
+  &gt;
+  <span style="cursor: default;">{{"Сторінка товару" | transloco}}</span>
+</div> 
+
+<button class="fixed-button" (click)="scrollToTop()">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<div class="container2">
+  <img 
+  *ngFor="let img of images4; let i = index"
+  [src]="activeIndex === i ? img.active : img.gray"
+  alt="Image"
+  class="image"
+  [class.active]="activeIndex === i"
+  (click)="onImageClick(img.link)">
+</div>
+
+<div class="right-section">
+  <div class="image-container">
+    <img src="assets/images/ShopGreenLeftUp.png" alt="Description of Image" class="top-right-image" />
+    <div class="overlay-text3">
+      <span class="main-text">{{"Ваш рахунок" | transloco}}</span>
+      <span class="highlight-seeds">Seeds</span>
+      <div class="number-container">
+        <img src="assets/images/yellowCoin.png" alt="Small Icon" class="small-icon" />
+        <span class="number">{{userInfo.bonusCoin}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper">
+  <div class="container">
+    <div class="image-section">
+      <img [src]="product.imageBase64" alt="Фото">
+    </div>
+    <div class="text-section">
+      <h2>{{product.name | transloco}}</h2>
+      <p>{{product.shortDescription | transloco}}</p>
+
+      <div class="dim-container">
+      <div class="dim-component">
+        <img src="assets/images/YellowLeftUpAngle.png" alt="Дім">
+        <span>{{ product.categoryName | transloco }}</span>
+      </div>
+
+      <img 
+      src="{{ product?.isFavourite ? 'assets/images/likeRed.png' : 'assets/images/like.png' }}" 
+      (click)="toggleLike()" 
+      alt="Heart" 
+      class="heart-icon" 
+    />
+  </div>
+
+  <div class="quantity-container">
+    <button (click)="decreaseQuantity()">-</button>
+    <p>{{ quantity }}</p>
+    <button (click)="increaseQuantity()">+</button>
+  </div>
+
+  <div class="buy-button-container">
+    <button
+    [routerLink]="'/basket-page'"
+    [ngClass]="{'purchased': isPurchased}" 
+    (click)="addToCart(product.id)">
+  {{ isPurchased ? ('В КОШИКУ' | transloco) : ('ПРИДБАТИ' | transloco) }}</button>
+  </div>
+
+    <div class="price">
+      <span>{{product.price}} {{"грн" | transloco}}</span>
+    </div>
+
+    <div class="product-articul">
+      <span>{{product.quantity}}{{" Шт." | transloco}}</span>
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+<!-- <div class="modal-overlay" *ngIf="showModal" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+      <h2 class="TovarAdd">{{"Товар успішно додано в кошик" | transloco}}</h2>
+
+      <img src="assets/images/Kryg.svg" alt="Product Image" class="modal-image">
+
+      <br>
+
+      <button class="go-to-cart-button" [routerLink]="'/basket-page'" (click)="goToCart()">{{"ПЕРЕЙТИ У КОШИК" | transloco}}</button>
+
+      <button class="continue-shopping-button" [routerLink]="'/shop-main-page-page'" (click)="continueShopping()">{{"ПРОДОВЖИТИ ПОКУПКИ" | transloco}}</button>
+  </div>
+</div> -->
+
+
+
+<div class="product-description-container">
+  <div class="product-description-header">
+    <h3>{{"ПРО ТОВАР" | transloco}}</h3>
+  </div>
+  <div class="product-description-body">
+    <div class="product-description-title">
+      <h3>{{"Опис" | transloco}}</h3>
+    </div>
+    <div class="product-description-text">
+      <p>{{product.fullDescription | transloco}}</p>
+    </div>
+  </div>
+
+  <div class="product-description-body">
+    <div class="product-description-title">
+      <h3>{{"Доставка" | transloco}}</h3>
+    </div>
+    <div class="product-description-text">
+      <p>{{product.delivery| transloco}}</p>
+    </div>
+  </div>
+
+  <div class="product-description-body">
+    <div class="product-description-title">
+      <h3>Website</h3>
+    </div>
+    <div class="product-description-text">
+      <p>{{product.website}}</p>
+    </div>
+  </div>
+
+  <div class="product-description-body">
+    <div class="product-description-title">
+      <h3>{{"Місцезнаходження" | transloco}}</h3>
+    </div>
+    <div class="product-description-text">
+      <p>{{product.location | transloco}}</p>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="custom-container">
+
+    <div class="right-section">
+        <div class="image-container">
+          <img src="assets/images/ShopGreenLeftUp.png" alt="Description of Image" class="top-right-image" />
+          <div class="overlay-text3">
+            <span class="main-text">Ваш рахунок</span>
+            <span class="highlight-seeds">Seeds</span>
+            <div class="number-container">
+              <img src="assets/images/yellowCoin.png" alt="Small Icon" class="small-icon" />
+              <span class="number">{{userInfo.bonusCoin}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div class="custom-left">
+      <img [src]="product.imageBase64" alt="Main Photo" class="main-photo" />
+    </div>
+  
+    <div class="custom-right">
+
+        <div class="top-section">
+            <div class="category-image">
+              <img src="assets/images/YellowLeftUpAngle.png" alt="Category" />
+              <span class="category-text">{{product.categoryName| transloco}}</span>
+            </div>
+            <img 
+              src="{{ product?.isFavourite ? 'assets/images/likeRed.png' : 'assets/images/like.png' }}" 
+              (click)="toggleLike()" 
+              alt="Heart" 
+              class="heart-icon" 
+            />
+          </div>
+      
+          <h2 class="product-title">{{product.name| transloco}}</h2>
+          <p class="product-size">{{product.shortDescription| transloco}}</p>
+          
+          <div class="product-price-container">
+          <span class="product-price">{{product.price}} {{"грн" | transloco}}</span>
+          <div class="product-articul">
+            <span>{{product.delivery}}{{" Шт." | transloco}}</span> 
+          </div>
+    </div>
+
+    <br><br><br><br><br>
+    <div class="quantity-container">
+        <button (click)="decreaseQuantity()">-</button>
+        <span>{{ quantity }}</span>
+        <button (click)="increaseQuantity()">+</button>
+      </div>
+
+<div class="buy-container">
+    <button class="buy-button" 
+            [ngClass]="{'purchased': isPurchased}" 
+            (click)="addToCart(product.id)">
+        {{ isPurchased ? ('В КОШИКУ' | transloco) : ('ПРИДБАТИ' | transloco) }}
+    </button>
+</div>
+
+
+
+
+<div class="modal-overlay" *ngIf="showModal" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <h2 style="font-family: 'Montserrat'; font-size: 20px; font-weight: 500; margin-bottom: 7%;">{{"Товар успішно додано в кошик" | transloco}}</h2>
+
+        <img src="assets/images/Ellipse2.png" alt="Product Image" class="modal-image">
+
+        <br>
+
+        <button class="go-to-cart-button" [routerLink]="'/basket-page'" (click)="goToCart()">{{"ПЕРЕЙТИ У КОШИК" | transloco}}</button>
+
+        <button class="continue-shopping-button" [routerLink]="'/shop-main-page-page'" (click)="continueShopping()">{{"ПРОДОВЖИТИ ПОКУПКИ" | transloco}}</button>
+
+        </div>
+</div>
+
+
+    </div>
+</div>
+  
+
+
+
+
+<div class="custom-description-container">
+
+    <div class="product-info-container">
+        <p class="product-info-text">{{"ПРО ТОВАР" | transloco}}</p>
+    </div>
+
+    <div class="description-row">
+        <div class="description-title">{{"Опис" | transloco}}</div>
+        <div class="description-text">
+            {{product.fullDescription | transloco}}
+        </div>
+    </div>
+    
+    <br>
+    <br>
+
+    <div class="description-row">
+        <div class="description-title">{{"Доставка" | transloco}}</div>
+        <div class="description-text">{{product.delivery| transloco}}</div>
+    </div>
+
+    <br>
+
+    <div class="description-row">
+        <div class="description-title">Website</div>
+        <div class="description-text">{{product.website}}</div>
+    </div>
+
+    <br>
+
+    <div class="description-row">
+        <div class="description-title">{{"Місцезнаходження" | transloco}}</div>
+        <div class="description-text">{{product.location| transloco}}</div>
+    </div>
+</div> -->

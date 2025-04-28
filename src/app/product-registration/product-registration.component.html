@@ -1,0 +1,199 @@
+<app-header></app-header>
+<hr>
+
+<div class="breadcrumbs">
+  <span style="cursor: default;">{{"Магазин" | transloco}}</span>  
+  &gt;
+  <span style="cursor: default;">{{"Оформлення замовлення" | transloco}}</span>
+</div> 
+
+<button class="fixed-button" (click)="scrollToTop()">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<div class="container2">
+  <img 
+  *ngFor="let img of images4; let i = index"
+  [src]="activeIndex === i ? img.active : img.gray"
+  alt="Image"
+  class="image"
+  [class.active]="activeIndex === i"
+  (click)="onImageClick(img.link)">
+</div>
+
+<div class="checkout-page">
+    <form class="form-block">
+        <h2 class="block-title">{{"Контактні дані" | transloco}}</h2>
+
+        <div class="form-row">
+        <div class="form-group">
+            <label for="firstName">{{"Ім'я" | transloco}}</label>
+            <input id="firstName" type="text" class="form-control" [(ngModel)]="name" name="firstName" (ngModelChange)="validName()"/>
+            <label *ngIf="nameError" class="error">{{nameError | transloco}}</label> 
+        </div>
+        <div class="form-group">
+            <label for="lastName">{{"Прізвище" | transloco}}</label>
+            <input id="lastName" type="text" class="form-control" [(ngModel)]="lastName" name="lastName" (ngModelChange)="validLastName()"/>
+            <label class="error" *ngIf="lastNameError">{{lastNameError | transloco}}</label>
+        </div>
+        </div>
+
+        <div class="form-row">
+        <div class="form-group">
+            <label for="phone">{{"Номер телефона" | transloco}}</label>
+            <input id="phone" type="text" class="form-control" [(ngModel)]="phoneNumber" name="phone" (ngModelChange)="validPhoneNumber()" />
+            <label class="error" *ngIf="phoneNumberError">{{phoneNumberError | transloco}}</label>
+        </div>
+        <div class="form-group">
+            <label for="email">{{"Електронна пошта" | transloco}}</label>
+            <input id="email" type="email" class="form-control" [(ngModel)]="email" name="email" (ngModelChange)="validEmail()"/>
+            <label class="error" *ngIf="emailError">{{emailError | transloco}}</label>
+        </div>
+        </div>
+  
+      <div class="form-row checkbox-row">
+        <label class="checkbox-label">
+          <input id="consent" type="checkbox" [(ngModel)]="consent" name="consent" (ngModelChange)="validConsent()"/>
+          {{"Я даю згоду на обробку моїх персональних даних" | transloco}}
+        </label>
+        <label class="error2" *ngIf="consentError">{{consentError | transloco}}</label>
+      </div>
+  
+    </form>
+  </div>
+  
+  <div class="checkout-page">
+    <form class="form-block">
+  
+      <h2 class="block-title">{{"Доставка" | transloco}}</h2>
+      <p class="subtitle">({{"За тарифами перевізника" | transloco}})</p>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="country" >{{"Країна" | transloco}}</label>
+          <input id="country" type="text" class="form-control" [(ngModel)]="deliveryCountry" name="country" (ngModelChange)="validDeliveryCountry()"/>
+          <label class="error" *ngIf="deliveryCountryError">{{deliveryCountryError | transloco}}</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+            <label for="city">{{"Місто" | transloco}}</label>
+            <input id="city" type="text" class="form-control" [(ngModel)]="deliveryLocation" name="city" (ngModelChange)="validDeliveryLocation()"/>
+            <label class="error" *ngIf="deliveryLocationError">{{deliveryLocationError | transloco}}</label>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label>{{"Спосіб доставки" | transloco}}</label>
+        <div class="delivery-options">
+          <div *ngFor="let option of deliveryOptions; let i = index" class="delivery">
+            <label>
+              <input 
+                type="radio" 
+                name="delivery" 
+                [value]="option.name" 
+                [(ngModel)]="deliveryMethod" 
+                (ngModelChange)="validDeliveryInformation()"/>
+              {{ option.name | transloco }}
+            </label>
+      
+            <div *ngIf="deliveryMethod === option.name" class="extra-option">
+              <input 
+                type="text" 
+                class="form-control" 
+                [placeholder]="option.placeholder | transloco"
+                [(ngModel)]="deliveryInformation" 
+                name="deliveryInformation"
+                (ngModelChange)="validDeliveryInformation()"
+              />
+            </div>
+          </div>
+        </div>
+      
+        <label class="error3" *ngIf="deliveryMethodError">{{ deliveryMethodError | transloco }}</label>
+      </div>
+  
+    </form>
+  </div>
+
+  <div class="checkout-page">
+    <form class="form-block">
+      <h2 class="block-title">{{"Оплата" | transloco}}</h2>
+      <p class="subtitle">({{"Оберіть спосіб оплати" | transloco}})</p>
+
+      <div class="form-group payment-options">
+
+        <div *ngFor="let option of paymentOptions" class="payment">
+          <label>
+            <input
+              type="radio"
+              name="payment"
+              [value]="option.name"
+              [(ngModel)]="paymentMethod"
+              (ngModelChange)="validPaymentMethod()"
+            />
+            {{ option.name | transloco }}
+          </label>
+        </div>
+      
+        <div *ngIf="paymentMethod === 'Карткою на сайті'" class="extra-payment">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cardNumber">{{"Вкажіть номер картки" | transloco}}</label>
+              <input 
+                id="cardNumber" 
+                type="text" 
+                class="form-control"
+                [(ngModel)]="cardNumber"
+                name="cardNumber"
+                (ngModelChange)="validPaymentMethod2()"
+              />
+              <label class="error5" *ngIf="cardNumberError">{{ cardNumberError | transloco}}</label>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="expiry">{{"Строк дії картки" | transloco}}</label>
+              <input 
+                id="expiry" 
+                type="text" 
+                placeholder="MM/YY" 
+                class="form-control"
+                [(ngModel)]="expiry" 
+                name="expiry"
+                (ngModelChange)="validPaymentMethod3()"
+              />
+              <label class="error5" *ngIf="expiryError">{{ expiryError | transloco}}</label>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cvv">{{"Код CVV" | transloco}}</label>
+              <input 
+                id="cvv" 
+                type="text" 
+                class="form-control"
+                [(ngModel)]="cvv" 
+                name="cvv"
+                (ngModelChange)="validPaymentMethod4()"
+              />
+              <label class="error5" *ngIf="cvvError">{{ cvvError | transloco}}</label>
+            </div>
+          </div>
+        </div>
+      
+        <label class="error4" *ngIf="paymentMethodError">{{ paymentMethodError | transloco}}</label>
+      </div>
+      
+      
+    </form>
+  </div>
+
+  <div class="button-container">
+    <button (click)="sendForm()" type="submit" class="submit-button">{{"Оформити замовлення" | transloco}}</button>
+    <button [routerLink]="'/shop-main-page-page'" type="button" class="continue-button">{{"Продовжити покупки" | transloco}}</button>
+  </div>
+
+  <app-footer></app-footer>
+

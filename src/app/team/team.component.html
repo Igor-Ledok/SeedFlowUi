@@ -1,0 +1,203 @@
+<app-header></app-header>
+
+  <hr>
+
+  <div class="tabs-container">
+    <div class="tabs">
+      <button [routerLink]="'/general-page'">{{"ЗАГАЛЬНЕ" | transloco}}</button>
+      <button [routerLink]="'/detail-page'">{{"ДЕТАЛІ" | transloco}}</button>
+      <button [routerLink]="'/team-page'">{{"КОМАНДА" | transloco}}</button>
+      <button [routerLink]="'/rewards-page'">{{"ВИНАГОРОДИ" | transloco}}</button>
+      <button [routerLink]="'/requisites-page'">{{"РЕКВІЗИТИ" | transloco}}</button>
+      <button [routerLink]="'/uploads-page'">{{"ВИКЛАСТИ" | transloco}}</button>
+    </div>
+  </div>
+
+  <button class="fixed-button" (click)="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <div class="container">
+    <img 
+    *ngFor="let img of images; let i = index"
+    [src]="activeIndex === i ? img.active : img.gray"
+    alt="Image"
+    class="image"
+    [class.active]="activeIndex === i"
+    (click)="onImageClick(img.link)">
+  </div>
+
+<div class="form-group">
+    <label class="form-label">{{"Команда" | transloco}}</label>
+    <div class="form-row">
+        <span class="form-description">
+            {{"Додайте людей, які приймають участь у реалізації проєкту" | transloco}}
+        </span>
+  
+        <div class="fields">
+          <form #teamForm="ngForm" (ngSubmit)="submitProject()">
+            <div class="team-members">
+              <div *ngFor="let member of projectData; let i = index" class="team-member">
+                <!-- Блок фото -->
+                <div class="photo-wrapper">
+                  <label class="photo-label" for="member-photo-{{ i }}">
+                    <input 
+                      [(ngModel)]="member.UrlPhoto"
+                      type="file" 
+                      id="member-photo-{{ i }}" 
+                      class="file-input" 
+                      (change)="uploadImage($event, i)" 
+                      accept="image/*"
+                      #photoInput="ngModel"
+                      [required]="!member.UrlPhoto" 
+                      name="photo-{{ i }}" />
+                    <img [src]="member.UrlPhoto ? member.UrlPhoto : defaultPhoto" class="member-photo" />
+                  </label>
+                  <div class="error" *ngIf="photoInput.invalid && photoInput.touched">
+                    <span *ngIf="photoInput.errors?.['required']">{{"Фото потрібно!" | transloco}}</span>
+                  </div>
+                </div>
+            
+                <!-- Блок информации -->
+                <div class="info-block">
+                  <div class="name-role">
+                    <div class="input-group">
+                    <!-- Поле ПІБ -->
+                    <input 
+                      type="text" 
+                      class="form-input" 
+                      [(ngModel)]="member.name" 
+                      name="name-{{ i }}"
+                      #nameInput="ngModel"
+                      placeholder='{{"ПІБ" | transloco}}'
+                      pattern="^[А-Яа-яЁёІіЇїЄєҐґA-Za-z'’\-]+ [А-Яа-яЁёІіЇїЄєҐґA-Za-z'’\-]+ [А-Яа-яЁёІіЇїЄєҐґA-Za-z'’\-]+$"
+                      required
+                      title="Введіть повне ім'я у форматі: Прізвище Ім'я По батькові" />
+                    <div class="error2" *ngIf="nameInput.invalid && nameInput.touched">
+                      <span *ngIf="nameInput.errors?.['required']">{{"Введіть ПІБ" | transloco}}</span>
+                      <span *ngIf="nameInput.errors?.['pattern']">{{"Формат: Прізвище Ім'я По батькові" | transloco}}</span>
+                    </div>
+                    </div>
+            
+                    <!-- Поле роль -->
+                    <div class="input-group">
+                    <input 
+                      type="text" 
+                      class="form-input2" 
+                      [(ngModel)]="member.role" 
+                      name="role-{{ i }}"
+                      #roleInput="ngModel"
+                      placeholder='{{"Роль у проєкті" | transloco}}'
+                      pattern="^[А-Яа-яЁёІіЇїЄєҐґA-Za-z\s\-]{2,50}$"
+                      required
+                      title="Введіть коректну роль (тільки букви, пробіли і дефіс)" />
+                    <div class="error3" *ngIf="roleInput.invalid && roleInput.touched">
+                      <span *ngIf="roleInput.errors?.['required']">{{"Введіть роль" | transloco}}</span>
+                      <span *ngIf="roleInput.errors?.['pattern']">{{"Некоректна роль (тільки букви, пробіли і дефіс)" | transloco}}</span>
+                    </div>
+                  </div>
+                </div>
+            
+                  <span class="contact-info">
+                    {{"Вкажіть хоча б один контакт, за яким із людиною можна зв'язатись (телефон, viber, telegram, тощо)" | transloco}}
+                  </span>
+            
+                  <div class="contact-fields">
+                    <!-- Поле телефон -->
+                    <div class="input-with-icon" [ngClass]="{'has-error': (phoneInput.invalid && (phoneInput.touched || phoneInput.dirty))}">
+                      <!-- <i class="icon"><img src="assets/images/phone.png" /></i> -->
+                       <!-- <i class="fa-solid fa-phone"></i> -->
+                      <div class="input-container">
+                      <input 
+                        type="text" 
+                        class="form-input3 small-input" 
+                        [(ngModel)]="member.phone" 
+                        name="phone-{{ i }}"
+                        #phoneInput="ngModel"
+                        placeholder='{{"Телефон" | transloco}}'
+                        pattern="^\+1\d{10}$|^\+380\d{9}$|^\+39\d{10}$|^\+49\d{10,11}$|^\+33\d{9}$|^\+34\d{9}$"
+                        required
+                        title="Введіть коректний номер телефону у форматі +XXXXXXXXXXXX" />
+                      <div class="error4" *ngIf="phoneInput.invalid && phoneInput.touched">
+                        <span *ngIf="phoneInput.errors?.['required']">{{"Введіть номер телефону" | transloco}}</span>
+                        <span *ngIf="phoneInput.errors?.['pattern']">{{"Невірний формат телефону (має бути +XXXXXXXXXXXX)" | transloco}}</span>
+                      </div>
+                    </div>
+                    </div>
+            
+                    <!-- Поле email -->
+                    <div class="input-with-icon" [ngClass]="{'has-error': (emailInput.invalid && (emailInput.touched || emailInput.dirty))}">
+                      <!-- <i class="icon"><img src="assets/images/mail.png" /></i> -->
+                      <div class="input-container">
+                      <input 
+                        type="email" 
+                        class="form-input3 small-input" 
+                        [(ngModel)]="member.email" 
+                        name="email-{{ i }}"
+                        #emailInput="ngModel"
+                        placeholder='{{"Пошта" | transloco}}'
+                        pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,}$"
+                        required
+                        title="Введіть коректний email у форматі example@domain.com" />
+                      <div class="error4" *ngIf="emailInput.invalid && emailInput.touched">
+                        <span *ngIf="emailInput.errors?.['required']">{{"Введіть email" | transloco}}</span>
+                        <span *ngIf="emailInput.errors?.['pattern']">{{"Невірний формат email" | transloco}}</span>
+                      </div>
+                    </div>
+                    </div>
+            
+                    <!-- Поля для Viber та Telegram (опціонально) -->
+                    <div class="input-with-icon">
+                      <!-- <i class="icon"><img style="width: 25px;" src="assets/images/Viber.png" /></i> -->
+                      <div class="input-container">
+                      <input 
+                        type="text" 
+                        class="form-input3 small-input" 
+                        [(ngModel)]="member.viber" 
+                        name="viber-{{ i }}"
+                        placeholder="Viber" />
+                      </div>
+                    </div>
+
+                    <div class="input-with-icon">
+                      <!-- <i class="icon"><img style="width: 25px;" src="assets/images/Telegram.jpg" /></i> -->
+                      <div class="input-container">
+                      <input 
+                        type="text" 
+                        class="form-input3 small-input" 
+                        [(ngModel)]="member.telegram" 
+                        name="telegram-{{ i }}"
+                        placeholder="Telegram" />
+                    </div>
+                  </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            </form>
+  
+            <div class="file-upload">
+                <button class="file-label add-member-btn" (click)="addMember()">{{"+ Додати людину" | transloco}}</button>
+            </div>
+        </div>
+    </div>
+  
+    <div class="form-buttons">
+      <button class="btn btn-secondary" (click)="saveGeneralData()">{{"ЗБЕРЕГТИ ЗМІНИ" | transloco}}</button>
+      <button class="btn btn-primary" (click)="submitProject()">{{"ДАЛІ" | transloco}}</button>
+    </div>
+
+    <div *ngIf="isPopupOpen" class="popup-window2" (click)="closePopup()">
+      <div class="popup-content2" (click)="$event.stopPropagation()">
+        
+        <div class="popup-message2">
+          <img src="assets/images/WhitePig.png" class="popup-image2" alt="Success">
+          <p class="popup-text2">{{"Зміни у проєкті успішно збережено" | transloco}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <app-footer></app-footer>

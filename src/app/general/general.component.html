@@ -1,0 +1,303 @@
+<app-header></app-header>
+
+  <hr>
+
+  <div class="container">
+    <img 
+    *ngFor="let img of images; let i = index"
+    [src]="activeIndex === i ? img.active : img.gray"
+    alt="Image"
+    class="image"
+    [class.active]="activeIndex === i"
+    (click)="onImageClick(img.link)">
+  </div>
+
+
+<div class="tabs-container">
+  <div class="tabs">
+    <button [routerLink]="'/general-page'">{{"ЗАГАЛЬНЕ" | transloco}}</button>
+    <button [routerLink]="'/detail-page'">{{"ДЕТАЛІ" | transloco}}</button>
+    <button [routerLink]="'/team-page'">{{"КОМАНДА" | transloco}}</button>
+    <button [routerLink]="'/rewards-page'">{{"ВИНАГОРОДИ" | transloco}}</button>
+    <button [routerLink]="'/requisites-page'">{{"РЕКВІЗИТИ" | transloco}}</button>
+    <button [routerLink]="'/uploads-page'">{{"ВИКЛАСТИ" | transloco}}</button>
+  </div>
+</div>
+
+<button class="fixed-button" (click)="scrollToTop()">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<div class="form-container">
+
+    <div class="form-group">
+      <label class="form-label">
+        {{"Назва проєкту" | transloco}} 
+      </label>
+      <div class="form-row">
+        <span class="form-description">{{"Як називається Ваш проєкт?" | transloco}}</span>
+        <div class="fields">
+          <div class="input-wrapper">
+            <input 
+            type="text" 
+            class="form-input" 
+            [(ngModel)]="projectData.Title"
+            (input)="updateCharCount()"
+            maxlength="50"
+            minlength="3"
+            required
+            #projectTitle="ngModel"
+            pattern="^[A-Za-zА-Яа-яЇїІіЄєҐґ][A-Za-zА-Яа-яЇїІіЄєҐґ0-9 ]*$"
+            />
+            <span class="char-counter">{{ charCount }}/50</span>
+            <div *ngIf="projectTitleError || (projectTitle.invalid && projectTitle.touched)" class="error-message">
+              <!-- <div *ngIf="projectTitleError">{{ projectTitleError | transloco }}</div> -->
+              <div *ngIf="projectTitle.errors?.['required']">
+                {{"Заповніть назву проєкту. Це обов'язково!" | transloco }}
+              </div>
+              <div *ngIf="projectTitle.errors?.['minlength']">
+                {{"Назва має містити щонайменше 3 символи" | transloco }}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label class="form-label">
+        {{"Сума збору" | transloco}}
+      </label>
+      <div class="form-row">
+        <span class="form-description2">
+          {{"Скільки ви плануєте зібрати на платформі Seed Flow?" | transloco}}
+        </span>
+        <div class="fields">
+          <div class="input-wrapper2">
+            <input 
+            type="number" 
+            class="form-input" 
+            min="0"  
+            [(ngModel)]="projectData.CollectionAmount"
+            #collectionAmount="ngModel"
+            (ngModelChange)="onAmountChange()"
+            required
+            min="10"
+            />
+            <span class="input-suffix">{{"грн" | transloco}}</span>
+            <div *ngIf="collectionAmountError || (collectionAmount.invalid && collectionAmount.touched)" class="error-message2">
+
+    
+              <span *ngIf="collectionAmount.errors?.['required']">
+                {{"Заповніть суму збору. Це обов'язково!" | transloco}}
+              </span>
+              <span *ngIf="collectionAmount.errors?.['min']">
+                {{"Мінімальна сума збору – 10 грн" | transloco}}
+              </span>
+            </div> 
+          </div>
+        
+
+        </div>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label class="form-label">
+        {{"План бюджету" | transloco}}
+        <br>
+        {{"(посилання)" | transloco}}
+      </label>
+      <div class="form-row">
+        <span class="form-description"></span>
+        <div class="fields">
+          <div class="input-wrapper3">
+            <textarea 
+              type="text"
+              class="form-input2"  
+              [(ngModel)]="projectData.BudgetPlan"
+              (input)="updateCharCountStr(); validateBudgetFields()"
+              (blur)="validateBudgetFields()"
+              maxlength="1000"
+              #budgetPlan="ngModel"
+              required
+            ></textarea>
+            <span class="char-counter2">{{ charCount2 }}/1000</span>
+          </div>
+        </div>
+      </div>
+    
+      <div class="form-row">
+        <span class="form-description3">
+          {{
+            "Скільки ви плануєте зібрати на платформі Seed Flow? Опишіть, як плануєте витратити кошти, зібрані на платформі або завантажте файл бізнес плану"
+            | transloco
+          }}
+        </span>
+    
+        <!-- Загрузка файла -->
+        <div class="fields">
+          <div class="file-upload">
+            <input
+              type="file"
+              class="file-input"
+              id="budget-file"
+              (change)="onFileSelectedDocx($event)"
+            />
+            <label for="budget-file" class="file-label">
+              {{"Завантажити файл" | transloco}} (Word, PDF, doc)
+            </label>
+    
+            <div *ngIf="fileError" class="error-message3">
+              <div style="position: relative; top: 0px;">
+                {{ fileError | transloco }}
+              </div>
+            </div>
+    
+            <div *ngIf="projectData.SelectedFileNameDocx" class="file-info">
+              <p class="docx2">{{ projectData.SelectedFileNameDocx }}</p>
+              <button (click)="clearFile()" class="remove-button">
+                {{"Видалити файл" | transloco}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">
+        {{"Тривалість збору" | transloco}}
+      </label>
+      <div class="form-row">
+        <p class="form-description">
+          {{"Скільки триватиме збір на платформі Seed Flow? збір може тривати від 30 до 180 днів." | transloco}}
+        </p>
+        <div class="fields">
+          <div class="input-wrapper">
+            <input
+            type="number"
+            class="form-input"
+            name="collectionDuration"
+            required
+            min="30"
+            max="180"
+            [(ngModel)]="projectData.CollectionDuration"
+            #collectionDuration="ngModel"
+            (ngModelChange)="validateCollectionDuration(collectionDuration)"
+          />
+            <span class="input-suffix">{{ "днів" | transloco }}</span>
+    
+            <!-- Ошибка внутри input-wrapper -->
+            <div *ngIf="collectionDurationError" class="error-message">
+              {{ collectionDurationError | transloco }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<div class="form-group">
+    <label class="form-label">
+      {{"Категорія" | transloco}}
+    </label>
+    <div class="form-row">
+      <span class="form-description5">
+        {{"Оберіть категорію, до якої відноситься Ваш проєкт" | transloco}}
+      </span>
+      
+      <div class="fields">
+        <div *ngFor="let topic of topics" class="category-block">
+          <h3 class="category-title">{{ topic.name | transloco }}</h3>
+          <div class="category-buttons">
+            <button 
+              *ngFor="let category of topic.categories" 
+              class="category-btn"
+              [class.selected]="isActive(category.id)" 
+              (click)="onCategoryButtonPress(category.id)">
+              {{ category.name | transloco }}
+            </button>
+          </div>
+          <div *ngIf="errorMessages['categories']" class="error-message5">
+            {{ errorMessages['categories'] | transloco }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<div class="form-group">
+    <label class="form-label2">{{"Фото" | transloco}}</label>
+    <div class="form-row">
+      <span class="form-description6">
+        {{"Викладіть якісне фото для обкладинки вашого проєкту" | transloco}}
+      </span>
+      <div class="fields">
+        <div *ngIf="projectData.MainPhotoUrl; else uploadBlock" class="photo-preview-container">
+          <img [src]="projectData.MainPhotoUrl" alt="Прев'ю фото" class="photo-preview" />
+          <div class="photo-buttons">
+            <button class="btn-remove" (click)="removePhoto()">{{"Видалити" | transloco}}</button>
+          </div>
+        </div>
+
+        <ng-template #uploadBlock>
+          <div class="file-upload">
+            <input 
+            type="file" 
+            class="file-input" 
+            id="photoFile" 
+            (change)="onFileSelectedPhoto($event)"
+            [class.invalid]="isFileInvalid"
+            />
+            
+            <label for="photoFile" class="file-label2">
+              {{"Завантажити файл" | transloco}} (JPEG, JPG, PNG)
+                      
+          <div *ngIf="errorMessage" class="error-message6">
+            {{ errorMessage | transloco }}
+          </div>
+            </label>
+          </div>
+
+        </ng-template>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label class="form-label-video">{{"Відео" | transloco}}</label>
+      <div class="form-row">
+        <span class="form-description7">
+          {{"Додайте відео тривалістю 1-3 хвилини, в якому коротко розповідається про ваш проєкт та його цілі. Вставьте посилання на youtube" | transloco}}
+        </span>
+        <div class="fields">
+          <div class="input-wrapper">
+            <input 
+            type="text" 
+            class="form-input" 
+            [(ngModel)]="projectData.YouTubeVideoUrl"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <div>
+    <div class="form-buttons">
+      <button class="btn btn-secondary" (click)="saveGeneralData()" >{{"ЗБЕРЕГТИ ЗМІНИ" | transloco}}</button>
+      <button class="btn btn-primary" (click)="handleNextClick()" >{{"ДАЛІ" | transloco}}</button>
+    </div>
+
+    <div *ngIf="isPopupOpen" class="popup-window2" (click)="closePopup()">
+      <div class="popup-content2" (click)="$event.stopPropagation()">
+        
+        <div class="popup-message2">
+          <img src="assets/images/WhitePig.png" class="popup-image2" alt="Success">
+          <p class="popup-text2">{{"Зміни у проєкті успішно збережено" | transloco}}</p>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  
+<app-footer></app-footer>

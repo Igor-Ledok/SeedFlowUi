@@ -1,0 +1,188 @@
+<app-header></app-header>
+
+  <hr>
+
+  <div class="container">
+    <img 
+    *ngFor="let img of images; let i = index"
+    [src]="activeIndex === i ? img.active : img.gray"
+    alt="Image"
+    class="image"
+    [class.active]="activeIndex === i"
+    (click)="onImageClick(img.link)">
+  </div>
+
+  <button class="fixed-button" (click)="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <div class="seminar-container">
+
+    <div class="breadcrumbs">
+      <a [routerLink] = "'/'" style="cursor: pointer; text-decoration: none; color: inherit;">
+      <span>{{"Головна" | transloco}}</span>  
+      </a>
+      &gt;
+      <a [routerLink] = "'/support-page'" style="cursor: pointer; text-decoration: none; color: inherit;">
+      <span>{{"Підтримка" | transloco}}</span>
+      </a>
+      &gt;
+      <span>{{"Семінари" | transloco}}</span>
+    </div>
+
+    <div class="seminar-image">
+      <img src="assets/images/ManFon.png" alt="Seminar Image" class="seminar-photo" />
+      
+      <div class="yellow-box">
+        <div class="yellow-stats">
+          <div class="stat">
+            <div class="stat-number">10+</div>
+            <div class="stat-label">{{ "Семінарів" | transloco }}</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">{{"10К+" | transloco}}</div>
+            <div class="stat-label">{{ "Переглядів" | transloco }}</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">{{"5К+" | transloco}}</div>
+            <div class="stat-label">{{ "Учасників" | transloco }}</div>
+          </div>
+        </div>
+      </div>
+      
+
+      <div class="seminar-text-overlay">
+        <p class="text1">{{"СЕМІНАР" | transloco}}</p>
+        <p class="text2">{{"Як створити проєкт з нуля" | transloco}}</p>
+        <p class="text3">By <span style="color: #ffcf33">James West</span> | 02.23.2025</p>
+        <p class="text4">{{"Надійний план є фундаментом будь‑якого успішного проєкту. Однак, якщо ви ніколи раніше не планували жодного проєкту, може бути складно зрозуміти, із чого почати." | transloco}}</p>
+      </div>
+    </div>
+  </div>
+
+
+ <div class="definitions-wrapper">
+
+    <div class="definition-container">
+      <h2 class="definition-title">{{"1. Визначення ідеї та мети" | transloco}}</h2>
+      <p class="definition-description">
+        {{"Перед тим як запустити кампанію, необхідно чітко визначити:" | transloco}}<br>
+        {{"• Яку проблему вирішує ваш проєкт?" | transloco}}<br>
+        {{"• Хто є цільовою аудиторією?" | transloco}}<br>
+        {{"• Яка кінцева мета та скільки коштів потрібно зібрати?" | transloco}}<br>
+        {{"Приклад: Якщо ви створюєте настільну гру, подумайте, кому вона буде цікава, чим відрізняється від аналогів і яка її унікальність." | transloco}}
+      </p>
+    </div>
+  
+    <div class="definition-container">
+      <h2 class="definition-title">{{"2. Планування та підготовка контенту" | transloco}}</h2>
+      <p class="definition-description">
+        {{"Перед запуском кампанії потрібно підготувати:" | transloco}}<br>
+        {{"• Якісний опис проєкту - що, як і для чого." | transloco}}<br>
+        {{"• Фото та відео - розповідь у форматі відеопрезентації підвищує довіру." | transloco}}<br>
+        {{"• Бюджет та винагороди для бекерів - чітко поясніть, на що підуть зібрані кошти." | transloco}}<br>
+        {{"Порада: Створіть 3-5 варіантів винагород для підтримки, щоб залучити більше людей." | transloco}}
+      </p>
+    </div>
+  
+    <div class="definition-container">
+      <h2 class="definition-title">{{"3. Вибір платформи" | transloco}}</h2>
+      <p class="definition-description">
+        {{"Обирайте платформу, яка найкраще відповідає вашій ідеї:" | transloco}}<br>
+        {{"• Seed Flow - для будь-яких твоїх стартапів та творчих проєктів." | transloco}}<br>
+        {{"• Kickstarter - для технологічних стартапів та творчих проєктів." | transloco}}<br>
+        {{"• Indiegogo - для інноваційних ідей та соціальних ініціатив." | transloco}}<br>
+        {{"• Спеціалізовані локальні платформи - для проєктів у певних регіонів." | transloco}}
+      </p>
+    </div>
+  
+    <div class="definition-container">
+      <h2 class="definition-title">{{"4. Маркетинг та просування" | transloco}}</h2>
+      <p class="definition-description">
+        {{"Без хорошої промоції навіть найкращий проєкт може залишитися непоміченим." | transloco}}<br>
+        {{"Використовуйте:" | transloco}}<br>
+        {{"• Соціальні мережі - створюйте пости, відео та взаємодійте з аудиторією." | transloco}}<br>
+        {{"• Email-розсилку - надсилайте потенційним інвесторам інформацію про кампанію." | transloco}}<br>
+        {{"• Рекламу та PR - залучайте блогерів та ЗМІ для розповсюдження інформації." | transloco}}<br>
+        {{"Приклад: Якщо ви запускаєте екологічний стартап, зверніться до тематичних спільнот і блогерів." | transloco}}
+      </p>
+    </div>
+  
+    <div class="definition-container">
+      <h2 class="definition-title">{{"5. Запуска та ведення кампанії" | transloco}}</h2>
+      <p class="definition-description">
+        {{"Під час активної фази:" | transloco}}<br>
+        {{"• Регулярно оновлюйте інформацію про прогрес зборів." | transloco}}<br>
+        {{"• Спілкуйтеся з бекерами та відповідайте на запитання." | transloco}}<br>
+        {{"• Використовуйте проміжні цілі(stretch goals), щоб мотивувати нових учасників." | transloco}}
+      </p>
+    </div>
+  
+    <div class="definition-container">
+      <h2 class="definition-title">{{"6. Завершення та реалізація проєкту" | transloco}}</h2>
+      <p class="definition-description">
+        {{"Якщо кампанія успішна:" | transloco}}<br>
+        {{"• Дякуйте учасникам та інвесторам." | transloco}}<br>
+        {{"• Реалізуйте обіцяне в зазначені терміни." | transloco}}<br>
+        {{"• Аналізуйте результати та готуйтеся до наступних кампаній." | transloco}}
+      </p>
+    </div>
+  
+    <div class="button-container2">
+      <button [routerLink]="'/seminar-page'" class="action-button">{{"Завантажити запис" | transloco}}</button>
+    </div>
+  </div>
+  
+  <!-- <div class="projects2-wrapper">
+    <div class="projects2-line">
+      <div class="line-highlight2"></div>
+      <span class="projects2-label">{{"КОМЕНТАРІ" | transloco}}</span>
+    </div>
+  </div>
+
+  <div class="comment-section-left">
+    <label for="user-comment" class="comment-label-left2">{{"Коментувати" | transloco}}</label>
+    <textarea id="user-comment" class="comment-textarea-left" [(ngModel)]="commentText" maxlength="500" placeholder="{{'Почніть вводити коментар...' | transloco}}" ></textarea>
+    <div class="character-count2">
+        <span>{{"Залишилось" | transloco}} {{ commentText.length }}</span>/500
+      </div>
+  
+    <button class="submit-btn2">{{"ЗБЕРЕГТИ" | transloco}}</button>
+  </div>
+
+  <div class="full-width-line"></div>
+
+  <div class="comments-wrapper">
+    <div class="comments-list">
+      <div class="comment-card" *ngFor="let comment of comments; let i = index">
+        <div class="comment-header">
+          <div class="comment-image">
+            <img [src]="comment.image" alt="User Image" class="profile-image" />
+          </div>
+          <div class="comment-info">
+            <div class="comment-name">{{ comment.name | transloco }}</div>
+          </div>
+          <div class="comment-date">{{ comment.date | transloco }}</div> 
+        </div>
+        <div class="comment-text">"{{ comment.text | transloco }}"</div>
+  
+        <div class="comment-reply" (click)="onReplyClick(i)">{{"Відповісти" | transloco}}</div>
+  
+        
+        <div class="reply-box" *ngIf="selectedReplyId === i">
+          <textarea class="reply-input" placeholder='{{"Напишіть відповідь..." | transloco}}'></textarea>
+          <button class="send-button">{{"Надіслати" | transloco}}</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+ <div class="full-width-line"></div>
+
+  <div class="text-container">
+    <h1 class="title-text">{{"Приєднуйтесь до нашої спільноти" | transloco}}</h1>
+    <p class="sub-text">{{"Ставайте учасником нашої спільноти" | transloco}}</p>
+    <button class="action-btn">{{"Приєднатися" | transloco}}</button>
+  </div> 
+
+<app-footer></app-footer>

@@ -1,0 +1,128 @@
+<app-header></app-header>
+
+  <hr>
+
+
+
+  <div class="registration-form">
+    <div class="left-panel"></div>
+    <div class="right-panel">
+      <h2 id="proj">{{ "Завантажте запис" | transloco }}</h2>
+  
+      <!-- Вся форма -->
+      <form #myForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+  
+        <!-- ПІБ -->
+        <div class="form-group">
+          <label for="fullName" class="yourName">
+            {{ "Ваше ім'я" | transloco }}:
+          </label>
+          <br>
+          <input
+            type="text"
+            id="fullName"
+            name="fullName"
+            required
+            [(ngModel)]="fullName"
+            #fullNameInput="ngModel"
+            pattern="^([A-ZА-ЯІЇЄҐ][a-zа-яіїєґ']+\s){2}[A-ZА-ЯІЇЄҐ][a-zа-яіїєґ']+$"
+            placeholder="{{ 'Введіть ваше ПІБ' | transloco }}"
+            style="width: 360px; background-color: #eaede3; margin-top: 5px; font-family: 'Montserrat';"
+          />
+  
+          <!-- Ошибки -->
+          <div class="error" *ngIf="fullNameInput.invalid && (fullNameInput.touched || myForm.submitted)" style="color: red;">
+            <div *ngIf="fullNameInput.errors?.['required']">
+              {{ "Обов'язкове поле" | transloco }}
+            </div>
+            <div *ngIf="fullNameInput.errors?.['pattern']">
+              {{ "Формат: Прізвище Ім'я По батькові" | transloco }}
+            </div>
+          </div>
+        </div>
+  
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email" class="yourEmail">
+            {{ "Адрес електронної пошти" | transloco }}:
+          </label>
+          <br>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            required
+            [(ngModel)]="email"
+            #emailInput="ngModel"
+            email
+            placeholder="{{ 'Введіть адресу електронної пошти' | transloco }}"
+            style="width: 360px; background-color: #eaede3; margin-top: 5px; font-family: 'Montserrat';"
+          />
+        
+          <!-- Ошибка Email -->
+          <div class="error" *ngIf="emailInput.invalid && (emailInput.touched || myForm.submitted)" style="color: red;">
+            <div *ngIf="emailInput.errors?.['required']">
+              {{ "Обов'язкове поле" | transloco }}
+            </div>
+            <div *ngIf="emailInput.errors?.['email']">
+              {{ "Невірний формат email" | transloco }}
+            </div>
+          </div>
+        </div>
+        
+  
+        <!-- Повідомлення -->
+        <label for="areatext" style="font-family: 'Montserrat'; font-size: larger; position: relative; left: -27px;">
+          {{ "Повідомлення" | transloco }}
+        </label>
+        <textarea
+          id="areatext"
+          [(ngModel)]="supportText"
+          name="supportText"
+          (ngModelChange)="updateCharCount()"
+          maxlength="500"
+          required
+          placeholder="{{ 'Надайте короткий огляд проекту та підсумок ваших потреб' | transloco }}"
+          #supportTextInput="ngModel">
+        </textarea>
+  
+        <div id="symbols">
+          {{ "Залишилось" | transloco }} {{ charCount }}/500 {{ "символів" | transloco }}
+        </div>
+  
+        <div class="error2" *ngIf="supportTextInput.invalid && (supportTextInput.touched || myForm.submitted)" style="color: red;">
+          <div *ngIf="supportTextInput.errors?.['required']">
+            {{ "Обов'язкове поле" | transloco }}
+          </div>
+        </div>
+  
+        <!-- Чекбокс -->
+        <section class="example-section" id="checkbox">
+          <mat-checkbox
+            class="example-margin"
+            name="checkbox2"
+            [(ngModel)]="agreed"
+            required
+            style="margin-left: 31px; top:-70px;">
+            <label class="agree">
+              {{ "Ви погоджуєтесь з нашими Умовами використання та Політикою конфіденційності" | transloco }}
+            </label>
+          </mat-checkbox>
+        </section>
+  
+        <!-- Кнопки -->
+        <button
+          id="btnSend2"
+          type="submit"
+          [disabled]="!myForm.valid || !supportText.trim()"
+          [routerLink]="'/marketing-access-page'">
+          {{ "ВІДПРАВИТИ" | transloco }}
+        </button>
+  
+        <button id="btnSkip" [routerLink]="'/seminars-vebinars-page'" type="button">
+          {{ "НАЗАД" | transloco }}
+        </button>
+      </form>
+    </div>
+  </div>
+  

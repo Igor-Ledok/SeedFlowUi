@@ -1,0 +1,24 @@
+<app-header></app-header>
+
+  <hr>
+
+  <div class="registration-form">
+    <div class="left-panel">
+    </div>
+    <div class="right-panel centered-panel">
+        <img src="assets/images/symbol.png" alt="user" class="center-avatar" />
+        
+        <p class="main-message">{{"Ви виклали максимальну кількість проєктів" | transloco}}.</p>
+      
+        <p class="notice">{{"Зверніть увагу!" | transloco}}</p>
+        
+        <p class="sub-message">
+          {{"Автор може відкривати одночасно максимум 3 збори" | transloco}}.
+          <br />
+          {{"Відкриття наступного збору можливе лише після завершення одного з актуальних зборів" | transloco}}.
+        </p>
+      
+        <button class="go-home-button" [routerLink]="'/'">{{"НА ГОЛОВНУ" | transloco}}</button>
+      </div>
+
+  </div>

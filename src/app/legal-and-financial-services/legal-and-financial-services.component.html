@@ -1,0 +1,101 @@
+<app-header></app-header>
+
+  <hr>
+
+  <button class="fixed-button" (click)="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <div class="container">
+    <img 
+    *ngFor="let img of images; let i = index"
+    [src]="activeIndex === i ? img.active : img.gray"
+    alt="Image"
+    class="image"
+    [class.active]="activeIndex === i"
+    (click)="onImageClick(img.link)">
+  </div>
+
+  <div class="breadcrumbs">
+    <a [routerLink] = "'/'" style="cursor: pointer; text-decoration: none; color: inherit;">
+    <span>{{"Головна" | transloco}}</span>  
+    </a>
+    &gt;
+    <a [routerLink] = "'/support-page'" style="cursor: pointer; text-decoration: none; color: inherit;">
+    <span>{{"Підтримка" | transloco}}</span>
+    </a>
+    &gt;
+    <a [routerLink] = "'/accompaniment-page'" style="cursor: pointer; text-decoration: none; color: inherit;">
+      <span>{{"Супровід проєкту" | transloco}}</span>
+    </a>
+    &gt;
+    <span>{{"Юридичні та фінансові послуги" | transloco}}</span>
+  </div> 
+
+  <div class="photo-content-container">
+
+    <div class="search-section">
+      <h2 class="title">{{"Юридичні та фінансові послуги" | transloco}}</h2>
+      <p class="description">{{"Все, що вам потрібно для кожного етапу подорожі вашого продукту." | transloco}}</p>
+      <input class="field-input" type="text" placeholder='{{"Пошук..." | transloco}}'
+      [(ngModel)]="searchText2" (keydown.enter)="onEnter()">
+    </div>
+
+    <div class="photo-row">
+      <div class="photo-left">
+        <img src="assets/images/specialistHelp1.png" alt="Фото 1" />
+        <p class="photo-caption">{{ "Повідомлення про доступність" | transloco }}</p>
+      </div>
+      <div class="photo-text">
+        <h2 class="section-heading">{{ "Доступність" | transloco }}</h2>
+        <p class="section-text">
+          {{ "У дусі спільноти Indiegogo постійно працює над тим, щоб члени нашої спільноти, ті, хто потенційно може приєднатися до нашої спільноти, і ті, кому просто цікаво, мали доступ до сайту Indiegogo та могли переміщатися по ньому." | transloco }}<br /><br />
+          {{ "Якщо у вас виникли труднощі з переглядом вмісту або навігацією сайтом, надішліть листа нашій команді. Ми будемо раді Вам допомогти." | transloco }}
+        </p>
+      </div>
+    </div>
+  
+    <div class="photo-row">
+      <div class="photo-left">
+        <img src="assets/images/specialistHelp2.png" alt="Фото 2" />
+        <p class="photo-caption">{{ "Що таке GDPR?" | transloco }}</p>
+      </div>
+      <div class="photo-text">
+        <h2 class="section-heading">{{ "Загальний регламент захисту даних («GDPR»)" | transloco }}</h2>
+        <p class="section-text">
+          {{ "Загальний регламент захисту даних («GDPR») — це закон Європейського Союзу про конфіденційність даних, який застосовується до 28 країн-членів ЄС і 3 додаткових країн-членів Європейської економічної зони (ЄС і ЄЕЗ разом іменуються «ЄЕЗ»). GDPR надає особам певні права щодо їхніх персональних даних, зокрема право на доступ, виправлення, видалення та обмеження обробки їхніх даних. Запити відповідно до GDPR можуть надсилати користувачі, які є резидентами ЄЕЗ." | transloco }}
+        </p>
+      </div>
+    </div>
+  
+    <div class="photo-row">
+      <div class="photo-left">
+        <img src="assets/images/specialistHelp3.png" alt="Фото 3" />
+        <p class="photo-caption">{{ "Авторські права, торгові марки та патенти" | transloco }}</p>
+      </div>
+      <div class="photo-text">
+        <h2 class="section-heading">{{ "Авторські права, торгові марки та патенти" | transloco }}</h2>
+        <p class="section-text">
+          {{ "Seed Flow дуже серйозно ставиться до прав інтелектуальної власності («ІВ»). У цій статті описано, як Seed Flow розглядає спори щодо інтелектуальної власності щодо вмісту на нашій платформі. Важлива примітка. Ця стаття не призначена для надання юридичних порад для будь-яких цілей і не повинна розглядатися як юридична порада. Ми рекомендуємо вам проконсультуватися з юристом, перш ніж надсилати нам будь-яку юридичну кореспонденцію, включаючи лист-вимогу чи запит на видалення, або якщо у вас виникли запитання щодо прав інтелектуальної власності." | transloco }}
+        </p>
+        <a [routerLink]="'/read-more-page'" class="read-more-link">{{ "Читати далі" | transloco }}</a>
+      </div>
+    </div>
+  
+  </div>
+  
+
+    <div class="center-text">
+        <p style="font-size: 27px; font-weight: 700;">{{"Чи була ця стаття корисною?" | transloco}}</p>
+    </div>
+
+        <div class="image-gallery">
+            <div class="image-item">
+                <button style="padding: 12px 15px; border: none; background-color: #247a60; color: white; font-weight: 600; border-radius: 5px; position: relative;  cursor: pointer; font-family: 'Montserrat'; font-size: 24px; width: 150px;">{{"Так" | transloco}}</button>
+            </div>
+            <div class="image-item second-image">
+                <button style="padding: 12px 15px; border: none; background-color: #ffcf33; color: #247a60; font-weight: 600; border-radius: 5px; position: relative;  cursor: pointer; font-family: 'Montserrat'; font-size: 24px; width: 150px;">{{"Ні" | transloco}}</button>
+            </div>
+          </div>
+  
+<app-footer></app-footer> 

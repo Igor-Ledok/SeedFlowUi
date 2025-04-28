@@ -1,0 +1,47 @@
+<app-header></app-header>
+
+<hr>
+
+<div class="main-container">
+
+    <div class="top-bar">
+        <div class="back-arrow" (click)="goBack()">
+          <i class="fa fa-arrow-left"></i>
+        </div>
+        <div class="title-with-underline">
+            {{"ВАШІ ЧАТИ" | transloco}}
+          </div>
+      </div>
+
+      <!-- <div class="message-bubble" [routerLink]="'/chat-page'">
+        <div class="message-content">
+          <img src="assets/images/man1.png" alt="Avatar" class="avatar">
+          <div class="text-content">
+            <div class="name">Маріна Равченко</div>
+            <div class="message-text">Так, велике дякую!</div>
+          </div>
+        </div>
+        <div class="timestamp">13.03.2025 19:05</div>
+      </div> -->
+      
+      <div class="chat-list-container">
+      <div *ngFor="let chat of listChats" class="message-bubble" [routerLink]="['/chat-page']" [queryParams]="{ chatId: chat.id}">
+        <div class="message-content">
+            <img [src]="chat.photoBase64 || 'assets/images/userWithoutPhoto.png'" alt="Avatar" class="avatar">
+            <div class="text-content">
+                <div class="name">
+                    {{ chat.name || 'Без имени' }}  <!-- Показывать "Без имени", если имя null -->
+                </div>
+            </div>
+        </div>
+        <div class="timestamp">
+            {{ chat.createdAt }}
+        </div>
+      </div>
+    </div>
+      
+  
+</div>
+
+<app-footer></app-footer>
+  

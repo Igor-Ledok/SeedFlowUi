@@ -1,0 +1,1058 @@
+.search-input 
+{
+  width: 420px !important;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  position: relative;
+  left: 25%;
+  font-family: 'Montserrat'; 
+  background-color: #EAEDE3; 
+  margin-left: -135px; 
+}
+
+.send-project-btn 
+{
+  width: 310px;
+  height: 40px;
+  background: #247a60;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: 'Montserrat';
+  margin-top: 70px;
+  margin-left: 25px;
+  white-space: nowrap;
+}
+
+.send-project-btn3 
+{
+  width: 200px;
+  height: 40px;
+  background: #247a60;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: 'Montserrat';
+  margin-top: 70px;
+  margin-left: 170px;
+  white-space: nowrap;
+}
+
+.send-project-btn2 
+{
+  width: 220px;
+  height: 40px;
+  background: #247a60;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: 'Montserrat';
+  margin-top: 40px;
+  margin-left: 75px;
+  white-space: nowrap;
+}
+
+.becomeAuthor
+{
+  text-align: start; 
+  margin-left: -50px;
+  width: 550px; 
+  color: #247A60; 
+  font-family: 'Montserrat'; 
+  font-weight: 600;
+}
+
+.sendZayavka
+{
+  margin-top: -10px; 
+  margin-left: -45px; 
+  color: #504B3D; 
+  font-family: 'Montserrat'; 
+  font-size: medium; 
+  font-weight: 400; 
+  max-width: 450px;
+}
+
+.yourPIB
+{
+  margin-left: -45px; 
+  color: #504B3D; 
+  font-family: 'Montserrat'; 
+  font-size: medium; 
+  font-weight: 600;
+}
+
+.password2
+{
+  margin-left: -45px; 
+  color: #504B3D; 
+  font-family: 'Montserrat'; 
+  font-size: medium; 
+  font-weight: 600;
+}
+
+
+/* --------------------- */
+
+.error2 
+{
+  font-family: 'Montserrat';
+  color: red;
+  font-size: 16px;
+  margin-top: 5px;
+  margin-left: -45px;
+}
+
+.error3 
+{
+  font-family: 'Montserrat';
+  color: red;
+  font-size: 16px;
+  margin-top: 0px;
+  margin-left: -45px;
+}
+
+.error4 
+{
+  font-family: 'Montserrat';
+  color: red;
+  font-size: 16px;
+  margin-top: -15px;
+  margin-left: -45px;
+}
+
+  .error 
+  {
+    color: red;
+    font-size: 14px;
+  }
+  
+  input.ng-invalid.ng-touched 
+  {
+    border: 1px solid red;
+  }
+
+  @media(max-width: 550px)
+  {
+    span.passMinLength
+    {
+      left: -27px;
+    }
+
+    label
+    {
+      margin-left: 3px;
+    }
+
+    div.form-group
+    {
+      margin-left: -30px;
+    }
+
+    #checkbox
+    {
+      transform: scale(1.3);
+      opacity: 0,9;
+      cursor: pointer;
+      margin-left: -28px;
+    }
+
+    a 
+    {
+      color: #2C7D59;
+      text-decoration: none;
+      margin-left: -20px;
+    }
+
+    a.politikaSaita
+    {
+      margin-left: 1px;
+    }
+
+    h2
+    {
+      left: -35px;
+    }
+  }
+
+  @media(max-width:510px)
+  {
+    span.passMinLength
+    {
+      left: -35px;
+    }
+
+    label
+    {
+      margin-left: 2px;
+    }
+
+    div.form-group
+    {
+      margin-left: -37px;
+    }
+
+    #checkbox
+    {
+      transform: scale(1.3);
+      opacity: 0,9;
+      cursor: pointer;
+      margin-left: -28px;
+    }
+
+    a 
+    {
+      color: #2C7D59;
+      text-decoration: none;
+      margin-left: -20px;
+    }
+
+    a.politikaSaita
+    {
+      margin-left: 1px;
+    }
+
+    h2
+    {
+      left: -35px;
+    }
+  }
+
+  
+  p {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .text
+  {
+    margin-top: 20px;
+    width: 80px;
+    height: 106px;
+  }
+
+  #checkbox
+  {
+    transform: scale(1.3);
+    opacity: 0,9;
+    cursor: pointer;
+  }
+  
+  .registration-form 
+  {
+    display: flex;
+    margin: 50px auto;
+    width: 900px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    height: 750px;
+  }
+
+  .left-panel 
+  {
+    background-image: url('/assets/images/bg-pattern.png');
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+  }
+  
+  .left-panel img 
+  {
+    width: 100%;
+    height: auto;
+  }
+  
+  .right-panel 
+  {
+    flex: 1;
+    background-color: #fff;
+    padding: 100px;
+    width: 150px;
+  }
+  
+  h2 
+  {
+    color: #247A60;
+    margin-bottom: 20px;
+  }
+  
+  .form-group 
+  {
+    margin-bottom: 20px;
+  }
+
+  a 
+  {
+    color: #2C7D59;
+    text-decoration: none;
+  }
+
+  .search-input.ng-invalid.ng-touched {
+    border-color: inherit;
+    outline: none;
+  }
+  
+  
+  .helpBtn
+  {
+    margin-left: -45px; 
+    text-decoration: underline; 
+    font-weight: 400; 
+    font-size: medium; 
+    color: #504B3D; 
+    font-family: 'Montserrat';
+    position: relative;
+    top: 55px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+
+// ------ поле ввода
+
+.message-container {
+  position: relative;
+  width: 250px;
+  margin-top: 30px;
+}
+
+.message-input {
+  width: 160%;
+  height: 255px;
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  resize: none;
+  margin-left: -50px;
+}
+
+.message-input::placeholder {
+  width: 250px;
+}
+
+.char-counter {
+  left: 220px;
+  top: 280px;
+  position: absolute;
+  font-size: 12px;
+  color: #666;
+  width: 180px;
+}
+
+h2#reg
+{
+  position: relative; 
+  margin-top: 0px;
+  padding-bottom: 30px; 
+  margin-left: 120px;
+  font-family: 'Montserrat'; 
+  font-size: 24px;
+}
+
+// Кнопка отправить
+
+
+
+.center-to-right-line {
+  position: absolute;
+  top: 100px; /* можно изменить на нужную позицию по вертикали */
+  left: 50%;
+  height: 4px;
+  width: 50vw; /* от центра до края экрана */
+  background-color: yellow;
+}
+
+
+
+// Окно подтверждения что сообщение отправлено
+
+.MessageSended {
+
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  gap: 10px; 
+  margin: 50px auto;
+  width: 250%;
+  max-width: 1000px;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 500px;
+  background-color: #247A60;
+}
+
+.BackBtn
+{
+  border: none; /* Убираем границу */
+  padding: 0; /* Убираем внутренние отступы */
+  background: none; /* Убираем фон */
+  cursor: pointer;
+  margin-left: 50px;
+  margin-top: 30px;
+
+}
+
+.BackBtn img {
+  background: none;
+  width: 90px; /* Размер изображения */
+  height: auto;
+  transition: opacity 0.3s ease; /* Плавное изменение прозрачности */
+
+}
+
+.BackBtn:hover img,
+.BackBtn:active img {
+  opacity: 0.7; /* Затемнение изображения */
+  background: none;
+}
+
+.BackBtn:hover {
+  filter: brightness(70%);
+  background: none;
+}
+
+.DM
+{
+  display: grid;
+  grid-auto-flow: column;
+  gap: -50px;
+}
+
+
+.contact-author-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.Botom_profile-icon
+{
+  border: #247A60 solid 5px; 
+  border-radius: 50%; 
+  margin-top: 10px; 
+  margin-left: 150px; 
+  width: 60px; 
+  height: auto;
+}
+
+.wPig
+{
+  width: 150px; 
+  height: 150px; 
+  margin-top: 130px;
+}
+
+.sendedText
+{
+  color: white; 
+  font-weight: 400; 
+  font-family: 'Montserrat';
+}
+
+/* Адаптация от 1080px до 560px */
+
+@media (max-width: 1080px) {
+  .BackBtn
+  {
+    margin-left: 20px;
+    margin-right: 40px;
+  }
+
+  .MessageSended
+  {
+    width: 75%;
+    height: 60%;
+    margin-top: 20px;
+  }
+
+  .wPig
+  {
+    margin-top: 100px;
+  }
+
+  .sendedText
+  {
+    font-size: large;
+  }
+}
+
+@media(max-width: 950px)
+{
+  .eye-icon {
+    right: 10px !important;
+  }
+
+  .send-project-btn3 
+  {
+    margin-left: 150px;
+  }
+
+  .error4
+  {
+    position: relative;
+    top: 0px !important;
+    left: -20px !important;
+  }
+
+  .error3
+  {
+    margin-top: 0px !important;
+    margin-left: -65px !important;
+  }
+
+  .error2 
+  {
+    font-family: 'Montserrat';
+    color: red;
+    font-size: 16px;
+    margin-top: 5px;
+    margin-left: -68px;
+  }
+
+  .registration-form
+  {
+    display: flex;
+    margin: 50px auto;
+    width: 700px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    height: 750px;
+  }
+
+  .left-panel
+  {
+    max-width: 150px !important;
+  }
+
+  .search-input
+  {
+    margin-left: -157px;
+  }
+
+  
+
+  .helpBtn
+  {
+    top: 55px;
+    margin-left: -65px;
+  }
+
+  .yourPIB
+  {
+    margin-left: -68px;
+  }
+
+  .password2
+  {
+    margin-left: -68px;
+  }
+
+  .sendZayavka
+  {
+    margin-left: -68px !important;
+  }
+
+  .becomeAuthor
+  {
+    margin-left: -68px;
+  }
+}
+
+@media (max-width: 900px) {
+
+  .BackBtn
+  {
+    width: 5%;
+    height: 5px;
+  }
+
+  .Botom_profile-icon
+  {
+    margin-left: 75px; 
+  }
+  
+  .message-container{
+    width: 200px;
+    padding: 10px;
+  }
+  
+  .message-input {
+    width: 130%;
+    height: 275px;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    resize: none;
+    margin-left: -75px;
+  }
+  
+  .message-input::placeholder {
+    width: 250px;
+  }
+
+  .char-counter
+  {
+    top: 320px;
+    left: 80px;
+  }
+
+  .MessageSended
+  {
+    width: 75%;
+    height: 60%;
+    margin-top: 20px;
+  }
+
+  .wPig
+  {
+    margin-top: 75px;
+  }
+
+  .sendedText
+  {
+    font-size: large;
+  }
+}
+
+.success2
+{
+  width: 550px; 
+  color: #247A60; 
+  font-family: 'Montserrat'; 
+  font-weight: 600;
+  position: relative;
+  left: -100px;
+  top: 50px;
+  text-align: center;
+}
+
+.zayavka
+{
+  width: 550px; 
+  line-height: 1.6; 
+  margin-top: -10px; 
+  color: #504B3D; 
+  font-family: 'Montserrat'; 
+  font-size: medium; 
+  font-weight: 400;
+  position: relative;
+  left: -100px;
+  top: 50px;
+  text-align: center;
+}
+
+@media(max-width: 750px)
+{
+  .eye-icon {
+    right: 15px !important;
+  }
+
+  .send-project-btn3 
+  {
+    margin-left: 195px;
+  }
+
+  .success2
+{
+  left: -80px;
+}
+
+.zayavka
+{
+  left: -80px;
+}
+
+.send-project-btn
+{
+  margin-left: 45px;
+}
+
+.send-project-btn2
+{
+  margin-left: 95px;
+}
+
+  .error2
+  {
+    margin-left: -28px;
+  }
+
+  .registration-form
+  {
+    display: flex;
+    margin: 50px auto;
+    width: 600px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    height: 750px;
+  }
+
+  .left-panel
+  {
+    display: none;
+  }
+
+  .search-input
+  {
+    margin-left: -127px;
+  }
+
+  .helpBtn
+  {
+    top: 50px;
+    margin-left: -25px;
+  }
+
+  .error4
+  {
+    position: relative;
+    top: 0px !important;
+    left: 20px !important;
+  }
+
+  .error3
+  {
+    margin-top: 0px !important;
+    margin-left: -25px !important;
+  }
+
+  .yourPIB
+  {
+    margin-left: -28px;
+  }
+
+  .password2
+  {
+    margin-left: -28px;
+  }
+
+  .sendZayavka
+  {
+    margin-left: -28px !important;
+  }
+
+  .becomeAuthor
+  {
+    margin-left: -28px;
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 720px) {
+  .BackBtn
+  {
+    width: 5px;
+    height: auto;
+    margin-top: 10px;
+  }
+
+  .MessageSended
+  {
+    width: 75%;
+    height: 60%;
+    padding-top: -300px;
+  }
+
+  .wPig
+  {
+    margin-top: 75px;
+  }
+
+  .sendedText
+  {
+    font-size: large;
+  }
+}
+
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.search-input.with-eye {
+  width: 100%;
+  padding-right: 40px;
+  box-sizing: border-box;
+}
+
+.eye-icon {
+  position: absolute;
+  top: 50%;
+  right: -12px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 24px;
+  color: #666;
+}
+
+
+
+@media(max-width: 650px)
+{
+  .eye-icon {
+    right: -50px !important;
+  }
+
+  .send-project-btn3 
+  {
+    margin-left: 158px;
+  }
+
+  .success2
+  {
+    left: -130px;
+  }
+  
+  .zayavka
+  {
+    left: -130px;
+  }
+  
+  .send-project-btn
+  {
+    margin-left: -5px;
+  }
+  
+  .send-project-btn2
+  {
+    margin-left: 45px;
+  }
+
+  .error2
+  {
+    margin-left: -60px;
+  }
+
+  .error4
+  {
+    position: relative;
+    top: 0px !important;
+    left: -15px !important;
+  }
+
+  .error3
+  {
+    margin-top: 0px !important;
+    margin-left: -60px !important;
+    white-space: nowrap;
+  }
+
+  .registration-form
+  {
+    display: flex;
+    margin: 50px auto;
+    width: 500px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    height: 750px;
+  }
+
+  .left-panel
+  {
+    display: none;
+  }
+
+  .search-input
+  {
+    margin-left: -137px;
+  }
+
+  .helpBtn
+  {
+    top: 50px;
+    margin-left: -58px;
+  }
+
+  .yourPIB
+  {
+    margin-left: -63px;
+  }
+
+  .password2
+  {
+    margin-left: -63px;
+  }
+
+  .sendZayavka
+  {
+    min-width: 450px !important;
+    margin-left: -63px !important;
+  }
+
+  .becomeAuthor
+  {
+    margin-left: -63px;
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 560px) {
+
+  .MessageSended
+  {
+    width: 100%;
+    height: 75%;
+    margin-right: -30px;
+  }
+
+  .wPig
+  {
+    width: 50px;
+    height: auto;
+  }
+
+  .sendedText
+  {
+    font-size: medium;
+  }
+}
+
+@media(max-width: 520px)
+{
+  .error2
+  {
+    font-size: 14px;
+  }
+
+  .registration-form
+  {
+    width: 450px;
+  }
+
+  h1.becomeAuthor
+  {
+    font-size: 26px;
+  }
+
+  .sendZayavka
+  {
+    min-width: 400px !important;
+  }
+
+  .search-input
+  {
+    width: 370px !important;
+    left: 30%;
+  }
+
+  .send-project-btn3
+  {
+    margin-left: 105px;
+  }
+}
+
+@media(max-width: 470px)
+{
+  .registration-form
+  {
+    width: 400px;
+  }
+
+  h1.becomeAuthor
+  {
+    font-size: 23px;
+  }
+
+  .sendZayavka
+  {
+    min-width: 320px !important;
+  }
+
+  .search-input
+  {
+    width: 320px !important;
+    left: 37%;
+  }
+
+  .send-project-btn3
+  {
+    margin-left: 55px;
+  }
+}
+
+@media(max-width: 420px)
+{
+  .error2
+  {
+    white-space: nowrap;
+  }
+
+  .registration-form
+  {
+    width: 350px;
+  }
+
+  .right-panel
+  {
+    position: relative;
+    left: -25px;
+  }
+
+  .search-input
+  {
+    width: 320px !important;
+    left: 50%;
+  }
+
+  .eye-icon {
+    right: -100px !important;
+  }
+}
+
+@media(max-width: 370px)
+{
+  .registration-form
+  {
+    width: 330px;
+  }
+
+  h1.becomeAuthor
+  {
+    font-size: 21px;
+  }
+
+  .search-input
+  {
+    width: 305px !important;
+    left: 50%;
+  }
+
+  .eye-icon {
+    right: -85px !important;
+  }
+
+  .send-project-btn3
+  {
+    margin-left: 43px;
+  }
+}
+
+@media(max-width: 345px)
+{
+  .right-panel
+  {
+    left: -27px;
+  }
+}

@@ -1,0 +1,386 @@
+<app-header></app-header>
+
+  <hr>
+
+  <div class="investor-container">
+    <div class="investor-item">
+
+      <img [src]="userInfo?.photo || 'assets/images/userWithoutPhoto.png'" alt="Investor" class="investor-image">
+      
+      <div class="investor-details">
+        <p class="investor-name">{{name}}</p>
+
+        <div class="investor-role-container">
+          <p class="investor-role">{{seerule | transloco}}</p>
+        </div>
+
+        <p class="investor-text">{{date}}</p>
+        
+        <div class="yellow-line"></div>
+        
+        <p class="investor-description">{{description}}</p>
+
+        <button 
+        [routerLink]="'/account-settings-page'" 
+        class="investor-button">
+        {{"Редагувати профіль" | transloco}}
+      </button>
+
+      <button  
+      [routerLink]="'/all-chats-page'"
+      class="investor-button2">
+      {{"Мої чати" | transloco}}
+      </button>
+
+      <button 
+      *ngIf="userIsAdmin" 
+      (click)="goToRootPanel()" 
+      class="investor-button2">
+      {{ "Адмін панель" | transloco }}
+      </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="partners2">
+    <div class="partners-header">
+      <div class="yellow-line-left"></div>
+      <h2>
+        {{ "ТОВАРИ ЯКІ ВАМ" | transloco}} <strong>{{"СПОДОБАЛИСЬ" | transloco}}</strong>
+      </h2>
+      <div class="yellow-line-right"></div>
+    </div>
+  </div>
+
+  <div class="cards-container">
+    <div class="four-cards-row">
+      <div *ngFor="let product of likeProducts; let i = index" class="small-card">
+
+        <!-- <img src="assets/images/like.png" alt="Right Top Image" class="right-top-image" /> -->
+        <img 
+        src="{{ product?.isFavourite ? 'assets/images/likeRed.png' : 'assets/images/like.png' }}" 
+        (click)="toggleLike3(product.id, i)" 
+        alt="Heart" 
+        class="right-top-image" 
+      />
+
+        <img src="assets/images/ShopGreenLeftUp2.png" alt="Left Top Image" class="left-top-image" />
+        <img [src]="product.imageBase64" [routerLink]="['/tovar-page-page']" [queryParams]="{ productId: product.id}" alt="Image" class="small-card-image" />
+        
+        <div class="left-top-text">
+          <p>{{ product.categoryName | transloco }}</p>
+        </div>
+        
+        <div class="small-card-info">
+          <h3 class="small-card-title">{{ product.name | transloco }}</h3>
+          <p class="small-card-description">{{ product.shortDescription | transloco }}</p>
+          <p class="small-card-price">{{ product.price }} {{"грн" | transloco}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <div *ngIf="showUserProject">
+  <div class="partners2">
+    <div class="partners-header">
+      <div class="yellow-line-left"></div>
+      <h2>
+        {{ "ВАШІ" | transloco}} <strong>{{"ПРОЄКТИ" | transloco}}</strong>
+      </h2>
+      <div class="yellow-line-right"></div>
+    </div>
+  </div>
+
+<div class="projects-container">
+  <div class="projects-grid">
+    <div
+      class="project-card"
+      *ngFor="let project of userProjectList; let i = index"
+      [ngClass]="'project-card-' + i"
+    >
+      <div class="icon-container"></div>
+
+      <div class="project-overlay2">
+
+        <div class="project-title">{{ project.title | transloco}}</div>
+
+        <div class="project-extra">
+          <div class="progress-bar2">
+            <div class="progress2" [style.width]="MATHPercentageOfMoney(project.collectedAmount, project.collectionAmount)"></div>
+          </div>
+          <p
+          class="startSum"
+          >
+            {{ project.collectedAmount }} {{ "грн" | transloco }}
+          </p>
+          <p
+          class="endSum"
+          >
+            {{ project.collectionAmount }} {{ "грн" | transloco }}
+          </p>
+
+          <div class="peoplePhoto">
+            <img src="assets/images/people.png" />
+          </div>
+          <span
+          class="people2"
+            >{{ project.teamsCount }}</span
+          >
+
+          <div class="commentsPhoto">
+            <img src="assets/images/comments.png" />
+          </div>
+          <span
+          class="comments2"
+            >{{project.teamsCount}}</span
+          >
+
+          <div class="moneyPhoto">
+            <img src="assets/images/money.png" />
+          </div>
+          <span
+          class="money2"
+            >{{PercentageOfMoney(project.collectedAmount, project.collectionAmount)}}%</span
+          >
+
+          <div class="dropdown-wrapper">
+            <img 
+            src="assets/images/socialMedia.png" 
+            alt="icon"
+            class="support-icon social-icon" 
+            (click)="toggleDropdown3(i)" 
+            /> 
+            <div class="dropdown-list" *ngIf="dropdownOpen2[i]">
+              <a href="https://www.facebook.com/profile.php?id=61573153085556"> 
+              <img src="assets/images/facebook.png" alt="social 1" class="dropdown-image" />
+              </a>
+              <a href="https://www.instagram.com/seedflow_itstep/"> 
+              <img src="assets/images/Instagram.png" alt="social 2" class="dropdown-image" />
+              </a>
+            </div>
+          </div> 
+
+
+          <div>
+            <img
+              class="like-icon2"
+              [src]="
+                likedProjects[i]
+                  ? 'assets/images/like.png'
+                  : 'assets/images/likeRed.png'
+              "
+              (click)="toggleLike(i, project.id)"
+            />
+          </div>
+
+          <button class="support-button"  [routerLink]="['/donation-page']" [queryParams]="{ projectId: project.id}">{{ "ПІДТРИМАТИ" | transloco }}</button>
+          
+          <div class="project-extra">
+            <p
+              class="project-extra-description"
+            >
+              {{ project.shortDescription | transloco }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <img
+          class="LeftUpAngle"
+          src="assets/images/LeftUpAngle.png"
+        />
+      </div>
+      <div>
+        <img
+        class="rocket2"
+          src="assets/images/rocket.png"
+        />
+      </div>
+  
+      <img
+      *ngIf="project" [routerLink]="['/see-project-page']" [queryParams]="{ projectId: project.id}"
+        [src]="project.mainPhotoUrl"
+        alt="{{ project.title }}"
+        class="project-image"
+      />
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+  <div class="partners2">
+    <div class="partners-header">
+      <div class="yellow-line-left"></div>
+      <h2>
+        {{ "ПРОЄКТИ ЯКІ ВАМ" | transloco}} <strong>{{"СПОДОБАЛИСЬ" | transloco}}</strong>
+      </h2>
+      <div class="yellow-line-right"></div>
+    </div>
+  </div>
+
+
+
+
+<div class="projects-container">
+  <div class="projects-grid">
+    <div
+      class="project-card"
+      *ngFor="let project of LikeProjectList; let i = index"
+      [ngClass]="'project-card-' + i"
+    >
+      <div class="icon-container"></div>
+
+      <div class="project-overlay">
+
+        <div class="project-title">{{ project.title | transloco}}</div>
+
+        <div class="project-extra">
+          <div class="progress-bar2">
+            <div class="progress2" [style.width]="MATHPercentageOfMoney(project.collectedAmount, project.collectionAmount)"></div>
+          </div>
+          <p
+          class="startSum"
+          >
+            {{ project.collectedAmount }} {{ "грн" | transloco }}
+          </p>
+          <p
+          class="endSum"
+          >
+            {{ project.collectionAmount }} {{ "грн" | transloco }}
+          </p>
+
+          <div class="peoplePhoto">
+            <img src="assets/images/people.png" />
+          </div>
+          <span
+          class="people2"
+            >{{project.teamsCount}}</span
+          >
+
+          <div class="commentsPhoto">
+            <img src="assets/images/comments.png" />
+          </div>
+          <span
+          class="comments2"
+            >{{project.rewardsCount}}</span
+          >
+
+          <div class="moneyPhoto">
+            <img src="assets/images/money.png" />
+          </div>
+          <span
+          class="money2"
+            >{{PercentageOfMoney(project.collectedAmount, project.collectionAmount)}}%</span
+          >
+
+          <div class="dropdown-wrapper">
+            <img 
+            src="assets/images/socialMedia.png" 
+            alt="icon"
+            class="support-icon social-icon" 
+            (click)="toggleDropdown3(i)" 
+            /> 
+            <div class="dropdown-list" *ngIf="dropdownOpen2[i]">
+              <a href="https://www.facebook.com/profile.php?id=61573153085556"> 
+              <img src="assets/images/facebook.png" alt="social 1" class="dropdown-image" />
+              </a>
+              <a href="https://www.instagram.com/seedflow_itstep/"> 
+              <img src="assets/images/Instagram.png" alt="social 2" class="dropdown-image" />
+              </a>
+            </div>
+          </div> 
+
+
+          <div>
+            <img
+              class="like-icon2"
+              [src]="
+                likedProjects[i]
+                  ? 'assets/images/like.png'
+                  : 'assets/images/likeRed.png'
+              "
+              (click)="toggleLike(i, project.id)"
+            />
+          </div>
+
+          <button class="support-button" [routerLink]="['/donation-page']" [queryParams]="{ projectId: project.id}">{{ "ПІДТРИМАТИ" | transloco }}</button>
+          
+          <div class="project-extra">
+            <p
+            class="project-extra-description"
+            >{{project.shortDescription | transloco}}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <img
+          src="assets/images/LeftUpAngle.png"
+          class="LeftUpAngle"
+        />
+      </div>
+      <div>
+        <img
+          src="assets/images/rocket.png"
+          class="rocket2"
+        />
+      </div>
+  
+      <img
+      *ngIf="project" [routerLink]="['/see-project-page']" [queryParams]="{ projectId: project.id}"
+        [src]="project.mainPhotoUrl"
+        alt="{{ project.title }}"
+        class="project-image"
+      />
+    </div>
+  </div>
+
+</div>
+
+
+
+
+<div id="targetSection2" style="position: relative; top: -100px"></div>
+
+  <div class="partners2">
+    <div class="partners-header">
+      <div class="yellow-line-left"></div>
+      <h2>
+        {{ "ВАШІ ОСТАННІ" | transloco}} <strong>{{"КОМЕНТАРІ" | transloco}}</strong>
+      </h2>
+      <div class="yellow-line-right"></div>
+    </div>
+  </div>
+
+
+  <div class="comments-wrapper">
+    <div class="comments-list">
+      <div class="comment-card" *ngFor="let comment of returnComents; let i = index">
+        <div class="comment-header">
+          <div class="comment-image">
+            <img [src]="comment.senderPhotoBase64 || 'assets/images/userWithoutPhoto.png'"  alt="User Image" class="profile-image" />
+          </div>
+          <div class="comment-info">
+            <div class="comment-name">{{ comment.senderName | transloco }}</div>
+          </div>
+          <div class="comment-date">{{ comment.createdAt | transloco }}</div> 
+        </div>
+        <div class="comment-text">{{ comment.message | transloco }}</div>
+  
+        <div class="comment-reply-answer" *ngIf="comment.reply" >
+          <div class="reply-header">
+            <span class="reply-author">{{comment.reply.senderName | transloco}}</span>
+            <span class="reply-date">{{ comment.reply.createdAt| transloco }}</span>
+          </div>
+          <div class="reply-text">{{ comment.reply.message| transloco }}</div>
+        </div>
+
+      </div>
+    </div>
+  </div> 
+
+<app-footer></app-footer>

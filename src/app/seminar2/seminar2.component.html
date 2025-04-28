@@ -1,0 +1,167 @@
+<app-header></app-header>
+
+  <hr>
+
+  <div class="container">
+    <img 
+    *ngFor="let img of images; let i = index"
+    [src]="activeIndex === i ? img.active : img.gray"
+    alt="Image"
+    class="image"
+    [class.active]="activeIndex === i"
+    (click)="onImageClick(img.link)">
+  </div>
+
+  <button class="fixed-button" (click)="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  
+  <div class="seminar-container">
+
+    <div class="breadcrumbs">
+      <a [routerLink] = "'/'" style="cursor: pointer; text-decoration: none; color: inherit;">
+      <span>{{"Головна" | transloco}}</span>  
+      </a>
+      &gt;
+      <a [routerLink] = "'/support-page'" style="cursor: pointer; text-decoration: none; color: inherit;">
+      <span>{{"Підтримка" | transloco}}</span>
+      </a>
+      &gt;
+      <span>{{"Семінари" | transloco}}</span>
+    </div>
+
+    <div class="seminar-image">
+      <img src="assets/images/ManFon.png" alt="Seminar Image" class="seminar-photo" />
+      <div class="seminar-text-overlay">
+        <p class="text1">{{"СЕМІНАР" | transloco}}</p>
+        <p class="text2">{{"Як створити проєкт з нуля" | transloco}}</p>
+        <p class="text3">By <span style="color: #ffcf33">James West</span> | 02.23.2025</p>
+        <p class="text4">{{"Надійний план є фундаментом будь‑якого успішного проєкту. Однак, якщо ви ніколи раніше не планували жодного проєкту, може бути складно зрозуміти, із чого почати." | transloco}}</p>
+      </div>
+      <button [routerLink]="'/seminar-third-page'" class="seminar-button">
+        {{ "Детальніше" | transloco }}
+      </button>
+    </div>
+  </div>
+  
+
+ <div class="content-wrapper">
+    <div class="seminar-list">
+      <div class="seminar-item">
+        <img src="assets/images/seminar1.png" alt="Seminar 1" class="seminar-item-photo">
+        <div class="seminar-info">
+          <h3 class="seminar-title">{{ "БІЗНЕС" | transloco }}</h3>
+          <p class="seminar-highlight">{{ "Сторінка перед запуском: як почати жити, коли спонсори вже поруч" | transloco }}</p>
+          <p class="seminar-description">
+            {{ "Від залучення вашої аудиторії до перевірки вашого продукту та створення ексклюзивного раннього доступу, сторінка перед запуском може допомогти вам зміцнити ваш краудфандинговий успіх ще до того, як ваша кампанія запрацює." | transloco }}
+          </p>
+          <a [routerLink]="'/seminar-second-page'" class="seminar-link">{{ "Взяти участь" | transloco }}</a>
+        </div>
+      </div>
+  
+      <div class="seminar-item">
+        <img src="assets/images/seminar2.png" alt="Seminar 2" class="seminar-item-photo">
+        <div class="seminar-info">
+          <h3 class="seminar-title">{{ "БІЗНЕС" | transloco }}</h3>
+          <p class="seminar-highlight">{{ "5 навичок спілкування, які потрібні для успіху в краудфандингу" | transloco }}</p>
+          <p class="seminar-description">
+            {{ "Краудфандинг — це більше, ніж просто наявність чудового продукту чи ідеї — це спілкування з людьми та надихання їх підтримати ваше бачення." | transloco }}
+          </p>
+          <a [routerLink]="'/seminar-second-page'" class="seminar-link">{{ "Взяти участь" | transloco }}</a>
+        </div>
+      </div>
+  
+      <div class="seminar-item">
+        <img src="assets/images/seminar3.png" alt="Seminar 3" class="seminar-item-photo">
+        <div class="seminar-info">
+          <h3 class="seminar-title">{{ "ЕКОНОМІКА" | transloco }}</h3>
+          <p class="seminar-highlight">{{ "Повний посібник із організації краудфандингової кампанії" | transloco }}</p>
+          <p class="seminar-description">
+            {{ "Якщо ви збираєтеся створити краудфандингову кампанію, дуже важливо подумати про те, як ви будете доставляти свої продукти спонсорам." | transloco }}
+          </p>
+          <a [routerLink]="'/seminar-second-page'" class="seminar-link">{{ "Взяти участь" | transloco }}</a>
+        </div>
+      </div>
+  
+      <div class="seminar-item">
+        <img src="assets/images/seminar4.png" alt="Seminar 4" class="seminar-item-photo">
+        <div class="seminar-info">
+          <h3 class="seminar-title">{{ "СТАРТАПИ" | transloco }}</h3>
+          <p class="seminar-highlight">{{ "Ми - команда авторів, які діляться своїми знаннями" | transloco }}</p>
+          <p class="seminar-description">
+            {{ "Ми – команда ентузіастів, які знають усі тонкощі цього процесу, і готові ділитися своїми знаннями, досвідом та лайфхаками, щоб допомогти вам досягти успіху." | transloco }}
+          </p>
+          <a [routerLink]="'/seminar-second-page'" class="seminar-link">{{ "Взяти участь" | transloco }}</a>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <div class="category-container">
+      <h3 class="category-title">{{"Категорії" | transloco}}</h3>
+      <div class="category-list">
+          <div class="category-item">
+              <img src="assets/images/Startap.png" alt="Стартапи" class="category-icon" />
+              <span class="category-text">{{"Стартапи" | transloco}}</span>
+          </div>
+          <div class="category-item">
+              <img src="assets/images/Business.png" alt="Бізнес" class="category-icon" />
+              <span class="category-text">{{"Бізнес" | transloco}}</span>
+          </div>
+          <div class="category-item">
+              <img src="assets/images/Economika.png" alt="Економіка" class="category-icon" />
+              <span class="category-text">{{"Економіка" | transloco}}</span>
+          </div>
+          <div class="category-item">
+              <img src="assets/images/Technology.png" alt="Технології" class="category-icon" />
+              <span class="category-text">{{"Технології" | transloco}}</span>
+          </div>
+      </div>
+    </div>
+    
+
+    <div class="tags-container">
+      <h3 class="tags-title">{{"Усі теги" | transloco}}</h3>
+      <div class="tags-list">
+          <div class="tags-row">
+              <button class="tag-button">{{"Інвестиції" | transloco}}</button>
+              <button class="tag-button">{{"Фінанси" | transloco}}</button>
+          </div>
+          <div class="tags-row">
+              <button class="tag-button">{{"Криптовалюта" | transloco}}</button>
+              <button class="tag-button">{{"Розвиток" | transloco}}</button>
+          </div>
+          <div class="tags-row">
+              <button class="tag-button">{{"Маркетинг" | transloco}}</button>
+              <button class="tag-button">{{"Технології" | transloco}}</button>
+          </div>
+      </div>
+  </div>
+
+</div>
+
+  <div class="image-gallery">
+  <div class="image-item" [routerLink]="'/support-page'">
+      <h3 class="image-title">{{"⇦ Prev" | transloco}}</h3>
+  </div>
+  <div class="image-item second-image" [routerLink]="'/seminars-vebinars-page'">
+      <h3 class="image-title2">{{"Next ⇨" | transloco}}</h3>
+  </div>
+</div>
+
+<div class="seminar-search-container">
+  <h2 class="seminar-search-title">{{"Підключіться до семінару" | transloco}}</h2>
+  <p class="seminar-search-description">{{"Розвивайте свою ідею далі з цими досвідченими компаніями, рекомендованими учасниками кампаній і співробітниками Seed Flow" | transloco}}</p>
+  <input type="text" class="seminar-search-input" placeholder="{{'Пошук семінару...' | transloco}}"
+  [(ngModel)]="searchText2" (keydown.enter)="onEnter()">
+</div>
+
+<div class="text-container">
+  <h1 class="title-text">{{"Приєднуйтесь до нашої спільноти" | transloco}}</h1>
+  <p class="sub-text">{{"Ставайте учасником нашої спільноти" | transloco}}</p>
+  <button class="action-btn">{{"Приєднатися" | transloco}}</button>
+</div>
+
+<app-footer></app-footer>

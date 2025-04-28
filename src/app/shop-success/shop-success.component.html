@@ -1,0 +1,37 @@
+<app-header></app-header>
+
+  <hr>
+
+
+  <div class="registration-form">
+    <div class="left-panel">
+    </div>
+    <div class="right-panel">
+
+        <p class="enterAccess">{{"Ваше замовлення" | transloco}}</p>
+
+      <!-- <h2 id="yspix">{{"325487" | transloco }}</h2> -->
+      
+      <form>
+        <p class="enterAccess2">{{"прийняте та відправлене в обробку" | transloco}}</p>
+        
+        <br>
+        <br>
+
+        <p class="enterAccess3">{{"Дякуємо, що завітали до" | transloco}}  <span style="font-weight: bold; font-size: 18px; color: #247a60">Seed Goods</span> !</p>
+
+        <br>
+
+        <button id="backToMainPage" [routerLink]="'/'" type="submit">{{"НА ГОЛОВНУ" | transloco }}</button>
+      
+        <br>
+        <br>
+
+        <button id="goToProfile" type="submit" [routerLink]="'/shop-main-page-page'">{{"ДО МАГАЗИНУ" | transloco }}</button>
+
+      </form>
+    </div>
+
+  </div>
+
+

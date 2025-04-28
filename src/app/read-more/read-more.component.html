@@ -1,0 +1,162 @@
+<app-header></app-header>
+
+  <hr>
+
+  <button class="fixed-button" (click)="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <div class="container">
+    <img 
+    *ngFor="let img of images; let i = index"
+    [src]="activeIndex === i ? img.active : img.gray"
+    alt="Image"
+    class="image"
+    [class.active]="activeIndex === i"
+    (click)="onImageClick(img.link)">
+  </div>
+
+  <div class="breadcrumbs">
+    <a [routerLink] = "'/'" style="cursor: pointer; text-decoration: none; color: inherit;">
+    <span>{{"Головна" | transloco}}</span>  
+    </a>
+    &gt;
+    <a [routerLink] = "'/support-page'" style="cursor: pointer; text-decoration: none; color: inherit;">
+    <span>{{"Підтримка" | transloco}}</span>
+    </a>
+    &gt;
+    <a [routerLink] = "'/accompaniment-page'" style="cursor: pointer; text-decoration: none; color: inherit;">
+      <span>{{"Супровід проєкту" | transloco}}</span>
+    </a>
+    &gt;
+    <span>{{"Юридичні та фінансові послуги" | transloco}}</span>
+  </div> 
+
+  <div class="photo-container">
+    <div class="photo-item">
+      <img src="assets/images/specialistHelp1.png" alt="Фото 1">
+      <p class="photo-title">{{"Авторські права, торгові марки та патенти" | transloco}}</p>
+    </div>
+    <div class="text-content">
+      <h2 class="section-heading">{{"Авторські права, торгові марки та патенти" | transloco}}</h2>
+      <p class="section-text">
+        {{"Seed Flow дуже серйозно ставиться до прав інтелектуальної власності («ІВ»). У цій статті описано, як Seed Flow розглядає спори щодо інтелектуальної власності щодо вмісту на нашій платформі.Важлива примітка. Ця стаття не призначена для надання юридичних порад для будь-яких цілей і не повинна розглядатися як юридична порада. Ми рекомендуємо вам проконсультуватися з юристом, перш ніж надсилати нам будь-яку юридичну кореспонденцію, включаючи лист-вимогу чи запит на видалення, або якщо у вас виникли запитання щодо прав інтелектуальної власності." | transloco}}
+        {{"Якщо у вас виникли труднощі з переглядом вмісту або навігацією сайтом, надішліть листа нашій команді. Ми будемо раді Вам допомогти." | transloco}}
+      </p>
+    </div>
+  
+  
+
+<div class="phone-info">
+
+    <div class="phone-info-button">
+        <button>{{"ВПОДОБАТИ" | transloco}}</button>
+    </div>
+    <div class="more-info-icon" (click)="toggleDropdown2()">
+        <a><img src="assets/images/socialMedia.png" alt="Иконка"></a>
+    </div>
+
+    <div *ngIf="showDropdown2" class="social-media-dropdown2">
+      <ul>
+        <li>
+          <a href="https://www.facebook.com/profile.php?id=61573153085556" target="_blank">
+            <img src="assets/images/facebook.png" alt="Facebook" />
+          </a>
+        </li>
+        <li>
+          <a href="https://www.instagram.com/seedflow_itstep/" target="_blank">
+            <img src="assets/images/Instagram.png" alt="Instagram" />
+          </a>
+        </li>
+      </ul>
+    </div>
+</div>
+
+
+    <div class="center-content">
+        
+        <p class="secondary-text">
+            {{"Авторське право" | transloco}}
+        </p>
+        <p class="primary-text2">{{"Авторське право захищає результати інтелектуальної діяльності в літературі, мистецтві, музиці, кінематографі та інших сферах. В Україні воно регулюється Законом «Про авторське право і суміжні права», а на міжнародному рівні – Бернською конвенцією." | transloco}}
+        <br>
+        <br>
+        {{"Основні положення авторського права:" | transloco}}
+        <br>
+        &nbsp;&nbsp;{{"· Виникає автоматично після створення твору, без необхідності реєстрації." | transloco}}
+        <br>
+        &nbsp;&nbsp;{{"· Автор має виключне право на використання твору, його розповсюдження та комерціалізацію." | transloco}}
+        <br>
+        &nbsp;&nbsp;{{"· Термін дії: 70 років після смерті автора." | transloco}}
+        </p>  
+        
+        <p class="secondary-text">           
+            {{"Торгові марки" | transloco}}
+        </p>
+        <p class="primary-text2">{{"Торгова марка (бренд) – це позначення, яке відрізняє товари та послуги однієї компанії від іншої. В Україні реєстрацією торгових марок займається Укрпатент, а на міжнародному рівні – Відомство інтелектуальної власності ЄС (EUIPO) та Всесвітня організація інтелектуальної власності (WIPO)." | transloco}}
+        <br>
+        <br>
+        {{"Основні аспекти реєстрації:" | transloco}}
+        <br>
+        &nbsp;&nbsp;{{"· Заявка подається до Укрпатенту." | transloco}}
+        <br>
+        &nbsp;&nbsp;{{"· Перевіряється унікальність." | transloco}}
+        <br>
+        &nbsp;&nbsp;{{"· Правоохоронний термін – 10 років із можливістю продовження." | transloco}}
+        <br>
+        &nbsp;&nbsp;{{"· Діє принцип «перший зареєстрований – перший власник»." | transloco}}
+        </p>    
+
+        <p class="secondary-text">           
+            {{"Патенти" | transloco}}
+        </p>
+        <p class="primary-text2">{{"Патент захищає винаходи,корисні моделі та промислові зразки. Він надає власнику виключне парво на використання технологічного рішення." | transloco}}
+            <br>
+            <br>
+            {{"Види патентів:" | transloco}}
+            <br>
+            &nbsp;&nbsp;{{"· Винахід - технічне рішення, що має новизну та винахідницький рівень." | transloco}}
+            <br>
+            &nbsp;&nbsp;{{"· Корисна модель - спрощена форма винаходу." | transloco}}
+            <br>
+            &nbsp;&nbsp;{{"· Промисловий зразок - дизайн вибору." | transloco}}
+            <br>
+            <br>
+            {{"Основні етапи патентування:" | transloco}}
+            <br>
+            &nbsp;&nbsp;{{"1. Подання заявки до Укрпатенту" | transloco}}
+            <br>
+            &nbsp;&nbsp;{{"2. Експертиза на відповідність критеріям новизни." | transloco}}
+            <br>
+            &nbsp;&nbsp;{{"3. Отримання патенту." | transloco}}
+            <br>
+            &nbsp;&nbsp;{{"4. Охоронний термін: 20 років для винаходу, 10 років для корисної моделі." | transloco}}
+        </p>    
+
+        <p class="secondary-text">           
+            {{"Висновок" | transloco}}
+        </p>
+       
+        <p class="primary-text2">{{"Захист інтелектуальної власності – важливий елемент правової системи, що забезпечує творцям, винахідникам і бізнесу механізми монетизації та захисту їхніх ідей. Реєстрація авторських прав, торгових марок і патентів допомагає запобігти незаконному використанню та сприяє розвитку інновацій." | transloco}}
+        </p>
+    </div>
+
+
+<!-- <div class="center-text">
+    <p style="font-size: 27px; font-weight: 700;">{{"Чи була ця стаття корисною?" | transloco}}</p>
+</div>
+
+    <div class="image-gallery">
+        <div class="image-item">
+            <button style="padding: 12px 15px; border: none; background-color: #247a60; color: white; font-weight: 600; border-radius: 5px; position: relative;  cursor: pointer; font-family: 'Montserrat'; font-size: 24px; width: 150px;">{{"Так" | transloco}}</button>
+            <h3 class="image-title" [routerLink]="'/blog-page'">{{"⇦ Prev" | transloco}}</h3>
+        </div>
+        <div class="image-item second-image">
+            <button style="padding: 12px 15px; border: none; background-color: #ffcf33; color: #247a60; font-weight: 600; border-radius: 5px; position: relative;  cursor: pointer; font-family: 'Montserrat'; font-size: 24px; width: 150px;">{{"Ні" | transloco}}</button>
+            <h3 class="image-title2" [routerLink]="'/accompaniment-page'">{{"Next ⇨" | transloco}}</h3>
+        </div>
+      </div> -->
+  </div>
+
+<app-footer></app-footer> 
+

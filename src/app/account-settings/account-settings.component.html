@@ -1,0 +1,175 @@
+<app-header></app-header>
+
+  <hr>
+
+
+  <div class="settings-container">
+    <h1 class="title">{{"НАЛАШТУВАННЯ" | transloco}}</h1>
+    <div class="settings-box">
+      <div class="back-arrow" (click)="goBack()">
+        <i class="fa fa-arrow-left"></i>
+      </div>
+      <p class="setting-title">{{"ПРОФІЛЬ" | transloco}}</p>
+
+      <div class="input-group">
+        <label id="email" for="email">{{"Електронна пошта" | transloco}}</label>
+        <input type="email" id="email" [(ngModel)]="email" />
+        <i class="fa fa-pencil"></i>
+      </div>
+  
+      <div class="input-group">
+        <label id="fullName" for="fullName">{{"Ім'я та прізвище" | transloco}}</label>
+        <input type="text" id="fullName" [(ngModel)]="name" />
+        <i class="fa fa-pencil"></i>
+      </div>
+  
+      <div class="input-group">
+        <div class="avatar-container">
+          <label id="fullName" for="fullName">{{"Зміна аватара" | transloco}}</label>
+          <div class="avatar-wrapper">
+            <img [src]="photoBase64 || 'assets/images/userWithoutPhoto.png'" alt="Аватар" class="avatar-image" />
+            <div class="overlay2" (click)="fileInput.click()">
+              <i class="fa fa-camera"></i>
+            </div>
+            <input type="file" #fileInput style="display: none;" (change)="changeAvatar($event)" />
+          </div>
+        </div>
+      </div>
+  
+      <div class="input-group">
+        <label id="fullName" for="fullName">{{"Опис профілю" | transloco}}</label>
+        <textarea
+          id="profileForm"
+          [(ngModel)]="profileForm"
+          maxlength="250"
+          placeholder='{{"Почніть вводити" | transloco}}'
+          (input)="updateCharCount()"
+        >
+        </textarea>
+      </div>
+      <div class="char-counter">{{ charCount }}/250</div>
+  
+      <div class="input-group">
+        <label id="showDos">{{"Зберегти дані" | transloco}}</label>
+        <button (click)="saveUserData()" class="custom-button">{{"Зберегти" | transloco}}</button>
+      </div>
+      
+      <br>
+    
+
+
+
+
+
+      
+
+      <div class="input-group">
+        <label id="showDos">{{"Стати автором" | transloco}}</label>
+        <button (click)="setAuthor()" class="custom-button2">{{"Надіслати заявку" | transloco}}</button>
+      </div>
+
+      <!-- <h1 class="setting-title">{{"КОНФІДЕНЦІЙНІСТЬ" | transloco}}</h1> -->
+        
+        <!-- <div class="input-group">
+          <label id="showStatistics">{{"Показувати сподобані проекти" | transloco}}</label>
+          <div class="with-margin-left2">
+          <mat-slide-toggle></mat-slide-toggle>
+          </div>
+        </div> -->
+    
+        <!-- <div class="input-group">
+          <label id="showStatistics">{{"Показувати статистику транзакцій" | transloco}}</label>
+          <div class="with-margin-left2">
+          <mat-slide-toggle></mat-slide-toggle>
+          </div>
+        </div> -->
+    
+        <!-- <div class="input-group">
+          <label id="showTovars">{{"Показувати сподобані товари" | transloco}}</label>
+          <div class="with-margin-left3">
+          <mat-slide-toggle></mat-slide-toggle>
+        </div>
+        </div> -->
+    
+        <!-- <div class="input-group">
+          <label id="showProjects">{{"Показувати підтримані проекти" | transloco}}</label>
+          <div class="with-margin-left7">
+          <mat-slide-toggle></mat-slide-toggle>
+        </div>
+        </div> -->
+    
+        <!-- <div class="input-group">
+          <label id="showComments">{{"Показувати останні коментарі" | transloco}}</label>
+          <div class="with-margin-left4">
+          <mat-slide-toggle></mat-slide-toggle>
+        </div>
+        </div> -->
+    
+        <!-- <div class="input-group">
+          <label id="showVitrina">{{"Відображувати вітрину досягнень" | transloco}}</label>
+          <div class="with-margin-left5">
+          <mat-slide-toggle></mat-slide-toggle>
+        </div>
+        </div> -->
+
+        <!-- <div class="input-group">
+          <label id="showVitrina">{{"Відображувати історію покупок" | transloco}}</label>
+          <div class="with-margin-left5">
+          <mat-slide-toggle></mat-slide-toggle>
+        </div>
+        </div> -->
+    
+        <!-- <div class="input-group">
+          <label id="showDos">{{"Відображувані досягнення" | transloco}}</label>
+          <button [routerLink]="'/displayed-achievements-page'" class="custom-button4">{{"Налаштувати" | transloco}}</button>
+        </div> -->
+
+        <!-- <h1 class="setting-title">{{"ПОВІДОМЛЕННЯ" | transloco}}</h1>
+        <br>
+        <div class="input-group">
+          <label id="haveInfo">{{"Отримувати повідомлення про нові коментарі" | transloco}}</label>
+          <div class="with-margin-left8">
+          <mat-slide-toggle></mat-slide-toggle>
+          </div>
+        </div>
+    
+        <div class="input-group">
+          <label id="haveLike">{{"Отримувати повідомлення про отримані лайки" | transloco}}</label>
+          <div class="with-margin-left10">
+          <mat-slide-toggle></mat-slide-toggle>
+          </div>
+        </div> -->
+    
+        <!-- <div class="input-group">
+          <label id="showTovars">{{"Показувати сподобані товари" | transloco}}</label>
+          <div class="with-margin-left9">
+          <mat-slide-toggle></mat-slide-toggle>
+        </div>
+        </div> -->
+    
+        <!-- <div class="input-group">
+            <label id="haveEmail">{{"Дублювати повідомлення на електронну пошту" | transloco}}</label>
+          <div class="with-margin-left11">
+            <mat-slide-toggle></mat-slide-toggle>
+          </div>
+        </div> -->
+
+        <h1 class="setting-title">{{"БЕЗПЕКА" | transloco}}</h1>
+        <br>
+        <!-- <div class="input-group">
+          <label id="seeEnter">{{"Переглянути історію входів до акаунту" | transloco}}</label>
+          <button class="custom-button2">{{"Переглянути" | transloco}}</button>
+        </div> -->
+
+        <div class="input-group">
+          <label id="showDos">{{"Вийти з усіх пристроїв" | transloco}}</label>
+          <button class="custom-button3" (click)="exitAccaunt()" >{{"Вийти" | transloco}}</button>
+        </div>
+
+        <br>
+        
+
+    </div>
+  </div>
+  
+<app-footer></app-footer>

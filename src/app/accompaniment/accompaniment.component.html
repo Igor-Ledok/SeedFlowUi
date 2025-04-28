@@ -1,0 +1,96 @@
+<app-header></app-header>
+
+  <hr>
+
+  <div class="container">
+    <img 
+    *ngFor="let img of images; let i = index"
+    [src]="activeIndex === i ? img.active : img.gray"
+    alt="Image"
+    class="image"
+    [class.active]="activeIndex === i"
+    (click)="onImageClick(img.link)">
+  </div>
+
+  <button class="fixed-button" (click)="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <div class="container1">
+    <div class="breadcrumbs">
+      <a [routerLink] = "'/'" style="cursor: pointer; text-decoration: none; color: inherit;">
+      <span>{{"Головна" | transloco}}</span>  
+      </a>
+      &gt;
+      <a [routerLink] = "'/support-page'" style="cursor: pointer; text-decoration: none; color: inherit;">
+      <span>{{"Підтримка" | transloco}}</span>
+      </a>
+      &gt;
+      <span>{{"Супровід проєкту" | transloco}}</span>
+    </div> 
+    <div class="left1">
+      <h2 class="title">{{"Готові допомогти" | transloco}}</h2>
+      <div class="image-container" [routerLink]="'/specialist-help-page'">
+        <img src="assets/images/faxivtsi.png" alt="Фото">
+        <div class="overlay1">{{"Допомога фахівців" | transloco}}</div>
+      </div>
+    </div>
+    <div class="right1">
+      <h3 class="subtitle">{{"Підключіться до експертів" | transloco}}</h3>
+      <p class="description">
+        {{"Розвивайте свою ідею далі з цими досвідченими компаніями, рекомендованими учасниками кампаній і співробітниками Seed Flow" | transloco}}
+      </p>
+      <input id="inp" type="text" placeholder='{{"Пошук експертів..." | transloco}}'
+      [(ngModel)]="searchText2" (keydown.enter)="onEnter()">
+    </div>
+  </div>
+
+  <div class="experts-block">
+    <h2 class="experts-title">{{"Рекомендовані експерти" | transloco}}</h2>
+    <div class="expert-card" [routerLink]="'/experts-page'" style="cursor: pointer;">
+      <img src="assets/images/loftImg.png" alt="Експерт">
+      <div class="expert-info">
+        <p class="expert-name">{{"Тел." | transloco}} +38 (073) 123-45-67</p>
+        <p class="expert-desc">{{"Більше" | transloco}}</p>
+      </div>
+    </div>
+    
+    <div class="expert-background" [routerLink]="'/experts-page'" style="cursor: pointer;">
+        <span class="overlay-text">{{"ПРОФЕСІЙНІ ПОРАДИ ЩОДО КРАУДФАНДИНГУ НА ПЕРЕПОВНЕНОМУ РИНКУ" | transloco}}</span>
+    </div>
+    
+  <div class="text-section">
+    <div [routerLink]="'/legal-and-financial-services-page'" class="text-item">{{"Юридичні та фінансові послуги" | transloco}}</div>
+    <div [routerLink]="'/marketing-page'" class="text-item">{{"Маркетинг" | transloco}}</div>
+    <div [routerLink]="'/blog-page'" class="text-item">{{"Статті" | transloco}}</div>
+    <div [routerLink]="'/seminars-vebinars-page'" class="text-item">{{"Семінари" | transloco}}</div>
+    <div [routerLink]="'/faq-page'" class="text-item">{{"FAQ" | transloco}}</div>
+  </div>
+    
+  </div> 
+
+
+  
+  <div class="container2">
+    <div class="left2">
+      <h2 class="title2">{{"Хочете стати експертом?" | transloco}}</h2>
+      <p  [routerLink]="'/experts-page'" class="zayavka">{{"Подайте заявку зараз" | transloco}}</p>
+      <div class="image-container2">
+        <img src="assets/images/hands.png" alt="Фото">
+        <div class="overlay2">{{"Послуга «проєкт під ключ»" | transloco}}</div>
+      </div>
+      <p class="under-overlay-text">{{"Містить обов'язковий комплекс робіт, після закінчення яких замовник приймає в експлуатацію повністю готовий до використання проєкт, підготовлений за індивідуальним побажанням замовника." | transloco}}</p>
+      <button class="order" [routerLink]="'/marketing-form-page'">{{"Замовити" | transloco}}</button>  
+    </div>
+    <div class="right2">
+        <div class="image-container2">
+            <img src="assets/images/hands2.png" alt="Фото">
+            <div class="overlay2">{{"Нефінансова допомога" | transloco}}</div>
+          </div>
+          <p class="under-overlay-text">{{"Актори, перекладачі, співаки, лікарі,  майстри тощо - зарєстровані користувачі, в яких на профілі є помітка «волонтер W та «тематика» допомоги (зв’язатись можна через приватні повідомлення/контакти у профілі)" | transloco}}</p>
+        <button class="order" [routerLink]="'/marketing-form-page'">{{"Замовити" | transloco}}</button>      
+    </div>
+  </div>
+
+<app-footer></app-footer>
+

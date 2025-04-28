@@ -1,0 +1,158 @@
+<app-header></app-header>
+
+<hr>
+
+
+<div class="tabs-container">
+    <div class="tabs">
+      <button [routerLink]="'/root-panel-page'">{{"ПРОЄКТИ" | transloco}}</button>
+      <button [routerLink]="'/root-accounts-page'">{{"АКАУНТИ" | transloco}}</button>
+      <button [routerLink]="'/root-shop-tovars-page'">{{"ТОВАРИ МАГАЗИНУ" | transloco}}</button>
+    </div>
+</div>
+
+
+<div class="main-container">
+    <div class="buttons-container">
+      <button (click)="setActiveTab(true)" 
+      [ngClass]="{
+          'active-button': showActive,
+          'inactive-button': !showActive
+        }" 
+        class="actual">{{"АКТУАЛЬНІ" | transloco}}</button>
+      <button (click)="setActiveTab(false)" [ngClass]="{
+          'active-button': !showActive,
+          'inactive-button': showActive
+        }" class="unActual">{{"ЗАВЕРШЕНІ" | transloco}}</button>
+    </div>
+  </div> 
+
+
+<div class="projects-wrapper">
+    <div class="projects-container">
+      <div class="projects-grid" *ngIf="showActive">
+        <div
+          class="project-card"
+          *ngFor="let project of projectsList; let i = index"
+          [ngClass]="'project-card-' + i"
+        >
+          <div class="icon-container"></div>
+    
+          <div class="project-overlay">
+            <div class="project-extra">
+              <div class="project-title">{{ project.title | transloco }}</div>
+    
+              <div class="progress-bar2">
+                <div class="progress2" [style.width]="MATHPercentageOfMoney(project.collectedAmount, project.collectionAmount)"></div>
+              </div>
+              <p class="amount-raised">{{ project.collectedAmount }} {{ "грн" | transloco }}</p>
+              <p class="goal-amount">{{ project.collectionAmount }} {{ "грн" | transloco }}</p>
+    
+              <div class="icon-container2">
+                <img src="assets/images/people.png" />
+                <span class="people2"> {{project.teamsCount}}</span>
+              </div>
+    
+              <div class="icon-container3">
+                <img src="assets/images/comments.png" />
+                <span class="comments2">  {{ project.rewardsCount}}</span>
+              </div>
+    
+              <div class="icon-container4">
+                <img src="assets/images/money.png" />
+                <span class="money2">   {{PercentageOfMoney(project.collectedAmount,project.collectionAmount)}}</span>
+              </div>
+    
+              <div class="dropdown-wrapper">
+                <img src="assets/images/socialMedia.png" alt="icon" class="support-icon social-icon" (click)="toggleDropdown3(i)" /> 
+                <div class="dropdown-list" *ngIf="dropdownOpen2[i]">
+                  <a href="https://www.facebook.com/profile.php?id=61573153085556"> 
+                  <img src="assets/images/facebook.png" alt="social 1" class="dropdown-image" />
+                  </a>
+                  <a href="https://www.instagram.com/seedflow_itstep/"> 
+                  <img src="assets/images/Instagram.png" alt="social 2" class="dropdown-image" />
+                  </a>
+                </div>
+              </div> 
+              <div>
+                <img
+                class="delete-icon"
+                src="assets/images/delete-icon.png"
+                (click)="onDeleteProject(project.id)"
+                alt="Delete"
+              />
+              
+              </div>
+    
+              <button [routerLink]="['/donation-page']" [queryParams]="{ projectId: project.id}" class="support-button">{{ "ПІДТРИМАТИ" | transloco }}</button>
+              
+              <div class="project-description">
+                <p>{{project.shortDescription | transloco }}</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <img  [src]="project.categoryPhotoUrl" class="rocket-icon" />
+          </div>
+    
+          <img *ngIf="project" [routerLink]="['/see-project-page']" [queryParams]="{ projectId: project.id}" [src]="project.mainPhotoUrl" alt="{{ project.title }}" class="project-image" />
+        </div>
+      </div>
+    </div>
+    
+    
+    <div id="targetSection2"></div>
+    
+    
+    <div class="projects-wrapper">
+    <div class="projects-grid2" *ngIf="!showActive">
+        <div
+          class="project-card2 completed"
+          *ngFor="let project of projectsInactiveList; let i = index"
+          [ngClass]="'project-card-' + i"
+        >
+          <div class="icon-container"></div>
+      
+          <div class="project-overlay2">
+            <img
+            class="delete-icon2"
+            src="assets/images/delete-icon.png"
+            (click)="onDeleteProject(project.id)"
+            alt="Delete"
+          />
+            <div class="project-title2">{{ project.title | transloco }}</div>
+            <div class="project-extra2">
+              <p class="completed-text">{{ "Збір закрито" | transloco }}: 
+                <span class="closing-date">{{ project.collectionAmount }}</span>
+              </p>
+      
+              <p class="participants-text">
+                {{ "Учасників" | transloco }}: 
+                <span class="participants">{{ project.teamsCount }}</span>
+              </p>
+      
+              <p class="amount-raised2">
+                {{ project.collectedAmount }} {{ "грн" | transloco }}
+              </p>
+      
+              <p class="goal-percentage">
+                ({{PercentageOfMoney(project.collectedAmount,project.collectionAmount)}}%)
+              </p>
+      
+              <div class="icon-container2">
+                <img [src]="" />
+                <span>{{22}}asdasdasd</span>
+              </div>
+            </div>
+          </div>
+      
+          <div>
+            <img [src]="project.categoryPhotoUrl" class="rocket-icon" />
+          </div>
+    
+          <img style="cursor: pointer;" *ngIf="project" [routerLink]="['/see-project-page']" [queryParams]="{ projectId: project.id}" [src]="project.mainPhotoUrl" alt="{{ project.title }}" class="project-image" />
+        </div>
+      </div>
+    </div>
+    </div>
+  

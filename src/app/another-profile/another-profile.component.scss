@@ -1,0 +1,1454 @@
+.language-switcher
+{
+  position: relative;
+  left: 22px;
+}
+
+.logo2
+{
+  vertical-align: middle;
+  text-align: center;
+  margin: auto;
+  width: 50px;
+  height: 50px;
+}
+
+.header 
+{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+  padding: 15px 0;
+  background: #fff;
+ 
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .logo {
+      width: 30px;
+      height: 30px;
+    }
+
+    .brand-name {
+      font-size: 25px;
+      font-weight: 500;
+      color: #2e7d32;
+      font-family: "Montserrat Alternates";
+      z-index: 2;
+    }
+  }
+
+  .header-center {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+
+    .search-input {
+      width: 550px;
+      padding: 8px 12px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      outline: none;
+      transition: 0.3s;
+
+      &:focus {
+        border-color: #2e7d32;
+      }
+    }
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    .submit-project-btn 
+    {
+      width: 160px;
+      height: 33px;
+      background: transparent;
+      border: 1px solid #247a60;
+      color: #247a60;
+      padding: 6px 12px;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-family: 'Montserrat';
+
+      &:hover {
+        background: #247a60;
+        color: #fff;
+      }
+    }
+
+    .profile-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  }
+}
+
+.footer 
+{
+  padding: 40px 0;
+  font-family: 'Montserrat', sans-serif;
+
+  .footer-container {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .footer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      img {
+        width: 40px;
+        height: 40px;
+      }
+
+      span {
+        font-size: 24px;
+        font-weight: 600;
+        color: #2e7d32;
+      }
+    }
+
+    .footer-line {
+      flex-grow: 1;
+      height: 2px;
+      background: #ffcf33;
+      border: none;
+      margin-left: 20px; /* Отступ от логотипа */
+    }
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    text-align: left;
+    margin-top: 20px;
+
+    .footer-column {
+      width: 18%;
+
+      h4 {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #1b5e20;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+          margin-bottom: 5px;
+
+          a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            transition: color 0.3s ease;
+
+            &:hover {
+              color: #2e7d32;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.footer-social 
+{
+position: relative;
+text-align: center;
+top: 20px;
+left: -40px;
+color: #247A60;
+}
+
+.underline-center 
+{
+display: inline-block;
+position: relative;
+}
+
+.underline-center::after 
+{
+content: "";
+position: absolute;
+left: 50%;
+bottom: -10px;
+width: 50%;
+height: 1px;
+background-color: #247A60;
+transform: translateX(-50%);
+}
+
+.social-icons a 
+{
+margin: 0 10px;
+font-size: 28px;
+color: #333;
+padding: 4px;
+}
+
+.footer-bottom 
+{
+position: relative;
+text-align: center;
+margin-top: 70px;
+margin-bottom: 40px;
+font-size: 15px;
+color: #666;
+left:-40px;
+font-family: 'Montserrat';
+}
+
+.search-container 
+{
+  position: relative;
+  width: 1200px;
+  font-family: 'Montserrat';
+}
+
+.search-input 
+{
+  width: 50%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  position: relative;
+  left: 25%;
+}
+
+.search-input:focus {
+  border-color: #bde7d6;  /* Зеленый цвет рамки */
+  background-color: #bde7d6;  /* Светлый голубой фон */
+}
+
+.search-dropdown 
+{
+  position: absolute;
+  top: 155%;
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid #ccc;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  height: 800px;
+  overflow-y: auto;
+  border-radius: 5px;
+  padding: 10px;
+  z-index: 10;
+}
+
+.search-item-content 
+{
+  border: 2px solid #ddd; 
+  border-radius: 10px; 
+  padding: 4px; 
+  background-color: #fff; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 99%; 
+}
+
+.search-items 
+{
+  display: flex;
+  gap: 15px;
+  justify-content: flex-start;
+}
+
+.search-item 
+{
+  text-align: left;
+  width: 390px; 
+  display: flex;
+  flex-direction: column; 
+  gap: 10px;  
+  align-items: flex-start;  
+}
+
+.search-item-img 
+{
+  width: 100%; 
+  height: 250px; 
+}
+
+.search-item-title 
+{
+  font-weight: bold;
+  margin-top: 10px;
+  font-size: 20px;
+  font-family: 'Montserrat';
+}
+
+.search-item-body 
+{
+  position: relative;
+  padding: 15px;
+  background-color: white;
+  color: black;
+  transition: transform 0.3s ease;
+}
+
+.search-item:hover .search-item-body,
+.search-item:hover .icon-container,
+.search-item:hover .icons-container 
+{
+  transform: translateY(-70px);
+}
+
+.search-item:hover 
+{
+  background-color: white;
+}
+
+.search-item-text 
+{
+  position: absolute;
+  bottom: 0px; 
+  left: 15px;
+  right: 15px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: black;
+  padding: 10px;
+  border-radius: 5px;
+  transform: translateY(10px);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.search-item:hover .search-item-text 
+{
+  bottom: 10px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.progress-bar 
+{
+  position: absolute;
+  width: 56%;
+  height: 8px; 
+  border-radius: 5px; 
+  appearance: none; 
+  background-color: #e0e0e0; 
+  margin-top: 8px;
+}
+
+.progress-bar::-webkit-progress-bar 
+{
+  background-color: #e0e0e0; 
+}
+
+.progress-bar::-webkit-progress-value 
+{
+  background-color: #247A60; 
+}
+
+.progress-bar::-moz-progress-bar 
+{
+  background-color: #247A60; 
+}
+
+.search-item-info h4 
+{
+  margin: 0;
+  font-size: 14px;
+}
+
+.search-item-info p {
+  margin: 5px 0 0;
+  font-size: 12px;
+  color: #777;
+}
+
+.search-item-info 
+{
+  flex-grow: 1;
+}
+
+.support-btn 
+{
+  background-color: #247a60;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.support-btn:hover 
+{
+  background-color: #247a60;
+}
+
+.no-results 
+{
+  padding: 10px;
+  text-align: center;
+  color: #999;
+}
+
+.button-row 
+{
+  display: flex;
+  justify-content: center; 
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.wide-buttons 
+{
+  gap: 80px; 
+  margin-bottom: 50px;
+  margin-top: 20px;
+}
+
+.button-row button 
+{
+  max-width: 350px;
+  padding: 8px 43px;
+  background-color: #bde7d6;
+  color: #333027;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.wide-button 
+{
+  width: 300px;
+  height: 45px;
+  padding: 12px 20px;
+  background-color: #bde7d6;
+  color: #333027;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  font-family: 'Montserrat';
+}
+
+.rounded-button 
+{
+  padding: 8px 16px;
+  width: 195px;
+  font-size: 18px !important;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50px !important;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  font-family: 'Montserrat';
+}
+
+button.wide-button.active, button.rounded-button.active 
+{
+  background-color: #ffcf33;
+  color: #247a60;
+  font-weight: 550;
+}
+
+button.rounded-button:hover 
+{
+  background-color: #ffcf33;
+  color: #247a60;
+  font-weight: 550;
+}
+
+.hot-projects 
+{
+  display: flex;
+  align-items: center;
+  margin-top: 40px;
+  margin-bottom: 30px;
+  margin-left: 10px;
+}
+
+.hot-projects-text 
+{
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 10px;
+  font-family: 'Montserrat';
+  color: #333;
+}
+
+.hot-projects-line {
+  flex-grow: 1;
+  border: none;
+  border-top: 3px solid #ffcf33;
+  margin-left: 20px;
+}
+
+.progress-info 
+{
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+  min-width: 200px;
+  font-size: 14px;
+  color: #333;
+  margin-top: -10px;
+}
+
+.progress-from 
+{
+  font-weight: normal;
+  font-family: 'Montserrat';
+}
+
+.progress-to 
+{
+  font-weight: 600;
+  font-family: 'Montserrat';
+}
+
+.icons-container 
+{
+  display: flex;
+  justify-content: space-between;
+  gap: 60px;
+  margin-top: 25px;
+  background: rgba(255, 255, 255, 0.7);
+  margin-left: 30px;
+  font-family: 'Montserrat';
+}
+
+.icon-item 
+{
+  text-align: center;
+  flex-basis: 30%;
+}
+
+.icon-img 
+{
+  width: 20px;
+  height: 20px;
+  margin-bottom: 5px;
+}
+
+.icon-number 
+{
+  margin-top: 5px;
+  font-size: 17px;
+  color: #333;
+  font-weight: 600;
+}
+
+.search-item 
+{
+  position: relative;
+}
+
+.icon-container 
+{
+  position: absolute;
+  top: 280px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.search-item-icon 
+{
+  width: 20px;
+  height: 20px;
+  margin-top: 10px;
+}
+
+.support-button2 
+{
+  padding: 8px 16px;
+  background-color: #247A60;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 130px;
+  height: 40px;
+  margin-left: 10px;
+  margin-top: 10px;
+  position: relative;
+  left: -45px;
+  font-family: 'Montserrat';
+}
+
+.support-button2:hover 
+{
+  background-color: #247A60;
+}
+
+.icon-top-left 
+{
+  position: absolute;
+  top: 30px;
+  left: 5px;
+  z-index: 10;
+}
+
+.top-left-icon
+{
+  width: 80px;
+  height: 40px;
+}
+
+.top-right-icon
+{
+  width:30px;
+  height: 30px;
+}
+
+.icon-top-right 
+{
+  position: absolute;
+  top: 35px;
+  left: 30px;
+  z-index: 10;
+}
+
+
+// ПРОФИЛЬ
+
+/* Контейнер для инвестора */
+.investor-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  /* Элемент инвестора */
+  .investor-item 
+  {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    padding: 15px;
+    position: relative;
+    margin-left: -130px;
+  }
+  
+  /* Фото инвестора (круглое) */
+  .investor-image 
+  {
+    width: 230px;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 50%; /* Округление изображения */
+    margin-right: 50px; /* Отступ между фото и текстом */
+  }
+  
+  /* Контейнер для имени и роли */
+  .investor-details 
+  {
+    position: relative;
+    top: -20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Имя и фамилия */
+  .investor-name 
+  {
+    font-size: 30px;
+    font-weight: bold;
+    margin-right: 10px;
+    font-family: 'Montserrat';
+    white-space: nowrap;
+    width: 300px;
+  }
+
+  /* Текст под именем и фамилией */
+.investor-text 
+{
+    font-size: 20px;
+    color: #666;
+    margin-top: 10px; /* Отступ между именем и текстом */
+    text-align: center;
+    left: -303px;
+    position: relative;
+    top: 80px;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* Контейнер для дополнительного фото справа */
+.additional-image 
+{
+    position: absolute;
+    margin-left: 720px; /* Отступ между контейнером с текстом и фото */
+    top:-30px;
+}
+
+/* Желтая линия */
+.yellow-line 
+{
+    width: 65%;
+    height: 3px;
+    background-color: #ffcf33;
+    margin-top: 20px;
+    position: absolute;
+    top: 110px;
+    left: 0px;
+}
+
+/* Описание под желтой линией */
+.investor-description {
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+    font-family: 'Montserrat';
+    position: absolute;
+    margin-bottom: 10px;
+    left: -2px;
+    top: 140px;
+    width: 500px;
+    text-align: left;
+}
+
+/* Кнопка под фото */
+.investor-button {
+    background-color: white;
+    color: #247A60;
+    border: 2px solid #247A60;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    left: -295px;
+    top: 195px;
+    width: 250px;
+    height: 45px;
+    font-family: 'Montserrat';
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.investor-button:hover
+{
+    background-color: #247A60;
+    color: white;
+}
+
+  .investor-role-container 
+  {
+    position: relative;
+    left: -240px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Роль "Инвестор" с округлым фоном */
+  .investor-role 
+  {
+    background-color: #66d6aa;
+    color: #333;
+    padding: 6px 10px;
+    border-radius: 15px;
+    font-size: 18px;
+    white-space: nowrap;
+  }
+
+  /* Стиль для текста "ВІТРИНА ДОСЯГНЕНЬ" */
+.achievements-title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 40px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+.vitrina
+{
+  text-align: center;
+}
+
+.vitrina h2::after 
+{
+  content: "";
+  display: block;
+  width:  1559px;
+  height: 4px;
+  background: #ffcf33;
+  position: absolute;
+  top: 40%;
+  right: 530px;
+}
+
+.statistika
+{
+  text-align: center;
+}
+
+.statistika h2::after 
+{
+  content: "";
+  display: block;
+  width: 1400px;
+  height: 4px;
+  background: #ffcf33;
+  position: absolute;
+  top: 55%;
+  right: 663px;
+}
+
+.projects2
+{
+  text-align: center;
+  margin-left: 150px;
+}
+
+.projects2 h2::after 
+{
+  content: "";
+  display: block;
+  width:  1465px;
+  height: 4px;
+  background: #ffcf33;
+  position: absolute;
+  top: 55%;
+  right: 650px;
+}
+
+
+
+/* Контейнер для всех фото */
+.photos-container 
+{
+    height: 220px;
+    margin-top: 100px;
+    display: flex;
+    justify-content: center; /* Центрируем элементы по горизонтали */
+    align-items: center; /* Центрируем элементы по вертикали */
+    gap: 190px; /* Уменьшаем отступы между фото */
+    margin-left: 200px;
+    margin-right: 200px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Тень для контейнера */
+    padding: 0 100px; /* Добавим отступы внутри контейнера */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 -4px 12px rgba(0, 0, 0, 0.1); /* Тень для контейнера */
+    border-radius: 10px; /* Скругление углов контейнера */
+    flex-wrap: wrap; /* Разрешаем перенос элементов на следующую строку при необходимости */
+}
+  
+  /* Элемент с фото */
+  .photo-item {
+    width: 6%; /* Каждый фото-элемент занимает 16% от ширины контейнера */
+    text-align: center; /* Центрирование текста */
+  }
+  
+  /* Фото */
+  .photo-image {
+    width: 100%; /* Фото занимает всю доступную ширину блока */
+    height: auto; /* Сохраняет пропорции фото */
+    border-radius: 10px; /* Скругление углов фото */
+  }
+  
+  /* Название под фото */
+  .photo-title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 10px;
+    color: #333;
+    font-family: 'Montserrat';
+    width: 200px;
+    margin-left: -60px;
+  }
+  
+  /* Описание под названием */
+  .photo-description {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+    font-family: 'Montserrat';
+    width: 320px;
+    margin-left: -120px;
+    font-weight: 400;
+  }
+  
+  /* Ссылка "Дивитись усі" */
+.view-all-link 
+{
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  color: #666; /* Цвет текста */
+  text-decoration: none; /* Убираем подчеркивание */
+  margin-top: 60px; /* Отступ сверху */ 
+  text-decoration: underline;
+  font-family: 'Montserrat';
+  margin-bottom: 100px;
+}
+
+  .partners 
+  {
+    text-align: center;
+    padding: 40px 20px;
+    position: relative;
+    height: 460px;
+  }
+
+.partners h2 
+{
+  color: #006838;
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: inline-block;
+  position: relative;
+}
+
+.partners h2::after  
+{
+  content: "";
+  display: block;
+  width:  1320px;
+  height: 4px;
+  background: #ffcf33;
+  position: relative;
+  top: -21px;
+  right: -772px;
+}
+
+.partners-list 
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-top: 20px;
+}
+
+
+
+.tovars3
+{
+  text-align: center;
+  padding: 40px 20px;
+  position: relative;
+  height: 460px;
+  margin-top: 100px;
+}
+
+.tovars3 h2 
+{
+color: #006838;
+font-size: 24px;
+font-weight: bold;
+text-transform: uppercase;
+display: inline-block;
+position: relative;
+}
+
+.tovars3 h2::after 
+{
+content: "";
+display: block;
+width:  1173px;
+height: 4px;
+background: #ffcf33;
+position: relative;
+top: -19px;
+right: -920px;
+}
+
+.lastComment
+{
+  text-align: center;
+  padding: 40px 20px;
+  position: relative;
+  height: 460px;
+  margin-top: 100px;
+}
+
+.lastComment h2 
+{
+color: #006838;
+font-size: 24px;
+font-weight: bold;
+text-transform: uppercase;
+display: inline-block;
+position: relative;
+}
+
+.lastComment h2::after 
+{
+content: "";
+display: block;
+width:  1510px;
+height: 4px;
+background: #ffcf33;
+position: relative;
+top: -21px;
+right: -663px;
+}
+
+
+.image-row {
+    display: flex;
+    justify-content: center; /* Центрирует изображения по горизонтали */
+    padding: 0 20px; /* Добавляем отступы слева и справа по 20px */
+    margin-left: 30px;
+    margin-top: -400px;
+    margin-bottom: 90px;
+}
+
+.image 
+{
+    width: 550px; /* Устанавливаем фиксированную ширину для изображений */
+    height: 400px; /* Устанавливаем фиксированную высоту для изображений */
+    object-fit: cover; /* Подгоняет изображения под контейнер */
+    margin: 0 15px; /* Добавляем небольшой промежуток между изображениями */
+}
+
+.projects-container
+{
+  position: relative;
+  top: -450px;
+  margin-bottom: -500px;
+}
+
+.projects-container2
+{
+  position: relative;
+  top: 100px;
+  margin-bottom: 180px;
+}
+
+.projects-grid 
+{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  justify-content: space-between;
+  margin-bottom: 150px;
+}
+
+.project-card 
+{
+  position: relative;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  height: 620px;
+  width: 550px;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-overlay 
+{
+  position: absolute;
+  bottom: 0;
+  left: -11px;
+  width: 100%;
+  height: 15%; /* Изначальная высота белого фона */
+  background: white;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  transition: height 0.2s ease-in-out; /* Плавное изменение высоты */
+  z-index: 2;
+}
+
+.project-card:hover .project-image
+{
+  filter: blur(4px);
+  opacity: 0.8;
+  transition: filter 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.project-card-0
+{
+  position: relative;
+  left: 215px;
+}
+
+.project-card-1
+{
+  position: relative;
+  left: 83px;
+}
+
+.project-card-2
+{
+  position: relative;
+  left: -48px;
+}
+
+.project-card-3
+{
+  position: relative;
+  left: 216px;
+  top: 25px;
+}
+
+.project-card-4
+{
+  position: relative;
+  left: 83px;
+  top: 25px;
+}
+
+.project-card-5
+{
+  position: relative;
+  left: -47px;
+  top: 25px;
+}
+
+.project-card:hover .project-overlay 
+{
+  height: 45%; /* Белый фон поднимается до полной высоты карточки */
+}
+
+.project-extra 
+{
+  opacity:1;
+  transition: opacity 0.4s ease;
+  top:10px;
+  position: relative;
+}
+
+.project-card:hover .project-extra 
+{
+  opacity: 1; 
+  top:10px;
+}
+
+.progress-bar2 
+{
+  height: 8px;
+  background: #eee;
+  border-radius: 4px;
+  margin-top: 10px;
+  position: relative;
+  overflow: hidden;
+  top: 130px;
+  width: 49.5%;
+  left: -7px;
+}
+
+.progress2 
+{
+  height: 100%;
+  background: #247A60;
+  border-radius: 4px;
+  width: 30%; 
+  transition: width 0.4s ease-in-out;
+}
+
+.project-image 
+{
+  width: 100%;
+  height: 400px;
+  object-fit: cover; 
+  position: relative;
+  top: -104px;
+}
+
+.support-button 
+{
+  background-color: #247A60;
+  color: white;
+  width: 200px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 2px solid #247A60;
+  font-size: 14px;
+  height: 50px;
+  display: block; 
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  left: 310px;
+  top:-128px;
+  font-weight: 500;
+  font-family: 'Montserrat';
+}
+
+.support-button:hover 
+{
+  background: #247A60;
+  color: white;
+}
+
+.project-title 
+{
+  top: 90px;
+  left: 15px;
+  font-size: 22px;
+  width: 550px;
+  font-weight: bold;
+  position: relative;
+  text-align: left;
+  font-family: 'Unbounded';
+  color: #645740;
+}
+
+.chart-container {
+    box-shadow:  0 4px 12px rgba(0, 0, 0, 0.1), 0 -4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    margin-top: 100px;
+    padding-left:30px;
+    padding-right: 30px;
+    width: 1120px;
+    position: relative; /* Убираем его из обычного потока */
+    left: 490px;  /* Устанавливаем сдвиг относительно родителя */
+}
+
+.chart {
+    position: relative;  /* Устанавливаем относительное позиционирование */
+    top: 20px;  /* Сдвигаем график вниз на 50px */
+    font-family: 'Montserrat';
+    left: -50px;
+    font-weight: 500;
+  }
+
+  
+  .container {
+    display: flex; /* Выравнивание элементов по горизонтали */
+    align-items: center; /* Центрируем по вертикали */
+    padding: 20px;
+    border: 1px solid #ccc; /* Контейнер с границей */
+    border-radius: 10px; /* Скругленные углы контейнера */
+    max-width: 1150px;
+    margin: 0 auto; /* Центрируем контейнер по экрану */
+    background-color: #f9f9f9; /* Цвет фона контейнера */
+    position: relative;
+    left: 40px;
+}
+  
+  .image-container 
+  {
+    margin-right: 20px; /* Отступ между изображением и текстом */
+  }
+  
+  .profile-image 
+  {
+    width: 150px; /* Фиксированная ширина изображения */
+    height: 150px; /* Фиксированная высота изображения */
+    border-radius: 50%; /* Делаем изображение круглым */
+    object-fit: cover; /* Обрезаем изображение, чтобы оно вписалось в круг */
+  }
+  
+  .text-container {
+    flex-grow: 1; /* Занимает оставшееся пространство */
+  }
+  
+  .name 
+  {
+    font-size: 23px; /* Размер шрифта для имени */
+    font-weight: bold; /* Жирное имя */
+    color: #333;
+    font-family: 'Montserrat';
+    top: -10px;
+    position: relative;
+  }
+  
+  .comment 
+  {
+    font-family: 'Montserrat';
+    font-size: 14px; /* Размер шрифта для комментария */
+    color: #555; /* Цвет для текста комментария */
+    margin-top: 5px; /* Отступ сверху для комментария */
+    top: -5px;
+    position: relative;
+    width: 700px;
+    height: 100px;
+}
+
+.thumbs-down-count 
+{
+    font-size: 18px;
+    color: #000;
+    position: relative;
+    top: -55px;
+    left: -10px;
+    width: 50px;
+  }
+
+.reactions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+.thumbs i 
+{
+    margin-right: 5px;
+    width: 30px;
+    position: relative;
+    left: -30px;
+  }
+  
+  .fa-thumbs-up
+  {
+    font-size: 25px;
+    top: -60px;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .fa-thumbs-down
+  {
+    font-size: 25px;
+    top: -55px;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .fa-heart {
+    font-size: 25px;
+    color: black; /* Черное сердце */
+    position: relative;
+    cursor: pointer;
+    top: -57px;
+    left: -20px;
+  }
+
+  .container-with-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: -570px;  /* Отступ сверху */
+  }
+
+  .container-with-header2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: -90px;  /* Отступ сверху */
+  }
+  
+  .header-text {
+    font-size: 20px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 10px;  /* Отступ между текстом и контейнером */
+    position: relative;
+    left: -360px; /* Сдвигает текст влево на 30px */
+    font-family: 'Montserrat';
+    top: 135px;
+  }
+
+  .header-text2 {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 10px;  /* Отступ между текстом и контейнером */
+    position: relative;
+    left: 450px; /* Сдвигает текст влево на 30px */
+    font-family: 'Montserrat';
+    text-decoration: underline;
+    top: 105px;
+  }
+
+  .header-text3 
+  {
+    font-size: 20px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 10px;  /* Отступ между текстом и контейнером */
+    position: relative;
+    left: -330px; /* Сдвигает текст влево на 30px */
+    font-family: 'Montserrat';
+    top: 135px;
+    width: 320px;
+  }
+
+  .bottom-right-text {
+    z-index: 100;
+    position: relative;
+    top: 242px; /* Отступ от нижнего края */
+    right: -300px; /* Отступ от правого края */
+    font-size: 16px; /* Размер шрифта */
+    font-weight: 500;
+    color: #333;
+    text-decoration: underline;
+    font-family: 'Montserrat';
+    cursor: pointer;
+}
+  
+.bottom-right-text2 {
+  z-index: 100;
+  position: relative;
+  top: 190px; /* Отступ от нижнего края */
+  right: -455px; /* Отступ от правого края */
+  font-size: 16px; /* Размер шрифта */
+  font-weight: 500;
+  color: #333;
+  text-decoration: underline;
+  font-family: 'Montserrat';
+  cursor: pointer;
+}
+
+  
+  
+  
+  
+
+
+
+
+  
+  
+  
+  
+  
+  
+
+
+
+

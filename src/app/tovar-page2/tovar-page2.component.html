@@ -1,0 +1,196 @@
+<app-header></app-header>
+
+<hr>
+
+    <!-- Фото в правом верхнем углу -->
+    <div class="top-right-image">
+        <img src="assets/images/ShopGreenLeftUp.png" alt="Top Right Image" />
+        <div class="overlay-text">{{"Ваш рахунок" | transloco}}<span style="color: #247a60; font-weight: 600; font-size: 20px; margin-bottom: 30%;"><br>Seeds</span></div>      
+    </div>
+
+    <div class="balance-info">
+        <!-- Маленькое фото слева от текста -->
+        <img src="assets/images/Seeds.png" alt="Small Image" class="small-image" />
+        <span class="balance-text">250</span>
+    </div>
+
+
+<div class="custom-container">
+    <!-- Левая часть -->
+    <div class="custom-left">
+      <img src="assets/images/ShopTovar2.png" alt="Main Photo" class="main-photo" />
+      <div class="photo-row">
+        <img src="assets/images/ShopTovar2.png" alt="Photo 1" class="small-photo" />
+        <img src="assets/images/ShopTovar2.png" alt="Photo 2" class="small-photo" />
+        <img src="assets/images/ShopTovar2.png" alt="Photo 3" class="small-photo" />
+      </div>
+    </div>
+  
+    <!-- Правая часть -->
+    <div class="custom-right">
+
+        <div class="top-section">
+            <div class="category-image">
+              <img src="assets/images/YellowLeftUpAngle.png" alt="Category" />
+              <span class="category-text">{{"ДІМ" | transloco}}</span>
+            </div>
+            <img src="assets/images/like.png" (click)="toggleLikeFirst()" [src]="isLiked ? 'assets/images/likeRed.png' : 'assets/images/like.png'" alt="Heart" class="heart-icon" />
+          </div>
+      
+          <h2 class="product-title">{{"Худі Seed Flow, свинка" | transloco}}</h2>
+          <p class="product-size">{{"сірий" | transloco}}</p>
+      
+          <div class="product-price-container">
+      <span class="product-price">1289 {{"грн" | transloco}}</span> <!-- Сумма -->
+      <div class="product-articul">
+        <span>{{"Артикул" | transloco}}: 425789</span> <!-- Артикул -->
+      </div>
+    </div>
+
+          <p class="color-selection-text">{{"Оберіть колір" | transloco}}:</p>
+          <div class="color-options">
+            <img src="assets/images/Color.png" alt="Color 1" 
+                 class="color-image" 
+                 [ngClass]="{'selected': selectedColor === 1}" 
+                 (click)="selectColor(1)">
+          
+            <img src="assets/images/NoColor1.png" alt="Color 2" 
+                 class="color-image" 
+                 (click)="selectColor(2)">
+          
+            <img src="assets/images/NoColor2.png" alt="Color 3" 
+                 class="color-image" 
+                 (click)="selectColor(3)">
+          
+            <img src="assets/images/NoColor3.png" alt="Color 4" 
+                 class="color-image"  
+                 (click)="selectColor(4)">
+          </div>
+
+          <div class="size-selection">
+            <p class="selection-title">{{"Оберіть розмір" | transloco}}:</p>
+            <div class="size-options">
+              <div class="size-box" [ngClass]="{'selected': selectedSize === 'S'}" (click)="selectSize('S')">S</div>
+              <div class="size-box" [ngClass]="{'selected': selectedSize === 'M'}" (click)="selectSize('M')">M</div>
+              <div class="size-box" [ngClass]="{'selected': selectedSize === 'L'}" (click)="selectSize('L')">L</div>
+              <div class="size-box" [ngClass]="{'selected': selectedSize === 'XL'}" (click)="selectSize('XL')">XL</div>
+            </div>
+          </div>
+
+           <!-- Информация о проекте -->
+    <p class="project-title">{{"Товар платформи" | transloco}}:</p>
+    <div class="project-info">
+      <img src="assets/images/greenCoin.png" alt="Project" class="project-photo" />
+      <p class="project-name">{{"Seed Flow" | transloco}}</p>
+      <a href="#" class="project-link">{{"Переглянути проєкт" | transloco}}</a>
+    </div>
+    
+    <div class="quantity-container">
+        <button (click)="decreaseQuantity()">-</button>
+        <span>{{ quantity }}</span>
+        <button (click)="increaseQuantity()">+</button>
+      </div>
+
+<!-- Кнопка "ПРИДБАТИ" -->
+<div class="buy-container">
+    <button class="buy-button" 
+            [ngClass]="{'purchased': isPurchased}" 
+            (click)="togglePurchase()">
+        {{ isPurchased ? ('В КОШИКУ' | transloco) : ('ПРИДБАТИ' | transloco) }}
+    </button>
+</div>
+
+<!-- Модальное окно -->
+<div class="modal-overlay" *ngIf="showModal" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <h2 style="font-family: 'Montserrat'; font-size: 20px; font-weight: 500; margin-bottom: 7%;">{{"Товар успішно додано в кошик" | transloco}}</h2>
+
+        <!-- Фото под текстом -->
+        <img src="assets/images/Ellipse2.png" alt="Product Image" class="modal-image">
+
+        <br>
+
+        <!-- Кнопка "ПЕРЕЙТИ У КОШИК" -->
+        <button class="go-to-cart-button" (click)="goToCart()">{{"ПЕРЕЙТИ У КОШИК" | transloco}}</button>
+
+        <!-- Еще одна кнопка -->
+        <button class="continue-shopping-button" (click)="continueShopping()">{{"ПРОДОВЖИТИ ПОКУПКИ" | transloco}}</button>
+
+        </div>
+</div>
+
+    </div>
+</div>
+  
+
+<!-- Новый контейнер -->
+<div class="product-info-container">
+    <p class="product-info-text">{{"ПРО ТОВАР" | transloco}}</p>
+</div>
+
+
+<!-- Контейнер с описанием -->
+<div class="custom-description-container">
+    <!-- Первый ряд: Описание товара -->
+    <div class="description-row">
+        <div class="description-title">{{"Опис" | transloco}}</div>
+        <div class="description-text">
+            {{"Цей товар є мерчем платформи Seed Flow." | transloco}}
+            <br>
+            <br> 
+            {{"Худі Seed Flow вирізняється стильним дизайном та комфортним кроєм, що робить його ідеальним вибором для повсякденного носіння. Виготовлене з високоякісних матеріалів, воно має м'яку текстуру, забезпечуючи тепло та затишок. Логотип Seed Flow на передній частині підкреслює приналежність до спільноти підприємців і новаторів. Це худі доступне в різних кольорах, що дозволяє кожному знайти свій унікальний стиль. Завдяки універсальному дизайну, його можна поєднувати як з джинсами, так і зі спортивними штанами. Це не просто одяг, а символ підтримки стартапів та творчості, що робить його популярним серед молоді та активних людей." | transloco}}
+        </div>
+    </div>
+    
+    <br>
+    <br>
+
+    <!-- Второй ряд: Информация о доставке -->
+    <div class="description-row">
+        <div class="description-title">{{"Доставка" | transloco}}</div>
+        <div class="description-text">{{"5-7 робочих днів" | transloco}}</div>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="description-row">
+        <div class="description-title">{{"Продавець" | transloco}}</div>
+        <div class="description-text">{{"Seed Flow — це краудфандингова платформа, що дозволяє стартапам та підприємцям залучати фінансування для своїх проектів від інвесторів та ентузіастів. Ось кілька ключових аспектів про Seed Flow:" | transloco}}
+            <br>
+            <br>    
+           {{"Основні особливості:" | transloco}}
+           <br>
+           <br>
+            {{"· Для стартапів: Платформа надає можливість малим і середнім підприємствам презентувати свої ідеї та залучати капітал." | transloco}}
+            <br>
+            <br>
+            {{"· Інвестування від множини: Інвестори можуть вкласти невелику суму, що дозволяє їм мати частку в багатьох проектах без великих ризиків." | transloco}}
+            <br>
+            <br>
+            {{"· Прозорість: Seed Flow забезпечує прозорість процесу фінансування, дозволяючи інвесторам слідкувати за розвитком проектів." | transloco}}
+            <br>
+            <br>
+            {{"· Комунікація з інвесторами: Платформа створює умови для зворотного зв'язку між підприємцями та інвесторами, що сприяє розвитку відносин." | transloco}}
+            <br>
+            </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="description-row">
+        <div class="description-title">Website</div>
+        <div class="description-text">http://seedflow</div>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="description-row">
+        <div class="description-title">{{"Місцезнаходження" | transloco}}</div>
+        <div class="description-text">{{"Україна, Харків" | transloco}}</div>
+    </div>
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,77 @@
+<app-header></app-header>
+
+  <hr>
+
+  <div class="container">
+    <img 
+    *ngFor="let img of images; let i = index"
+    [src]="activeIndex === i ? img.active : img.gray"
+    alt="Image"
+    class="image"
+    [class.active]="activeIndex === i"
+    (click)="onImageClick(img.link)">
+  </div>
+
+  <button class="fixed-button" (click)="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <div class="policy-container">
+    <p class="policy-label">{{"Політика Конфіденційності" | transloco}}</p>
+    <h3 class="policy-title">{{"Політика Конфіденційності" | transloco}}</h3>
+    <h4 class="title2">{{"Останнє оновлення: 25.03.2025 рік" | transloco}}</h4>
+    <p class="policy-text">
+        {{"Ласкаво просимо до Seed Flow! Ми піклуємось про вашу конфіденційність і прагнемо захистити ваші особисті дані." | transloco}} 
+        {{"Ця Політика конфіденційності описує, які дані ми збираємо, як їх використовуємо та захищаємо, а також ваші права у зв'язку з цими даними." | transloco}}
+    </p>
+    <h4 class="title2">{{"1. Збір інформації" | transloco}}</h4>
+    <p class="policy-text">
+        {{"Ми можемо збирати та обробляти такі особисті дані:" | transloco}}<br>
+        
+        <span class="policy-text dot-before2">{{"• Особисті дані: ім'я, прізвище, електронна пошта, номер телефону, адреса." | transloco}}</span><br>
+        <span class="policy-text dot-before2">{{"• Фінансова інформація: дані про платіжні картки та банківські реквізити для обробки платежів." | transloco}}</span><br>
+        <span class="policy-text dot-before2">{{"• Дані про активність: інформація про ваше використання платформи, наприклад, IP-адреси, тип браузера, час доступу." | transloco}}</span>
+    </p>
+    <h4 class="title2">{{"2. Використання інформації" | transloco}}</h4>
+    <p class="policy-text">
+        {{"Ми використовуємо вашу інформацію для:" | transloco}}<br>
+        <span class="policy-text dot-before2">{{"• Надання послуг на платформі." | transloco}}</span><br>
+        <span class="policy-text dot-before2">{{"• Обробки транзакцій та платежів." | transloco}}</span><br>
+        <span class="policy-text dot-before2">{{"• Спілкування з вами щодо ваших проектів, оновлень та новин." | transloco}}</span><br>
+        <span class="policy-text dot-before2">{{"• Поліпшення нашого сервісу та платформи." | transloco}}</span>
+    </p>
+    <h4 class="title2">{{"3. Збереження інформації" | transloco}}</h4>
+    <p class="policy-text">
+        {{"Ми зберігаємо вашу інформацію лише стільки, скільки це необхідно для виконання цілей, зазначених у цій політиці, або для виконання вимог законодавства." | transloco}}
+    </p>
+    <h4 class="title2">{{"4. Передача інформації" | transloco}}</h4>
+    <p class="policy-text">
+        {{"Ми не передаємо вашу особисту інформацію третім особам, крім випадків, коли це необхідно для виконання нашого зобов'язання (наприклад, для обробки платежів) або якщо цього вимагає закон." | transloco}}
+    </p>
+    <h4 class="title2">{{"5. Безпека інформації" | transloco}}</h4>
+    <p class="policy-text">
+        {{"Ми вживаємо відповідні технічні та організаційні заходи для захисту ваших особистих даних від несанкціонованого доступу, випадкової втрати чи знищення." | transloco}}
+    </p>
+    <h4 class="title2">{{"6. Ваші права" | transloco}}</h4>
+    <p class="policy-text">
+        {{"У вас є право:" | transloco}}<br>
+        <span class="policy-text dot-before2">{{"• Запитувати доступ до своїх персональних даних." | transloco}}</span><br>
+        <span class="policy-text dot-before2">{{"• Вимагати виправлення невірних або неповних даних." | transloco}}</span><br>
+        <span class="policy-text dot-before2">{{"• Запитувати видалення своїх персональних даних." | transloco}}</span><br>
+        <span class="policy-text dot-before2">{{"• Відкликати згоду на обробку даних у будь-який час." | transloco}}</span>
+    </p>
+    <h4 class="title2">{{"7. Зміни до Політики конфіденційності" | transloco}}</h4>
+    <p class="policy-text">
+        {{"Ми можемо періодично оновлювати цю Політику конфіденційності. Всі зміни будуть опубліковані на цій сторінці з оновленою датою." | transloco}}
+    </p>
+    <h4 class="title2">{{"8. Контактна інформація" | transloco}}</h4>
+    <p class="policy-text">
+        {{"Якщо у вас є запитання або коментарі щодо цієї Політики конфіденційності, будь ласка, зв'яжіться з нами за адресою:" | transloco}}<br><br>
+        seedflow&#64;gmail.com<br>
+        +380 (73) 123 45 67<br>
+        {{"вул.Майка Йогансена, 27, м. Харків, 61010, Україна" | transloco}}
+    </p>
+</div>
+
+<app-footer></app-footer>
+

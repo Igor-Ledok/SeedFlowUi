@@ -1,0 +1,176 @@
+<app-header></app-header>
+
+<hr>
+
+
+    <!-- Фото в правом верхнем углу -->
+    <div class="top-right-image">
+        <img src="assets/images/ShopGreenLeftUp.png" alt="Top Right Image" />
+        <div class="overlay-text">{{"Ваш рахунок" | transloco}}<span style="color: #247a60; font-weight: 600; font-size: 20px; margin-bottom: 30%;"><br>Seeds</span></div>      
+    </div>
+
+    <div class="balance-info">
+        <!-- Маленькое фото слева от текста -->
+        <img src="assets/images/Seeds.png" alt="Small Image" class="small-image" />
+        <span class="balance-text">250</span>
+    </div>
+
+
+<div class="custom-container">
+    <!-- Левая часть -->
+    <div class="custom-left">
+      <img src="assets/images/ShopTovar8.png" alt="Main Photo" class="main-photo" />
+      <div class="photo-row">
+        <img src="assets/images/ShopTovar9.png" alt="Photo 1" class="small-photo" />
+        <img src="assets/images/ShopTovar6.png" alt="Photo 2" class="small-photo" />
+        <img src="assets/images/ShopTovar7.png" alt="Photo 3" class="small-photo" />
+      </div>
+    </div>
+  
+    <!-- Правая часть -->
+    <div class="custom-right">
+
+        <div class="top-section">
+            <div class="category-image">
+              <img src="assets/images/YellowLeftUpAngle.png" alt="Category" />
+              <span class="category-text">{{"ДІМ" | transloco}}</span>
+            </div>
+            <img src="assets/images/like.png" (click)="toggleLikeFirst()" [src]="isLiked ? 'assets/images/likeRed.png' : 'assets/images/like.png'" alt="Heart" class="heart-icon" />
+          </div>
+      
+          <h2 class="product-title">{{"Чашка з блюдцем" | transloco}}</h2>
+          <p class="product-size">{{"250 мл" | transloco}}</p>
+      
+          <div class="product-price-container">
+      <span class="product-price">{{"Товар закінчився" | transloco}}</span> <!-- Сумма -->
+      <div class="product-articul">
+        <span>{{"Артикул" | transloco}}: 425789</span> <!-- Артикул -->
+      </div>
+    </div>
+
+    <p class="color-selection-text">{{"Оберіть колір" | transloco}}:</p>
+    <div class="color-options">
+      <img src="assets/images/NoColor4.png" alt="Color 1" 
+           class="color-image"  
+           (click)="selectColor(1)">
+    
+      <img src="assets/images/NoColor1.png" alt="Color 2" 
+           class="color-image" 
+           (click)="selectColor(2)">
+    
+      <img src="assets/images/NoColor2.png" alt="Color 3" 
+           class="color-image" 
+           (click)="selectColor(3)">
+    
+      <img src="assets/images/NoColor3.png" alt="Color 4" 
+           class="color-image"  
+           (click)="selectColor(4)">
+    </div>
+
+           <!-- Информация о проекте -->
+    <p class="project-title">{{"Товар проєкта" | transloco}}:</p>
+    <div class="project-info">
+      <img src="assets/images/CupOfCoffee.png" alt="Project" class="project-photo" />
+      <p class="project-name">{{"«Чашка кави»" | transloco}}</p>
+      <a href="#" class="project-link">{{"Переглянути проєкт" | transloco}}</a>
+    </div>
+    
+    <div class="quantity-container">
+        <button (click)="decreaseQuantity()">-</button>
+        <span>{{ quantity }}</span>
+        <button (click)="increaseQuantity()">+</button>
+      </div>
+
+<!-- Кнопка "ПРИДБАТИ" -->
+<div class="buy-container">
+    <button class="buy-button" 
+            [ngClass]="{'purchased': isPurchased}" 
+            (click)="togglePurchase()">
+        {{ isPurchased ? ('ПОВІДОМИТИ ПРО НАЯВНІСТЬ' | transloco) : ('ПРИДБАТИ' | transloco) }}
+    </button>
+</div>
+
+<!-- Модальное окно -->
+<div class="modal-overlay" *ngIf="showModal" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <h2 style="font-family: 'Montserrat'; font-size: 20px; font-weight: 500; margin-top:15%;">{{"Ви успішно підключили функцію" | transloco}}</h2>
+
+        <br>
+
+        <h1 style="font-family: 'Montserrat'; font-size: 24px; font-weight: 600; color:#247a60; margin-top: -1%;">{{"«Повідомити про наявність»" | transloco}}</h1>
+
+        <br>
+
+        <h2 style="font-family: 'Montserrat'; font-size: 20px; font-weight: 500; margin-top: 1%;">{{"Тепер, коли товар з’явиться в наявності, ми Вас сповістимо!" | transloco}}</h2>
+
+
+        <!-- Фото под текстом -->
+        <img src="assets/images/YellowPig.png" alt="Product Image" class="modal-image">
+
+        <br>
+        
+        </div>
+</div>
+
+
+    </div>
+</div>
+  
+
+<!-- Новый контейнер -->
+<div class="product-info-container">
+    <p class="product-info-text">{{"ПРО ТОВАР" | transloco}}</p>
+</div>
+
+
+<!-- Контейнер с описанием -->
+<div class="custom-description-container">
+    <!-- Первый ряд: Описание товара -->
+    <div class="description-row">
+        <div class="description-title">{{"Опис" | transloco}}</div>
+        <div class="description-text">
+            {{"Цей товар є продуктом успішно закритого проєкту «Чашка кави»." | transloco}}
+            <br>
+            <br> 
+            {{"Чашка з блюдцем від стартапу кафе «Чашка кави» – це елегантний аксесуар для справжніх поціновувачів кави. Виготовлена з якісного фарфору, вона має приємну текстуру та витончену форму, що надає кожному ковтку особливого шарму. Дизайн чашки прикрашений логотипом кафе, що підкреслює вашу приналежність до спільноти любителів кави. Комплект доповнюється стильним блюдцем, яке ідеально підходить для невеликих закусок або цукерок. Купуючи цей товар, ви не лише отримуєте стильний аксесуар, але й підтримуєте розвиток молодого кафе, що прагне подарувати вам найкращий кавовий досвід." | transloco}}
+        </div>
+    </div>
+    
+    <br>
+    <br>
+
+    <!-- Второй ряд: Информация о доставке -->
+    <div class="description-row">
+        <div class="description-title">{{"Доставка" | transloco}}</div>
+        <div class="description-text">{{"5-7 робочих днів" | transloco}}</div>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="description-row">
+        <div class="description-title">{{"Продавець" | transloco}}</div>
+        <div class="description-text">{{"Урбаністичне кафе «Чашка кави» – це місце, де сучасність зустрічається з традиціями, створюючи унікальну атмосферу для відвідувачів. Розташоване в серці міста, кафе привертає увагу не лише смачною кавою, а й стильним інтер'єром з елементами індустріального дизайну. Меню пропонує різноманітність кавових напоїв, від класичного еспресо до авторських коктейлів на основі кави, які здивують навіть найвибагливіших гурманів. Крім того, в кафе часто проводяться майстер-класи з приготування кави та інші культурні заходи, що об'єднують місцеву громаду." | transloco}} 
+            <br>
+            <br>
+            {{"«Чашка кави» підтримує локальних виробників, тому більшість інгредієнтів, використаних у напоях і десертах, походять із регіону. У кафе ви знайдете зручні зони для роботи та відпочинку, що робить його популярним місцем для фрілансерів та студентів. Залиште всі турботи за дверима й насолоджуйтеся затишною атмосферою та приємним обслуговуванням. А для тих, хто бажає віднести частинку «Чашки кави» додому, пропонуються ексклюзивні мерч-товари, включаючи чашки з блюдцями та стильні еко-сумки. Завітайте до нас, щоб відчути справжню пристрасть до кави у поєднанні з урбаністичним стилем!" | transloco}}</div>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="description-row">
+        <div class="description-title">Website</div>
+        <div class="description-text">http://chashka_kavy</div>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="description-row">
+        <div class="description-title">{{"Місцезнаходження" | transloco}}</div>
+        <div class="description-text">{{"Україна, Миколаїв" | transloco}}</div>
+    </div>
+</div>
+
+<app-footer></app-footer>

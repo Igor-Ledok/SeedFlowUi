@@ -1,0 +1,41 @@
+<app-header></app-header>
+
+  <hr>
+
+    <div class="registration-form">
+      <div class="left-panel">
+      </div>
+      <div class="right-panel">
+        <div id="accessSupport">{{"Ви успішно підтримали проєкт" | transloco }}</div>
+        <h2 id="proj">{{ project.title }}</h2>
+
+        <div id="comment">{{"Чи хочете Ви залишити слова підтримки авторам проєкту?" | transloco }}</div>
+
+        <textarea id="areatext" [(ngModel)]="supportText" (ngModelChange)="updateCharCount()" maxlength="500" placeholder="{{'Введіть текст підтримки тут' | transloco}}"></textarea>
+
+        <div id="symbols">
+         {{"Залишилось" | transloco }} {{ charCount }}/500 {{"символів" | transloco }}
+        </div>
+
+       <form #myForm="ngForm">
+          <section class="example-section" id="checkbox">
+            <mat-checkbox class="example-margin" name="checkbox2" type="checkbox" required style="margin-left: 31px; top:-90px; ">
+              <br>
+              <label class="sendAnonim">{{"Відправити анонімно" | transloco }}</label> 
+            </mat-checkbox>
+          </section>
+            <button id="btnSend2" (click)="sendDonationWithComment()" type="button"  [disabled]="!supportText.trim()">
+                {{"ВІДПРАВИТИ" | transloco}}
+             </button>
+
+           <button id="btnSkip" (click)="sendDonation()" type="button" >
+            {{"ПРОПУСТИТИ" | transloco}}
+          </button>
+        </form>
+        
+      </div>
+
+    </div>
+  
+
+

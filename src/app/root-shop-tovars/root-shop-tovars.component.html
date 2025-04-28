@@ -1,0 +1,35 @@
+<app-header></app-header>
+
+<hr>
+
+<div class="tabs-container">
+    <div class="tabs">
+      <button [routerLink]="'/root-panel-page'">{{"ПРОЄКТИ" | transloco}}</button>
+      <button [routerLink]="'/root-accounts-page'">{{"АКАУНТИ" | transloco}}</button>
+      <button [routerLink]="'/root-shop-tovars-page'">{{"ТОВАРИ МАГАЗИНУ" | transloco}}</button>
+    </div>
+</div>
+
+<div class="cards-container">
+    <div class="four-cards-row">
+      <div *ngFor="let product of products" class="small-card">
+
+        <!-- <img src="assets/images/like.png" alt="Right Top Image" class="right-top-image" /> -->
+
+        <img src="assets/images/delete-icon.png" (click)="deleteProduct(product.id)" alt="icon" class="right-top-image" />
+
+        <img src="assets/images/ShopGreenLeftUp2.png" alt="Left Top Image" class="left-top-image" />
+        <img [src]="product.imageBase64" [routerLink]="['/tovar-page-page']" [queryParams]="{ productId: product.id}" alt="Image" class="small-card-image" />
+        
+        <div class="left-top-text">
+          <p>{{ product.categoryName | transloco }}</p>
+        </div>
+        
+        <div class="small-card-info">
+          <h3 class="small-card-title">{{ product.name | transloco }}</h3>
+          <p class="small-card-description">{{ product.shortDescription | transloco }}</p>
+          <p class="small-card-price">{{ product.price }} {{"грн" | transloco}}</p>
+        </div>
+      </div>
+    </div>
+  </div>

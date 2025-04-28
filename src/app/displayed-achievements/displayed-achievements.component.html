@@ -1,0 +1,32 @@
+<app-header></app-header>
+
+  <hr>
+
+
+  <div class="achievement-container">
+    <h1 class="title">{{"НАЛАШТУВАННЯ" | transloco}}</h1>
+    <div class="achievement-box">
+      <div class="back-arrow" (click)="goBack()">
+        <i class="fa fa-arrow-left"></i>
+      </div>
+      <h1 class="title2">{{"ВІДОБРАЖУВАНІ ДОСЯГНЕННЯ" | transloco}}</h1>
+
+      <span class="title2-description">{{"Зазначені досягнення будуть показані у вашому профілі" | transloco}}</span>
+    
+    <div class="achievement-grid">
+      
+      <div class="achievement-item" *ngFor="let achievement of achievements">
+        <img [src]="achievement.image" alt="achievement">
+        <p class="achievement-title">{{ achievement.title | transloco }}</p>
+        <p class="achievement-description">{{ achievement.description | transloco }}</p>
+        <mat-slide-toggle class="achievement-toggle"></mat-slide-toggle>
+      </div>
+    </div>
+
+    <button class="achievement-button">{{ "Зберегти" | transloco }}</button>
+
+    </div>
+  </div>
+
+
+<app-footer></app-footer>

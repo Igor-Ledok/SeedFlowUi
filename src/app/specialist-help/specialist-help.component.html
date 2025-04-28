@@ -1,0 +1,105 @@
+<app-header></app-header>
+
+  <hr>
+
+  <button class="fixed-button" (click)="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <div class="container">
+    <img 
+    *ngFor="let img of images; let i = index"
+    [src]="activeIndex === i ? img.active : img.gray"
+    alt="Image"
+    class="image"
+    [class.active]="activeIndex === i"
+    (click)="onImageClick(img.link)">
+  </div>
+
+
+  <div class="search-section">
+    <div class="breadcrumbs">
+      <a [routerLink] = "'/'" style="cursor: pointer; text-decoration: none; color: inherit;">
+      <span>{{"Головна" | transloco}}</span>  
+      </a>
+      &gt;
+      <a [routerLink] = "'/support-page'" style="cursor: pointer; text-decoration: none; color: inherit;">
+      <span>{{"Підтримка" | transloco}}</span>
+      </a>
+      &gt;
+      <a [routerLink] = "'/accompaniment-page'" style="cursor: pointer; text-decoration: none; color: inherit;">
+        <span>{{"Супровід проєкту" | transloco}}</span>
+      </a>
+      &gt;
+      <span>{{"Допомога фахівців" | transloco}}</span>
+    </div> 
+    <h2 class="title">{{"Освітній центр" | transloco}}</h2>
+    <p class="description">{{"Все, що вам потрібно для кожного етапу подорожі вашого продукту." | transloco}}</p>
+    <input class="field-input" type="text" placeholder='{{"Пошук ресурсів..." | transloco}}'
+    [(ngModel)]="searchText2" (keydown.enter)="onEnter()">
+  </div>
+
+ <div class="photo-grid">
+  <div class="photo-item">
+      <img src="assets/images/specialistHelp1.png" alt="Фото 1">
+      <p class="photo-title">{{"Створення вашої кампанії" | transloco}}</p>
+  </div>
+  <div class="photo-item">
+      <img src="assets/images/specialistHelp2.png" alt="Фото 2">
+      <p class="photo-title">{{"Розробка вашого продукту" | transloco}}</p>
+  </div>
+  <div class="photo-item">
+      <img src="assets/images/specialistHelp3.png" alt="Фото 3">
+      <p class="photo-title">{{"Керування вашою кампанією" | transloco}}</p>
+  </div>
+  <div class="photo-item">
+      <img src="assets/images/specialistHelp4.png" alt="Фото 4">
+      <p class="photo-title">{{"Планування кампанії" | transloco}}</p>
+  </div>
+  <div class="photo-item">
+      <img src="assets/images/specialistHelp5.png" alt="Фото 5">
+      <p class="photo-title">{{"Маркетинг і PR" | transloco}}</p>
+  </div>
+  <div class="photo-item">
+      <img src="assets/images/specialistHelp6.png" alt="Фото 6">
+      <p class="photo-title">{{"Всі теми" | transloco}}</p>
+  </div>
+</div>
+
+ <div class="center-text">
+  <p>{{"Добірка експертних порад для втілення вашої ідеї в життя." | transloco}}</p>
+</div>
+
+<div class="two-photos-row">
+  <div class="photo-item-wrapper">
+    <div class="photo-item">
+      <img src="assets/images/specialistHelp7.png" alt="Фото 7">
+      <p class="photo-title">{{"Коли шукати експертної допомоги для краудфандингової кампаніях" | transloco}}</p>
+    </div>
+  </div>
+  <div class="photo-item-wrapper">
+    <div class="photo-item">
+      <img src="assets/images/specialistHelp8.png" alt="Фото 8">
+      <p class="photo-title">{{"Посібник із збільшення аудиторії вашої кампанії" | transloco}}</p>
+    </div>
+  </div>
+</div>
+
+
+<div class="center-text">
+  <p style="font-size: 24px; font-weight: 600;">{{"Перегляньте за типом ресурсу" | transloco}}</p>
+</div>
+
+<div class="image-gallery">
+  <div class="image-item" [routerLink]="'/state-startup-page'">
+      <img src="assets/images/book.png" alt="Фото 1">
+      <h3 class="image-title">{{"Статті" | transloco}}</h3>
+  </div>
+  <div class="image-item second-image" [routerLink]="'/state2-page'">
+      <img src="assets/images/edit.png" alt="Фото 2">
+      <h3 class="image-title">{{"Тематичні дослідження" | transloco}}</h3>
+  </div>
+</div>
+
+<app-footer></app-footer>
+

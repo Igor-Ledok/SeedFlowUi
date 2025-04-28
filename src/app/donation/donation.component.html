@@ -1,0 +1,210 @@
+<app-header></app-header>
+
+  <hr>
+
+    <div class="registration-form">
+      <div class="left-panel">
+      </div>
+      <div class="right-panel">
+        <div id="wantSupport">{{"Ви хочете підтримати проєкт" | transloco }}</div>
+        <h2 id="proj">{{project.title| transloco }}</h2>
+
+        <div class="sumaHelp">{{"Оберіть суму допомоги" | transloco }}</div>
+
+        <button class="moneyBtn" (click)="setAmount(50)" [ngClass]="{'selected': selectedAmount === 50}"> 50 {{ "грн" | transloco }}</button>
+        <button class="moneyBtn2" (click)="setAmount(100)" [ngClass]="{'selected': selectedAmount === 100}"> 100 {{ "грн" | transloco }}</button>
+        <button class="moneyBtn3" (click)="setAmount(200)" [ngClass]="{'selected': selectedAmount === 200}"> 200 {{ "грн" | transloco }}</button>
+        <button class="moneyBtn4" (click)="setAmount(500)" [ngClass]="{'selected': selectedAmount === 500}"> 500 {{ "грн" | transloco }}</button>
+        <button class="moneyBtn5" (click)="setAmount(1000)" [ngClass]="{'selected': selectedAmount === 1000}"> 1000 {{ "грн" | transloco }}</button>
+
+       <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+          <div class="form-group">
+            <br>
+            <input 
+            type="yourMoney" 
+            [(ngModel)]="customAmount" 
+            (input)="onCustomAmountChange($event)" 
+            [ngModelOptions]="{standalone: true}" 
+            required 
+            placeholder='{{"Введіть вашу суму" | transloco }}' 
+            id="donation-amount"
+            name="donation-amount"
+            />
+            <span class="currency-symbol">{{"грн" | transloco}}</span>
+          </div>
+
+          <div id="changePay">{{"Оберіть спосіб оплати" | transloco }}</div>
+
+          <mat-radio-group [(ngModel)]="selectedPaymentMethod" (change)="onPaymentMethodChange($event)" class="radioGroup">
+            <mat-radio-button value="1" style="position: relative; top: -250px; left: -60px;">
+              <img src="assets/images/G_Pay.png" style="width: 50px; top: 4px; position: relative;">
+              <span style="position: absolute;top: 200px; left: 112px; font-family: 'Montserrat'; font-size: 15px; height: 10px; top: 0px; width: 90px;">Google Pay</span>
+            </mat-radio-button>
+            <br>
+            <mat-radio-button value="2" style="position: relative; top: -250px; left: -60px;">
+              <img src="assets/images/CreditCard.png" style="width: 30px; top: 3px; position: relative; left: 12px;">
+              <span style="position: relative;top: -3px; left: 40px; font-family: 'Montserrat'; font-size: 15px; height: 10px;">{{"Кредитна картка" | transloco}}</span>
+            </mat-radio-button>
+          </mat-radio-group>
+          
+         <div class="validForm">
+              <div class="form-group">
+                  <input 
+                      type="text" 
+                      id="firstName" 
+                      name="firstName" 
+                      [(ngModel)]="firstName"
+                      [ngModelOptions]="{standalone: true}"
+                      required 
+                      minlength="2"
+                      placeholder='{{"Ім&#39;я" | transloco }}'
+                      #firstNameField="ngModel"
+                      [disabled]="selectedPaymentMethod !== '2'" 
+                      >
+                      <div *ngIf="firstNameField.invalid && firstNameField.touched" id="please1">
+                        {{ "Будь ласка, введіть Ваше ім'я" | transloco }}
+                      </div>
+                </div>
+
+              <div class="form-group">
+                  <input 
+                      type="text" 
+                      id="lastName" 
+                      name="lastName" 
+                      [(ngModel)]="lastName" 
+                      [ngModelOptions]="{standalone: true}"
+                      required 
+                      placeholder='{{"Прізвище" | transloco}}' 
+                      #lastNameField="ngModel"
+                      [disabled]="selectedPaymentMethod !== '2'" 
+                      >
+                      <div *ngIf="lastNameField.invalid && lastNameField.touched" id="please2">
+                        <span style="position: relative; top:-186px; left: 70px;">{{ "Будь ласка, введіть Ваше прізвище" | transloco }}</span>
+                      </div>
+                  </div>
+
+              <div class="form-group">
+                  <input 
+                      type="email" 
+                      id="email" 
+                      name="email" 
+                      [(ngModel)]="email" 
+                      [ngModelOptions]="{standalone: true}"
+                      required 
+                      pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+                      placeholder='{{"Електронна пошта" | transloco}}'  
+                      [disabled]="selectedPaymentMethod !== '2'" 
+                      #emailField="ngModel"
+                      >
+                      <div *ngIf="emailField.invalid && emailField.touched" id="please3">
+                        <span>{{ "Будь ласка, введіть Вашу електронну пошту" | transloco }}</span>
+                      </div>
+                    </div>
+
+              <div class="form-group">
+                  <input 
+                      type="text" 
+                      id="cardNumber" 
+                      name="cardNumber" 
+                      [(ngModel)]="cardNumber" 
+                      [ngModelOptions]="{standalone: true}" 
+                      required 
+                      pattern="^\d{16}$"
+                      placeholder='{{"Номер карти" | transloco}}' 
+                      [disabled]="selectedPaymentMethod !== '2'" 
+                      #cardNumberField="ngModel"
+                      >
+                      <div *ngIf="cardNumberField.invalid && cardNumberField.touched" id="please4">
+                        <span>{{ "Будь ласка, введіть номер картки" | transloco }}</span>
+                      </div>
+                  </div>
+                  
+              <div class="form-group">
+                  <input 
+                      type="text" 
+                      id="expiry" 
+                      name="expiry" 
+                      [(ngModel)]="expiry" 
+                      [ngModelOptions]="{standalone: true}"
+                      required 
+                      mask="MM/YY"
+                      pattern="^(0[1-9]|1[0-2])\/([0-9]{2})$"
+                      placeholder='{{"ММ/РР" | transloco}}' 
+                      #expiryField="ngModel"
+                      [disabled]="selectedPaymentMethod !== '2'" 
+                      >
+                      <div *ngIf="expiryField.invalid && expiryField.touched" id="please5">
+                        <span>{{ "Будь ласка, введіть дату на картці" | transloco }}</span>
+                      </div>
+                  </div>
+
+              <div class="form-group">
+                  <input 
+                      type="text" 
+                      id="cvv" 
+                      name="cvv" 
+                      [(ngModel)]="cvv" 
+                      [ngModelOptions]="{standalone: true}"
+                      required 
+                      placeholder="CVV"
+                      pattern="^\d{3}$" 
+                      #cvvField="ngModel"
+                      [disabled]="selectedPaymentMethod !== '2'" 
+                      >
+                      <div *ngIf="cvvField.invalid && cvvField.touched" id="please6">
+                        <span>{{ "Будь ласка, введіть код CVV" | transloco }}</span>
+                      </div>
+                  </div>
+              <section class="example-margin" id="checkbox" style="color: #44b36a;">
+                  <mat-checkbox 
+                      class="example-margin2" 
+                      [disabled]="selectedPaymentMethod !== '2'" 
+                      >
+                      <label id="savePayment">
+                          {{"Зберігати для майбутніх платежів" | transloco }}
+                      </label>
+                  </mat-checkbox>
+              </section>
+        </div>    
+
+          <section class="example-margin" id="checkbox" style="color: #44b36a;">
+            <mat-checkbox class="example-margin" style="margin-left: -13px; top:-120px;">
+              <label class="dontShow">{{"Не показувати моє ім'я публічно під час збору коштів" | transloco }}</label></mat-checkbox>
+          </section>
+
+          <br>
+
+          <section class="example-section" id="checkbox">
+            <mat-checkbox class="example-margin" name="checkbox2" type="checkbox" required style="margin-left: -13px; top:-120px;  width: 450px;">
+              <br>
+              <label id="take">{{"Отримувати новини від Seed Flow. Ви можете скасувати підписку в будь-який час" | transloco }}</label> 
+            </mat-checkbox>
+          </section>
+
+           <button 
+           type="button" 
+           [disabled]="!isPayButtonEnabled"
+           (click)="onPayClick()" 
+           class="btnSend"
+           >
+            
+           <ng-container *ngIf="selectedPaymentMethod !== '2'; else sendButton">
+           <img src="assets/images/G_Pay.png" class="next-icon" alt="next-icon" />
+          </ng-container>
+
+          <ng-template #sendButton>
+           {{ "ВІДПРАВИТИ" | transloco }}
+          </ng-template>
+
+          <ng-container *ngIf="selectedPaymentMethod !== '2'">
+            PAY
+          </ng-container>
+
+          </button>
+        </form>
+        
+      </div>
+
+    </div>
+
+  

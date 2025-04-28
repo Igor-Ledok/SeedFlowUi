@@ -1,0 +1,86 @@
+<app-header></app-header>
+
+  <hr>
+
+  <button class="fixed-button" (click)="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <div class="container-full">
+
+    <div class="breadcrumbs">
+      <a [routerLink] = "'/'" style="cursor: pointer; text-decoration: none; color: inherit;">
+      <span>{{"Головна" | transloco}}</span>  
+    </a>
+      &gt;
+      <span>{{"Підтримка" | transloco}}</span>
+    </div>    
+
+    <div class="side-images left-images">
+      <img *ngFor="let img of leftImages" [src]="img" class="side-img" />
+    </div>
+
+    <div class="side-images right-images">
+      <img *ngFor="let img of rightImages" [src]="img" class="side-img" />
+    </div>
+
+    <p class="header-text">{{"Як ми можемо вам допомогти?" | transloco}}</p>
+    
+    <div class="input-wrapper">
+        <input type="text" placeholder="{{'Шукайте наші довідкові статті' | transloco}}" class="input-field"
+        [(ngModel)]="searchText2" (keydown.enter)="onEnter()">
+        <span class="icon-search"></span>
+    </div>
+
+    <!-- <p>Текущее значение поиска: {{ searchText2 }}</p> -->
+
+    <div class="below-input-image">
+      <img src="assets/images/heart.png" alt="Фото" class="below-img">
+    </div>
+
+    <!-- <li *ngFor="let question of filterQuestions()" (click)="onQuestionClick(question.url)">
+      {{ question.question }}
+    </li> -->
+    
+  </div>
+
+  <div class="container-full2">
+    <div class="images-container">
+        <div [routerLink]="'/faq-page'" class="image-item" [attr.data-text]="'Питання та відповіді' | transloco">
+          <img src="assets/images/photo2.png" alt="Фото 1" />
+          <a [routerLink]="'/faq-page'" class="image-link">{{"Переглянути усі" | transloco}}</a>
+        </div>
+        <div [routerLink]="'/accompaniment-page'" class="image-item" [attr.data-text]="'Супровід проєкту' | transloco">
+          <img src="assets/images/photo2.png" alt="Фото 2" />
+          <a [routerLink]="'/accompaniment-page'" class="image-link">{{"Переглянути усі" | transloco}}</a>
+        </div>
+        <div [routerLink]="'/blog-page'" class="image-item" [attr.data-text]="'Статті/блог' | transloco">
+          <img src="assets/images/photo2.png" alt="Фото 3" />
+          <a [routerLink]="'/blog-page'" class="image-link">{{"Переглянути усі" | transloco}}</a>
+        </div>
+        <div [routerLink]="'/seminar2-page'" class="image-item" [attr.data-text]="'Семінари/вебінари' | transloco">
+          <img src="assets/images/photo2.png" alt="Фото 4" />
+          <a [routerLink]="'/seminar2-page'" class="image-link">{{"Переглянути усі" | transloco}}</a>
+        </div>
+      </div>
+  </div>
+  
+ <div class="container">
+    <img 
+    *ngFor="let img of images; let i = index"
+    [src]="activeIndex === i ? img.active : img.gray"
+    alt="Image"
+    class="image"
+    [class.active]="activeIndex === i"
+    (click)="onImageClick(img.link)">
+  </div>
+
+  <div class="container-full3">
+    <div class="centered-text">
+        {{"Все ще не можете знайти те, що вам потрібно?" | transloco}}
+    </div>
+    <button [routerLink]="'/send-request-page'" class="custom-button">{{"Зверніться до служби підтримки" | transloco}}</button>
+  </div> 
+
+ <app-footer></app-footer>
+

@@ -1,0 +1,61 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+@use "@angular/material" as mat;
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:root {
+  @include mat.checkbox-overrides(
+    (
+      selected-focus-state-layer-color: none,
+      selected-hover-state-layer-color: none,
+      selected-pressed-state-layer-color: none,
+      unselected-focus-state-layer-color: none,
+      unselected-hover-state-layer-color: none,
+      unselected-pressed-state-layer-color: none
+    )
+  );
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+html {
+  @include mat.theme((
+    color: mat.$green-palette,
+    
+    density: 0,
+  ));
+}
+
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:root {
+  @include mat.slide-toggle-overrides((
+    track-outline-color:transparent,
+    unselected-focus-track-color:#d2d2d2,
+    unselected-pressed-track-color:#d2d2d2,
+    unselected-hover-track-color:#d2d2d2,
+    unselected-track-color:#d2d2d2,
+    selected-hover-handle-color:#247a60,
+    selected-pressed-track-color:#d2d2d2,
+    selected-focus-handle-color:#247a60, 
+    unselected-focus-handle-color:#5a5a5a,
+    selected-focus-track-color:#d2d2d2, 
+    unselected-icon-color:#5a5a5a,
+    selected-pressed-handle-color:#247a60,
+    unselected-pressed-handle-color:#5a5a5a,
+    selected-pressed-state-layer-color:#247a60,
+    unselected-pressed-state-layer-color:#d2d2d2,
+    selected-track-color:#d2d2d2,
+    unselected-hover-handle-color:#5a5a5a,
+    selected-hover-track-color:#d2d2d2,
+    unselected-handle-color:#5a5a5a,
+    selected-handle-color:#247a60,
+    selected-icon-color:#247a60
+  ));
+}
+
+

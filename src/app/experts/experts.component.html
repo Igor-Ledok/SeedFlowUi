@@ -1,0 +1,197 @@
+<app-header></app-header>
+
+  <hr>
+
+  <div class="container">
+    <img 
+    *ngFor="let img of images; let i = index"
+    [src]="activeIndex === i ? img.active : img.gray"
+    alt="Image"
+    class="image"
+    [class.active]="activeIndex === i"
+    (click)="onImageClick(img.link)">
+  </div>
+
+  <button class="fixed-button" (click)="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <div class="container2">
+    <img src="assets/images/loftImage2.jpg" alt="Фото">
+    <div class="overlay2">{{"ПРОФЕСІЙНІ ПОРАДИ ЩОДО КРАУДФАНДИНГУ НА ПЕРЕПОВНЕНОМУ РИНКУ" | transloco}}</div>
+</div>
+
+<div class="breadcrumbs">
+  <a [routerLink] = "'/'" style="cursor: pointer; text-decoration: none; color: inherit;">
+  <span>{{"Головна" | transloco}}</span>  
+  </a>
+  &gt;
+  <a [routerLink] = "'/support-page'" style="cursor: pointer; text-decoration: none; color: inherit;">
+  <span>{{"Підтримка" | transloco}}</span>
+  </a>
+  &gt;
+  <a [routerLink] = "'/accompaniment-page'" style="cursor: pointer; text-decoration: none; color: inherit;">
+    <span>{{"Супровід проєкту" | transloco}}</span>
+  </a>
+  &gt;
+  <span>{{"Рекомендовані експерти" | transloco}}</span>
+</div> 
+
+<div class="phone-info">
+    <span>{{"Тел." | transloco}} +38 (073) 123-45-67</span>
+    <div class="phone-info-button">
+        <button>{{"ВПОДОБАТИ" | transloco}}</button>
+    </div>
+    <span><a href="#" class="more">{{"Більше" | transloco}}</a></span>
+    <div class="more-info-icon" (click)="toggleDropdown2()">
+      <a><img src="assets/images/socialMedia.png" alt="Иконка"></a>
+    </div>
+    <div *ngIf="showDropdown2" class="social-media-dropdown2">
+      <ul>
+        <li>
+          <a href="https://www.facebook.com/profile.php?id=61573153085556" target="_blank">
+            <img src="assets/images/facebook.png" alt="Facebook" />
+          </a>
+        </li>
+        <li>
+          <a href="https://www.instagram.com/seedflow_itstep/" target="_blank">
+            <img src="assets/images/Instagram.png" alt="Instagram" />
+          </a>
+        </li>
+      </ul>
+    </div>
+
+</div>
+
+
+
+
+<div class="center-container">
+    <div class="center-content">
+        <p class="primary-text">{{"Запуск краудфандингової кампанії на конкурентному ринку може здатися складним, але це також можливість продемонструвати, що робить ваш проект унікальним. Завдяки продуманому підходу та надійній стратегії ви можете виділитися, залучити свою аудиторію та досягти успіху навіть у переповненому полі. Ось кілька професійних порад, які допоможуть вам сяяти:" | transloco}}
+        </p>
+        <p class="secondary-text">
+            {{"1. Визначте свою унікальну цінність" | transloco}}
+        </p>
+        <p class="primary-text2">{{"Чим ваш проект відрізняється від інших на ринку? Чітке визначення вашої унікальної цінності є першим кроком до того, щоб виділитися." | transloco}}
+        </p>
+
+        <p class="primary-text2">{{"Чому це важливо. Потенційним спонсорам потрібна чітка причина, щоб обрати вашу кампанію перед іншими." | transloco}}
+            <br>
+            {{"Як це зробити:" | transloco}}
+            <br>
+            {{"Підкресліть проблему, яку вирішує ваш продукт, і чому він важливий для вашої аудиторії. Підкресліть будь-які унікальні особливості, переваги чи інновації. Поділіться своєю історією — що надихнуло ваш проект і чому ви ним захоплені." | transloco}}
+        </p>    
+        
+        <p class="secondary-text">           
+            {{"2. Створіть сильну присутність перед запуском" | transloco}}
+        </p>
+        <p class="primary-text2">{{"Чудова кампанія починається ще до дня запуску. Використовуйте свою передзапускову фазу, щоб створити галас і підтвердити свою присутність." | transloco}}
+        </p>
+
+
+        <p class="primary-text2">{{"Чому це важливо: серйозні зусилля перед запуском створюють очікування та забезпечують готову аудиторію під час запуску." | transloco}}
+            <br>
+            {{"Як це зробити:" | transloco}}
+            <br>
+            {{"Створіть сторінку перед запуском, щоб збирати адреси електронної пошти та перевіряти інтерес. Діліться тизерами, закулісним вмістом і оновленнями в соціальних мережах. Залучайтеся до своєї мережі та заохочуйте їх поширювати інформацію." | transloco}}
+        </p>    
+
+        <p class="secondary-text">           
+            {{"3. Зосередьтеся на чітких і переконливих повідомленнях" | transloco}}
+        </p>
+        <p class="primary-text2">{{"На переповненому ринку ясність є ключовою. Ваші повідомлення мають миттєво повідомляти про вашу кампанію та чому її варто підтримати." | transloco}}
+        </p>
+        <p class="primary-text2">{{"Чому це важливо: люди, швидше за все, залучатимуться до кампанії, яку легко зрозуміти та емоційно резонансну." | transloco}}
+            <br>
+            {{"Як це зробити:" | transloco}}
+            <br>
+            {{"Використовуйте просту, привабливу мову, яка підкреслює переваги вашого продукту. Зосередьтеся на тому, як ваш проект покращує життя ваших спонсорів. Уникайте жаргону чи надто технічних термінів, які можуть заплутати чи відштовхнути потенційних прихильників." | transloco}}
+        </p> 
+
+        <p class="secondary-text">           
+            {{"4. Створюйте візуальні ефекти, що привертають увагу" | transloco}}
+        </p>
+       
+        <p class="primary-text2">{{"У морі кампаній яскраві візуальні ефекти можуть виділити вашу." | transloco}}
+        </p>
+        <p class="primary-text2">{{"Чому це важливо? Високоякісні зображення та відео привертають увагу та передають професіоналізм." | transloco}}
+            <br>
+            {{"Як це зробити:" | transloco}}
+            <br>
+            {{"Використовуйте професійні фотографії та відео, щоб продемонструвати свій продукт. Додайте чітке, захоплююче презентаційне відео, яке висвітлює функції, переваги та історію вашого продукту. Переконайтеся, що ваші візуальні елементи відповідають вашому бренду та повідомленням." | transloco}}
+        </p> 
+
+        <p class="secondary-text">           
+            {{"5. Пропонуйте непереборні бонуси" | transloco}}
+        </p>
+
+        <p class="primary-text2">{{"Ваші бонуси є головним стимулом для спонсорів, тому зробіть їх привабливими та цінними." | transloco}}
+
+        </p>
+        <p class="primary-text2">{{"Чому це важливо: привабливі бонуси заохочують до внесків і створюють ажіотаж навколо вашої кампанії." | transloco}}
+            <br>
+            {{"Як це зробити:" | transloco}}
+            <br>
+            {{"Пропонуйте різноманітні бонуси за різними цінами, щоб зацікавити широку аудиторію. Використовуйте бонуси для ранніх клієнтів, щоб винагородити ранніх спонсорів і створити терміновість. Розгляньте ексклюзивні або обмежені бонуси, щоб додати відчуття ексклюзивності." | transloco}}
+        </p> 
+
+        <p class="secondary-text">           
+            {{"6. Будуйте стосунки, а не лише спонсорів" | transloco}}
+        </p>
+
+        <p class="primary-text2">{{"Краудфандинг — це не лише фінансування, а й створення спільноти прихильників, які вірять у ваше бачення." | transloco}}
+
+        </p>
+        <p class="primary-text2">{{"Чому це важливо: заангажовані спонсори з більшою ймовірністю зроблять внесок, поділяться вашою кампанією та стануть прихильниками вашого проекту." | transloco}}
+            <br>
+            {{"Як це зробити:" | transloco}}
+            <br>
+            {{"Швидко відповідайте на запитання та коментарі спонсорів. Висловіть вдячність, подякувавши спонсорам особисто або через оновлення кампанії. Залучайте свою аудиторію за допомогою регулярних оновлень, етапів і перспективних цілей." | transloco}}
+        </p> 
+
+        <p class="secondary-text">             
+            {{"7. Використовуйте соціальний доказ" | transloco}}
+        </p>
+
+        <p class="primary-text2">{{"Коли потенційні спонсори бачать, що інші підтримують вашу кампанію, вони, швидше за все, приєднаються." | transloco}}
+
+
+        </p>
+        <p class="primary-text2">{{"Чому це важливо: соціальний доказ створює довіру та імпульс." | transloco}}
+            <br>
+            {{"Як це зробити:" | transloco}}
+            <br>
+            {{"Виділіть перші внески та етапи на сторінці кампанії та в соціальних мережах. Поділіться відгуками або цитатами перших прихильників. Заохочуйте спонсорів ділитися своїм захопленням з приводу вашої кампанії зі своїми мережами." | transloco}}
+        </p> 
+
+        <p class="secondary-text">             
+            {{"Заключні думки" | transloco}}
+        </p>
+
+        <p class="primary-text2">{{"Краудфандинг на переповненому ринку може здатися складним, але це також можливість піднятися над конкурентами. Зосереджуючись на своїй унікальній цінності, створюючи міцні зв’язки та створюючи кампанію, яка резонує з вашою аудиторією, ви можете досягти успіху та втілити своє бачення в життя." | transloco}}
+
+
+        </p>
+        <p class="primary-text2">{{"Пам’ятайте, кожна взаємодія з вашою аудиторією – це можливість продемонструвати свою пристрасть і відданість. Зробіть перший крок сьогодні і зробіть свою кампанію незабутньою!" | transloco}}
+        </p> 
+
+        <div class="center-text">
+        <p style="font-size: 27px; font-weight: 700;">{{"Чи була ця стаття корисною?" | transloco}}</p>
+        </div>
+
+        <div class="image-gallery">
+            <div class="image-item" [routerLink]="'/blog-page'">
+                <button style="padding: 12px 15px; border: none; background-color: #247a60; color: white; font-weight: 600; border-radius: 5px; position: relative;  cursor: pointer; font-family: 'Montserrat'; font-size: 24px; width: 150px;">{{"Так" | transloco}}</button>
+                <h3 class="image-title">{{"⇦ Prev" | transloco}}</h3>
+            </div>
+            <div class="image-item second-image" [routerLink]="'/state2-page'">
+                <button style="padding: 12px 15px; border: none; background-color: #ffcf33; color: #247a60; font-weight: 600; border-radius: 5px; position: relative;  cursor: pointer; font-family: 'Montserrat'; font-size: 24px; width: 150px;">{{"Ні" | transloco}}</button>
+                <h3 class="image-title2">{{"Next ⇨" | transloco}}</h3>
+            </div>
+          </div>
+        
+    </div>
+</div>
+
+<app-footer></app-footer> 

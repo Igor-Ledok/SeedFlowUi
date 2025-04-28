@@ -1,0 +1,244 @@
+<app-header></app-header>
+
+  <hr>
+
+  <div class="container">
+    <img 
+    *ngFor="let img of images; let i = index"
+    [src]="activeIndex === i ? img.active : img.gray"
+    alt="Image"
+    class="image"
+    [class.active]="activeIndex === i"
+    (click)="onImageClick(img.link)">
+  </div>
+
+  <button class="fixed-button" (click)="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <div class="seminar-container">
+
+    <div class="breadcrumbs">
+      <a [routerLink] = "'/'" style="cursor: pointer; text-decoration: none; color: inherit;">
+      <span>{{"Головна" | transloco}}</span>  
+      </a>
+      &gt;
+      <a [routerLink] = "'/support-page'" style="cursor: pointer; text-decoration: none; color: inherit;">
+      <span>{{"Підтримка" | transloco}}</span>
+      </a>
+      &gt;
+      <a [routerLink] = "'/seminars-vebinars-page'" style="cursor: pointer; text-decoration: none; color: inherit;">
+        <span>{{"Семінари" | transloco}}</span>
+      </a>
+      &gt;
+      <span>{{"Семінар" | transloco}}</span>
+    </div>
+
+    <div class="seminar-image">
+      <img src="assets/images/People2.png" alt="Seminar Image" class="seminar-photo" />
+      
+      <div class="yellow-box">
+        <div class="yellow-stats">
+          <div class="stat">
+            <div class="stat-number">12+</div>
+            <div class="stat-label">{{ "Семінарів" | transloco }}</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">{{"18К+" | transloco}}</div>
+            <div class="stat-label">{{ "Переглядів" | transloco }}</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">{{"30К+" | transloco}}</div>
+            <div class="stat-label">{{ "Учасників" | transloco }}</div>
+          </div>
+        </div>
+      </div>
+      
+
+      <div class="seminar-text-overlay">
+        <p class="text1">{{"СТАРТАПИ" | transloco}}</p>
+        <p class="text2">{{"Ми - команда авторів, які діляться своїми знаннями" | transloco}}</p>
+        <p class="text4">{{"У сучасному світі краудфандинг став потужним інструментом для реалізації сміливих ідей, підтримки соціальних ініціатив та розвитку бізнесу. Ми – команда ентузіастів, які знають усі тонкощі цього процесу, і готові ділитися своїми знаннями, досвідом та лайфхаками, щоб допомогти вам досягти успіху." | transloco}}</p>
+      </div>
+
+      <button [routerLink]="'/marketing-form-page'" class="seminar-button">
+        {{ "Взяти участь" | transloco }}
+      </button>
+    </div>
+  </div>
+
+
+
+  <div class="content-container">
+    <div class="content-left">
+      <h3 class="title">{{"НАША МІСІЯ" | transloco}}</h3>
+      <h4 class="bold-text">{{"Ми прагнемо зробити краудфандинг доступним для кожного, хто має ідею, але не має стартового капіталу." | transloco}}</h4>
+      <p class="description">{{"Наша команда досліджує світові тенденції, аналізує найуспішніші кампанії та розробляє стратегії, які дійсно працюють. Ми хочемо, щоб кожен мав шанс втілити свою мрію в реальність." | transloco}}</p>
+    </div>
+    <div class="content-right">
+      <h3 class="title">{{"Для кого ми працюємо?" | transloco}}</h3>
+      <h4 class="bold-text">{{"Наша аудиторія" | transloco}}</h4>
+      <p class="description">{{"Наша аудиторія – це стартапери, творчі особистості, підприємці та громадські діячі, які прагнуть залучити фінансування для своїх проєктів. Ми допомагаємо новачкам зрозуміти механіку краудфандингу та надаємо корисні інструменти для досвідчених користувачів." | transloco}}</p>
+    </div>
+  </div>
+
+  <div class="content-container3">
+    <div class="right-side2">
+      <h2 class="content-title2">{{"Чим ми ділимося?" | transloco}}</h2>
+      <p class="content-text2">{{"· Практичними кейсами – реальні історії успіху та невдач, щоб ви знали, яких помилок уникати." | transloco}}  </p>
+      <p class="content-text2">{{"· Порадами з підготовки кампанії – як правильно презентувати свій проєкт, які елементи є найважливішими для залучення бекерів." | transloco}}  </p>
+    </div>
+    <div class="left-side">
+      <img src="assets/images/hands3.png" alt="Image on the left">
+    </div>
+  </div>
+  
+
+ <div class="content-container3">
+    <div class="left-side">
+      <img src="assets/images/ThreePersons.png" alt="Image on the left">
+    </div>
+    <div class="right-side2">
+      <h2 class="content-title2">{{"Навіщо тобі цей семінар" | transloco}}</h2>
+      <p class="content-text2">{{"Ми не просто ділимося теоретичними знаннями – ми практики, які працюють над власними кампаніями та знають, як досягти успіху. Наші матеріали – це концентрат корисної інформації без «води», яка допоможе вам створити успішний проєкт і отримати фінансування. Долучайтеся до нашої спільноти та дізнавайтеся більше про світ краудфандингу! Разом ми зможемо більше!" | transloco}}</p>
+    </div>
+</div>
+
+<div class="image-gallery">
+    
+  <div class="image-item second-image">
+    <button [routerLink]="'/seminar-page'" class="action-button">
+      {{"Завантажити запис" | transloco}}
+    </button>
+
+    <div class="action-box">
+      <button class="green-button">{{"ВПОДОБАТИ" | transloco}}</button>
+      <div class="social-wrapper">
+        <img
+          src="assets/images/socialMedia.png"
+          alt="Іконка"
+          class="icon-image"
+          (click)="toggleDropdown2()"
+        />
+
+        <div *ngIf="showDropdown2" class="social-dropdown">
+          <a href="https://www.facebook.com/profile.php?id=61573153085556" target="_blank">
+            <img src="assets/images/facebook.png">
+          </a>
+          <a href="https://www.instagram.com/seedflow_itstep/" target="_blank">
+            <img src="assets/images/Instagram.png">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+  
+
+  <div class="speakers-container">
+    <h2 class="speakers-title">{{"Список спікерів" | transloco}}</h2>
+    
+    <div class="speakers-list">
+      <div class="speaker">
+        <img src="assets/images/Speaker1.png" alt="Speaker 1" class="speaker-image">
+        <p class="speaker-name">Floyd Miles</p>
+        <p class="speaker-role">Content Writer Company</p>
+      </div>
+      <div class="speaker">
+        <img src="assets/images/Speaker2.png" alt="Speaker 2" class="speaker-image">
+        <p class="speaker-name">Dianne Russell</p>
+        <p class="speaker-role">Content Writer Company</p>
+      </div>
+      <div class="speaker">
+        <img src="assets/images/Speaker3.png" alt="Speaker 3" class="speaker-image">
+        <p class="speaker-name">Jenny Wilson</p>
+        <p class="speaker-role">Content Writer Company</p>
+      </div>
+      <div class="speaker">
+        <img src="assets/images/Speaker4.png" alt="Speaker 4" class="speaker-image">
+        <p class="speaker-name">Leslie Alexander</p>
+        <p class="speaker-role">Content Writer Company</p>
+      </div>
+  
+      <div class="speaker">
+        <img src="assets/images/Speaker5.png" alt="Speaker 5" class="speaker-image">
+        <p class="speaker-name">Guy Hawkins</p>
+        <p class="speaker-role">Content Writer Company</p>
+      </div>
+      <div class="speaker">
+        <img src="assets/images/Speaker6.png" alt="Speaker 6" class="speaker-image">
+        <p class="speaker-name">Eleanor Pena</p>
+        <p class="speaker-role">Content Writer Company</p>
+      </div>
+      <div class="speaker">
+        <img src="assets/images/Speaker7.png" alt="Speaker 7" class="speaker-image">
+        <p class="speaker-name">Robert Fox</p>
+        <p class="speaker-role">Content Writer Company</p>
+      </div>
+      <div class="speaker">
+        <img src="assets/images/Speaker8.png" alt="Speaker 8" class="speaker-image">
+        <p class="speaker-name">Jacob Jones</p>
+        <p class="speaker-role">Content Writer Company</p>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- <div class="projects2-wrapper">
+    <div class="projects2-line">
+      <div class="line-highlight2"></div>
+      <span class="projects2-label">{{"КОМЕНТАРІ" | transloco}}</span>
+    </div>
+  </div>
+
+  <div class="comment-section-left">
+    <label for="user-comment" class="comment-label-left">{{"Коментувати" | transloco}}</label>
+    <textarea id="user-comment" class="comment-textarea-left" [(ngModel)]="commentText" maxlength="500" placeholder="{{'Почніть вводити коментар...' | transloco}}" ></textarea>
+    <div class="character-count">
+        <span>{{"Залишилось" | transloco}} {{ commentText.length }}</span>/500
+      </div>
+
+    <button class="submit-btn">{{"ЗБЕРЕГТИ" | transloco}}</button>
+</div>
+
+  <div class="full-width-line"></div>
+
+  <div class="comments-wrapper">
+    <div class="comments-list">
+      <div class="comment-card" *ngFor="let comment of comments; let i = index">
+        <div class="comment-header">
+          <div class="comment-image">
+            <img [src]="comment.image" alt="User Image" class="profile-image" />
+          </div>
+          <div class="comment-info">
+            <div class="comment-name">{{ comment.name | transloco }}</div>
+          </div>
+          <div class="comment-date">{{ comment.date | transloco }}</div> 
+        </div>
+        <div class="comment-text">"{{ comment.text | transloco }}"</div>
+  
+        <div class="comment-reply" (click)="onReplyClick(i)">{{"Відповісти" | transloco}}</div>
+  
+        
+        <div class="reply-box" *ngIf="selectedReplyId === i">
+          <textarea class="reply-input" placeholder='{{"Напишіть відповідь..." | transloco}}'></textarea>
+          <button class="send-button">{{"Надіслати" | transloco}}</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
+ <div class="full-width-line"></div>
+
+  <div class="text-container">
+    <h1 class="title-text">{{"Приєднуйтесь до нашої спільноти" | transloco}}</h1>
+    <p class="sub-text">{{"Ставайте учасником нашої спільноти" | transloco}}</p>
+    <button class="action-btn">{{"Приєднатися" | transloco}}</button>
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,41 @@
+<app-header></app-header>
+
+  <hr>
+
+  <div class="DM">
+  <!-- <div><button class="BackBtn"><img src="assets/images/GreenArow.png" alt=""></button></div> -->
+  <div *ngIf="!messageSent" class="registration-form">
+    <div class="left-panel"></div>
+    <div class="right-panel">
+      <h3 id="reg" style="margin-left: 10px; text-align: center; font-size: medium; color:#247A60; font-weight: 500; font-family: 'Montserrat';">{{"Ви хочете написати повідомлення" | transloco }}</h3>
+
+      <h3 id="reg" style="margin-top: 30px; margin-left: 10px; text-align: center; font-size: 15px; color:#247A60; font-weight: 700; font-family: 'Montserrat';">{{"Мироненко Станіславі" | transloco }}</h3>
+      
+      <img src="assets/images/profile.png" class="Botom_profile-icon" [routerLink]="'/profile-page'">
+      <img style="width: 75px; height:auto; margin-left: -40px; margin-bottom: 25px;" src="assets/images/Circle23.png">
+      
+
+      <div class="message-container">
+        <textarea
+          class="message-input"
+          [(ngModel)]="message"
+          (input)="updateCharacterCount()"
+          maxlength="500"
+          placeholder="Введіть текст повідомлення тут"
+        ></textarea>
+        <div class="char-counter">Залишилось {{ message.length }}/500 символів</div>
+      </div>
+
+      <button class="send-project-btn" [disabled]="message.length === 0" [routerLink]="'/general-page'" (click)="sendMessage()">{{"Відправити" | transloco}}</button>
+    </div>
+    </div>
+</div>
+  
+
+<!-- Блок с подтверждением отправки сообщения -->
+<div *ngIf="messageSent" class="MessageSended">
+  <img class="wPig" src="assets/images/WhitePig.png" alt="">
+  <h2 class="sendedText">Ваше повідомлення успішно відправлено</h2>
+</div>
+  
+  

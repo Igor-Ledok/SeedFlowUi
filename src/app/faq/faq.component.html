@@ -1,0 +1,75 @@
+<app-header></app-header>
+
+  <hr>
+
+  <button class="fixed-button" (click)="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <div class="container">
+    <img 
+    *ngFor="let img of images; let i = index"
+    [src]="activeIndex === i ? img.active : img.gray"
+    alt="Image"
+    class="image"
+    [class.active]="activeIndex === i"
+    (click)="onImageClick(img.link)">
+  </div>
+
+  <div class="breadcrumbs">
+    <a [routerLink] = "'/'" style="cursor: pointer; text-decoration: none; color: inherit;">
+    <span>{{"Головна" | transloco}}</span>  
+    </a>
+    &gt;
+    <a [routerLink] = "'/support-page'" style="cursor: pointer; text-decoration: none; color: inherit;">
+    <span>{{"Підтримка" | transloco}}</span>
+    </a>
+    &gt;
+      <span>{{"Питання та відповіді" | transloco}}</span>
+  </div> 
+
+    <p class="header-text">{{"Найчастіші питання?" | transloco}}</p>
+
+    <div class="background">
+        <div class="left-background">
+          <div *ngFor="let row of rows; let i = index" 
+               class="row" 
+               [ngClass]="{'active': selectedRow === i}" 
+               (click)="selectRow(i)">
+            <div class="circle" [ngStyle]="{'background-color': selectedRow === i ? '#247A60' : '#bde7d6'}"></div>
+            <span class="text">{{ row.text | transloco }}</span>
+            <span class="arrow"></span>
+          </div>
+        </div>
+      
+        <div class="right-background">
+          <div *ngIf="selectedRow !== null">
+            <h2 class="selected-title">{{ rows[selectedRow].title | transloco }}</h2>
+            <p class="selected-text">{{ rows[selectedRow].detailText | transloco }}</p>
+          </div>
+          <p *ngIf="selectedRow === null" class="default-text">{{"Виберіть ряд для перегляду тексту" | transloco}}</p>
+        </div>
+      </div>
+      
+
+      <div class="footer-wrapper">
+        <div class="photo-group left-group">
+          <img src="assets/images/greenPig2.png" class="random-img" />
+          <img src="assets/images/greenPig2.png" class="random-img" />
+          <img src="assets/images/greenPig2.png" class="random-img" />
+        </div>
+      
+        <div class="custom-footer">
+          <h3 class="footer-title">{{ "Поставьте своє питання" | transloco }}</h3>
+          <input class="search-input2" type="text" placeholder='{{ "Чи можу я..." | transloco }}'
+          [(ngModel)]="searchText2" (keydown.enter)="onEnter()">
+        </div>
+      
+        <div class="photo-group right-group">
+          <img src="assets/images/greenPig3.png" class="random-img" />
+          <img src="assets/images/greenPig3.png" class="random-img" />
+          <img src="assets/images/greenPig3.png" class="random-img" />
+        </div>
+      </div>
+      
+<app-footer></app-footer>

@@ -1,0 +1,95 @@
+<app-header></app-header>
+
+<hr>
+
+<div class="main-container">
+
+  <div class="top-bar">
+    <div class="back-arrow" [routerLink]="'/all-chats-page'">
+      <i class="fa fa-arrow-left"></i>
+    </div>
+    <div class="profile">
+      <img [src]="listChats.photoBase64 || 'assets/images/userWithoutPhoto.png'" alt="Фото" class="avatar">
+      <div class="name">{{listChats.name}}</div>
+    </div>
+  </div>
+
+
+
+  <div class="chat-messages-container">
+    <div class="chat-messages">
+      <div *ngFor="let msg of listChats?.messages" [ngClass]="{'chat-message': true, 'left': msg.authorId !== myUserId, 'right': msg.authorId === myUserId}">
+        <img *ngIf="msg.authorId !== myUserId" [src]="listChats.photoBase64 || 'assets/images/userWithoutPhoto.png'" alt="avatar" class="avatar" />
+  
+        <div class="message-bubble">
+          <div class="message-header">
+            <span class="name">  {{ msg.authorId === myUserId ? userInfo.name : listChats.name }}</span>
+            <span class="timestamp">{{ msg.createdAt | date: 'dd.MM.yyyy HH:mm' }}</span>
+          </div>
+  
+          <!-- Вот эта часть обновлена -->
+          <div class="message-text" *ngIf="!isFile(msg.message)">
+            {{ msg.message }}
+          </div>
+  
+          <div class="message-file" *ngIf="isFile(msg.message)">
+            <ng-container [ngSwitch]="getFileCategory(msg.message)">
+              <!-- Картинки -->
+              <img *ngSwitchCase="'image'" 
+                   [src]="getFileDataUrl(msg.message)" 
+                   alt="фото" 
+                   class="chat-image"
+                   (error)="onImageError($event)" />
+              
+              <!-- PDF -->
+              <a *ngSwitchCase="'pdf'" 
+                 [href]="getFileDataUrl(msg.message)" 
+                 target="_blank" 
+                 download="file.pdf">
+                {{"Файл.pdf" | transloco}}
+              </a>
+          
+              <!-- Остальное -->
+              <a *ngSwitchDefault 
+                 [href]="getFileDataUrl(msg.message)" 
+                 target="_blank" 
+                 download="file">
+                 {{"Файл" | transloco}}
+              </a>
+            </ng-container>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+  <div class="chat-bar">
+
+    <div class="attachment-icon" (click)="fileInput.click()">
+      <i class="fa-solid fa-paperclip"></i>
+    </div>
+    <input 
+    type="file" 
+    #fileInput 
+    style="display: none" 
+    (change)="onFileSelected($event)" />
+
+    <input 
+    type="text" 
+    class="chat-input" 
+    placeholder='{{"Введіть повідомлення..." | transloco }}' 
+    [(ngModel)]="messageText"
+    (keydown.enter)="sendMessage()" />
+    <button class="send-button" (click)="sendMessage()">{{"Надіслати" | transloco}}</button>
+  </div>
+  
+</div>
+  
+  
+  
+  
+<app-footer></app-footer>

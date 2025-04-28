@@ -1,0 +1,210 @@
+<app-header></app-header>
+
+  <hr>
+
+  <div class="container">
+    <img 
+    *ngFor="let img of images; let i = index"
+    [src]="activeIndex === i ? img.active : img.gray"
+    alt="Image"
+    class="image"
+    [class.active]="activeIndex === i"
+    (click)="onImageClick(img.link)">
+  </div>
+
+  <button class="fixed-button" (click)="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <div class="profile-wrapper">
+    <div class="breadcrumbs">
+      <a [routerLink] = "'/'" style="cursor: pointer; text-decoration: none; color: inherit;">
+      <span>{{"Головна" | transloco}}</span>  
+      </a>
+      &gt;
+      <a [routerLink] = "'/support-page'" style="cursor: pointer; text-decoration: none; color: inherit;">
+      <span>{{"Підтримка" | transloco}}</span>
+      </a>
+      &gt;
+      <a [routerLink] = "'/blog-page'" style="cursor: pointer; text-decoration: none; color: inherit;">
+        <span>{{"Статті/Блог" | transloco}}</span>
+      </a>
+      &gt;
+      <span>{{"Стаття" | transloco}}</span>
+    </div>
+    <div class="profile-container">
+      <div class="profile-header">
+          <img src="assets/images/state2Man.png" alt="Фото Andrew Johnson" class="profile-image">
+          <div class="profile-info">
+              <h3 class="profile-name">Anry Tomson</h3>
+              <p class="profile-date">Posted on 25th February 2025</p>
+          </div>
+      </div>
+      <div class="profile-content">
+          <h2 class="profile-title">{{"Ми відкриваємо перед вами нові  перспективи" | transloco}}</h2>
+          <div class="profile-subtitle">
+              <img src="assets/images/Startap.png" class="startap">
+              <span class="startap2">{{"Стартап" | transloco}}</span>
+          </div>
+      </div>
+    </div>
+  
+    <div class="photo">
+        <img src="assets/images/state5.png" alt="State">
+    </div>
+  </div>
+
+
+
+ <div class="info-section">
+    <p class="info-description">
+      {{"Світ змінюється, і разом з ним змінюються можливості для розвитку бізнесу, покращення якості життя та створення нових екологічних рішень. Наша компанія є однією з ведучих міжнародних структур, яка активно працює в трьох ключових напрямках: постачання свіжих овочів та фруктів, підтримка підприємницької діяльності та вирощування кімнатних і садових рослин." | transloco}} 
+  </p>
+    
+    <h1 class="info-title">{{"Свіжі овочі та фрукти" | transloco}}</h1>
+    <p class="info-description">
+        {{"Ми забезпечуємо наших клієнтів найякіснішою продукцією, вирощеною в екологічно чистих регіонах світу. Завдяки налагодженій логістиці ми гарантуємо швидку доставку свіжих овочів та фруктів, щоб кожен споживач міг насолоджуватися природним смаком та користю. Ми співпрацюємо з фермерськими господарствами, підтримуючи принципи сталого розвитку та екологічної відповідальності перспективи!" | transloco}} 
+    </p>
+
+    <h1 class="info-title">{{"Підтримка підприємництва" | transloco}}</h1>
+    <p class="info-description">
+        {{"Наші експерти допомагають розпочати власну справу та масштабувати вже існуючі бізнеси. Ми надаємо консультації, освітні програми та доступ до міжнародних ринків, відкриваючи нові можливості для підприємців у сфері агробізнесу, дистрибуції та екологічних ініціатив. Разом ми створюємо успішне майбутнє, підтримуючи розвиток малого та середнього бізнесу." | transloco}}  
+    </p>
+    
+    <h1 class="info-title">{{"Кімнатні та садові рослини" | transloco}}</h1>
+    <p class="info-description">
+        {{"Озеленення – це не лише тренд, а й необхідність для гармонійного життя. Ми пропонуємо широкий вибір кімнатних і садових рослин, які допоможуть створити затишок у будинку, офісі або на присадибній ділянці. Наша продукція відповідає найвищим стандартам якості, а наші спеціалісти готові надати поради щодо догляду за рослинами, щоб вони радували вас довгі роки." | transloco}}  
+    </p>
+    
+    <h1 class="info-title">{{"Наші цінності" | transloco}}</h1>
+
+    <h1 class="info-title3">{{"• Висока якість" | transloco}}</h1>
+    <h1 class="info-title3">{{"• Інноваційні підходи у веденні бізнесу" | transloco}}</h1>
+    <h1 class="info-title3">{{"• Підтримка екологічно відповідальних рішень" | transloco}}</h1>
+    <h1 class="info-title3">{{"• Співпраця з підприємцями для створення стійкого економічного майбутнього" | transloco}}</h1>
+    <p class="info-description">
+        {{"Ми будуємо бізнес, який змінює світ на краще, допомагаючи людям отримувати якісну продукцію та розширювати свої можливості. Долучайтеся до нас – разом ми відкриємо нові перспективи!" | transloco}} 
+    </p>
+</div>
+
+ <div class="image-gallery">
+  <div class="image-item" [routerLink]="'/blog-page'">
+    <h3 class="image-title">{{"⇦ Prev" | transloco}}</h3>
+  </div>
+
+  <div class="image-item second-image" [routerLink]="'/seminars-vebinars-page'">
+    <h3 class="image-title2">{{"Next ⇨" | transloco}}</h3>
+
+    <div class="action-box">
+      <button class="green-button">{{"ВПОДОБАТИ" | transloco}}</button>
+      <div class="social-wrapper">
+        <img
+          src="assets/images/socialMedia.png"
+          alt="Іконка"
+          class="icon-image"
+          (click)="toggleDropdown2()"
+        />
+
+        <div *ngIf="showDropdown2" class="social-dropdown">
+          <a href="https://www.facebook.com/profile.php?id=61573153085556" target="_blank">
+            <img src="assets/images/facebook.png">
+          </a>
+          <a href="https://www.instagram.com/seedflow_itstep/" target="_blank">
+            <img src="assets/images/Instagram.png">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="projects2-wrapper">
+  <div class="projects2-line">
+    <div class="line-highlight2"></div>
+    <span class="projects2-label">{{"КОМЕНТАРІ" | transloco}}</span>
+  </div>
+</div>
+
+<div class="comment-section-left">
+  <label for="user-comment" class="comment-label-left">{{"Коментувати" | transloco}}</label>
+  <textarea id="user-comment" class="comment-textarea-left" [(ngModel)]="commentText" maxlength="500" placeholder="{{'Почніть вводити коментар...' | transloco}}" ></textarea>
+  <div class="character-count">
+      <span>{{"Залишилось" | transloco}} {{ commentText.length }}</span>/500
+    </div>
+
+  <button class="submit-btn">{{"ЗБЕРЕГТИ" | transloco}}</button>
+</div>
+
+
+<div class="full-width-line"></div>
+
+<div class="comments-wrapper">
+  <div class="comments-list">
+    <div class="comment-card" *ngFor="let comment of comments; let i = index">
+      <div class="comment-header">
+        <div class="comment-image">
+          <img [src]="comment.image" alt="User Image" class="profile-image" />
+        </div>
+        <div class="comment-info">
+          <div class="comment-name">{{ comment.name | transloco }}</div>
+        </div>
+        <div class="comment-date">{{ comment.date | transloco }}</div> 
+      </div>
+      <div class="comment-text">"{{ comment.text | transloco }}"</div>
+
+      <div class="comment-reply" (click)="onReplyClick(i)">{{"Відповісти" | transloco}}</div>
+
+      
+      <div class="reply-box" *ngIf="selectedReplyId === i">
+        <textarea class="reply-input" placeholder='{{"Напишіть відповідь..." | transloco}}'></textarea>
+        <button class="send-button">{{"Надіслати" | transloco}}</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
+
+<div class="full-width-line"></div>
+
+<div class="next-reads-container">
+  <h2 class="next-reads-title">{{"Що читати далі" | transloco}}</h2>
+  <div class="next-reads-row">
+      <div class="next-reads-item">
+          <img src="assets/images/state2.png" alt="Article Image" class="next-reads-image">
+          <p class="next-reads-meta">By John Doe | Aug 23, 2021</p>
+          <h3 class="next-reads-heading">A UX Case Study Creating a Studious Environment for Students:</h3>
+          <p class="next-reads-description">
+              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+          </p>
+      </div>
+      <div class="next-reads-item">
+          <img src="assets/images/state3.png" alt="Article Image" class="next-reads-image">
+          <p class="next-reads-meta">By John Doe | Aug 23, 2021</p>
+          <h3 class="next-reads-heading">A UX Case Study Creating a Studious Environment for Students:</h3>
+          <p class="next-reads-description">
+              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+          </p>
+      </div>
+      <div class="next-reads-item">
+          <img src="assets/images/state4.png" alt="Article Image" class="next-reads-image">
+          <p class="next-reads-meta">By John Doe | Aug 23, 2021</p>
+          <h3 class="next-reads-heading">A UX Case Study Creating a Studious Environment for Students:</h3>
+          <p class="next-reads-description">
+              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+          </p>
+      </div>
+  </div>
+</div>
+
+<div class="full-width-line"></div>
+
+<div class="text-container">
+  <h1 class="title-text">{{"Приєднуйтесь до нашої спільноти" | transloco}}</h1>
+  <p class="sub-text">{{"Ставайте учасником нашої спільноти" | transloco}}</p>
+  <button class="action-btn">{{"Приєднатися" | transloco}}</button>
+</div> 
+
+<app-footer></app-footer>

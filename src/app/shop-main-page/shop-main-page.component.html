@@ -1,0 +1,201 @@
+<app-header></app-header>
+
+  <hr>
+
+  <div class="breadcrumbs">
+    <span style="cursor: default;">{{"Магазин" | transloco}}</span>  
+    &gt;
+    <span style="cursor: default;">{{"Головна" | transloco}}</span>
+  </div> 
+
+  <button class="fixed-button" (click)="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  
+  <div class="container2">
+    <img 
+    *ngFor="let img of images4; let i = index"
+    [src]="activeIndex === i ? img.active : img.gray"
+    alt="Image"
+    class="image"
+    [class.active]="activeIndex === i"
+    (click)="onImageClick(img.link)">
+  </div>
+
+  <div class="header-container">
+    <div class="filter-container">
+      <h2 class="filter-title">{{"Фільтрувати" | transloco}}</h2>
+  
+      <div class="filter-image-container">
+        <img src="assets/images/ShopYellowBackground1.png" alt="Фільтр" class="filter-image">
+        <span class="overlay-text">{{"ТЕМАТИКА" | transloco}}</span>
+      </div>
+  
+      <div class="checkbox-container">
+        <section id="checkbox" *ngFor="let category of categories">
+          <mat-checkbox
+            [checked]="selectedCategoryIds.includes(category.id)"
+            (change)="onCategoryChange($event.checked, category.id)">
+            <span style="font-family: 'Montserrat'; font-size: 14px;">
+              {{ category.name | transloco }}
+            </span>
+          </mat-checkbox>
+        </section>
+      </div>
+  
+      <div class="filter-image-container">
+        <img src="assets/images/ShopYellowBackground1.png" alt="Фільтр" class="filter-image">
+        <span class="overlay-text">{{"ЦІНА" | transloco}}</span>
+      </div>
+  
+      <div class="progress-container">
+        <div class="number-container2">
+          <div class="number-box">{{ progressValue }}</div>
+          <div class="number-box">{{ maxValue }}</div>
+        </div>
+  
+        <div class="progress-bar-container">
+          <input type="range" class="slider" [(ngModel)]="progressValue" [min]="minValue" [max]="maxValue" (input)="updateProgress()" />
+        </div>
+  
+        <div class="text-box" (click)="resetFilters()">
+          {{"СКИНУТИ ВСЕ" | transloco}}
+        </div>
+      </div>
+    </div>
+  
+    <div class="centered-header-container">
+      <h1 class="main-title">Seed Goods</h1>
+      <p class="subtitle">{{"Вчора ідея - сьогодні продукт" | transloco}}</p>
+  
+      <p class="description">
+        {{"Ласкаво просимо до крамнички" | transloco}} <span class="green">Seed Flow</span>
+      </p>
+      <p class="description">
+        {{"Кожен проєкт має на меті створення кінцевого продукту" | transloco}}.<br>
+        {{"Багато успішно закритих проєктів не тільки почали втілювати свої ідеї" | transloco}},<br>
+        {{"а й налагодили виробництво своїх товарів" | transloco}}.
+      </p>
+      <p class="highlight">
+        {{'Вже зараз ви можете замовити круті та корисні товари, які ще вчора були тільки ідеєю!' | transloco}}
+      </p>
+  
+      <!-- мин цена -->
+      <div class="cards-row">
+        <div class="card">
+          <div class="card-image-wrapper">
+            <img [src]="productMaxPrice.imageBase64" alt="Image" class="card-image" [routerLink]="'/tovar-page-page'" [queryParams]="{ productId: productMaxPrice.id}"/>
+          </div>
+          <div class="card-info">
+            <h2 class="card-title">{{ productMaxPrice.name | transloco }}</h2>
+            <p class="card-description">{{ productMaxPrice.shortDescription | transloco }}</p>
+            <p class="card-price">{{ productMaxPrice.price }}</p>
+          </div>
+          <div class="card-overlay top-left-image">
+            <img src="assets/images/TopWeek.png" alt="Top Left Image" />
+          </div>
+          <div class="card-overlay bottom-right-image" [routerLink]="'/tovar-page-page'" [queryParams]="{ productId: productMaxPrice.id}">
+            <img src="assets/images/ShopKorzina.png" alt="Bottom Right Image" />
+          </div>
+        </div>
+  
+        <!-- макс цена -->
+        <div class="card custom-card">
+          <div class="card-image-wrapper">
+            <img [src]="productMinPrice.imageBase64" alt="Image" class="card-image" [routerLink]="'/tovar-page-page'" [queryParams]="{ productId: productMinPrice.id}"/>
+          </div>
+          <div class="card-info">
+            <h2 class="card-title">{{ productMinPrice.name | transloco }}</h2>
+            <p class="card-description">{{ productMinPrice.shortDescription | transloco }}</p>
+            <p class="card-price">{{ productMinPrice.price }}</p>
+          </div>
+          <div class="card-overlay top-left-image">
+            <img src="assets/images/NewNew.png" alt="Top Left Image" />
+          </div>
+          <div class="card-overlay bottom-right-image" [routerLink]="'/tovar-page-page'" [queryParams]="{ productId: productMinPrice.id}">
+            <img src="assets/images/ShopKorzina.png" alt="Bottom Right Image" />
+          </div>
+        </div>
+      </div>
+    </div>
+	
+
+  
+    <div class="right-section">
+      <div class="image-container">
+        <img src="assets/images/ShopGreenLeftUp.png" alt="Description of Image" class="top-right-image">
+        <div class="overlay-text3">
+          <span class="main-text">{{"Ваш рахунок" | transloco}}</span>
+          <span class="highlight-seeds">Seeds</span>
+          <div class="number-container">
+            <img src="assets/images/yellowCoin.png" alt="Small Icon" class="small-icon">
+            <span class="number">{{userInfo.bonusCoin}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-container">
+
+    <div class="cards-container">
+      <div class="four-cards-row">
+        <div *ngFor="let product of products; let i = index" class="small-card">
+  
+          <img 
+          src="{{ product?.isFavourite ? 'assets/images/likeRed.png' : 'assets/images/like.png' }}" 
+          (click)="toggleLike(product.id, i)" 
+          alt="Heart" 
+          class="right-top-image" 
+        />
+  
+          <img src="assets/images/ShopGreenLeftUp2.png" alt="Left Top Image" class="left-top-image" />
+          <img [src]="product.imageBase64" [routerLink]="['/tovar-page-page']" [queryParams]="{ productId: product.id}" alt="Image" class="small-card-image" />
+          
+          <div class="left-top-text">
+            <p>{{ product.categoryName | transloco }}</p>
+          </div>
+          
+          <div class="small-card-info">
+            <h3 class="small-card-title">{{ product.name | transloco }}</h3>
+            <p class="small-card-description">{{ product.shortDescription | transloco }}</p>
+            <p class="small-card-price">{{ product.price }} {{"грн" | transloco}}</p>
+            <div class="card-overlay bottom-right-image" [routerLink]="'/tovar-page-page'" [queryParams]="{ productId: product.id}">
+              <img src="assets/images/ShopKorzina.png" alt="Bottom Right Image" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="custom-container">
+      <div class="left-image">
+        <img class="photoFirst" src="assets/images/loftImg.png" alt="Фото" />
+        <img src="assets/images/Priamoygolnik.png" alt="Фото в правом верхнем углу" class="top-right-image2" />
+      
+        <div class="text-overlay">
+          {{"КРЕАТИВНИЙ ПРОСТІР «LOFT»" | transloco}}
+        </div>
+      
+      </div>
+      
+      <div class="right-content">
+        <h2 class="arenda">{{"Довгострокова короткострокова оренда" | transloco}}</h2>
+        <p class="txt1">Lorem ipsum dolor sit amet consectetur. Mattis laoreet dolor facilisis ac magnis ullamcorper sed quis. Lectus vel nunc tellus fringilla. Pellentesque eu dapibus purus leo orci dignissim id.</p>
+        <p class="txt2">Pellentesque eu dapibus purus leo orci dignissim id. Felis malesuada habitant tempor odio dolor.</p>
+      </div>
+  
+      <div class="phone-text">
+        {{"Тел." | transloco}} +38 (073) 123-45-67
+      </div>
+  
+      <div class="more" [routerLink]="'/experts-page'">
+        <a>{{"Більше" | transloco}}</a>
+      </div>
+    </div>
+
+  </div>
+
+
+
+<app-footer></app-footer> 

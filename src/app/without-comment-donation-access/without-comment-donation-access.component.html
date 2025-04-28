@@ -1,0 +1,28 @@
+<app-header></app-header>
+
+  <hr>
+
+    <div class="registration-form">
+      <div class="left-panel">
+      </div>
+      <div class="right-panel">
+        <div id="vnesok">{{"Ваш внесок у проєкт" | transloco }}</div>
+        <h2 id="proj">{{ project.title| transloco }}</h2>
+
+        <div id="sendSuccess">{{"успішно відправлено" | transloco }}</div>
+
+       <form #myForm="ngForm">
+
+            <button id="onMain2" [routerLink]="'/'" type="submit">
+                {{"НА ГОЛОВНУ" | transloco}}
+             </button>
+        </form>
+        
+      </div>
+
+    </div>
+  
+
+
+
+

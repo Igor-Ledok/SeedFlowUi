@@ -1,0 +1,117 @@
+<footer class="footer">
+    <div class="footer-container">
+      <div class="footer-header">
+        <div class="footer-logo">
+          <img src="assets/images/greenCoin.png" alt="Seed Flow" />
+          <span>Seed Flow</span>
+        </div>
+        <hr class="footer-line" />
+      </div>
+
+      <form #emailForm="ngForm" (ngSubmit)="onSubmit(emailForm)">
+      <div class="subscription">
+        <span class="podpiska">
+          {{"ПІДПИШИСЬ НА НАШІ НОВИНИ" | transloco}}
+        </span>
+        <input 
+        type="email" 
+        name="email"
+        [(ngModel)]="email"
+        required
+        email
+        #emailInput="ngModel"
+        placeholder="{{'Введіть адресу електронної пошти' | transloco }}" 
+        class="email2" />
+
+        <button class="btn2">
+          {{"ВІДПРАВИТИ" | transloco }}
+        </button>
+      </div>
+      </form>
+
+<!-- Модалка -->
+<div class="modal-backdrop" *ngIf="showModal" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <p>{{ 'Дякуємо за підписку!' | transloco }}</p>
+    <button style="font-family: 'Montserrat'; width: 150px; height: 40px; font-size: 16px;" (click)="closeModal()">{{ 'Закрити' | transloco }}</button>
+  </div>
+</div>
+
+  
+      <div class="footer-links">
+        <div class="footer-column">
+          <h4>{{"ПРО НАС" | transloco}}</h4>
+          <ul>
+            <li><a [routerLink]="'/policy-page'">{{"Політика конфіденційності" | transloco}}</a></li>
+            <li><a [routerLink]="'/using-rools-page'">{{"Правила користування порталом" | transloco}}</a></li>
+            <li><a [routerLink]="'/cookie-rools-page'">{{"Правила використання файлів Cookie" | transloco}}</a></li>
+            <li><a [routerLink]="'/about-us-page'">{{"Про нас" | transloco}}</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>{{"ПРОЄКТИ" | transloco}}</h4>
+          <ul>
+            <li><a [routerLink]="'/projects-list-page'">{{"Список проєктів" | transloco}}</a></li>
+            <li><a [routerLink]="'/send-request-page'">{{"Пошук" | transloco}}</a></li>
+            <li><a [routerLink]="'/general-page'">{{"Викласти проєкт" | transloco}}</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>{{"АКАУНТ" | transloco}}</h4>
+          <ul>
+            <li><a [routerLink]="'/account-settings-page'">{{"Налаштування акаунта" | transloco}}</a></li>
+            <!-- <li><a [routerLink]="'/'">{{"Повідомлення" | transloco}}</a></li> -->
+            <!-- <li><a [routerLink]="'/'">{{"Перегляд транзакцій" | transloco}}</a></li> -->
+            <!-- <li><a [routerLink]="'/profile-page'">{{"Підтримані проєкти" | transloco}}</a></li> -->
+            <li><a [routerLink]="'/profile-page'">{{"Вподобані проєкти" | transloco}}</a></li>
+            <li><a [routerLink]="'/profile-page'">{{"Вподобані товари" | transloco}}</a></li>
+            <!-- <li><a [routerLink]="'/'">{{"Історія покупок" | transloco}}</a></li> -->
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>{{"ПІДТРИМКА" | transloco}}</h4>
+          <ul>
+            <li><a [routerLink]="'/faq-page'">FAQ</a></li>
+            <li><a [routerLink]="'/accompaniment-page'">{{"Супровід проєкту" | transloco}}</a></li>
+            <li><a [routerLink]="'/seminars-vebinars-page'">{{"Семінари/вебінари" | transloco}}</a></li>
+            <li><a [routerLink]="'/blog-page'">{{"Блог" | transloco}}</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>{{"МАГАЗИН" | transloco}}</h4>
+          <ul>
+            <li><a [routerLink]="'/shop-main-page-page'">{{"Всі товари" | transloco}}</a></li>
+            <li><a [routerLink]="'/product-registration-page'">{{"Оплата і доставка" | transloco}}</a></li>
+            <li><a [routerLink]="'/basket-page'">{{"Кошик" | transloco}}</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  
+    <hr
+    class="yellowLine"
+  />
+  <div class="footer-social">
+    <h4 style="font-family: 'Montserrat'">
+      <p class="underline-center">{{"МИ У СОЦМЕРЕЖАХ" | transloco }}</p>
+    </h4>
+  
+    <div class="social-icons">
+      <a href="https://www.instagram.com/seedflow_itstep/"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.facebook.com/profile.php?id=61573153085556"><i class="fa-brands fa-facebook"></i></a>
+      <a href="https://youtube.com/@seedflow-r4g9w?si=VXUP5mSxWinFA785"><i class="fa-brands fa-youtube"></i></a>
+      <!-- <a href="#"><i class="fa-brands fa-linkedin"></i></a> -->
+    </div>
+  </div>
+  
+  <hr
+  class="yellowLine2"
+  
+  />
+  
+  <div class="footer-bottom">
+    <p style="font-weight: 400;">
+      Всі права збережені | All rights save © 2025
+    </p>
+  </div>
+  </footer>

@@ -1,0 +1,840 @@
+.gsi-material-button {
+  background-color: WHITE;
+  background-image: none;
+  -webkit-border-radius: 20px;
+  border-radius: 10px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #1f1f1f;
+  cursor: pointer;
+  font-family: 'Montserrat';
+  font-size: 13px;
+  height: 40px;
+  letter-spacing: 0.25px;
+  outline: none;
+  overflow: hidden;
+  padding: 0 12px;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: auto;
+  max-width: 400px;
+  min-width: min-content;
+  border: 2px solid #247A60;
+  left: 110px;
+  top: -15px;
+}
+
+.gsi-material-button .gsi-material-button-icon {
+  height: 20px;
+  margin-right: 12px;
+  min-width: 20px;
+  width: 20px;
+}
+
+.gsi-material-button .gsi-material-button-content-wrapper {
+  -webkit-align-items: center;
+  align-items: center;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  height: 100%;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+}
+
+.gsi-material-button .gsi-material-button-contents {
+  color: #247A60;
+  font-weight: 600;
+}
+
+.gsi-material-button:hover {
+  background-color: WHITE !important;
+  border-color: #247A60 !important;
+  color: #1f1f1f !important;
+}
+
+.twitter-material-button {
+  background-color: WHITE;
+  background-image: none;
+  -webkit-border-radius: 20px;
+  border-radius: 10px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #1f1f1f;
+  cursor: pointer;
+  font-family: 'Montserrat';
+  font-size: 12px;
+  height: 40px;
+  letter-spacing: 0.25px;
+  outline: none;
+  overflow: hidden;
+  padding: 0 12px;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: auto;
+  max-width: 400px;
+  min-width: min-content;
+  border: 2px solid #1DA1F2;
+  background-color: #1DA1F2;
+  left: 20px;
+}
+
+.twitter-material-button .twitter-material-button-icon {
+  height: 30px;
+  margin-right: 0px;
+  width: 30px;
+}
+
+.twitter-material-button .twitter-material-button-content-wrapper {
+  -webkit-align-items: center;
+  align-items: center;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  height: 100%;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+}
+
+.twitter-material-button .twitter-material-button-contents {
+  color: white;
+}
+
+.twitter-material-button:hover {
+  background-color: #1DA1F2 !important;
+  border-color: #1DA1F2 !important;
+  color: #1f1f1f !important;
+}
+
+
+.container 
+{
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+}
+
+header 
+{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  align-items: center;
+  margin-top: -20px;
+}
+
+.logo 
+{
+  vertical-align: middle;
+  text-align: center;
+  margin: auto;
+  width: 50px;
+  height: 50px;
+}
+
+@media(max-width: 1060px)
+{
+   button{
+    top:-19px;
+    left: 180px;
+    display: block;
+   }
+
+   a.notHaveAcc
+   {
+     position: relative;
+     top:8px;
+     left: 10px;
+   }
+}
+
+mat-form-field 
+{
+  width: 300px;
+  margin-bottom: 20px;
+}
+
+  p 
+  {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .logo2
+  {
+    vertical-align: middle;
+    text-align: center;
+    margin: auto;
+    width: 50px;
+    height: 50px;
+  }
+
+  .language-switcher
+  {
+    position: relative;
+    left: -70px;
+  }
+
+  .separator 
+  {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 20px 0;
+    position: relative;
+    top: -20px;
+    font-family: 'Montserrat';
+  }
+  
+  .separator::before,
+  .separator::after 
+  {
+    content: "";
+    flex: 1;
+    border-bottom: 2px solid #ccc;
+    margin: 0 10px;
+  }
+
+  span#erroremail
+  {
+    position: relative;
+    top: -15px;color: red;
+    font-family: 'Montserrat'
+  }
+
+  span#erroremail2
+  {
+    position: relative;
+    top: -15px; 
+    color: red;
+    font-family: 'Montserrat'
+  }
+
+  label#password2
+  {
+    font-family: 'Montserrat';
+    font-size: larger;
+  }
+
+  input#password
+  {
+    width: 360px;
+    background-color: #eaede3; 
+    margin-top: 5px;
+    font-family: 'Montserrat';
+  }
+
+  span#errorpassword
+  {
+    position: relative;
+    top: -15px; 
+    color: red;
+    font-family: 'Montserrat'
+  }
+
+  span#errorpassword2
+  {
+    position: relative;
+    top: -15px; 
+    color: red;
+    font-family: 'Montserrat'
+  }
+
+  p#forgotpassword
+  {
+    font-weight: 100;
+    position: relative; 
+    margin-top: -10px; 
+    font-size: 13px; 
+    margin-left: 1px;
+    font-family: 'Montserrat';
+    font-weight: 400;
+  }
+
+  .error-message 
+  {
+    position: relative;
+    top: -30px;
+    left: 0px;
+    font-family: 'Montserrat';
+    color: red;
+    font-size: 18px;
+    margin-top: 10px;
+  }
+ 
+@media(max-width: 580px)
+{
+  p#forgotpassword
+  {
+    left: -8px;
+  }
+
+  span#errorpassword2
+  {
+    left: -9px;
+  }
+
+  span#errorpassword
+  {
+    left: -9px;
+  }
+
+  input#password
+  {
+    margin-left: 22px;
+  }
+
+  label#password2
+  {
+    margin-left: 24px;
+  }
+
+   span#erroremail
+   {
+      left: -9px;
+   }
+
+   span#erroremail2
+   {
+    left: -9px;
+   }
+
+   span.inputEmail
+   {
+      left: -28px;
+   }
+
+   span.emailInvalid
+   {
+      left: -28px;
+   }
+
+   span.inputPass
+   {
+      left: -28px;
+   }
+
+   span.min6Symb
+   {
+      left: -28px;
+   }
+
+   .logo2
+   {
+      display: none;
+   }
+
+   .language-switcher
+   {
+    display: none;
+   }
+
+   header 
+   {
+     justify-content: left;
+     padding: 20px;
+     margin-top: -30px;
+     margin-left: 120px;
+   }
+
+   h2
+   {
+    left: -30px;
+   }
+
+   p
+   {
+    left: -28px;
+   }
+
+   button
+   {
+    left: 145px;
+   }
+
+   label
+    {
+      margin-left: 2px;
+    }
+
+    div.form-group
+    {
+      margin-left: -30px;
+    }
+
+    a.notHaveAcc
+    {
+      position: relative;
+      top:8px;
+      left: -21px;
+    }
+}
+
+.text
+{
+  margin-top: 20px;
+  width: 80px;
+  height: 106px;
+}
+
+#checkbox
+{
+  transform: scale(1.3);
+  opacity: 0,9;
+  cursor: pointer;
+}
+
+.registration-form 
+{
+  display: flex;
+  margin: 50px auto;
+  width: 80%;
+  max-width: 900px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  height: 690px;
+}
+
+.left-panel 
+{
+  background-image: url('/assets/images/bg-pattern.png');
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+}
+
+.left-panel img 
+{
+  width: 100%;
+  height: auto;
+}
+
+.right-panel 
+{
+  flex: 1;
+  background-color: #fff;
+  padding: 40px;
+}
+
+h2 
+{
+  color: #2C7D59;
+  margin-bottom: 20px;
+}
+
+.form-group 
+{
+  margin-bottom: 20px;
+}
+
+form input[type="email"],
+form input[type="password"],
+form input[type="text"]
+{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+button:disabled
+{
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  opacity: 0.6;
+  color: white;
+}
+
+form input[type="checkbox"] 
+{
+  margin-right: 10px;
+}
+
+button 
+{
+  background-color: #2C7D59;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover 
+{
+  background-color: #246944;
+}
+
+a 
+{
+  color: #2C7D59;
+  text-decoration: none;
+}
+
+button#next
+{
+  position: relative; 
+  margin-left: 262px; 
+  top: -45px; 
+  width: 120px;
+  font-family: 'Montserrat';
+  background-color: #247a60;
+}
+
+.seedFlowNazva
+{
+  font-size: 30px;
+  color: #66D6AA; 
+  position: absolute;
+  margin-top: 7px;
+  margin-left: 5px;
+  font-family: 'Montserrat Alternates';
+}
+
+.notHaveAcc
+{
+  text-decoration: underline; 
+  color:#898268; 
+  font-family: 'Montserrat'; 
+  font-weight: 400; 
+  font-size: 15px; 
+  position: relative; 
+  width: 180px; 
+  top: -15px;
+}
+
+@media(max-width: 1080px)
+{
+  button.fb-material-button
+  {
+    top:-40px;
+    margin-left: 180px;
+  }
+
+  button.gsi-material-button
+  {
+    margin-left: -20px;
+  }
+}
+
+@media(max-width: 1060px)
+{
+  button.twitter-material-button
+  {
+    top:-60px;
+    margin-left: 180px;
+  }
+
+  a.notHaveAcc
+  {
+    margin-left: -520px;
+    top: -15px;
+  }
+
+  button#next
+  {
+    left: 0px;
+  }
+}
+
+@media(max-width: 1060px)
+{
+  a.notHaveAcc
+  {
+    left: 520px;
+  }
+}
+
+@media(max-width: 1020px)
+{
+  a.notHaveAcc
+  {
+    left: 520px;
+  }
+}
+
+@media(max-width: 700px)
+{
+  .logo
+  {
+    margin-left: -110px;
+  }
+}
+
+@media(max-width: 600px)
+{
+  .logo
+  {
+    margin-left: -70px;
+    margin-top: 10px;
+  }
+
+  .seedFlowNazva
+  {
+    margin-top: 15px;
+  }
+
+  .language-switcher
+  {
+    display: block;
+    margin-top: 10px;
+    margin-left: 300px;
+  }
+
+  .logo2
+  {
+    display: block;
+    position: absolute;
+    margin-left: -50px;
+    top: -15px;
+  }
+}
+
+label#email2
+{
+  font-family: 'Montserrat';
+  font-size: larger;
+}
+
+input#email
+{
+  width: 360px; 
+  background-color: #eaede3; 
+  margin-top: 5px;
+  font-family: 'Montserrat';
+}
+
+@media(max-width: 580px)
+{
+  .error-message 
+  {
+    left: -10px;
+  }
+
+  input#email
+  {
+    position: relative;
+    left: 20px;
+  }
+
+  label#email2
+  {
+    position: relative;
+    left: 19px;
+  }
+
+  a.notHaveAcc
+  {
+    left: 515px;
+    margin-top: 0px;
+  }
+
+  button#next
+  {
+    left: -10px;
+  }
+
+  button.fb-material-button
+  {
+    margin-left: 180px;
+  }
+
+  button.gsi-material-button
+  {
+    margin-left: -25px;
+  }
+
+  .logo2
+  {
+    top: -15px;
+  }
+
+  .language-switcher
+  {
+    left: -10px;
+  }
+}
+
+
+@media(max-width: 530px)
+{
+  h2
+  {
+    left: -50px;
+  }
+
+  .gsi-material-button
+  {
+    margin-left: -55px !important;
+  }
+
+  .separator
+  {
+    width: 325px;
+  }
+
+  .notHaveAcc
+  {
+    font-size: 14px;
+  }
+
+  button#next
+  {
+    left: -69px;
+  }
+
+  input#email
+  {
+    width: 300px;
+  }
+
+  input#password
+  {
+    width: 300px;
+  }
+
+  header 
+   {
+     justify-content: left;
+     padding: 20px;
+     margin-top: -30px;
+     margin-left: 100px;
+   }
+}
+
+@media(max-width: 480px)
+{
+  .language-switcher
+  {
+    left: -60px;
+  }
+
+  .logo
+  {
+    margin-left: -100px;
+  }
+}
+
+@media(max-width: 450px)
+{
+  .right-panel
+  {
+    margin-left: -20px;
+  }
+}
+
+@media(max-width: 430px)
+{
+  .gsi-material-button
+  {
+    margin-left: -70px !important;
+  }
+
+  .separator
+  {
+    width: 275px;
+  }
+
+  label#email2
+  {
+    font-size: 17px;
+  }
+
+  label#password2
+  {
+    font-size: 17px;
+  }
+
+  .language-switcher
+  {
+    left: -110px;
+  }
+
+  .logo
+  {
+    margin-left: -120px;
+  }
+
+  input#email
+  {
+    width: 250px;
+  }
+
+  input#password
+  {
+    width: 250px;
+  }
+
+  h2
+  {
+    left: -70px;
+  }
+
+  .notHaveAcc
+  {
+    font-size: 12px;
+  }
+
+  button#next
+  {
+    left: -98px;
+    width: 100px;
+  }
+}
+
+@media(max-width: 380px)
+{
+  .gsi-material-button
+  {
+    margin-left: -85px !important;
+  }
+
+  .separator
+  {
+    width: 255px;
+  }
+
+  button#next
+  {
+    left: -117px;
+  }
+
+  h2
+  {
+    left: -85px;  
+  }
+
+  .language-switcher
+  {
+    left: -145px;
+  }
+
+  input#email
+  {
+    width: 230px;
+    font-size: 12px;
+  }
+
+  input#password
+  {
+    width: 230px;
+    font-size: 12px;
+  }
+}
